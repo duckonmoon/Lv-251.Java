@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Roles extends BaseEntity {
 
     @Column
-    String name;
+     private String name;
 
     public Roles() {
     }

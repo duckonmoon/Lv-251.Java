@@ -15,6 +15,7 @@ public class App {
     public static void main(String[] args) {
         EntityManagerFactory entityManagerFactory= Persistence.createEntityManagerFactory("my-pu");
         EntityManager entityManager= entityManagerFactory.createEntityManager();
-
+        entityManager.close();
+        entityManagerFactory.close();
     }
 }

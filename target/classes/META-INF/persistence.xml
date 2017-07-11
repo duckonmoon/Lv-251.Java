@@ -14,7 +14,7 @@
                 &amp;useLegacyDatetimeCode=false
                 &amp;serverTimezone=UTC"></property>
             <property name="hibernate.connection.username" value="root"></property>
-            <property name="hibernate.connection.password" value="root"></property>
+            <property name="hibernate.connection.password" value="1111"></property>
             <property name="hibernate.hbm2ddl.auto" value="create"></property>
             <property name="show_sql" value="true"></property>
         </properties>

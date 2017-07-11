@@ -7,7 +7,7 @@ import javax.persistence.Entity;
  * Created by User on 11.07.2017.
  */
 @Entity
-public class Doctors extends BaseEntity{
+public class Doctors extends Users{
     private long id_user;
     @Column(length = 10000)
     private String description;

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -11,8 +12,18 @@ public class MedicalCard extends BaseEntity {
     private Date date;
     private String description;
 
+    @ManyToOne
+    private Users user;
 
     public MedicalCard() {
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Date getDate() {

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -13,12 +14,60 @@ public class Contacts extends BaseEntity {
     private String district;
     private String city;
     private String zipCode;
-    private String phone;
+    private String firstPhone;
+    private String secondPhone;
+    private String thirdPhone;
     private String email;
     private Double longitude;
     private Double latitude;
 
+    @OneToOne(mappedBy = "contact")
+    private Clinics clinics;
+
+    @OneToOne(mappedBy = "contact")
+    private Users users;
+
     public Contacts() {
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public String getFirstPhone() {
+        return firstPhone;
+    }
+
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
+    }
+
+    public String getSecondPhone() {
+        return secondPhone;
+    }
+
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
+    }
+
+    public String getThirdPhone() {
+        return thirdPhone;
+    }
+
+    public void setThirdPhone(String thirdPhone) {
+        this.thirdPhone = thirdPhone;
+    }
+
+    public Clinics getClinics() {
+        return clinics;
+    }
+
+    public void setClinics(Clinics clinics) {
+        this.clinics = clinics;
     }
 
     public String getAddress() {
@@ -51,14 +100,6 @@ public class Contacts extends BaseEntity {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getEmail() {

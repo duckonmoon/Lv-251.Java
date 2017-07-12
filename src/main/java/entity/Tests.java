@@ -1,16 +1,19 @@
 package entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * Created by kilopo on 11.07.2017.
  */
 @Entity
-public class Tests extends BaseEntity{
+public class Tests extends BaseEntity {
 
-    @Column
     private String name;
+
+    @OneToMany(mappedBy = "tests")
+    private List<TestsResults> testsResults;
 
     public Tests() {
     }
@@ -22,4 +25,13 @@ public class Tests extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<TestsResults> getTestsResults() {
+        return testsResults;
+    }
+
+    public void setTestsResults(List<TestsResults> testsResults) {
+        this.testsResults = testsResults;
+    }
+
 }

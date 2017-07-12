@@ -1,43 +1,42 @@
 package entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
  *
  */
 @Entity
-public class Appointments extends BaseEntity{
+public class Appointments extends BaseEntity {
 
-    @Column
-    private long id_doctor;
-    @Column
-    private long id_patient;
-    @Column
     private Date appintmentDate;
-    @Column
     private String status;
-    @Column
     private double duration;
+
+    @ManyToOne
+    private Doctors doctors;
+
+    @ManyToOne
+    private Users users;
 
     public Appointments() {
     }
 
-    public long getId_doctor() {
-        return id_doctor;
+    public Doctors getDoctors() {
+        return doctors;
     }
 
-    public void setId_doctor(long id_doctor) {
-        this.id_doctor = id_doctor;
+    public void setDoctors(Doctors doctors) {
+        this.doctors = doctors;
     }
 
-    public long getId_patient() {
-        return id_patient;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setId_patient(long id_patient) {
-        this.id_patient = id_patient;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public Date getAppintmentDate() {

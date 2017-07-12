@@ -3,13 +3,14 @@ package entity;
 import javax.persistence.*;
 
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BaseEntity {
 
     @Id
     @GeneratedValue
     private long id;
 
-    public BaseEntity(){
+    public BaseEntity() {
     }
 
     public long getId() {

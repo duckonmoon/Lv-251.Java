@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
@@ -9,37 +10,32 @@ import java.util.Date;
 @Entity
 public class TestsResults extends BaseEntity {
 
-    private long id_patient;
-    private long id_doctor;
-    private long id_test;
     private Date date;
     private String description;
+
+    @ManyToOne
+    private Tests tests;
+
+    @ManyToOne
+    private Users user;
 
     public TestsResults() {
     }
 
-    public long getId_patient() {
-        return id_patient;
+    public Users getUser() {
+        return user;
     }
 
-    public void setId_patient(long id_patient) {
-        this.id_patient = id_patient;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public long getId_doctor() {
-        return id_doctor;
+    public Tests getTests() {
+        return tests;
     }
 
-    public void setId_doctor(long id_doctor) {
-        this.id_doctor = id_doctor;
-    }
-
-    public long getId_test() {
-        return id_test;
-    }
-
-    public void setId_test(long id_test) {
-        this.id_test = id_test;
+    public void setTests(Tests tests) {
+        this.tests = tests;
     }
 
     public Date getDate() {

@@ -1,23 +1,75 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Users extends BaseEntity {
 
-    @Column
     private String firstname;
-    @Column
     private String lastname;
-    @Column
     private String middlename;
-    @Column
     private String email;
-    @Column
     private String password;
 
+    @OneToMany(mappedBy = "users")
+    private List<Appointments> appointments;
+
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Roles> roles;
+
+    @OneToOne
+    private Contacts contact;
+
+    @OneToMany(mappedBy = "user")
+    private List<MedicalCard> medicalCards;
+
+    @OneToMany(mappedBy = "user")
+    private List<TestsResults> testsResults;
+
+
     public Users() {
+    }
+
+    public List<TestsResults> getTestsResults() {
+        return testsResults;
+    }
+
+    public void setTestsResults(List<TestsResults> testsResults) {
+        this.testsResults = testsResults;
+    }
+
+    public List<MedicalCard> getMedicalCards() {
+        return medicalCards;
+    }
+
+    public void setMedicalCards(List<MedicalCard> medicalCards) {
+        this.medicalCards = medicalCards;
+    }
+
+    public Contacts getContact() {
+        return contact;
+    }
+
+    public void setContact(Contacts contact) {
+        this.contact = contact;
+    }
+
+    public List<Appointments> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointments> appointments) {
+        this.appointments = appointments;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 
     public String getFirstname() {

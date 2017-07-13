@@ -6,6 +6,7 @@ import java.util.List;
  *
  */
 public interface BaseDAO<T> {
+
     void addEntity(T entity);
 
     void updateEntity(T entity);

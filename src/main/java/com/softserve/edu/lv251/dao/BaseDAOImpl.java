@@ -1,5 +1,8 @@
 package com.softserve.edu.lv251.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,24 +14,28 @@ import java.util.List;
  *
  */
 public class BaseDAOImpl<T> implements BaseDAO<T> {
+
     private Class<T> entityClass;
 
-    //@Autowired
+    @Autowired
     private EntityManager entityManager;
 
+
+    @Autowired
     public BaseDAOImpl() {
-        entityClass = (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
+        entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     @Override
-    //@Transactional
+    @Transactional
     public void addEntity(T entity) {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
     }
 
     @Override
-    //@Transactional
+    @Transactional
     public void updateEntity(T entity) {
         entityManager.merge(entity);
     }
@@ -56,7 +63,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     }
 
     @Override
-    //@Transactional
+    @Transactional
     public void deleteEntity(T entity) {
         entityManager.remove(entity);
     }

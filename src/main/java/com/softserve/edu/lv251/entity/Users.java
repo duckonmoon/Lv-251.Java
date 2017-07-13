@@ -1,4 +1,4 @@
-package entity;
+package com.softserve.edu.lv251.entity;
 
 import javax.persistence.*;
 import java.util.List;

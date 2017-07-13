@@ -1,7 +1,5 @@
-package entity;
+package com.softserve.edu.lv251.entity;
 
-
-import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

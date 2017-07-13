@@ -1,21 +1,25 @@
-package entity;
+package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
- *
+ * Created by Taras on 11.07.2017.
  */
 @Entity
-public class MedicalCard extends BaseEntity {
+public class TestsResults extends BaseEntity {
+
     private Date date;
     private String description;
 
     @ManyToOne
+    private Tests tests;
+
+    @ManyToOne
     private Users user;
 
-    public MedicalCard() {
+    public TestsResults() {
     }
 
     public Users getUser() {
@@ -24,6 +28,14 @@ public class MedicalCard extends BaseEntity {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public Tests getTests() {
+        return tests;
+    }
+
+    public void setTests(Tests tests) {
+        this.tests = tests;
     }
 
     public Date getDate() {
@@ -40,13 +52,5 @@ public class MedicalCard extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "MedicalCard{" +
-                "date=" + date +
-                ", description='" + description + '\'' +
-                '}';
     }
 }

@@ -11,7 +11,7 @@ public interface BaseDAO<T> {
 
     void updateEntity(T entity);
 
-    T getEntityByID(Integer entityId);
+    T getEntityByID(Long entityId);
 
     List<T> getEntitiesByColumnNameAndValue(String columnName, Object value);
 

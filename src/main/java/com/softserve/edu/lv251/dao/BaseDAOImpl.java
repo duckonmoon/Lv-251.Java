@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -17,7 +18,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 
     private Class<T> entityClass;
 
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
 
@@ -29,9 +30,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     @Override
     @Transactional
     public void addEntity(T entity) {
-        entityManager.getTransaction().begin();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -41,7 +40,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     }
 
     @Override
-    public T getEntityByID(Integer entityId) {
+    public T getEntityByID(Long entityId) {
         return entityManager.find(entityClass, entityId);
     }
 

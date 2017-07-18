@@ -1,9 +1,6 @@
 package com.softserve.edu.lv251.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,10 +11,10 @@ public class Doctors extends BaseEntity {
     @Column(length = 10000)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Clinics clinics;
 
-    @OneToMany(mappedBy = "doctors")
+    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL})
     private List<Appointments> docAppointments;
 
     public Doctors() {

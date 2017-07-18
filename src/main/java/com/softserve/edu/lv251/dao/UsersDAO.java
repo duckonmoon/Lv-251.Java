@@ -1,11 +1,9 @@
 package com.softserve.edu.lv251.dao;
 
 import com.softserve.edu.lv251.entity.Users;
-import org.springframework.stereotype.Repository;
 
 /**
- * Created by kilopo on 13.07.2017.
+ * Created by Taras on 16.07.2017.
  */
-@Repository
-public class UsersDAO extends BaseDAOImpl<Users> {
+public interface UsersDAO extends BaseDAO<Users>{
 }

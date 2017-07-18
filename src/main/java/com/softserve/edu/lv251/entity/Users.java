@@ -12,6 +12,7 @@ public class Users extends BaseEntity {
     private String middlename;
     private String email;
     private String password;
+    private String photo;
 
     @OneToMany(mappedBy = "users")
     private List<Appointments> appointments;
@@ -110,5 +111,13 @@ public class Users extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

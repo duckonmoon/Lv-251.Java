@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -21,22 +23,17 @@ public class Contacts extends BaseEntity {
     private Double longitude;
     private Double latitude;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "contact")
     private Clinics clinics;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "contact")
     private Users users;
 
     public Contacts() {
     }
 
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
 
     public String getFirstPhone() {
         return firstPhone;
@@ -60,14 +57,6 @@ public class Contacts extends BaseEntity {
 
     public void setThirdPhone(String thirdPhone) {
         this.thirdPhone = thirdPhone;
-    }
-
-    public Clinics getClinics() {
-        return clinics;
-    }
-
-    public void setClinics(Clinics clinics) {
-        this.clinics = clinics;
     }
 
     public String getAddress() {
@@ -124,5 +113,21 @@ public class Contacts extends BaseEntity {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public Clinics getClinics() {
+        return clinics;
+    }
+
+    public void setClinics(Clinics clinics) {
+        this.clinics = clinics;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 }

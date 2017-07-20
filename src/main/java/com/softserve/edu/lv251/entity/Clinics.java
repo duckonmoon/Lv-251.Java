@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,7 +17,10 @@ import java.util.List;
 @Entity
 public class Clinics extends BaseEntity {
     private String clinic_name;
-    private String photo;
+
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] photo;
+
     private String description;
 
     @JsonIgnore
@@ -46,11 +50,11 @@ public class Clinics extends BaseEntity {
         this.clinic_name = clinic_name;
     }
 
-    public String getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 

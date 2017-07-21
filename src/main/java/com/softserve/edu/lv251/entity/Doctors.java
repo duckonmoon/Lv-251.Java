@@ -16,6 +16,8 @@ public class Doctors extends BaseEntity {
 
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL})
     private List<Appointments> docAppointments;
+    @ManyToOne
+    private Specialization specialization;
 
     public Doctors() {
     }

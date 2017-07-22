@@ -4,7 +4,6 @@ package com.softserve.edu.lv251.dao.impl;
 import com.softserve.edu.lv251.dao.ClinicsDAO;
 import com.softserve.edu.lv251.entity.Clinics;
 import org.springframework.stereotype.Repository;
-//import org.springframework.transaction.annotation.Transactional;
 import javax.transaction.Transactional;
 
 /**

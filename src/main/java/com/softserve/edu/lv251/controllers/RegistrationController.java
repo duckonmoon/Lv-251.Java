@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -53,7 +52,7 @@ public class RegistrationController {
             return "registration";
         }
         else {
-            return "index.jsp";
+            return "clinics";
         }
     }
 
@@ -71,7 +70,7 @@ public class RegistrationController {
     //fix
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
-        return "welcome";
+        return "/index.jsp";
     }
 
     private Users createUserAccount(UserDTO accountDto, BindingResult result) {

@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * Created by Taras on 14.07.2017.
+ * Created by on 14.07.2017.
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -74,7 +74,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users findByEmail(String email) {
-        return getUsersByColumnNameAndValue("email", email).get(0);
+        List<Users> users = getUsersByColumnNameAndValue("email", email);
+        return users.isEmpty() ? null : getUsersByColumnNameAndValue("email", email).get(0);
     }
 
     public List<Users> getWithOffsetOrderedByName(int offset, int limit) {
@@ -105,7 +106,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(accountDto.getEmail());
         try {
             user.setPhoto(new String(Base64.encode(Files.readAllBytes(
-                    Paths.get("web/resources/main_theme/images/User_Default.png"))), "UTF-8"));
+                    Paths.get("web/resources/img/User_Default.png"))), "UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }

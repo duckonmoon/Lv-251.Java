@@ -39,6 +39,7 @@
           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>--%>
 
+        <br>
         <h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |<button
                 id="begin_button" type="button" class="button" name="back"
                 onclick="location.href='<c:url value="/login"/>'">Login</button></h2>
@@ -48,5 +49,11 @@
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+<footer id="footer_clinics">
+    <div>Posted by: lol</div>
+    <div>Contact information: <a href="mailto:lol.ua@gmail.com">
+        lol.ua@gmail.com</a>.</div>
+</footer>
 </body>
 </html>

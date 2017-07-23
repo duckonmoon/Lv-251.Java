@@ -36,7 +36,7 @@
                 onclick="location.href='<c:url value="/index.jsp"/>'">Back</button>
     </form>
 </div>
-<footer id="footer_users">
+<footer id="footer_clinics">
     <div>Posted by: lol</div>
     <div>Contact information: <a href="mailto:lol.ua@gmail.com">
         lol.ua@gmail.com</a>.</div>

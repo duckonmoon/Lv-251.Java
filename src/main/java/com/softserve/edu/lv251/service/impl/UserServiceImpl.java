@@ -6,6 +6,7 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -33,8 +34,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public void addUser(Users user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         this.usersDAO.addEntity(user);
     }
 

@@ -36,7 +36,7 @@ public class RegistrationController {
 
     //fix
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount(
+    public String registerUserAccount(
             @ModelAttribute("userForm") @Valid UserDTO accountDto,
             BindingResult result,
             WebRequest request,
@@ -50,10 +50,10 @@ public class RegistrationController {
             result.rejectValue("email", "message.regError");
         }
         if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
+            return "registration";
         }
         else {
-            return new ModelAndView("successRegister", "user", accountDto);
+            return "index.jsp";
         }
     }
 

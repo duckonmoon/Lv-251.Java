@@ -51,5 +51,11 @@
 <!-- /container -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+<footer id="footer_clinics">
+    <div>Posted by: lol</div>
+    <div>Contact information: <a href="mailto:lol.ua@gmail.com">
+        lol.ua@gmail.com</a>.</div>
+</footer>
 </body>
 </html>

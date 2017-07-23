@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.List;
@@ -33,5 +34,22 @@ private List<Doctors> doctors;
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Doctors> getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(List<Doctors> doctors) {
+        this.doctors = doctors;
+    }
+
+    @Override
+    public String toString() {
+        return "Specialization{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+
+                '}';
     }
 }

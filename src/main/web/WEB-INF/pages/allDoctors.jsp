@@ -1,25 +1,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: Admin
+  Date: 23.07.2017
+  Time: 17:04
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Doctors</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Home</title>
+        <title>Home</title>
 
-    <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/bootstrap-theme.min.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="resources/css/style.css" rel="stylesheet">
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet">
+        <link href="resources/css/bootstrap-social.css" rel="stylesheet">
 
-</head>
+    </head>
 <body>
 <!--NAVBAR***************************************************************************************************************************************-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -29,28 +36,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<c:url value="/index.jsp"/>">
-                <img src="<c:url value="/resources/img/heartbeat2.png"/>" height=35 width=100>
+            <a class="navbar-brand" href="index.html">
+                <img src="resources/img/heartbeat2.png" height=35 width=100>
             </a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href=<c:url value="/index.jsp"/>>
-                    <span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li>
-                    <a href="#"><span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
-                </li>
+                <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"
+                                                              aria-hidden="true"></span> Home</a></li>
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-user"></span>Doctors</a>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        Clinics</a>
+                </li>
+                <li>
+                    <a href="/allDoctors">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        Doctors</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-envelope-o"></i> Contact</a>
                 </li>
                 <li>
-                    <a class="navbar-brand pull-right" href=<c:url value="/index.jsp"/>>
-                        <img src="<c:url value="/resources/img/heartbeat2.png"/>" height=35 width=100>
+                    <a class="navbar-brand pull-right" href="index.html">
+                        <img src="resources/img/heartbeat2.png" height=35 width=100>
                     </a>
                 </li>
             </ul>
@@ -73,7 +83,7 @@
                 <h4 class="modal-title">Login</h4>
             </div>
             <div class="modal-body">
-                <form class="form-inline" method="POST" action="<c:url value="/login"/>">
+                <form class="form-inline">
                     <div class="form-group">
                         <label class="sr-only" for="email">Address Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -91,9 +101,6 @@
                         <button type="sign-in" class="btn btn-info">Sign in</button>
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
                     </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-info" onclick="location.href='/registration'">Create an account</button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -108,14 +115,17 @@
             HERE GOES THE SEARCH BOX
         </div>
     </div>
-
+<c:forEach items="${doctors}" var="doctor">
+    <a href="doctor/${doctor.id}">
     <div class="row row-content">
         <div class="container-fluid">
-            HERE GOES THE CONTENT
-            <img class="show-logo" alt="logo" src=<c:url value="/resources/img/clinic_logo.png"/>>
+           <p>${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</p>
+            <p>Specialization:${doctor.specialization.name}</p>
+            <img class="show-logo" alt="logo" src="resources/img/clinic_logo.png">
         </div>
     </div>
-
+    </a>
+    </c:forEach>
 </div>
 
 
@@ -126,9 +136,9 @@
             <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href=<c:url value="/index.jsp"/>>Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="#">Clinics</a></li>
-                    <li><a href="#">Doctors</a></li>
+                    <li><a href="/allDoctors">Doctors</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
@@ -161,7 +171,6 @@
     </div>
 </footer>
 
-<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
 </body>
-</html>

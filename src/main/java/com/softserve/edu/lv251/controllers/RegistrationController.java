@@ -50,8 +50,7 @@ public class RegistrationController {
         }
         if (result.hasErrors()) {
             return "registration";
-        }
-        else {
+        } else {
             return "clinics";
         }
     }
@@ -65,12 +64,6 @@ public class RegistrationController {
             model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
-    }
-
-    //fix
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "/index.jsp";
     }
 
     private Users createUserAccount(UserDTO accountDto, BindingResult result) {

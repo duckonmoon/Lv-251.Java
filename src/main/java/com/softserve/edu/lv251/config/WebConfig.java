@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -39,11 +40,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     Environment env;
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/main_theme/");
-        registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(31556926);
     }
 
     @Bean
@@ -66,6 +65,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("i18n/messages");
+        source.setUseCodeAsDefaultMessage(true);
+        return source;
+    }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
@@ -79,6 +85,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
         return entityManagerFactory.createEntityManager();
     }
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -98,7 +105,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint){
-        Logger logger =  Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
-        return logger;
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
     }
 }

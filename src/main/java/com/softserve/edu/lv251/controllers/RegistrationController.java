@@ -43,7 +43,7 @@ public class RegistrationController {
 
         Users registered = new Users();
         if (!result.hasErrors()) {
-//            registered = createUserAccount(accountDto, result);
+            registered = createUserAccount(accountDto, result);
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");
@@ -66,5 +66,14 @@ public class RegistrationController {
         return "login";
     }
 
-    //fix
+    private Users createUserAccount(UserDTO accountDto, BindingResult result) {
+        Users registered;
+        try {
+            registered = userService.registerNewUserAccount(accountDto);
+        } catch (EmailExistsException e) {
+            System.out.println("Email exception!");
+            return null;
+        }
+        return registered;
+    }
 }

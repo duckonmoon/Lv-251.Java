@@ -7,7 +7,7 @@ import java.util.List;
  * Created by User on 11.07.2017.
  */
 @Entity
-public class Doctors extends BaseEntity {
+public class Doctors extends Users {
     @Column(length = 10000)
     private String description;
 
@@ -16,7 +16,8 @@ public class Doctors extends BaseEntity {
 
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL})
     private List<Appointments> docAppointments;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Specialization specialization;
 
     public Doctors() {
@@ -44,5 +45,23 @@ public class Doctors extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctors{" +
+                "description='" + description + '\'' +
+                ", clinics=" + clinics +
+                ", docAppointments=" + docAppointments +
+                ", specialization=" + specialization +
+                '}';
     }
 }

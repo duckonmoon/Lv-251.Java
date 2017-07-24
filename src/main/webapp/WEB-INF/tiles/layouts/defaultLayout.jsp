@@ -25,7 +25,9 @@
     <header id="header">
         <tiles:insertAttribute name="header"/>
     </header>
-
+    <section id="site-content">
+        <tiles:insertAttribute name="body" />
+    </section>
     <footer id="footer">
         <tiles:insertAttribute name="footer"/>
     </footer>

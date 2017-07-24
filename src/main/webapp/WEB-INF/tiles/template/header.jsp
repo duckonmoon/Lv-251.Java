@@ -23,11 +23,11 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                 <li>
-                    <a href="${pageContext.request.contextPath}WEB-INF/pages/clinics">
+                    <a href="${pageContext.request.contextPath}/clinics">
                         <span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
                 </li>
                 <li>
-                    <a href="<${pageContext.request.contextPath}WEB-INF/pages/allDoctors">
+                    <a href="<${pageContext.request.contextPath}/allDoctors">
                         <span class="glyphicon glyphicon-user"></span>Doctors</a>
                 </li>
                 <li>

@@ -28,7 +28,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DatabaseConfig {
 
-    private String[] packages = { "com.softserve.edu.lv251" };
+    private String[] packages = {"com.softserve.edu.lv251"};
 
     @Autowired
     Environment env;
@@ -43,20 +43,6 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-
-
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager manager = new JpaTransactionManager();
-        manager.setEntityManagerFactory(entityManagerFactory().getObject());
-
-        return manager;
-    }
-
-    @Bean
-    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -74,5 +60,17 @@ public class DatabaseConfig {
         return em;
     }
 
+    @Bean
+    public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
+        return entityManagerFactory.createEntityManager();
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager manager = new JpaTransactionManager();
+        manager.setEntityManagerFactory(entityManagerFactory().getObject());
+
+        return manager;
+    }
 
 }

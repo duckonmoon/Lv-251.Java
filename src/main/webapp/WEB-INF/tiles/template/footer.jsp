@@ -9,8 +9,8 @@
             <h5>Links</h5>
             <ul class="list-unstyled">
                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}WEB-INF/pages/clinics">Clinics</a></li>
-                <li><a href="${pageContext.request.contextPath}WEB-INF/pages/allDoctors">Doctors</a></li>
+                <li><a href="${pageContext.request.contextPath}/clinics">Clinics</a></li>
+                <li><a href="${pageContext.request.contextPath}/allDoctors">Doctors</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </div>

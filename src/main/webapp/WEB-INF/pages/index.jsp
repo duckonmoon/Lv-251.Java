@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,16 +8,16 @@
 
     <title>Home</title>
 
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel="stylesheet">
-    <link href="resources/css/font-awesome.min.css" rel="stylesheet">
-    <link href="resources/css/bootstrap-social.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/bootstrap-theme.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
 
 </head>
 <body>
 <!--NAVBAR***************************************************************************************************************************************-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -27,31 +27,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                <img src="resources/img/heartbeat2.png" height=35 width=100>
+            <a class="navbar-brand" href="<c:url value="/"/>">
+                <img src="<c:url value="/resources/img/heartbeat2.png"/>" height=35 width=100>
             </a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"
-                                                              aria-hidden="true"></span> Home</a></li>
+                <li class="active"><a href="<c:url value="/"/>"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                 <li>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        Clinics</a>
+                    <a href="<c:url value="/clinics"/>">
+                        <span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
                 </li>
                 <li>
-                    <a href="/allDoctors">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        Doctors</a>
+                    <a href="<c:url value="/allDoctors"/>">
+                        <span class="glyphicon glyphicon-user"></span>Doctors</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-envelope-o"></i> Contact</a>
                 </li>
                 <li>
-                    <a class="navbar-brand pull-right" href="index.html">
-                        <img src="resources/img/heartbeat2.png" height=35 width=100>
+                    <a class="navbar-brand pull-right" href="<c:url value="/"/>">
+                        <img src="<c:url value="/resources/img/heartbeat2.png"/>" height=35 width=100>
                     </a>
                 </li>
             </ul>
@@ -92,6 +89,9 @@
                         <button type="sign-in" class="btn btn-info">Sign in</button>
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
                     </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-info" onclick="location.href='/registration'">Create an account</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -110,7 +110,7 @@
     <div class="row row-content">
         <div class="container-fluid">
             HERE GOES THE CONTENT
-            <img class="show-logo" alt="logo" src="resources/img/clinic_logo.png">
+            <img class="show-logo" alt="logo" src="<c:url value="/resources/img/clinic_logo.png"/>">
         </div>
     </div>
 
@@ -124,9 +124,9 @@
             <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Clinics</a></li>
-                    <li><a href="/allDoctors">Doctors</a></li>
+                    <li><a href="<c:url value="/"/>">Home</a></li>
+                    <li><a href="<c:url value="/clinics"/>">Clinics</a></li>
+                    <li><a href="<c:url value="/allDoctors"/>">Doctors</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
@@ -159,7 +159,7 @@
     </div>
 </footer>
 
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

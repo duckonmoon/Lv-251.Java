@@ -30,5 +30,11 @@
         <put-attribute name="body" value="" />
     </definition>
 
+    <!--Clinics page-->
+    <definition name="clinics" extends="base-definition">
+        <put-attribute name="title" value="Clinics" />
+        <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp" />
+    </definition>
+
 
 </tiles-definitions>

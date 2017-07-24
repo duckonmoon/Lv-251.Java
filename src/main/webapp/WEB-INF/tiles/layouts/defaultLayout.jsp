@@ -26,6 +26,8 @@
         <tiles:insertAttribute name="header"/>
     </header>
 
+    <tiles:insertAttribute name="body"/>
+
     <footer id="footer">
         <tiles:insertAttribute name="footer"/>
     </footer>

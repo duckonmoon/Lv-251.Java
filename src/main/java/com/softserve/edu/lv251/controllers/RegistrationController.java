@@ -51,7 +51,7 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "registration";
         } else {
-            return "clinics";
+            return "/index";
         }
     }
 

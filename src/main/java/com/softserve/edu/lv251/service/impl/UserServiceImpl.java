@@ -104,12 +104,7 @@ public class UserServiceImpl implements UserService {
         user.setMiddlename("");
         user.setPassword(accountDto.getPassword());
         user.setEmail(accountDto.getEmail());
-        try {
-            user.setPhoto(new String(Base64.encode(Files.readAllBytes(
-                    Paths.get("web/resources/img/User_Default.png"))), "UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         //user.setAppointments();
         //user.setRoles();
         //user.setContact();

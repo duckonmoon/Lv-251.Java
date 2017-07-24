@@ -41,18 +41,23 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean
-    public ResourceBundleMessageSource messageSource() {
-        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasename("i18n/messages");
-        source.setUseCodeAsDefaultMessage(true);
-        return source;
-    }
 
 
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
+    }
+
+
+    /*
+    Not implemented yet.
+     */
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("i18n/messages");
+        source.setUseCodeAsDefaultMessage(true);
+        return source;
     }
 }

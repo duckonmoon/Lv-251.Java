@@ -27,7 +27,7 @@
                         <span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
                 </li>
                 <li>
-                    <a href="<${pageContext.request.contextPath}/allDoctors">
+                    <a href="${pageContext.request.contextPath}/allDoctors">
                         <span class="glyphicon glyphicon-user"></span>Doctors</a>
                 </li>
                 <li>

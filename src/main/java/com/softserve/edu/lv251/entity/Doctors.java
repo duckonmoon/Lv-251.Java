@@ -14,7 +14,7 @@ public class Doctors extends Users {
     @ManyToOne(cascade = {CascadeType.ALL})
     private Clinics clinics;
 
-    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     private List<Appointments> docAppointments;
 
     @ManyToOne(fetch = FetchType.EAGER)

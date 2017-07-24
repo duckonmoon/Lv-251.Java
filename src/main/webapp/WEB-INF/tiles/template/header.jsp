@@ -23,7 +23,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/clinics">
+                    <a href="${pageContext.request.contextPath}/clinics/all">
                         <span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
                 </li>
                 <li>

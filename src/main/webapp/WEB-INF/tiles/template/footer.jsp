@@ -8,7 +8,7 @@
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5>Links</h5>
             <ul class="list-unstyled">
-                <li><a href="${pageContext.request.contextPath}WEB-INF/pages/">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}WEB-INF/pages/clinics">Clinics</a></li>
                 <li><a href="${pageContext.request.contextPath}WEB-INF/pages/allDoctors">Doctors</a></li>
                 <li><a href="#">Contact</a></li>

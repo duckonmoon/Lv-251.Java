@@ -43,14 +43,14 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"
+                <li ><a href="/"><span class="glyphicon glyphicon-home"
                                                               aria-hidden="true"></span> Home</a></li>
                 <li>
                     <a href="#">
                         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                         Clinics</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/allDoctors">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         Doctors</a>

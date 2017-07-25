@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 /**
  * Created on 14.07.2017.
@@ -26,9 +28,13 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    Logger logger;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
+    public String registration(Model model, Principal principal) {
         model.addAttribute("userForm", new UserDTO());
+
 
         return "registration";
     }
@@ -57,14 +63,15 @@ public class RegistrationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+//        if (error != null)
+//            model.addAttribute("error", "Your username and password is invalid.");
+//
+//        if (logout != null)
+//            model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
     }
+
 
     private Users createUserAccount(UserDTO accountDto, BindingResult result) {
         Users registered;

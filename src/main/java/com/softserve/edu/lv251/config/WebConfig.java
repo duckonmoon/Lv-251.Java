@@ -74,8 +74,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.viewResolver(viewResolver);
     }
 
-    /*
-   Not implemented yet.
+    /**
+    Next 3 beans and override is for localization
     */
     @Bean
     public ReloadableResourceBundleMessageSource messageSource(){

@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
     Author: Vitaliy Kovalevskyy
     Last updated by: Vitaliy Kovalevskyy
@@ -21,18 +23,21 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="${pageContext.request.contextPath}/"><span
-                        class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> <spring:message code="messages.home" />
+                </a></li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/clinics">
-                        <span class="glyphicon glyphicon-plus-sign"></span>Clinics</a>
+                    <a href="${pageContext.request.contextPath}/clinics/all">
+                        <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics" />
+                    </a>
                 </li>
                 <li>
-                    <a href="<${pageContext.request.contextPath}/allDoctors">
-                        <span class="glyphicon glyphicon-user"></span>Doctors</a>
+                    <a href="${pageContext.request.contextPath}/allDoctors">
+                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
+                    </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-envelope-o"></i> Contact</a>
+                    <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
+                    </a>
                 </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">

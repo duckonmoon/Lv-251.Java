@@ -3,10 +3,7 @@ package com.softserve.edu.lv251.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -18,8 +15,8 @@ import java.util.List;
 public class Clinics extends BaseEntity {
     private String clinic_name;
 
-    @Type(type="org.hibernate.type.BinaryType")
-    private byte[] photo;
+    @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
+    private String photo;
 
     private String description;
 
@@ -50,14 +47,6 @@ public class Clinics extends BaseEntity {
         this.clinic_name = clinic_name;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -72,5 +61,13 @@ public class Clinics extends BaseEntity {
 
     public void setDoctors(List<Doctors> doctors) {
         this.doctors = doctors;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

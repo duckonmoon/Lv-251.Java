@@ -29,14 +29,15 @@
 
 <div class="container">
 
-    <form method="POST" action="${contextPath}/login" class="form-signin">
+    <c:url value="/j_spring_security_check" var="loginUrl" />
+    <form action="${loginUrl}" method="post">
         <h2 class="form-heading">Log in</h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="username" type="email" class="form-control" placeholder="Email"
+            <input name="j_username" type="email" class="form-control" placeholder="Email"
                    autofocus=""/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="j_password" type="password" class="form-control" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 

@@ -21,13 +21,19 @@
     <!-- Home Page -->
     <definition name="home" extends="base-definition">
         <put-attribute name="title" value="Home" />
-        <put-attribute name="body" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/index.jsp" />
     </definition>
 
     <!-- Doctors Page -->
     <definition name="allDoctors" extends="base-definition">
         <put-attribute name="title" value="Doctors" />
-        <put-attribute name="body" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/allDoctors.jsp" />
+    </definition>
+
+    <!--Clinics page-->
+    <definition name="clinics" extends="base-definition">
+        <put-attribute name="title" value="Clinics" />
+        <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp" />
     </definition>
 
 

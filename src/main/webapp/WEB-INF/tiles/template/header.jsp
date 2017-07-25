@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                 </li>
             </ul>
         </div>

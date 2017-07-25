@@ -22,5 +22,62 @@
                There are no doctors in database
             </div>
         </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div><div class="row row-content">
+        <div class="container-fluid">
+            There are no doctors in database
+        </div>
+    </div><div class="row row-content">
+        <div class="container-fluid">
+            There are no doctors in database
+        </div>
+    </div><div class="row row-content">
+        <div class="container-fluid">
+            There are no doctors in database
+        </div>
+    </div><div class="row row-content">
+        <div class="container-fluid">
+            There are no doctors in database
+        </div>
+    </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="container-fluid">
+                There are no doctors in database
+            </div>
+        </div>
+
+
+
+
+
     </c:otherwise>
 </c:choose>

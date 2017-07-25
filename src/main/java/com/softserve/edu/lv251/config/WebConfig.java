@@ -76,6 +76,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
     Next 3 beans and override is for localization
+     Created by Taras
     */
     @Bean
     public ReloadableResourceBundleMessageSource messageSource(){

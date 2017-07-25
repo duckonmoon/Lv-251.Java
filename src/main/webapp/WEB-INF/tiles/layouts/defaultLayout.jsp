@@ -18,6 +18,7 @@
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/js/main.css"/>" rel="stylesheet">
 
 </head>
 <body>
@@ -27,7 +28,7 @@
     </header>
 
 
-    <tiles:insertAttribute name="body"/>
+
 
     <section id="site-content">
         <tiles:insertAttribute name="body" />
@@ -37,8 +38,10 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
-
+    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/search.js"/>"></script>
 </body>
 </html>

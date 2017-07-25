@@ -47,11 +47,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav navbar-nav flags">
-                    <a class="" href="#" style="padding: 20px 0 ; float: left">
+                    <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class="" href="#" style="padding: 20px 3px ; float: left ">
+                    <a class=""  href="?lang=ua"  style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>

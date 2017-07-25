@@ -6,6 +6,10 @@ import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ * Custom validation class for correspondent custom annotation - @PasswordMatches.
+ */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
     @Override

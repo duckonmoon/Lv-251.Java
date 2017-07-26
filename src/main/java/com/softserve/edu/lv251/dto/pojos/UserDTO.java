@@ -2,8 +2,7 @@ package com.softserve.edu.lv251.dto.pojos;
 
 import com.softserve.edu.lv251.customannotations.PasswordMatches;
 import com.softserve.edu.lv251.customannotations.ValidEmail;
-import org.hibernate.validator.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Added by Pavlo Kuchereshko.
@@ -11,21 +10,18 @@ import javax.validation.constraints.NotNull;
  */
 @PasswordMatches
 public class UserDTO {
-    @NotNull
-    @NotEmpty
+    
+    @NotBlank
     private String firstName;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String lastName;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String password;
     private String matchingPassword;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     @ValidEmail
     private String email;
 

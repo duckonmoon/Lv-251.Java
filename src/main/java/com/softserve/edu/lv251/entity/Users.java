@@ -14,14 +14,34 @@ public class Users extends BaseEntity {
     private String middlename;
     private String email;
     private String password;
+    private boolean enabled;
+    private boolean tokenExpired;
 
     @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
     private String photo;
-@JsonIgnore
+
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<Appointments> appointments;
+
     @JsonIgnore
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                            CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.PERSIST
+                    },
+            targetEntity = Roles.class)
+    @JoinTable(
+            name = "roles_users",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private List<Roles> roles;
 
     @OneToOne
@@ -123,5 +143,21 @@ public class Users extends BaseEntity {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
     }
 }

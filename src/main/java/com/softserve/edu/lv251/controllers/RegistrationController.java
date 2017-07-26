@@ -64,11 +64,13 @@ public class RegistrationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
-//        if (error != null)
-//            model.addAttribute("error", "Your username and password is invalid.");
-//
-//        if (logout != null)
-//            model.addAttribute("message", "You have been logged out successfully.");
+        if (error != null) {
+            return "wrongPassword";
+        }
+
+        if (logout != null) {
+            model.addAttribute("message", "You have been logged out successfully.");
+        }
 
         return "login";
     }
@@ -79,7 +81,7 @@ public class RegistrationController {
         try {
             registered = userService.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {
-            System.out.println("Email exception!");
+            e.getMessage();
             return null;
         }
         return registered;

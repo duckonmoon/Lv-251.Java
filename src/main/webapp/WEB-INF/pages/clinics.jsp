@@ -16,11 +16,11 @@
     </c:forEach>
 
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#"><</a></li>
+        <li class="page-item"><a class="page-link" href=""><</a></li>
         <c:forEach begin="1" end="${size}" varStatus="loop">
             <li id="current" class="page-item"><a class="page-link" href="/clinics/${loop.index}">${loop.index}</a></li>
         </c:forEach>
-        <li class="page-item"><a class="page-link" href="#">></a></li>
+        <li class="page-item"><a class="page-link" href="">></a></li>
     </ul>
 </div>
 

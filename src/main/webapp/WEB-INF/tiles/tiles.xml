@@ -12,9 +12,6 @@
     <!-- Base Definition -->
     <definition name="base-definition"
                 template="/WEB-INF/tiles/layouts/defaultLayout.jsp">
-        <put-attribute name="title" value="" />
-        <put-attribute name="header" value="/WEB-INF/tiles/template/header.jsp" />
-        <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
     </definition>
 
@@ -22,18 +19,21 @@
     <definition name="home" extends="base-definition">
         <put-attribute name="title" value="Home" />
         <put-attribute name="body" value="/WEB-INF/pages/index.jsp" />
+        <put-attribute name="current" value="home"/>
     </definition>
 
     <!-- Doctors Page -->
     <definition name="allDoctors" extends="base-definition">
         <put-attribute name="title" value="Doctors" />
         <put-attribute name="body" value="/WEB-INF/pages/allDoctors.jsp" />
+        <put-attribute name="current" value="allDoctors"/>
     </definition>
 
     <!--Clinics page-->
     <definition name="clinics" extends="base-definition">
         <put-attribute name="title" value="Clinics" />
         <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp" />
+        <put-attribute name="current" value="clinics"/>
     </definition>
 
     <!--Wrong password page-->

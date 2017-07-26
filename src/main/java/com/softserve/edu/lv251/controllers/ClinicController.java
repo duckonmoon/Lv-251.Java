@@ -20,7 +20,6 @@ public class ClinicController {
 
 
     @RequestMapping(value = "/{current}", method = RequestMethod.GET)
-    @ResponseBody
     public ModelAndView getTenClinics(@PathVariable("current") Integer i){
         ModelAndView model = new ModelAndView("clinics");
         model.addObject("tenClinics", clinicService.getTenClinics(i));

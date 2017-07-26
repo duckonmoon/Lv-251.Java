@@ -1,7 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<p id="result"></p>
 <div class="container">
     <div class="row">
         <h2></h2>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Created by Admin on 23.07.2017.
+ * Created by Yana on 23.07.2017.
  */
 @Controller
 public class AllDoctorsController {
@@ -27,11 +27,11 @@ public class AllDoctorsController {
         return doctorsService.searchByLetters(name);
 
     }
-    @RequestMapping(value = "/searchResult")
-    public String searchDoctor(@RequestParam("search")String name){
-        System.out.println(name);
-        return "searchDoctor";
-    }
+//    @RequestMapping(value = "/searchResult")
+//    public String searchDoctor(@RequestParam("search")String name){
+//        System.out.println(name);
+//        return "searchDoctor";
+//    }
     @ResponseBody
     @RequestMapping(value = "/searchResult/{id}")
     public Doctors s(@PathVariable Long id){

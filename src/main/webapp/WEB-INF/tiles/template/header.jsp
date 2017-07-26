@@ -80,7 +80,7 @@
 
 <sec:authorize access="!isAuthenticated()">
     <!--LOGIN MODAL________________________________________________________________________________________________________________________________________-->
-    <div id="loginModal" class="modal fade" role="dialog">
+    <div id="loginModal" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,14 +98,15 @@
                     <div class="form-group ${error != null ? 'has-error' : ''}">
                         <span>${message}</span>
                         <div class="modal-body">
-                            <input name="j_username" type="email" class="form-control" placeholder="Email"
+                            <input id="email" name="j_username" type="email" class="form-control" placeholder="Email"
                                    autofocus=""/>
-                            <input name="j_password" type="password" class="form-control" placeholder="Password"/>
+                            <input id="password" name="j_password" type="password" class="form-control" placeholder="Password"/>
                             <span>${error}</span>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <p id="wrong" style="color: red"></p>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-lg btn-primary btn-block">
+                            <button class="btn btn-lg btn-primary btn-block" onclick="validate()">
                                 <spring:message code="messages.login"/>
                             </button>
                             <h4 class="text-center">
@@ -118,3 +119,5 @@
         </div>
     </div>
 </sec:authorize>
+
+

@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(
                 user.getEmail().toLowerCase(),
                 user.getPassword(),
-                /*enabled = */ true,
+                /*enabled = */ user.isEnabled(),
                 /*accountNonExpired = */ true,
                 /*credentialsNonExpired = */ true,
                 /*accountNonLocked = */ true,

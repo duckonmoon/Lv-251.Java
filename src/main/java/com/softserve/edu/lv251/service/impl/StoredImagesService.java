@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-class StoredImagesService {
+public class StoredImagesService {
 
-    static String getDefaultPictureBase64encoded(String filename) {
+    public static String getDefaultPictureBase64encoded(String filename) {
         //Get file from resources folder
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(new ClassPathResource(filename).getURI()));

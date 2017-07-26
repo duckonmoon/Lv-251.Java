@@ -1,29 +1,25 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
+import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
+import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
-//import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,7 +33,10 @@ public class UserServiceImpl implements UserService {
     ContactsDAO contactsDAO;
 
     @Autowired
-    private UsersDAO usersDAO;
+    UsersDAO usersDAO;
+
+    @Autowired
+    RolesService rolesService;
 
     @Autowired
     EntityManager entityManager;
@@ -82,7 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Users findByEmail(String email) {
         List<Users> users = getUsersByColumnNameAndValue("email", email);
-        return users.isEmpty() ? null : getUsersByColumnNameAndValue("email", email).get(0);
+        return users.isEmpty() ? null : users.get(0);
     }
 
     public List<Users> getWithOffsetOrderedByName(int offset, int limit) {
@@ -111,20 +110,22 @@ public class UserServiceImpl implements UserService {
         user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
+        user.setEnabled(true);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+        user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
+        //user.setAppointments(new ArrayList<>());
+        //user.setMedicalCards(new ArrayList<>());
+        //user.setTestsResults(new ArrayList<>());
         Contacts contact = new Contacts();
         contact.setUsers(user);
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
         user.setContact(contact);
-        //user.setAppointments(new ArrayList<>());
-        //user.setRoles(new ArrayList<>());
-        //user.setMedicalCards(new ArrayList<>());
-        //user.setTestsResults(new ArrayList<>());
         addUser(user);
 
         return user;
     }
+
     private boolean emailExist(String email) {
         return findByEmail(email) != null;
     }

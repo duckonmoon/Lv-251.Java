@@ -36,6 +36,12 @@
         <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp" />
     </definition>
 
+    <!-- Clinic details Page -->
+    <definition name="clinic_details" extends="base-definition">
+        <put-attribute name="title" value="Doctors" />
+        <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
+    </definition>
+
     <!--Wrong password page-->
     <definition name="wrongPassword" extends="home">
         <put-attribute name="wrong" value="Wrong" />

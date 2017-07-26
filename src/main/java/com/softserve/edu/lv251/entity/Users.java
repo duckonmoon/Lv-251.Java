@@ -25,7 +25,6 @@ public class Users extends BaseEntity {
     private List<Appointments> appointments;
 
     @JsonIgnore
-    /*@ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)*/
     @ManyToMany(fetch = FetchType.LAZY,
             cascade =
                     {

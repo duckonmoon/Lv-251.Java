@@ -12,7 +12,6 @@ public class Roles extends BaseEntity {
     @Column
     private String name;
 
-    /*@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)*/
     @ManyToMany(fetch = FetchType.LAZY,
             cascade =
                     {

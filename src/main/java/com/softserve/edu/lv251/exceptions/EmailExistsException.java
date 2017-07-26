@@ -1,5 +1,10 @@
 package com.softserve.edu.lv251.exceptions;
 
+
+/**
+ * Added by Pavlo Kuchereshko.
+ * Custom exception for duplicate emails issues.
+ */
 public class EmailExistsException extends Exception {
     public EmailExistsException() {
         super();

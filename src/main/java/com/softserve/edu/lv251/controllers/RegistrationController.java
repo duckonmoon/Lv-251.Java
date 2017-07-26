@@ -19,7 +19,8 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 /**
- * Created on 14.07.2017.
+ * Added by Pavlo Kuchereshko.
+ *
  */
 
 @Controller

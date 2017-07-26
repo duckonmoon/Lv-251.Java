@@ -35,8 +35,8 @@ console.log("before");
 
                         console.log(result.firstname);
                         $("#content").empty();
-                        $("#content").append("<div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
-                            " "+result.lastname +"</div></div>")
+                        $("#content").append("<div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
+                            " "+result.lastname +"</div></div></div>")
 
 
 

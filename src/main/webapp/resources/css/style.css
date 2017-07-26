@@ -91,8 +91,8 @@ address{
 
 
 #custom-search-input {
-    margin:0;
-    margin-top: 10px;
+ width: 400px;
+    margin: auto;
     padding: 0;
 }
 
@@ -127,4 +127,8 @@ address{
 
 .search-query:focus + button {
     z-index: 3;
+}
+.doc-name{
+    font-size: 20px;
+    color: #5e5e5e;
 }

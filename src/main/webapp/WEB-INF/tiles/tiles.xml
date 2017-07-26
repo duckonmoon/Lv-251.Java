@@ -36,5 +36,10 @@
         <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp" />
     </definition>
 
+    <!--Wrong password page-->
+    <definition name="wrongPassword" extends="home">
+        <put-attribute name="wrong" value="Wrong" />
+        <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
+    </definition>
 
 </tiles-definitions>

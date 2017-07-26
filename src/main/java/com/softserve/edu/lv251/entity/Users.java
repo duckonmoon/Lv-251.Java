@@ -14,6 +14,8 @@ public class Users extends BaseEntity {
     private String middlename;
     private String email;
     private String password;
+
+    @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
     private String photo;
 @JsonIgnore
     @OneToMany(mappedBy = "users")

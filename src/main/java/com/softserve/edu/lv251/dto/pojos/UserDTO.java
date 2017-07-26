@@ -5,6 +5,10 @@ import com.softserve.edu.lv251.customannotations.ValidEmail;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ * Used for transferring Users entity into more convenient DTO object for registration purposes.
+ */
 @PasswordMatches
 public class UserDTO {
     @NotNull

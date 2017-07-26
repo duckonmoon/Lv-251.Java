@@ -1,7 +1,10 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.UserService;
@@ -20,13 +23,18 @@ import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by on 14.07.2017.
+ * Added by Pavlo Kuchereshko.
+ *
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    ContactsDAO contactsDAO;
 
     @Autowired
     private UsersDAO usersDAO;
@@ -39,7 +47,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(Users user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         this.usersDAO.addEntity(user);
     }
 
@@ -102,15 +109,19 @@ public class UserServiceImpl implements UserService {
         user.setFirstname(accountDto.getFirstName());
         user.setLastname(accountDto.getLastName());
         user.setMiddlename("");
-        user.setPassword(accountDto.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        //user.setAppointments();
-        //user.setRoles();
-        //user.setContact();
-        //user.setMedicalCards();
-        //user.setTestsResults();
-        this.usersDAO.addEntity(user);
+        Contacts contact = new Contacts();
+        contact.setUsers(user);
+        contact.setEmail(accountDto.getEmail());
+        this.contactsDAO.addEntity(contact);
+        user.setContact(contact);
+        //user.setAppointments(new ArrayList<>());
+        //user.setRoles(new ArrayList<>());
+        //user.setMedicalCards(new ArrayList<>());
+        //user.setTestsResults(new ArrayList<>());
+        addUser(user);
 
         return user;
     }

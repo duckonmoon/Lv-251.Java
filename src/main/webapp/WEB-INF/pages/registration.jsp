@@ -1,7 +1,14 @@
+<%--
+* Added by Pavlo Kuchereshko.
+* Registration page.
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -86,7 +93,7 @@
             <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href=<c:url value="/index.jsp"/>>Home</a></li>
+                    <li><a href=<c:url value="/index"/>>Home</a></li>
                     <li><a href="#">Clinics</a></li>
                     <li><a href="#">Doctors</a></li>
                     <li><a href="#">Contact</a></li>

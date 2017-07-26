@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+
 <%--
     Author: Vitaliy Kovalevskyy
     Last updated by: Vitaliy Kovalevskyy
@@ -46,9 +48,18 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal">
-                    <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login" />
-                </a>
+                <li class="nav navbar-nav flags">
+                    <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
+                             alt="Great Britain"/>
+                    </a>
+                    <a class=""  href="?lang=ua"  style="padding: 20px 3px ; float: left ">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
+                             alt="Ukraine"/>
+                    </a>
+                </li>
+                <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
+                    <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                 </li>
             </ul>
         </div>

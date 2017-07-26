@@ -12,6 +12,10 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ * Custom annotation for email validation.
+ */
 @Target({TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = EmailValidator.class)

@@ -24,7 +24,6 @@ public class AllDoctorsController {
     @ResponseBody
     @RequestMapping(value = "/all/doc")
     public List<Doctors> searchDoctors(@RequestParam String name){
-        System.out.println(doctorsService.searchByLetters("P"));
         return doctorsService.searchByLetters(name);
 
     }

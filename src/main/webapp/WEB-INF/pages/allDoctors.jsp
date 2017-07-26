@@ -33,10 +33,6 @@
                 <div class="row row-content">
                     <div class="container-fluid">
                         <p>${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</p>
-
-                        <%--<p>Specialization:${doctor.specialization.name}</p>--%>
-                        <img class="show-logo" alt="logo" src="resources/img/clinic_logo.png">
-
                         <p>Specialization:${doctor.specialization.name}</p>
                         <img class="show-logo" alt="logo" src="<c:url value="/resources/img/clinic_logo.png"/>">
 

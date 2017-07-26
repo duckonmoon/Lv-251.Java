@@ -17,7 +17,7 @@ public class Users extends BaseEntity {
 
     @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
     private String photo;
-@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "users")
     private List<Appointments> appointments;
     @JsonIgnore

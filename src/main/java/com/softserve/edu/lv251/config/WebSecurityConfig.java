@@ -38,6 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder();}
 
+    /**
+     * Added by Marian Brynetskyi.
+     * Configuration for Spring Securiry.
+     * @param http;
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.csrf()
@@ -50,14 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http.formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/j_spring_security_check")
-                    .failureUrl("/clinics")
+                    .failureUrl("/")
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
                     .permitAll();
 
             http.logout()
                     .permitAll()
-                    .logoutUrl("/index")
+                    .logoutUrl("/logout")
                     .logoutSuccessUrl("/")
                     .invalidateHttpSession(true);
     }

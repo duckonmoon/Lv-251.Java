@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%--
@@ -58,10 +59,62 @@
                              alt="Ukraine"/>
                     </a>
                 </li>
-                <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
-                    <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
-                </li>
+
+                <sec:authorize access="!isAuthenticated()">
+                    <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
+                        <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li>
+                        <a type="button" id="logoutBtn" style="cursor:pointer;" href="${pageContext.request.contextPath}/logout">
+                            <span class="glyphicon glyphicon-log-out"></span> <spring:message code="messages.logout"/>
+                        </a>
+                    </li>
+                </sec:authorize>
             </ul>
         </div>
     </div>
 </nav>
+
+<sec:authorize access="!isAuthenticated()">
+    <!--LOGIN MODAL________________________________________________________________________________________________________________________________________-->
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-lg-3">
+                        <h3 class="form-heading"><spring:message code="messages.login"/></h3>
+                    </div>
+                    <div class="col-lg-9">
+                        <button class="close" type="button" data-dismiss="modal">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
+                    <div class="form-group ${error != null ? 'has-error' : ''}">
+                        <span>${message}</span>
+                        <div class="modal-body">
+                            <input name="j_username" type="email" class="form-control" placeholder="Email"
+                                   autofocus=""/>
+                            <input name="j_password" type="password" class="form-control" placeholder="Password"/>
+                            <span>${error}</span>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-lg btn-primary btn-block">
+                                <spring:message code="messages.login"/>
+                            </button>
+                            <h4 class="text-center">
+                                <a href="${contextPath}/registration"><spring:message code="messages.createAccount"/></a>
+                            </h4>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</sec:authorize>

@@ -18,10 +18,8 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
     private Class<T> entityClass;
 
     @PersistenceContext
-    protected EntityManager entityManager;
+    EntityManager entityManager;
 
-
-//    @Autowired
     public BaseDAOImpl() {
         entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
@@ -58,6 +56,6 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 
     @Transactional
     public void deleteEntity(T entity) {
-        entityManager.remove(entity);
+        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
     }
 }

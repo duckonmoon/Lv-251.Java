@@ -16,7 +16,7 @@ public interface UserService {
 
     void updateUser(Users user);
 
-    Users getUserByID(Long entityId);
+    Users getUserByID(Long userId);
 
     List<Users> getUsersByColumnNameAndValue(String columnName, Object value);
 

@@ -1,9 +1,6 @@
 package com.softserve.edu.lv251.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,7 +12,24 @@ public class Roles extends BaseEntity {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)*/
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                            CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.PERSIST
+                    },
+            targetEntity = Users.class)
+    @JoinTable(
+            name = "roles_users",
+            inverseJoinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private List<Users> users;
 
     public Roles() {

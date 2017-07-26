@@ -79,7 +79,7 @@ public class RegistrationController {
         try {
             registered = userService.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {
-            System.out.println("Email exception!");
+            e.getMessage();
             return null;
         }
         return registered;

@@ -28,11 +28,13 @@ public class AllDoctorsController {
         return doctorsService.searchByLetters(name);
 
     }
-//    @RequestMapping(value = "/searchResult")
-//    public String searchDoctor(@RequestParam("search")String name){
-//        System.out.println(name);
-//        return "searchDoctor";
-//    }
+    @ResponseBody
+    @RequestMapping(value = "/search/{name}")
+    public List<Doctors> searchAll(@PathVariable("name") String name){
+        System.out.println("innnnn");
+        return doctorsService.searchByLetters(name);
+
+    }
     @ResponseBody
     @RequestMapping(value = "/searchResult/{id}")
     public Doctors s(@PathVariable Long id){

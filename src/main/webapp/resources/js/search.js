@@ -35,8 +35,8 @@ console.log("before");
 
                         console.log(result.firstname);
                         $("#content").empty();
-                        $("#content").append("<div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
-                            " "+result.lastname +"</div></div>")
+                        $("#content").append("<div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
+                            " "+result.lastname +"</div></div></div>")
 
 
 
@@ -48,5 +48,27 @@ console.log("before");
 
 
 
+    });
+});
+
+$("#search-doctor").click(function () {
+    console.log($("#autocomplete").val());
+    var  n=$("#autocomplete").val();
+    $.ajax({
+        url:'/search/'+n,
+        type:"GET",
+        contentType:'application/json',
+        success:function (res) {
+            console.log(res.size);
+            $.each(function (key,item) {
+                $("#content").empty();
+                $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                    "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                    "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
+                    "<a href='"+"doctor/"+item.id+"'class='btn-link'><span class='doc-name'>"+item.firstname+"</span></a>"+
+                    "<p><spring:message code='messages.specialization'/>:"+item.id+"</p> </div> </div>")
+            })
+
+        }
     });
 });

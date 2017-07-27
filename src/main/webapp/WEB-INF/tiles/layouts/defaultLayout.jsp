@@ -59,6 +59,12 @@
                     <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
+                <li class="${current == 'doctorCabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
+                        <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>

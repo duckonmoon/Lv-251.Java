@@ -13,6 +13,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ *
+ */
 @Service
 public class MailServiceImpl implements MailService {
 

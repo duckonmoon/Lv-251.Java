@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Author: Pavlo Kuchereshko.
+     * Added by Pavlo Kuchereshko.
      * Will be used to encode the raw password. Generally, a good encoding algorithm applies a SHA-1
      * or greater hash combined with an 8-byte or greater randomly generated salt.
      *

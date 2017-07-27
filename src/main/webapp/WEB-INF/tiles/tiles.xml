@@ -66,7 +66,13 @@
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-        <put-attribute name="current" value="allDoctors"/>
+    </definition>
+
+    <!-- Doctor_cabinet Page -->
+    <definition name="doctor_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Cabinet" />
+        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet.jsp" />
+        <put-attribute name="current" value="doctorCabinet"/>
     </definition>
 
 </tiles-definitions>

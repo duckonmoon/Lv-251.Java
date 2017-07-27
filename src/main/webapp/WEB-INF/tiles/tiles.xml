@@ -29,6 +29,13 @@
         <put-attribute name="current" value="registration"/>
     </definition>
 
+    <!-- Registration Doctor Page -->
+    <definition name="registrationDoctor" extends="base-definition">
+        <put-attribute name="title" value="Registration" />
+        <put-attribute name="body" value="/WEB-INF/pages/registrationDoctor.jsp" />
+        <put-attribute name="current" value="registration"/>
+    </definition>
+
     <!-- Doctors Page -->
     <definition name="allDoctors" extends="base-definition">
         <put-attribute name="title" value="Doctors" />

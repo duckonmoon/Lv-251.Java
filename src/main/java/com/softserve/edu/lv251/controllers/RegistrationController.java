@@ -58,7 +58,7 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "registration";
         } else {
-            return "/index";
+            return "redirect:/";
         }
     }
 

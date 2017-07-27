@@ -6,16 +6,16 @@
     <div class="row">
         <h2></h2>
         <div id="custom-search-input">
-<form action="/searchResult" method="get">
+
             <div class="input-group col-md-12">
                 <input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder="Search" />
                 <span class="input-group-btn">
-                                    <button class="btn btn-danger" type="submit"  id="search-doctor">
+                                    <button class="btn btn-danger"  id="search-doctor">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
             </div>
-</form>
+
         </div>
     </div>
 </div>

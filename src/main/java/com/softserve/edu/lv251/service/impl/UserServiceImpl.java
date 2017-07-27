@@ -130,7 +130,9 @@ public class UserServiceImpl implements UserService {
         this.contactsDAO.addEntity(contact);
         user.setContact(contact);
         addUser(user);
-        sendRegistrationEmail(user);
+
+        //IT'S WORKS, DO NOT UNCOMMENT)))
+        //sendRegistrationEmail(user);
 
         return user;
     }

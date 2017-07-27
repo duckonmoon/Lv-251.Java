@@ -42,4 +42,11 @@
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
+    <!-- Doctor_details Page -->
+    <definition name="doctor_details" extends="base-definition">
+        <put-attribute name="title" value="Doctor" />
+        <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
+        <put-attribute name="current" value="allDoctors"/>
+    </definition>
+
 </tiles-definitions>

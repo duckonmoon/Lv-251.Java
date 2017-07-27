@@ -113,13 +113,32 @@
 
                     <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
                         <div class="form-group ${error != null ? 'has-error' : ''}">
-                            <span>${message}</span>
+                            <%--<span>${message}</span>--%>
                             <div class="modal-body">
-                                <input name="j_username" type="email" class="form-control" placeholder="Email"
+                                <div class="form-group">
+                                    <label class="control-label" for="email">
+                                        <spring:message code="messages.email"/>
+                                    </label>
+                                    <input id="email" name="j_username" type="email" class="form-control" placeholder="Email"
                                        autofocus=""/>
-                                <input name="j_password" type="password" class="form-control" placeholder="Password"/>
-                                <span>${error}</span>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="password">
+                                        <spring:message code="messages.password"/>
+                                    </label>
+                                    <input id="password" name="j_password" type="password" class="form-control" placeholder="Password"/>
+                                </div>
+                                <%--<span>${error}</span>--%>
+                                <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+
+                                <div class="form-group">
+                                    <input id="remember" type="checkbox" name="remember-me" value="true">
+                                    <label class="control-label" for="remember">
+                                        <spring:message code="messages.rememberMe"/>
+                                    </label>
+                                </div>
+
+                                <p id="wrong" style="color: red"></p>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-lg btn-primary btn-block">
@@ -150,5 +169,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
+
+
 </body>
 </html>

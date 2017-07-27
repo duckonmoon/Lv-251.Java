@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.dto;
+package com.softserve.edu.lv251.config;
 
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Users;

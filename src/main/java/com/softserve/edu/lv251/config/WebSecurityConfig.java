@@ -79,14 +79,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Added by Marian Brynetskyi.
      * Global security configurations with admin data.
-     * @return DaoAuthenticationProvider;
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
         auth.inMemoryAuthentication()
-                .withUser("root@user.com").password("root").authorities(WebRoles.ROLE_USER.name())
-                .and()
                 .withUser("root@admin.com").password("root")
                 .authorities(WebRoles.ROLE_USER.name(), WebRoles.ROLE_DOCTOR.name(), WebRoles.ROLE_ADMIN.name());
         auth.userDetailsService(customUserDetailsService);

@@ -21,15 +21,8 @@ import java.util.Arrays;
 public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
     private boolean isAlreadySetup = false;
-
-    @Autowired
-    UserService userService;
-
     @Autowired
     RolesService rolesService;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
@@ -37,20 +30,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         if (isAlreadySetup) return;
 
         Arrays.stream(WebRoles.values()).map(Enum::name).forEach(this::createRoleIfNotFound);
-
-        Users user = new Users();
-        user.setFirstname("Adam");
-        user.setLastname("Root");
-        user.setMiddlename("");
-        user.setPassword(bCryptPasswordEncoder.encode("root"));
-        user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        user.setEmail("root@root.com");
-        user.setRoles(this.rolesService.getAllRoles());
-        user.setEnabled(true);
-
-        if (this.userService.findByEmail(user.getEmail()) == null) {
-            this.userService.addUser(user);
-        }
 
         isAlreadySetup = true;
     }

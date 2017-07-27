@@ -4,6 +4,7 @@
 <%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html lang="en">
 <head>
@@ -144,7 +145,7 @@
                                     <spring:message code="messages.login"/>
                                 </button>
                                 <h4 class="text-center">
-                                    <a href="${contextPath}/registration"><spring:message code="messages.createAccount"/></a>
+                                    <a href="<c:url value="/registration"/>"><spring:message code="messages.createAccount"/></a>
                                 </h4>
                             </div>
                         </div>

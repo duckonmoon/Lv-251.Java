@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.config;
 
+import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -67,7 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true);
     }
 
-
     /**
      * Added by Pavlo Kuchereshko.
      * AuthenticationManagerBuilder builds AuthenticationManager using which in-memory,
@@ -77,6 +77,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
+        auth.inMemoryAuthentication()
+                .withUser("root@user.com").password("root").authorities(WebRoles.ROLE_USER.name())
+                .and()
+                .withUser("root@admin.com").password("root")
+                .authorities(WebRoles.ROLE_USER.name(), WebRoles.ROLE_DOCTOR.name(), WebRoles.ROLE_ADMIN.name());
     }
 
     /**

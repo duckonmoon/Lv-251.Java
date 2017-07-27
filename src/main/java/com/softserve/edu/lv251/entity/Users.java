@@ -14,10 +14,14 @@ public class Users extends BaseEntity {
     private String middlename;
     private String email;
     private String password;
+
+    @Column(name = "enabled", nullable = false, columnDefinition="tinyint(1) default 1")
     private boolean enabled;
+
+    @Column(name = "tokenExpired", nullable = false, columnDefinition="tinyint(1) default 1")
     private boolean tokenExpired;
 
-    @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
+    @Column(name = "photo", length = 65535, columnDefinition="TEXT")
     private String photo;
 
     @JsonIgnore

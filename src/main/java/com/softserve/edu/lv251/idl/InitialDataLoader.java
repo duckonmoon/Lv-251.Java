@@ -38,8 +38,6 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
 
         Arrays.stream(WebRoles.values()).map(Enum::name).forEach(this::createRoleIfNotFound);
 
-        Roles adminRole = this.rolesService.findByName(WebRoles.ROLE_ADMIN.name());
-
         Users user = new Users();
         user.setFirstname("Adam");
         user.setLastname("Root");
@@ -47,7 +45,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         user.setPassword(bCryptPasswordEncoder.encode("root"));
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setEmail("root@root.com");
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(this.rolesService.getAllRoles());
         user.setEnabled(true);
 
         if (this.userService.findByEmail(user.getEmail()) == null) {

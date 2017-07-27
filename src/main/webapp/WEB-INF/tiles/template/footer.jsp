@@ -14,7 +14,7 @@
             <h5><spring:message code="messages.links"/></h5>
             <ul class="list-unstyled">
                 <li><a href="${pageContext.request.contextPath}/"><spring:message code="messages.home" /></a></li>
-                <li><a href="${pageContext.request.contextPath}/clinics"><spring:message code="messages.clinics" /></a></li>
+                <li><a href="${pageContext.request.contextPath}/clinics/details"><spring:message code="messages.clinics" /></a></li>
                 <li><a href="${pageContext.request.contextPath}/allDoctors"><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>

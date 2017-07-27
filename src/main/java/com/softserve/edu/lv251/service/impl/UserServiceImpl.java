@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
         addUser(user);
 
         //IT'S WORKS, DO NOT UNCOMMENT)))
-        sendRegistrationEmail(user);
+        //sendRegistrationEmail(user);
 
         return user;
     }

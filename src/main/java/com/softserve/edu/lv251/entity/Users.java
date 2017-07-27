@@ -15,10 +15,10 @@ public class Users extends BaseEntity {
     private String email;
     private String password;
 
-    @Column(name = "enabled", nullable = false, columnDefinition="tinyint(1) default 1")
+    @Column(name = "enabled", nullable = false, columnDefinition="bit(1) default 1")
     private boolean enabled;
 
-    @Column(name = "tokenExpired", nullable = false, columnDefinition="tinyint(1) default 1")
+    @Column(name = "tokenExpired", nullable = false, columnDefinition="bit(1) default 1")
     private boolean tokenExpired;
 
     @Column(name = "photo", length = 65535, columnDefinition="TEXT")

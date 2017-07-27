@@ -5,7 +5,6 @@ package com.softserve.edu.lv251.idl;
  *
  */
 public enum WebRoles {
-    ROLE_UNAUTHORIZED,
     ROLE_USER,
     ROLE_DOCTOR,
     ROLE_ADMIN

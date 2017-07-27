@@ -81,7 +81,7 @@ public class RegistrationController {
         try {
             registered = userService.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {
-            e.getMessage();
+            logger.warn(e);
             return null;
         }
         return registered;

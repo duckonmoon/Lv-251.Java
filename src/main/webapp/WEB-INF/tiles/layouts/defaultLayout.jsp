@@ -119,14 +119,16 @@
                                     <label class="control-label" for="email">
                                         <spring:message code="messages.email"/>
                                     </label>
-                                    <input id="email" name="j_username" type="email" class="form-control" placeholder="Email"
+                                    <input id="email" name="j_username" type="email" class="form-control"
+                                           placeholder="<spring:message code="messages.email"/>"
                                        autofocus=""/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="password">
                                         <spring:message code="messages.password"/>
                                     </label>
-                                    <input id="password" name="j_password" type="password" class="form-control" placeholder="Password"/>
+                                    <input id="password" name="j_password" type="password" class="form-control"
+                                           placeholder="<spring:message code="messages.password"/>"/>
                                 </div>
                                 <%--<span>${error}</span>--%>
                                 <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>

@@ -109,16 +109,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         //Using gmail
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
-        //javaMailSender.setProtocol("smtp");
         javaMailSender.setUsername("lv251clinics@gmail.com");
         javaMailSender.setPassword("clinics251lv");
 
-        Properties javaMailProperties = javaMailSender.getJavaMailProperties();
+        Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
         javaMailProperties.put("mail.smtp.auth", "true");
         javaMailProperties.put("mail.transport.protocol", "smtp");
-        javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
-        //javaMailProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        javaMailProperties.put("mail.debug", "true");
+
 
         javaMailSender.setJavaMailProperties(javaMailProperties);
         return javaMailSender;

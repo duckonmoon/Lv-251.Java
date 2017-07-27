@@ -2,7 +2,7 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.UsersDAO;
-import com.softserve.edu.lv251.dto.Mapper;
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;

@@ -14,6 +14,8 @@
 <script>
     document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
     jQuery(window).load(function(){
-        jQuery('#loginModal').modal('show')
+        jQuery('#loginModal').modal('show').on('hide.bs.modal', function(e){
+            e.preventDefault();
+        });
     });
 </script>

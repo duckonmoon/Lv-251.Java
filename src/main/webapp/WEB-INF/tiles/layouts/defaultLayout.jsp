@@ -119,6 +119,7 @@
                                 <input name="j_password" type="password" class="form-control" placeholder="Password"/>
                                 <span>${error}</span>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <p id="wrong" style="color: red"></p>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-lg btn-primary btn-block">
@@ -148,5 +149,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
+
+
 </body>
 </html>

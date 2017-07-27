@@ -146,7 +146,6 @@
                                 </button>
                                 <h4 class="text-center">
                                     <a href="<c:url value="/registration"/>"><spring:message code="messages.createAccount"/></a>
-                                    </a>
                                 </h4>
                             </div>
                         </div>

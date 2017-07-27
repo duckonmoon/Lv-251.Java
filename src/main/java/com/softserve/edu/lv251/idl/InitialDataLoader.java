@@ -29,7 +29,10 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         if (isAlreadySetup) return;
 
-        Arrays.stream(WebRoles.values()).map(Enum::name).forEach(this::createRoleIfNotFound);
+        for (WebRoles webRoles : WebRoles.values()) {
+            String name = webRoles.name();
+            createRoleIfNotFound(name);
+        }
 
         isAlreadySetup = true;
     }

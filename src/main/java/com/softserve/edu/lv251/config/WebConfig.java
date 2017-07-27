@@ -46,6 +46,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    /**
+     * Author: Marian Brynetskyi
+     * Logger bean.
+     * Prototype scope for logger in any class.
+     */
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint) {

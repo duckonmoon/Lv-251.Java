@@ -69,9 +69,12 @@ address{
     bottom: 0px;
 }
 
-.list-group{
-    padding: 15px;
+.list-group {
+
+    margin: 15px 15px 15px 15px;
+    padding: 0;
 }
+
 
 .card{
     position:relative;

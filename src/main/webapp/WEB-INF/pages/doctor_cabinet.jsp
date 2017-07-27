@@ -6,15 +6,13 @@
 
 <div class="container">
     <div class="row row-content">
-        <div class="container-fluid">
-            <div class="list-group col-sm-3">
-                <a href="#" class="list-group-item active">
-                    Calendar
-                </a>
-                <a href="#" class="list-group-item">
-                    Patients
-                </a>
-            </div>
+        <div class="list-group col-sm-3 doc-menu">
+            <a href="#" class="list-group-item active">
+                Calendar
+            </a>
+            <a href="#" class="list-group-item">
+                Patients
+            </a>
         </div>
     </div>
 </div>

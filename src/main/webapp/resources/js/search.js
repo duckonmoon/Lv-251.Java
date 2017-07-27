@@ -59,8 +59,9 @@ $("#search-doctor").click(function () {
         type:"GET",
         contentType:'application/json',
         success:function (res) {
-            console.log(res.size);
-            $.each(function (key,item) {
+            console.log(res.length);
+            console.log(res.toString());
+            $.each(function (res,item) {
                 $("#content").empty();
                 $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                     "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+

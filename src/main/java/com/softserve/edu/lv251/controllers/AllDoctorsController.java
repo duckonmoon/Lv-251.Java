@@ -31,7 +31,7 @@ public class AllDoctorsController {
     @ResponseBody
     @RequestMapping(value = "/search/{name}")
     public List<Doctors> searchAll(@PathVariable("name") String name){
-        System.out.println("innnnn");
+        System.out.println(name);
         return doctorsService.searchByLetters(name);
 
     }

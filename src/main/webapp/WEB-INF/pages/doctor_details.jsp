@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-block">
-        <c:if test="doctor!=null">
+        <c:if test="${doctor!=null}">
             <img class="show-logo" alt="logo" src="<c:url value="/resources/img/clinic_logo.png"/>">
             <h4>${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</h4>
             <p>Specialization:${doctor.specialization.name}</p>
@@ -15,7 +15,7 @@
 </div>
 <div class="card">
     <div class="card-block">
-        <c:if test="doctor!=null">
+        <c:if test="${doctor!=null}">
             <p>${doctor.description}</p>
         </c:if>
     </div>

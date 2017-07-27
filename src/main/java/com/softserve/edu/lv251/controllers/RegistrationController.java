@@ -1,8 +1,10 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
+import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class RegistrationController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    DoctorsService doctorsService;
 
     @Autowired
     Logger logger;
@@ -62,6 +67,35 @@ public class RegistrationController {
         }
     }
 
+    @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
+    public String registrationDoctor(Model model, Principal principal) {
+        model.addAttribute("doctorForm", new UserDTO());
+
+
+        return "registrationDoctor";
+    }
+
+    @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
+    public String registerDoctorAccount(
+            @ModelAttribute("doctorForm") @Valid UserDTO accountDto,
+            BindingResult result,
+            WebRequest request,
+            Errors errors) {
+
+        Doctors registered = new Doctors();
+        if (!result.hasErrors()) {
+            registered = createDoctorAccount(accountDto, result);
+        }
+        if (registered == null) {
+            result.rejectValue("email", "message.regError");
+        }
+        if (result.hasErrors()) {
+            return "registration";
+        } else {
+            return "redirect:/";
+        }
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
@@ -80,6 +114,17 @@ public class RegistrationController {
         Users registered;
         try {
             registered = userService.registerNewUserAccount(accountDto);
+        } catch (EmailExistsException e) {
+            logger.warn(e);
+            return null;
+        }
+        return registered;
+    }
+
+    private Doctors createDoctorAccount(UserDTO accountDto, BindingResult result) {
+        Doctors registered;
+        try {
+            registered = doctorsService.registerNewDoctorAccount(accountDto);
         } catch (EmailExistsException e) {
             logger.warn(e);
             return null;

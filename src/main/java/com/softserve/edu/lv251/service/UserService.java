@@ -32,4 +32,5 @@ public interface UserService {
 
     Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 
+    void sendRegistrationEmail(Users user);
 }

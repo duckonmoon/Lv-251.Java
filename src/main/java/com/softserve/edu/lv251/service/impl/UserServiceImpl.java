@@ -8,6 +8,7 @@ import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.MailService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     Mapper mapper;
+
+    @Autowired
+    MailService mailService;
 
     @Override
     public void addUser(Users user) {
@@ -126,11 +130,17 @@ public class UserServiceImpl implements UserService {
         this.contactsDAO.addEntity(contact);
         user.setContact(contact);
         addUser(user);
+        sendRegistrationEmail(user);
 
         return user;
     }
 
     private boolean emailExist(String email) {
         return findByEmail(email) != null;
+    }
+
+    @Override
+    public void sendRegistrationEmail(Users user) {
+        this.mailService.sendEmail(user);
     }
 }

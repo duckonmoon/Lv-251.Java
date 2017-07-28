@@ -56,13 +56,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-id-card"></i> <spring:message code="messages.contact" />
+                    <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
                 <li class="${current == 'user/cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
-                            <i class="fa fa-user-o"></i>
+                            <i class="fa fa-id-card"></i>
                             <spring:message code="messages.userCabinet" />
                         </a>
                     </sec:authorize>

@@ -36,7 +36,7 @@
                                     <img width="200" height="200" src="/resources/img/User_Default.png" alt="...">
                                 </a>
                             </div>
-                            <a href="doctor/${doctor.id}" class="btn-link"> <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span></a>
+                            <a href="doctors/${doctor.id}" class="btn-link"> <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span></a>
                             <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
                         </div>
 

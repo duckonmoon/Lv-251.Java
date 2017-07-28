@@ -10,12 +10,20 @@ import java.util.Date;
 @Entity
 public class Appointments extends BaseEntity {
 
-    private Date appintmentDate;
-    private String status;
+    private Date appointmentDate;
+    private Boolean status;
     private double duration;
 
     @ManyToOne
     private Doctors doctors;
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
 
     @ManyToOne
     private Users users;
@@ -39,19 +47,11 @@ public class Appointments extends BaseEntity {
         this.users = users;
     }
 
-    public Date getAppintmentDate() {
-        return appintmentDate;
-    }
-
-    public void setAppintmentDate(Date appintmentDate) {
-        this.appintmentDate = appintmentDate;
-    }
-
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

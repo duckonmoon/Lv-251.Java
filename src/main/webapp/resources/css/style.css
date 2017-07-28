@@ -68,6 +68,14 @@ address{
     padding: 20px 0px 0px 0px;
     bottom: 0px;
 }
+
+.list-group {
+
+    margin: 15px 15px 15px 15px;
+    padding: 0;
+}
+
+
 .card{
     position:relative;
     display:-webkit-box;

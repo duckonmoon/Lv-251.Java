@@ -6,10 +6,13 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.MailService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,6 +43,9 @@ public class UserServiceImpl implements UserService {
     RolesService rolesService;
 
     @Autowired
+    VerificationTokenService verificationTokenService;
+
+    @Autowired
     EntityManager entityManager;
 
     @Autowired
@@ -47,6 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     Mapper mapper;
+
+    @Autowired
+    MailService mailService;
 
     @Override
     public void addUser(Users user) {
@@ -79,7 +88,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public Users getFirst() {
-        return usersDAO.getEntityByID(1L);
+        return this.usersDAO.getEntityByID(1L);
     }
 
     @Override
@@ -114,7 +123,7 @@ public class UserServiceImpl implements UserService {
         user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
-        user.setEnabled(true);
+        user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
         //user.setAppointments(new ArrayList<>());
@@ -127,10 +136,36 @@ public class UserServiceImpl implements UserService {
         user.setContact(contact);
         addUser(user);
 
+        //IT'S WORKS, DO NOT UNCOMMENT)))
+        //sendRegistrationEmail(user);
+
         return user;
     }
 
     private boolean emailExist(String email) {
         return findByEmail(email) != null;
+    }
+
+    @Override
+    public void sendRegistrationEmail(Users user) {
+        this.mailService.sendEmail(user);
+    }
+
+    @Override
+    public Users getUserByVerificationToken(String verificationToken) {
+        return this.verificationTokenService.findByVerificationToken(verificationToken).getUser();
+    }
+
+    @Override
+    public void createVerificationToken(Users user, String verificationToken) {
+        VerificationToken myVerificationToken = new VerificationToken();
+        myVerificationToken.setUser(user);
+        myVerificationToken.setToken(verificationToken);
+        this.verificationTokenService.addVerificationToken(myVerificationToken);
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String verificationToken) {
+        return this.verificationTokenService.findByVerificationToken(verificationToken);
     }
 }

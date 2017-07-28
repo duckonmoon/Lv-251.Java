@@ -5,32 +5,29 @@
     <div class="row" style="margin-top: 50px">
 
         <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
+            <div  class="container-fluid">
 
-                    <form class="navbar-form " role="search">
+                    <div class="navbar-form " >
                         <div class="form-group">
 
-                                        <select class="selectpicker form-control"style="width:210px ">
-                                            <option>Clinic search</option>
-                                            <option>Doctors search</option>
+                                        <select class="selectpicker form-control"style="width:210px " id="selectDocOrClinic">
+                                            <option id="option-clinic" value="0">Clinic search</option>
+                                            <option  id="option-doc" value="1">Doctors search</option>
                                         </select>
 
 
-                            <input type="text" class="form-control " style="width: 600px" placeholder="Search">
-                            <select class="selectpicker form-control "style="width: 210px">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                            </select>
+                            <input type="text" class="form-control " id="autocomplete" style="width: 570px" placeholder="Search">
+
+                                <input type="text" class="form-control " style="width: 210px" placeholder="Enter Distinct" >
                         </div>
-                        <button type="submit" class="btn btn-facebook">Submit</button>
-                    </form>
+                        <button id="main-search-btn" class="btn btn-facebook">Submit</button>
+                    </div>
 
                 </div>
 
         </nav>
 
-
+<div class="content" id="content">dd</div>
 
     </div>
 </div>

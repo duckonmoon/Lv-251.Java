@@ -18,7 +18,7 @@ public class ClinicController {
     @Autowired
     private ClinicService clinicService;
 
-
+@ResponseBody
     @RequestMapping(value = "/{current}", method = RequestMethod.GET)
     public ModelAndView getTenClinics(@PathVariable("current") Integer i){
         ModelAndView model = new ModelAndView("clinics");
@@ -28,8 +28,8 @@ public class ClinicController {
     }
 
 
-    @RequestMapping(value = "/details", method = RequestMethod.GET)
-    public String clinicDetails(@RequestParam(name = "id", required = true)long id, Model model){
+    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+    public String clinicDetails(@PathVariable(name = "id")Long id, Model model){
         Clinics clinic = clinicService.getClinicByID(id);
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());

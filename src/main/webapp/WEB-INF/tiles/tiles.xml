@@ -22,6 +22,34 @@
         <put-attribute name="current" value="home"/>
     </definition>
 
+    <!-- Registration Page -->
+    <definition name="registration" extends="base-definition">
+        <put-attribute name="title" value="Registration" />
+        <put-attribute name="body" value="/WEB-INF/pages/registration.jsp" />
+        <put-attribute name="current" value="registration"/>
+    </definition>
+
+    <!-- Registration Doctor Page -->
+    <definition name="registrationDoctor" extends="base-definition">
+        <put-attribute name="title" value="Doctor Registration" />
+        <put-attribute name="body" value="/WEB-INF/pages/registrationDoctor.jsp" />
+        <put-attribute name="current" value="registrationDoctor"/>
+    </definition>
+
+    <!-- Registration Confirm Page -->
+    <definition name="registrationComfirm" extends="base-definition">
+        <put-attribute name="title" value="Registration Confirmation" />
+        <put-attribute name="body" value="/WEB-INF/pages/registrationConfirm.jsp" />
+        <put-attribute name="current" value="registrationComfirm"/>
+    </definition>
+
+    <!-- Bad User Page -->
+    <definition name="403" extends="base-definition">
+        <put-attribute name="title" value="Bad User" />
+        <put-attribute name="body" value="/WEB-INF/pages/403.jsp" />
+        <put-attribute name="current" value="403"/>
+    </definition>
+
     <!-- Doctors Page -->
     <definition name="allDoctors" extends="base-definition">
         <put-attribute name="title" value="Doctors" />
@@ -40,6 +68,7 @@
     <definition name="clinic_details" extends="base-definition">
         <put-attribute name="title" value="Doctors" />
         <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
+        <put-attribute name="current" value="clinic_details"/>
     </definition>
 
     <!--Wrong password page-->
@@ -52,7 +81,14 @@
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-        <put-attribute name="current" value="allDoctors"/>
+        <put-attribute name="current" value="doctor_details"/>
+    </definition>
+
+    <!-- Doctor_cabinet Page -->
+    <definition name="doctor_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Cabinet" />
+        <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet.jsp" />
+        <put-attribute name="current" value="doctorCabinet"/>
     </definition>
 
 </tiles-definitions>

@@ -61,6 +61,12 @@
                     <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
+                <li class="${current == 'doctorCabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
+                        <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
@@ -121,14 +127,16 @@
                                     <label class="control-label" for="email">
                                         <spring:message code="messages.email"/>
                                     </label>
-                                    <input id="email" name="j_username" type="email" class="form-control" placeholder="Email"
+                                    <input id="email" name="j_username" type="email" class="form-control"
+                                           placeholder="<spring:message code="messages.email"/>"
                                        autofocus=""/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="password">
                                         <spring:message code="messages.password"/>
                                     </label>
-                                    <input id="password" name="j_password" type="password" class="form-control" placeholder="Password"/>
+                                    <input id="password" name="j_password" type="password" class="form-control"
+                                           placeholder="<spring:message code="messages.password"/>"/>
                                 </div>
                                 <%--<span>${error}</span>--%>
                                 <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
@@ -170,6 +178,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
+<script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 
 
 </body>

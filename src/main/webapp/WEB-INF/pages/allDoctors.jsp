@@ -28,7 +28,7 @@
     <c:when test="${doctors.size()>0}">
         <div class="container">
         <c:forEach items="${doctors}" var="doctor">
-            <a href="doctor/${doctor.id}">
+            <a href="doctors/${doctor.id}">
                 <div class="row row-content">
                     <div class="container-fluid">
                         <div class="row">
@@ -37,7 +37,7 @@
                                     <img width="200" height="200" src="/resources/img/User_Default.png" alt="...">
                                 </a>
                             </div>
-                            <a href="doctor/${doctor.id}" class="btn-link"> <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span></a>
+                            <a href="doctors/${doctor.id}" class="btn-link"> <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span></a>
                             <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
                         </div>
 

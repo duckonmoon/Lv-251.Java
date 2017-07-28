@@ -3,11 +3,15 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.VerificationToken;
+import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +19,13 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Added by Pavlo Kuchereshko.
@@ -37,6 +44,15 @@ public class RegistrationController {
     @Autowired
     Logger logger;
 
+    @Autowired
+    MessageSource messageSource;
+
+    /**
+     * The publisher constructs the event object and publishes it to anyone who’s listening.
+     */
+    @Autowired
+    ApplicationEventPublisher applicationEventPublisher;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model, Principal principal) {
         model.addAttribute("userForm", new UserDTO());
@@ -45,7 +61,6 @@ public class RegistrationController {
         return "registration";
     }
 
-    //fix
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registerUserAccount(
             @ModelAttribute("userForm") @Valid UserDTO accountDto,
@@ -53,18 +68,25 @@ public class RegistrationController {
             WebRequest request,
             Errors errors) {
 
-        Users registered = new Users();
-        if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
+        if (result.hasErrors()) {
+            return "registration";
         }
+
+        Users registered = createUserAccount(accountDto, result);
+
         if (registered == null) {
             result.rejectValue("email", "message.regError");
         }
-        if (result.hasErrors()) {
+
+        try {
+            String appUrl = request.getContextPath();
+            applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+        } catch (Exception e) {
+            logger.error(e);
             return "registration";
-        } else {
-            return "redirect:/";
         }
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
@@ -94,6 +116,43 @@ public class RegistrationController {
         } else {
             return "redirect:/";
         }
+    }
+
+    @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
+    public String finishRegistration(
+            @RequestParam("token") String token,
+            Model model,
+            WebRequest request) {
+
+        Locale locale = request.getLocale();
+
+        VerificationToken verificationToken = userService.getVerificationToken(token);
+        if (verificationToken == null) {
+            String message = messageSource.getMessage("message.invalidToken", null, locale);
+            model.addAttribute("message", message);
+            return "redirect:/403?lang=" + locale.getLanguage();
+        }
+
+        Users user = verificationToken.getUser();
+        Calendar calendar = Calendar.getInstance();
+        if ((verificationToken
+                .getExpiryDate().getTime()
+                - calendar.getTime().getTime())
+                <= 0) {
+            String message
+                    = messageSource
+                    .getMessage("message.invalidToken", null,
+                            locale);
+            model
+                    .addAttribute("message",
+                    message);
+            return "redirect:/403?lang=" + locale.getLanguage();
+        }
+
+        user.setEnabled(true);
+        this.userService.updateUser(user);
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -36,10 +36,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new User(
                 user.getEmail().toLowerCase(),
                 user.getPassword(),
-                /*enabled = */ user.isEnabled(),
-                /*accountNonExpired = */ true,
-                /*credentialsNonExpired = */ true,
-                /*accountNonLocked = */ true,
+                true, /*enabled*/
+                true, /*accountNonExpired*/
+                true, /*credentialsNonExpired*/
+                true, /*accountNonLocked*/
                 getAuthorities(user.getRoles())
         );
     }

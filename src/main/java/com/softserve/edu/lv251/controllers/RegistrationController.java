@@ -6,7 +6,6 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
-import com.softserve.edu.lv251.listeners.RegistrationListener;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;

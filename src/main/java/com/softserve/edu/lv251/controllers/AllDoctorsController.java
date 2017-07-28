@@ -41,7 +41,7 @@ public class AllDoctorsController {
         return  doctorsService.find(id);
     }
 
-    @RequestMapping(value = "/doctor/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/doctors/{id}",method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model){
         model.addAttribute("doctor",doctorsService.find(id));
         return "doctor_details";

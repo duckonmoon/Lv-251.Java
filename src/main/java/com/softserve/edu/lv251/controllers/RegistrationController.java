@@ -6,6 +6,7 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
+import com.softserve.edu.lv251.listeners.RegistrationListener;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
@@ -135,17 +136,9 @@ public class RegistrationController {
 
         Users user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
-        if ((verificationToken
-                .getExpiryDate().getTime()
-                - calendar.getTime().getTime())
-                <= 0) {
-            String message
-                    = messageSource
-                    .getMessage("message.invalidToken", null,
-                            locale);
-            model
-                    .addAttribute("message",
-                    message);
+        if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
+            String message = messageSource.getMessage("message.invalidToken", null, locale);
+            model.addAttribute("message", message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 

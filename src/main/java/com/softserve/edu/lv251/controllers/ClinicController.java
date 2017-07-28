@@ -1,12 +1,14 @@
 package com.softserve.edu.lv251.controllers;
 
-import com.softserve.edu.lv251.Districts;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,12 +23,15 @@ public class ClinicController {
 
 
     @RequestMapping(value = "/{current}", method = RequestMethod.GET)
-    public ModelAndView getTenClinics(@PathVariable("current") Integer i){
+    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex){
         ModelAndView model = new ModelAndView("clinics");
-        model.addObject("tenClinics", clinicService.getTenClinics(i));
-        model.addObject("size", clinicService.numberOfPaging());
+        model.addObject("getClinics", clinicService.getClinics(chainIndex, 10));
+        model.addObject("numberChain", clinicService.numberOfPaging(10));
+        model.addObject("maxSize", clinicService.getAllClinics().size());
         return model;
     }
+
+
 
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)

@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public interface UserService {
     Users getFirst();
 
     Users findByEmail(String email);
+
+    Users getUserByVerificationToken(String verificationToken);
+
+    void createVerificationToken(Users user, String verificationToken);
+
+    VerificationToken getVerificationToken(String verificationToken);
 
     Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 

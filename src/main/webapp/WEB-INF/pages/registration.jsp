@@ -53,7 +53,7 @@
                     </spring:bind>
                     <spring:bind path="matchingPassword">
                         <div class="form-group">
-                            <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.password" var="passwordConfirmRegMess"/></label>
+                            <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.confirmPassword" var="passwordConfirmRegMess"/></label>
                             <form:input type="password" id="passwordConfirmReg" path="matchingPassword"
                                         name="passwordConfirm" class="form-control" placeholder="${passwordConfirmRegMess}"/>
                             <form:errors path="matchingPassword"/>

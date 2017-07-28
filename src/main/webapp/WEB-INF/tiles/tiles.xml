@@ -31,9 +31,23 @@
 
     <!-- Registration Doctor Page -->
     <definition name="registrationDoctor" extends="base-definition">
-        <put-attribute name="title" value="Registration" />
+        <put-attribute name="title" value="Doctor Registration" />
         <put-attribute name="body" value="/WEB-INF/pages/registrationDoctor.jsp" />
-        <put-attribute name="current" value="registration"/>
+        <put-attribute name="current" value="registrationDoctor"/>
+    </definition>
+
+    <!-- Registration Confirm Page -->
+    <definition name="registrationComfirm" extends="base-definition">
+        <put-attribute name="title" value="Registration Confirmation" />
+        <put-attribute name="body" value="/WEB-INF/pages/registrationConfirm.jsp" />
+        <put-attribute name="current" value="registrationComfirm"/>
+    </definition>
+
+    <!-- Bad User Page -->
+    <definition name="403" extends="base-definition">
+        <put-attribute name="title" value="Bad User" />
+        <put-attribute name="body" value="/WEB-INF/pages/403.jsp" />
+        <put-attribute name="current" value="403"/>
     </definition>
 
     <!-- Doctors Page -->

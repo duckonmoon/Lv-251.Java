@@ -17,6 +17,14 @@ public class Appointments extends BaseEntity {
     @ManyToOne
     private Doctors doctors;
 
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
     @ManyToOne
     private Users users;
 
@@ -37,14 +45,6 @@ public class Appointments extends BaseEntity {
 
     public void setUsers(Users users) {
         this.users = users;
-    }
-
-    public Date getAppintmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppintmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
     }
 
     public Boolean getStatus() {

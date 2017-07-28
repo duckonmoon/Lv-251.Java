@@ -7,6 +7,7 @@ package com.softserve.edu.lv251.config;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -33,17 +34,19 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
+    /**
+     * Added by Pavlo Kuchereshko.
+     *
+     * Servlet Filter that allows one to specify a character encoding for requests.
+     * This is useful because current browsers typically do not set a character encoding
+     * even if specified in the HTML page or form.
+     * @return Filter[] {characterEncodingFilter}.
+     */
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-        initCharacterEncodingFilter(servletContext);
-    }
-
-    private void initCharacterEncodingFilter(final ServletContext servletContext) {
-        final CharacterEncodingFilter utf8 = new CharacterEncodingFilter();
-        utf8.setEncoding("utf-8");
-        utf8.setForceEncoding(true);
-        servletContext.addFilter("SetCharacterEncodingFilter", utf8)
-                .addMappingForUrlPatterns(null, false, "/*");
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[] {characterEncodingFilter};
     }
 }

@@ -43,6 +43,12 @@
         <put-attribute name="current" value="registrationComfirm"/>
     </definition>
 
+    <!--Registration Success Page-->
+    <definition name="successRegistration" extends="home">
+        <put-attribute name="success" value="Success" />
+        <put-attribute name="body" value="/WEB-INF/pages/successRegistration.jsp" />
+    </definition>
+
     <!-- Bad User Page -->
     <definition name="403" extends="base-definition">
         <put-attribute name="title" value="Bad User" />

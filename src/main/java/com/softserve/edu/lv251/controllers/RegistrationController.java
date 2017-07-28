@@ -144,7 +144,7 @@ public class RegistrationController {
         user.setEnabled(true);
         this.userService.updateUser(user);
 
-        return "redirect:/";
+        return "successRegistration";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 /**
@@ -37,6 +38,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     Logger logger;
 
     @Override
+    @Transactional
     public void onApplicationEvent(
             OnRegistrationCompleteEvent event) {
         this.confirmRegistration(event);
@@ -44,10 +46,6 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         Users user = event.getUser();
-        /*if (verificationTokenService.findByUser(user) != null) {
-            logger.error("DUPLICATE!!!");
-            return;
-        }*/
         //A UUID (Universally Unique Identifier) represents a 128-bit value.
         String token = UUID.randomUUID().toString();
         userService.createVerificationToken(user, token);

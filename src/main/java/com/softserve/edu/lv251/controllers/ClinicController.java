@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.Districts;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class ClinicController {
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());
         return "clinic_details";
+    }
+    @RequestMapping(value = "/map")
+    public String map(){
+        return "map";
     }
 
 

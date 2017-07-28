@@ -41,12 +41,9 @@ public class AllDoctorsController {
         return  doctorsService.find(id);
     }
 
-    @RequestMapping(value = "/doctor/{id}",method = RequestMethod.GET)
-    public ModelAndView Doctor(@PathVariable Long id, Model model){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("doctor_details");
+    @RequestMapping(value = "/doctors/{id}",method = RequestMethod.GET)
+    public String Doctor(@PathVariable Long id, Model model){
         model.addAttribute("doctor",doctorsService.find(id));
-        modelAndView.addAllObjects(model.asMap());
-        return modelAndView;
+        return "doctor_details";
     }
 }

@@ -1,9 +1,11 @@
 package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +21,5 @@ public interface DoctorsService {
     List<Doctors> getDoctorsByColumnNameAndValue(String columnName, Object value);
     public Doctors findByEmail(String email);
     public Doctors registerNewDoctorAccount(UserDTO accountDto) throws EmailExistsException;
+    List<Appointments> appointmentsInThisMonth(Long id, Date date);
 }

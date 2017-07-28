@@ -60,6 +60,14 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
+                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_USER')">
+                        <a href="${pageContext.request.contextPath}/user/cabinet">
+                            <i class="fa fa-id-card"></i>
+                            <spring:message code="messages.userCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
                 <li class="${current == 'doctorCabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />

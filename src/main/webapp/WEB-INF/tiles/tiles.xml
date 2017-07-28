@@ -80,9 +80,14 @@
 
     <!-- Clinic details Page -->
     <definition name="clinic_details" extends="base-definition">
-        <put-attribute name="title" value="Doctors" />
-        <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
+    <put-attribute name="title" value="Clinic" />
+    <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
     </definition>
+
+    <!--<definition name="map" extends="base-definition">-->
+        <!--<put-attribute name="title" value="Map" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
+    <!--</definition>-->
 
     <!--Wrong password page-->
     <definition name="wrongPassword" extends="home">
@@ -105,5 +110,13 @@
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet.jsp" />
         <put-attribute name="current" value="doctorCabinet"/>
     </definition>
+
+    <!-- User cabinet Page -->
+    <definition name="user_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Personal Cabinet" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet.jsp" />
+        <put-attribute name="current" value="user/cabinet"/>
+    </definition>
+
 
 </tiles-definitions>

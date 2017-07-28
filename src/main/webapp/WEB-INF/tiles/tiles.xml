@@ -97,4 +97,12 @@
         <put-attribute name="current" value="doctorCabinet"/>
     </definition>
 
+    <!-- User cabinet Page -->
+    <definition name="user_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Personal Cabinet" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet.jsp" />
+        <put-attribute name="current" value="user/cabinet"/>
+    </definition>
+
+
 </tiles-definitions>

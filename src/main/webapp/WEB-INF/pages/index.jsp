@@ -19,7 +19,7 @@
                             <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change" aria-hidden="true" style="color: #226ed9"></i></span>
                             <input type="text" class="form-control " id="autocomplete" style="width: 550px" placeholder="Search"aria-describedby="sizing-addon1">
                             </div>
-                                <input type="text" class="form-control " style="width: 210px" placeholder='<spring:message code="messages.distinct"/>' >
+                                <input type="text" class="form-control " style="width: 210px" placeholder='<spring:message code="messages.district"/>' >
                         </div>
                         <button id="main-search-btn" class="btn btn-facebook"><spring:message code="messages.search"/></button>
                     </div>

@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 /**
@@ -37,6 +38,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     Logger logger;
 
     @Override
+    @Transactional
     public void onApplicationEvent(
             OnRegistrationCompleteEvent event) {
         this.confirmRegistration(event);

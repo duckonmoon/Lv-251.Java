@@ -43,6 +43,12 @@
         <put-attribute name="current" value="registrationComfirm"/>
     </definition>
 
+    <!--Registration Success Page-->
+    <definition name="successRegistration" extends="home">
+        <put-attribute name="success" value="Success" />
+        <put-attribute name="body" value="/WEB-INF/pages/successRegistration.jsp" />
+    </definition>
+
     <!-- Bad User Page -->
     <definition name="403" extends="base-definition">
         <put-attribute name="title" value="Bad User" />
@@ -78,10 +84,13 @@
     </definition>
 
     <!-- Doctor_details Page -->
+    <!-- Якщо хто-небудь ще раз відредагує получить по єбалу, я 2 години шукав помилку-->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-        <put-attribute name="current" value="doctor_details"/>
+
+        <put-attribute name="current" value="doctorsss"/>
+
     </definition>
 
     <!-- Doctor_cabinet Page -->

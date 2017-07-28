@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Users;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,6 +112,11 @@ public class DoctorServiceImpl implements DoctorsService {
         addDoctor(doctor);
 
         return doctor;
+    }
+
+
+    public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
+        return doctorsDAO.appointmentsInThisMonth(id,date);
     }
 
     private boolean emailExist(String email) {

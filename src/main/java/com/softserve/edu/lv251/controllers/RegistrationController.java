@@ -135,24 +135,16 @@ public class RegistrationController {
 
         Users user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
-        if ((verificationToken
-                .getExpiryDate().getTime()
-                - calendar.getTime().getTime())
-                <= 0) {
-            String message
-                    = messageSource
-                    .getMessage("message.invalidToken", null,
-                            locale);
-            model
-                    .addAttribute("message",
-                    message);
+        if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
+            String message = messageSource.getMessage("message.invalidToken", null, locale);
+            model.addAttribute("message", message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
         user.setEnabled(true);
         this.userService.updateUser(user);
 
-        return "redirect:/";
+        return "successRegistration";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

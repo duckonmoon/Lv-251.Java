@@ -124,14 +124,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return javaMailSender;
     }
 
-    /*@Bean
-    public CharacterEncodingFilter characterEncodingFilter() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        return filter;
-    }*/
-
     @Bean
     public CookieLocaleResolver localeResolver(){
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();

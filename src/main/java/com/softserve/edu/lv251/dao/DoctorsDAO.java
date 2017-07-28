@@ -1,7 +1,9 @@
 package com.softserve.edu.lv251.dao;
 
+import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,4 +11,5 @@ import java.util.List;
  */
 public interface DoctorsDAO extends BaseDAO<Doctors>{
     List searchByLetters(String letters);
+    List<Appointments> appointmentsInThisMonth(Long id, Date date);
 }

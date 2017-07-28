@@ -11,7 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import java.util.Locale;
+import java.util.Properties;
 
 
 @Configuration
@@ -46,6 +48,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    /**
+     * Author: Marian Brynetskyi
+     * Logger bean.
+     * Prototype scope for logger in any class.
+     */
     @Bean
     @Scope("prototype")
     public Logger logger(InjectionPoint injectionPoint) {
@@ -59,7 +66,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public TilesConfigurer tilesConfigurer(){
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
-        tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/tiles/tiles.xml"});
+        tilesConfigurer.setDefinitions("/WEB-INF/tiles/tiles.xml");
         tilesConfigurer.setCheckRefresh(true);
         return tilesConfigurer;
     }
@@ -85,6 +92,35 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         messageSource.setBasename("classpath:messages");
 
         return messageSource;
+    }
+
+    /**
+     * Added by Pavlo Kuchereshko.
+     * It is the subinterface of MailSender. It supports MIME messages.
+     * It is mostly used with MimeMessageHelper class for the creation of JavaMail MimeMessage, with attachment etc.
+     * The spring framework recommends MimeMessagePreparator mechanism for using this interface.
+     *
+     * @return JavaMailSender.
+     */
+    @Bean
+    public JavaMailSender getMailSender(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+        //Using gmail
+        javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setPort(587);
+        javaMailSender.setUsername("lv251clinics@gmail.com");
+        javaMailSender.setPassword("clinics251lv");
+
+        Properties javaMailProperties = new Properties();
+        javaMailProperties.put("mail.smtp.starttls.enable", "true");
+        javaMailProperties.put("mail.smtp.auth", "true");
+        javaMailProperties.put("mail.transport.protocol", "smtp");
+        javaMailProperties.put("mail.debug", "true");
+
+
+        javaMailSender.setJavaMailProperties(javaMailProperties);
+        return javaMailSender;
     }
 
     @Bean

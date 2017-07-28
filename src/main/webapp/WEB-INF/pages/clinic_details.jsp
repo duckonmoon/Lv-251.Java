@@ -12,9 +12,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
-
     <div class="card">
-        <div class="card-block">
+        <div class="container-fluid"style="float: left">
+            <img src="<c:url value="/resources/img/clinic_logo.png"/>">
+        </div>
+        <div class="card-block" >
             <h4 class="card-title">${clinic.clinic_name}</h4>
             <p class="card-text">${clinic.description}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -32,6 +34,12 @@
             <p class="card-text">${clinic.contact.thirdPhone}</p>
             <p class="card-text">${clinic.contact.email}</p>
         </div>
+
+        <iframe
+                height="450"
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBp1Qv4qS0nsGmiiXY1Z60u8DLrBGgalQQ&q=${mappoint}" allowfullscreen>
+        </iframe>
     </div>
 
 </div>

@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.config;
 
+import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -22,66 +21,87 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
-    @Autowired
-    DataSource dataSource;
-
     public WebSecurityConfig() {
         super(false);
     }
 
     /**
-     * Author: Pavlo Kuchereshko.
+     * Added by Pavlo Kuchereshko.
      * Will be used to encode the raw password. Generally, a good encoding algorithm applies a SHA-1
      * or greater hash combined with an 8-byte or greater randomly generated salt.
+     *
      * @return BCryptPasswordEncoder.
      */
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() { return new BCryptPasswordEncoder();}
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     /**
      * Added by Marian Brynetskyi.
      * Configuration for Spring Securiry.
+     *
      * @param http;
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-            http.csrf()
-                    .disable()
-                    .authorizeRequests()
-                    .antMatchers("/resources/**", "/**").permitAll()
-                    .anyRequest().permitAll()
-                    .and();
+        http
+                .csrf()
+                .disable()
 
-            http.formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/j_spring_security_check")
-                    .failureUrl("/")
-                    .usernameParameter("j_username")
-                    .passwordParameter("j_password")
-                    .permitAll();
+                .authorizeRequests()
+                .antMatchers("/user/*")
+                .hasAnyAuthority(WebRoles.ROLE_USER.name(), WebRoles.ROLE_DOCTOR.name())
 
-            http.logout()
-                    .permitAll()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true);
+
+                .antMatchers("/doctor/*")
+                .hasAuthority(WebRoles.ROLE_DOCTOR.name())
+
+                .antMatchers("/moderator/*")
+                .hasAuthority(WebRoles.ROLE_DOCTOR.name())
+
+                .antMatchers("/admin/*")
+                .hasAuthority(WebRoles.ROLE_DOCTOR.name())
+                .and()
+
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/login?error")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
+                .permitAll()
+                .and()
+
+                .logout()
+                .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .and()
+
+                .rememberMe()
+        ;
     }
 
 
     /**
-     * Added by Pavlo Kuchereshko.
-     * AuthenticationManagerBuilder builds AuthenticationManager using which in-memory,
-     * JDBC and LDAP authentication is performed.
-     * @param auth;
+     * Added by Marian Brynetskyi.
+     * Global security configurations with admin data.
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
+        auth.inMemoryAuthentication()
+                .withUser("root@admin.com").password("root")
+                .authorities(WebRoles.ROLE_USER.name(), WebRoles.ROLE_DOCTOR.name(), WebRoles.ROLE_ADMIN.name());
+        auth.userDetailsService(customUserDetailsService);
     }
 
     /**
      * Added by Pavlo Kuchereshko.
      * A production-quality AuthenticationProvider implementation called DaoAuthenticationProvider.
+     *
      * @return DaoAuthenticationProvider;
      */
     @Bean

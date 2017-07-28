@@ -5,6 +5,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- FOOTER*****************************************************************************************************************************************-->
 
 
@@ -13,9 +14,9 @@
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5><spring:message code="messages.links"/></h5>
             <ul class="list-unstyled">
-                <li><a href="${pageContext.request.contextPath}/"><spring:message code="messages.home" /></a></li>
-                <li><a href="${pageContext.request.contextPath}/clinics"><spring:message code="messages.clinics" /></a></li>
-                <li><a href="${pageContext.request.contextPath}/allDoctors"><spring:message code="messages.doctors"/> </a></li>
+                <li><a href=<c:url value="/"/>><spring:message code="messages.home" /></a></li>
+                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics" /></a></li>
+                <li><a href=<c:url value="/allDoctors"/>><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>
         </div>

@@ -15,10 +15,10 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><spring:message code="messages.createAccount"/></h4>
+                <h4 class="modal-title"><spring:message code="messages.createDoctorAccount"/></h4>
             </div>
             <div class="modal-body">
-                <form:form method="POST" modelAttribute="userForm">
+                <form:form method="POST" modelAttribute="doctorForm">
                     <spring:bind path="firstName">
                         <div class="form-group">
                             <label class="sr-only" for="firstName"><spring:message code="messages.firstName" var="firstNameMess"/></label>
@@ -53,7 +53,7 @@
                     </spring:bind>
                     <spring:bind path="matchingPassword">
                         <div class="form-group">
-                            <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.confirmPassword" var="passwordConfirmRegMess"/></label>
+                            <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.password" var="passwordConfirmRegMess"/></label>
                             <form:input type="password" id="passwordConfirmReg" path="matchingPassword"
                                         name="passwordConfirm" class="form-control" placeholder="${passwordConfirmRegMess}"/>
                             <form:errors path="matchingPassword"/>

@@ -35,6 +35,7 @@ public class ClinicController {
     public String clinicDetails(@RequestParam(name = "id", required = true)long id, Model model){
         Clinics clinic = clinicService.getClinicByID(id);
         model.addAttribute("clinic", clinic);
+        model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());
         return "clinic_details";
     }
 

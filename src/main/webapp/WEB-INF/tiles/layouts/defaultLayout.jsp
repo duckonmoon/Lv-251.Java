@@ -4,6 +4,7 @@
 <%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html lang="en">
 <head>
@@ -59,6 +60,12 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
+                <li class="${current == 'doctorCabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
+                        <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
@@ -113,20 +120,41 @@
 
                     <form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
                         <div class="form-group ${error != null ? 'has-error' : ''}">
-                            <span>${message}</span>
+                            <%--<span>${message}</span>--%>
                             <div class="modal-body">
-                                <input name="j_username" type="email" class="form-control" placeholder="Email"
+                                <div class="form-group">
+                                    <label class="control-label" for="email">
+                                        <spring:message code="messages.email"/>
+                                    </label>
+                                    <input id="email" name="j_username" type="email" class="form-control"
+                                           placeholder="<spring:message code="messages.email"/>"
                                        autofocus=""/>
-                                <input name="j_password" type="password" class="form-control" placeholder="Password"/>
-                                <span>${error}</span>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="password">
+                                        <spring:message code="messages.password"/>
+                                    </label>
+                                    <input id="password" name="j_password" type="password" class="form-control"
+                                           placeholder="<spring:message code="messages.password"/>"/>
+                                </div>
+                                <%--<span>${error}</span>--%>
+                                <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+
+                                <div class="form-group">
+                                    <input id="remember" type="checkbox" name="remember-me" value="true">
+                                    <label class="control-label" for="remember">
+                                        <spring:message code="messages.rememberMe"/>
+                                    </label>
+                                </div>
+
+                                <p id="wrong" style="color: red"></p>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-lg btn-primary btn-block">
                                     <spring:message code="messages.login"/>
                                 </button>
                                 <h4 class="text-center">
-                                    <a href="${contextPath}/registration"><spring:message code="messages.createAccount"/></a>
+                                    <a href="<c:url value="/registration"/>"><spring:message code="messages.createAccount"/></a>
                                 </h4>
                             </div>
                         </div>
@@ -151,5 +179,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
+
+
 </body>
 </html>

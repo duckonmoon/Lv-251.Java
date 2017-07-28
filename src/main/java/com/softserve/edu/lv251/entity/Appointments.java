@@ -10,8 +10,8 @@ import java.util.Date;
 @Entity
 public class Appointments extends BaseEntity {
 
-    private Date appintmentDate;
-    private String status;
+    private Date appointmentDate;
+    private Boolean status;
     private double duration;
 
     @ManyToOne
@@ -40,18 +40,18 @@ public class Appointments extends BaseEntity {
     }
 
     public Date getAppintmentDate() {
-        return appintmentDate;
+        return appointmentDate;
     }
 
-    public void setAppintmentDate(Date appintmentDate) {
-        this.appintmentDate = appintmentDate;
+    public void setAppintmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

@@ -44,6 +44,10 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         Users user = event.getUser();
+        /*if (verificationTokenService.findByUser(user) != null) {
+            logger.error("DUPLICATE!!!");
+            return;
+        }*/
         //A UUID (Universally Unique Identifier) represents a 128-bit value.
         String token = UUID.randomUUID().toString();
         userService.createVerificationToken(user, token);

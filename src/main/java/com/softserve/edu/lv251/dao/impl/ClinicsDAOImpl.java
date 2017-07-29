@@ -24,4 +24,12 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinics> implements ClinicsDAO {
 
         return query.getResultList();
     }
+
+    @Override
+    public List<Clinics> searchByLetters(String letters) {
+        String name=letters+"%".toLowerCase();
+        Query query=entityManager.createQuery("select c from Clinics c where lower(c.clinic_name) like :name").setParameter("name",name);
+
+        return query.getResultList();
+    }
 }

@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface ClinicsDAO extends BaseDAO<Clinics>{
  List<Clinics>findByDistrict(String name);
+ List<Clinics>searchByLetters(String letters);
 
 }

@@ -12,7 +12,7 @@ $(document).ready(function() {
             console.log("You select 0");
             clinicsAll();
 
-        }else {
+        } if(($(this).val() == 1)) {
             $(".change ").removeClass("fa-ambulance");
             $(".change").addClass("fa-user-md");
             $("#autocomplete").attr('placeholder','Введіть імя доктора ');
@@ -21,6 +21,13 @@ $(document).ready(function() {
             doctorsByDistrict();
             console.log("before all docs")
             allDocs();
+        }
+         if (($(this).val() == 2)) {console.log("You select 2");
+            $(".change ").removeClass("fa-ambulance");
+            $(".change").addClass("fa-user-md");
+             $("#autocomplete").attr('placeholder','Введіть спеціалізацію доктора ');
+            doctorsBySpecialization();
+            doctorsByDistrict();
         }
     });
 
@@ -41,14 +48,14 @@ function clinicsAll() {
     console.log($("#selectDocOrClinic").val());
     $("#autocomplete").autocomplete({
         serviceUrl: '/all/clinics',
+        noSuggestionNotice:'No results',
+        showNoSuggestionNotice:true,
         paramName: "name",
         delimiter: ",",
-        transformResult: function (response) {
-            console.log("before" + response.toString());
+           transformResult: function (response) {
+            console.log("before all clinics" + response.toString());
             return {
-
-                suggestions: $.map($.parseJSON(response), function (item) {
-
+                   suggestions: $.map($.parseJSON(response), function (item) {
                     var i = item.clinic_name;
                     console.log(i);
                     var html="<a href='"+"/clinics/"+item.id+"'>"+i+"</a>";
@@ -92,9 +99,11 @@ function clinicsByDistrict() {
     $("#autocomplete-districts").autocomplete({
         serviceUrl: '/districts/byName',
         paramName: "name",
+        noSuggestionNotice:'No results',
+        showNoSuggestionNotice:true,
         delimiter: ",",
         transformResult: function (response) {
-            console.log("before" + response.toString());
+            console.log("before clinics by districts");
             return {
 
                 suggestions: $.map($.parseJSON(response), function (item) {
@@ -142,9 +151,11 @@ function doctorsByDistrict() {
     $("#autocomplete-districts").autocomplete({
         serviceUrl: '/districts/byName',
         paramName: "name",
+        noSuggestionNotice:'No results',
+        showNoSuggestionNotice:true,
         delimiter: ",",
         transformResult: function (response) {
-            console.log("before" + response.toString());
+            console.log("before doc by districts");
             return {
 
                 suggestions: $.map($.parseJSON(response), function (item) {
@@ -184,4 +195,53 @@ function doctorsByDistrict() {
 
     });
 
+}
+function  doctorsBySpecialization() {
+    console.log("doc by cpec");
+    $("#autocomplete").autocomplete({
+        serviceUrl: '/doc/by/spec',
+        noSuggestionNotice:'No results',
+        showNoSuggestionNotice:true,
+        paramName: "name",
+        delimiter: ",",
+        transformResult: function (response) {
+            console.log("before doc by spec" );
+            return {
+
+                suggestions: $.map($.parseJSON(response), function (item) {
+
+                    var i = item.name;
+                    console.log(i);
+                    return {value: i, data: item.name};
+                })
+            };
+        },
+        onSelect: function (suggestion) {
+            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
+            var name = suggestion.data;
+            $.ajax({
+                url: '/search/doctors/by/spec/'+name,
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (res) {
+                    console.log(res.length);
+                    $(".content").empty();
+                    for (var i = 0; i < res.length; i++) {
+                        console.log("Doctors search by districts");
+                        $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                            "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                            "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
+                            "<a href='"+"clinic/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
+                    }
+
+
+                }
+
+            })
+
+        }
+
+
+    });
 }

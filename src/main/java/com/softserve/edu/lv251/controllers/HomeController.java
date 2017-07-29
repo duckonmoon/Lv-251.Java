@@ -3,9 +3,11 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.entity.Districts;
 import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DistrictsService;
 import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +26,8 @@ public class HomeController {
     private DistrictsService districtsService;
     @Autowired
     private DoctorsService doctorsService;
+    @Autowired
+    private SpecializationService specializationService;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(ModelMap model){
@@ -32,7 +36,8 @@ public class HomeController {
     @RequestMapping(value = "/all/clinics")
     @ResponseBody
     public List<Clinics> autocompleteClinics(@RequestParam("name") String name){
-        return  clinicService.getAllClinics();
+        System.out.println(clinicService.searchByLetters(name));
+        return  clinicService.searchByLetters(name);
     }
     @ResponseBody
     @RequestMapping(value = "/search/clinics/{id}")
@@ -60,6 +65,19 @@ public class HomeController {
     public List<Doctors>doctorsByDistrict(@PathVariable("name")String name){
         System.out.println(doctorsService.searchByDistrict(name));
         return doctorsService.searchByDistrict(name);
+    }
+@ResponseBody
+@RequestMapping(value = "/doc/by/spec")
+    public List<Specialization>autocompleteSpec(@RequestParam("name")String name){
+        System.out.println("in spec auto fufufjfjhhggffhffhfhhffhhfhfhfh");
+        System.out.println(specializationService.searchByLetters(name));
+        return specializationService.searchByLetters(name);
+    }
+    @ResponseBody
+    @RequestMapping(value = "/search/doctors/by/spec/{name}")
+    public List<Doctors>doctorsBySpec(@PathVariable("name")String name){
+        System.out.println(doctorsService.searchBySpecialization(name));
+        return doctorsService.searchBySpecialization(name);
     }
 
 }

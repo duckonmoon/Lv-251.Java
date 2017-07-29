@@ -29,4 +29,5 @@ public interface ClinicService {
 
     List<Clinics> getClinics(Integer chainIndex, Integer size);
     List<Clinics>findByDistrict(String name);
+    List<Clinics>searchByLetters(String letters);
 }

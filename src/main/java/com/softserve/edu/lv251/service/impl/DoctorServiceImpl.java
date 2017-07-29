@@ -127,4 +127,9 @@ public class DoctorServiceImpl implements DoctorsService {
     private boolean emailExist(String email) {
         return findByEmail(email) != null;
     }
+
+    @Override
+    public List<Doctors> searchBySpecialization(String name) {
+        return doctorsDAO.searchBySpecialization(name);
+    }
 }

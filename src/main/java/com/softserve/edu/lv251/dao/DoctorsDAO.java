@@ -13,4 +13,5 @@ public interface DoctorsDAO extends BaseDAO<Doctors>{
     List<Doctors> searchByLetters(String letters);
     List<Appointments> appointmentsInThisMonth(Long id, Date date);
     List<Doctors>searchByDistrict(String name);
+    List<Doctors>searchBySpecialization(String name);
 }

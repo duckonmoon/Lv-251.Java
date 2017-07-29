@@ -89,4 +89,8 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicsDAO.findByDistrict(name);
     }
 
+    @Override
+    public List<Clinics> searchByLetters(String letters) {
+        return clinicsDAO.searchByLetters(letters);
+    }
 }

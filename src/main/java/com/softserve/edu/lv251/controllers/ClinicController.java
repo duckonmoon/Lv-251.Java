@@ -31,9 +31,8 @@ public class ClinicController {
 
 
 
-
-    @RequestMapping(value = "/details", method = RequestMethod.GET)
-    public String clinicDetails(@RequestParam(name = "id", required = true)long id, Model model){
+    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+    public String clinicDetails(@PathVariable(name = "id", required = true)long id, Model model){
 
         Clinics clinic = clinicService.getClinicByID(id);
         model.addAttribute("clinic", clinic);

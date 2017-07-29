@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -13,7 +14,7 @@ import javax.persistence.OneToOne;
 public class Contacts extends BaseEntity {
 
     private String address;
-    private String district;
+
     private String city;
     private String zipCode;
     private String firstPhone;
@@ -26,7 +27,9 @@ public class Contacts extends BaseEntity {
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
     private Clinics clinics;
-
+    @ManyToOne
+    @JsonIgnore
+    private Districts district;
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
     private Users users;
@@ -67,11 +70,11 @@ public class Contacts extends BaseEntity {
         this.address = address;
     }
 
-    public String getDistrict() {
+    public Districts getDistrict() {
         return district;
     }
 
-    public void setDistrict(String district) {
+    public void setDistrict(Districts district) {
         this.district = district;
     }
 

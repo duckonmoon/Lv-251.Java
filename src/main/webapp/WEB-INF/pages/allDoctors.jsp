@@ -1,18 +1,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <div class="container">
     <div class="row">
         <h2></h2>
         <div id="custom-search-input">
 
             <div class="input-group col-md-12">
-                <input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder="Search" />
+                <input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder='<spring:message code="messages.searchDoctors"/>' />
                 <span class="input-group-btn">
-                                    <button class="btn btn-danger"  id="search-doctor">
+                                    <button class="btn btn-danger" onclick="task2()"  id="search-doctor">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
+
                                 </span>
             </div>
 
@@ -27,7 +28,7 @@
     <c:when test="${doctors.size()>0}">
         <div class="container">
         <c:forEach items="${doctors}" var="doctor">
-            <a href="doctor/${doctor.id}">
+            <a href="doctors/${doctor.id}">
                 <div class="row row-content">
                     <div class="container-fluid">
                         <div class="row">

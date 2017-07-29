@@ -9,19 +9,12 @@ $(document).ready(function() {
         transformResult: function (response) {
 console.log("before"+response.toString());
             return {
-
                 suggestions: $.map($.parseJSON(response), function (item) {
-
-              var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
+                    var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
                     console.log(i);
                     return {value:i, data:item.id};
-
                 })
-
-
             };
-
-
         },
         onSelect: function (suggestion) {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
@@ -100,8 +93,6 @@ function allDocs() {
                     contentType:'application/json',
 
                     success:function (result) {
-
-
                         console.log(result.firstname);
                         $("#content").empty();
                         $("#content").append("<a href='"+"/doctors/"+result.id+"'><div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +

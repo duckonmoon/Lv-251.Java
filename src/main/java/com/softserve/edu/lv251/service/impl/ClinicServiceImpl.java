@@ -84,4 +84,9 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicsDAO.pagination(chainIndex, size);
     }
 
+    @Override
+    public List<Clinics> findByDistrict(String name) {
+        return clinicsDAO.findByDistrict(name);
+    }
+
 }

@@ -33,5 +33,10 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctors> implements DoctorsDAO {
                 .getResultList();
     }
 
-
+    @Override
+    public List<Doctors> searchByDistrict(String name) {
+       Query query=entityManager.createQuery("select d from Doctors d join d.clinics c join c.contact cont join cont.district dist where" +
+               " dist.name like :name").setParameter("name",name);
+        return query.getResultList();
+    }
 }

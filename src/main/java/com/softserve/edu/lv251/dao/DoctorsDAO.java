@@ -10,6 +10,7 @@ import java.util.List;
  * Created by Taras on 16.07.2017.
  */
 public interface DoctorsDAO extends BaseDAO<Doctors>{
-    List searchByLetters(String letters);
+    List<Doctors> searchByLetters(String letters);
     List<Appointments> appointmentsInThisMonth(Long id, Date date);
+    List<Doctors>searchByDistrict(String name);
 }

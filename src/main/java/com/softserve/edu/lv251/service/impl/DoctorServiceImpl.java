@@ -119,6 +119,11 @@ public class DoctorServiceImpl implements DoctorsService {
         return doctorsDAO.appointmentsInThisMonth(id,date);
     }
 
+    @Override
+    public List<Doctors> searchByDistrict(String name) {
+        return doctorsDAO.searchByDistrict(name);
+    }
+
     private boolean emailExist(String email) {
         return findByEmail(email) != null;
     }

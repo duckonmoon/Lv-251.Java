@@ -22,4 +22,5 @@ public interface DoctorsService {
     public Doctors findByEmail(String email);
     public Doctors registerNewDoctorAccount(UserDTO accountDto) throws EmailExistsException;
     List<Appointments> appointmentsInThisMonth(Long id, Date date);
+    List<Doctors>searchByDistrict(String name);
 }

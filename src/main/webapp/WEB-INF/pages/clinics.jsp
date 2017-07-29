@@ -6,6 +6,7 @@
 
 <div class="container">
 
+
     <%--<select name="size"  class="selectpicker show-menu-arrow">--%>
         <%--<option>10</option>--%>
         <%--<option>20</option>--%>
@@ -20,6 +21,7 @@
 
     <c:forEach items="${getClinics}" var="clinic">
         <a href="clinic/${clinic.id}">
+
             <div class="row row-content">
                 <div class="container-fluid">
                     <p>${clinic.clinic_name}</p>

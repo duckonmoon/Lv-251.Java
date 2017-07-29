@@ -164,4 +164,14 @@ public class Users extends BaseEntity {
     public void setTokenExpired(boolean tokenExpired) {
         this.tokenExpired = tokenExpired;
     }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", middlename='" + middlename + '\'' +
+
+                '}';
+    }
 }

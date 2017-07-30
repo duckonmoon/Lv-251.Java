@@ -35,7 +35,7 @@
                                 </select>
                                 <div class="input-group ">
                                     <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change" aria-hidden="true" style="color: #226ed9"></i></span>
-                                    <input type="text" class="form-control " id="autocomplete" style="width: 530px" placeholder='<spring:message code="messages.searchClinics"/>'aria-describedby="sizing-addon1">
+                                    <input type="text" class="form-control " id="autocomplete" style="width: 530px" placeholder=''aria-describedby="sizing-addon1">
                                 </div>
                                 <input id="autocomplete-districts" type="text" class="form-control " style="width: 210px" placeholder='<spring:message code="messages.district"/>' >
                             </div>
@@ -70,6 +70,7 @@
                             </div>
                             <a href="doctors/${doctor.id}" class="btn-link"> <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span></a>
                             <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
+                            <a href="/appointment/to/doctor/${doctor.id}"><button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"><spring:message code="messages.addAppointment"/></button ></a>
                         </div>
 
                     </div>

@@ -174,9 +174,7 @@
         </div>
     </sec:authorize>
 
-
-
-<section id="site-content">
+    <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
 

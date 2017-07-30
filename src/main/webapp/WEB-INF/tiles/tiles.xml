@@ -116,9 +116,13 @@
     <!-- User cabinet Page -->
     <definition name="user_cabinet" extends="base-definition">
         <put-attribute name="title" value="Personal Cabinet" />
-        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet.jsp" />
+        <put-attribute name="body" value="user_cabinet.body" />
         <put-attribute name="current" value="user/cabinet"/>
     </definition>
 
+    <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
+    </definition>
 
 </tiles-definitions>

@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.dto.pojos;
 
 import com.softserve.edu.lv251.customannotations.PasswordMatches;
 import com.softserve.edu.lv251.customannotations.ValidEmail;
+import com.softserve.edu.lv251.customannotations.ValidPassword;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -18,6 +19,7 @@ public class UserDTO {
     private String lastName;
 
     @NotBlank
+    @ValidPassword
     private String password;
     private String matchingPassword;
 

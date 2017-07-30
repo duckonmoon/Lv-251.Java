@@ -20,6 +20,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/passwordStrengthGood.css"/>" rel="stylesheet">
 </head>
 
 <body>
@@ -171,12 +172,13 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/search.js"/>"></script>
-
-
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
+<script src="<c:url value="/resources/js/zxcvbn-async.min.js"/>"></script>
+<script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
+<script src="<c:url value="/resources/js/passwordStrengthGood.js"/>"></script>
+<script src="<c:url value="/resources/js/search.js"/>"></script>
 </body>
 </html>

@@ -95,6 +95,12 @@
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
+    <!--Login page-->
+    <definition name="login" extends="home">
+        <put-attribute name="login" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+
 
     <!-- Doctor_details Page -->
     <!-- Якщо хто-небудь ще раз відредагує получить по єбалу, я 2 години шукав помилку-->

@@ -9,6 +9,7 @@ import java.util.List;
  *
  */
 public interface ClinicsDAO extends BaseDAO<Clinics>{
+ List<Clinics>findByDistrict(String name);
+ List<Clinics>searchByLetters(String letters);
 
-    public List<Clinics> getTenClinics(Integer i);
 }

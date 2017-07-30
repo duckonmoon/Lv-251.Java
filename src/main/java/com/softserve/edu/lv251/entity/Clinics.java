@@ -20,8 +20,9 @@ public class Clinics extends BaseEntity {
 
     private String description;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "clinics")
+    @JsonIgnore
     private List<Doctors> doctors;
 
     @JsonIgnore
@@ -69,5 +70,15 @@ public class Clinics extends BaseEntity {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    @Override
+    public String toString() {
+        return "Clinics{" +
+                "clinic_name='" + clinic_name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", description='" + description + '\'' +
+
+                '}';
     }
 }

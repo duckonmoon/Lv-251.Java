@@ -56,9 +56,18 @@
                         <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
+
+                <li class="${current == 'contact' ? 'active': ''}">
+                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
+                </li>
+                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_USER')">
+                        <a href="${pageContext.request.contextPath}/user/cabinet">
+                            <i class="fa fa-id-card"></i>
+                            <spring:message code="messages.userCabinet" />
+                        </a>
+                    </sec:authorize>
                 </li>
                 <li class="${current == 'doctorCabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
@@ -180,5 +189,7 @@
 <script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
 <script src="<c:url value="/resources/js/passwordStrengthGood.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
+<script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+
 </body>
 </html>

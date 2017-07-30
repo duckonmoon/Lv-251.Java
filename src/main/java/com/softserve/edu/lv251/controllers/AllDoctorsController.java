@@ -25,12 +25,16 @@ public class AllDoctorsController {
     @ResponseBody
     @RequestMapping(value = "/all/doc")
     public List<Doctors> searchDoctors(@RequestParam String name){
+        System.out.println(name);
+        System.out.println(doctorsService.searchByLetters("Zyrr"));
+        System.out.println(doctorsService.searchByLetters(name));
         return doctorsService.searchByLetters(name);
 
     }
     @ResponseBody
     @RequestMapping(value = "/search/{name}")
     public List<Doctors> searchAll(@PathVariable("name") String name){
+        System.out.println("in search ");
         System.out.println(name);
         return doctorsService.searchByLetters(name);
 

@@ -16,11 +16,20 @@ import java.util.List;
 @Repository
 public class ClinicsDAOImpl extends BaseDAOImpl<Clinics> implements ClinicsDAO {
 
+
     @Override
-    public List<Clinics> getTenClinics(Integer i) {
-        Query query = entityManager.createQuery("FROM Clinics clinics order by clinics.clinic_name");
-        query.setFirstResult(i*10-10);
-        query.setMaxResults(10);
+    public List<Clinics> findByDistrict(String name) {
+        Query query=entityManager.createQuery("select c from Clinics c join c.contact cont join cont.district d where d.name like :name")
+                .setParameter("name",name);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Clinics> searchByLetters(String letters) {
+        String name=letters+"%".toLowerCase();
+        Query query=entityManager.createQuery("select c from Clinics c where lower(c.clinic_name) like :name").setParameter("name",name);
+
         return query.getResultList();
     }
 }

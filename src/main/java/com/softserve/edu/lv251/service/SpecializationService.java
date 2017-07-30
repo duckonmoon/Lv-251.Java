@@ -1,0 +1,14 @@
+package com.softserve.edu.lv251.service;
+
+import com.softserve.edu.lv251.entity.Specialization;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * Created by Admin on 29.07.2017.
+ */
+
+public interface SpecializationService {
+    List<Specialization> searchByLetters(String letters);
+}

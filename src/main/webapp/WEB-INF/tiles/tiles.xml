@@ -70,11 +70,24 @@
         <put-attribute name="current" value="clinics"/>
     </definition>
 
+
+    <!--Contact page-->
+    <definition name="contact" extends="base-definition">
+        <put-attribute name="title" value="Contact" />
+        <put-attribute name="body" value="/WEB-INF/pages/contact.jsp" />
+        <put-attribute name="current" value="contact"/>
+    </definition>
+
     <!-- Clinic details Page -->
     <definition name="clinic_details" extends="base-definition">
-        <put-attribute name="title" value="Doctors" />
-        <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
+    <put-attribute name="title" value="Clinic" />
+    <put-attribute name="body" value="/WEB-INF/pages/clinic_details.jsp" />
     </definition>
+
+    <!--<definition name="map" extends="base-definition">-->
+        <!--<put-attribute name="title" value="Map" />-->
+        <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
+    <!--</definition>-->
 
     <!--Wrong password page-->
     <definition name="wrongPassword" extends="home">
@@ -82,12 +95,21 @@
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
+    <!--Login page-->
+    <definition name="login" extends="home">
+        <put-attribute name="login" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+
+
     <!-- Doctor_details Page -->
     <!-- Якщо хто-небудь ще раз відредагує получить по єбалу, я 2 години шукав помилку-->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
+
         <put-attribute name="current" value="doctorsss"/>
+
     </definition>
 
     <!-- Doctor_cabinet Page -->
@@ -95,6 +117,18 @@
         <put-attribute name="title" value="Cabinet" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet.jsp" />
         <put-attribute name="current" value="doctorCabinet"/>
+    </definition>
+
+    <!-- User cabinet Page -->
+    <definition name="user_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Personal Cabinet" />
+        <put-attribute name="body" value="user_cabinet.body" />
+        <put-attribute name="current" value="user/cabinet"/>
+    </definition>
+
+    <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
     </definition>
 
 </tiles-definitions>

@@ -3,22 +3,53 @@
 
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <div class="container">
-    <div class="row">
-        <h2></h2>
-        <div id="custom-search-input">
+    <%--<div class="row">--%>
+        <%--<h2></h2>--%>
+        <%--<div id="custom-search-input">--%>
 
-            <div class="input-group col-md-12">
-                <input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder='<spring:message code="messages.searchDoctors"/>' />
-                <span class="input-group-btn">
-                                    <button class="btn btn-danger" onclick="task2()"  id="search-doctor">
-                                        <span class=" glyphicon glyphicon-search"></span>
-                                    </button>
+            <%--<div class="input-group col-md-12">--%>
+                <%--<input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder='<spring:message code="messages.searchDoctors"/>' />--%>
+                <%--<span class="input-group-btn">--%>
+                                    <%--<button class="btn btn-danger" onclick="task2()"  id="search-doctor">--%>
+                                        <%--<span class=" glyphicon glyphicon-search"></span>--%>
+                                    <%--</button>--%>
 
-                                </span>
+                                <%--</span>--%>
+            <%--</div>--%>
+
+        <%--</div>--%>
+    <%--</div>--%>
+        <div class="container">
+            <div class="row" style="margin-top: 50px">
+
+                <nav class="navbar navbar-inverse">
+                    <div  class="container-fluid">
+
+                        <div class="navbar-form " >
+                            <div class="form-group">
+
+                                <select class="selectpicker form-control"style="width:210px " id="selectDocOrClinic">
+                                    <option  value="3"><spring:message code="messages.chooseSearch"/></option>
+                                    <option  value="1"><spring:message code="messages.doctorsSearch"/></option>
+                                    <option   value="2"><spring:message code="messages.doctorsSearchBySpec"/></option>
+                                </select>
+                                <div class="input-group ">
+                                    <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change" aria-hidden="true" style="color: #226ed9"></i></span>
+                                    <input type="text" class="form-control " id="autocomplete" style="width: 530px" placeholder='<spring:message code="messages.searchClinics"/>'aria-describedby="sizing-addon1">
+                                </div>
+                                <input id="autocomplete-districts" type="text" class="form-control " style="width: 210px" placeholder='<spring:message code="messages.district"/>' >
+                            </div>
+                            <a href="/allDoctors"><button id="main-search-btn" class="btn btn-facebook"><spring:message code="messages.search"/></button></a>
+                        </div>
+
+                    </div>
+
+                </nav>
+
+
+
             </div>
-
         </div>
-    </div>
 </div>
 <div id="content">
 

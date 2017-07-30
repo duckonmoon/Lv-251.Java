@@ -13,11 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-<<<<<<< HEAD
-import org.springframework.web.servlet.LocaleContextResolver;
-=======
 import org.springframework.web.servlet.LocaleResolver;
->>>>>>> f821345f540fde03fe47639e5ec8e20b1d2eb776
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;

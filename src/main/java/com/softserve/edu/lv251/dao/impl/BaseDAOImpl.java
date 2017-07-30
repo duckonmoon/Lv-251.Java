@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.BaseDAO;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,8 @@ import java.util.List;
 /**
  *
  */
-public class BaseDAOImpl<T> implements BaseDAO<T> {
+@Repository
+public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
 
     private Class<T> entityClass;
 
@@ -49,6 +51,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 
+    @Override
     public List<T> getAllEntities() {
         CriteriaQuery<T> criteriaQuery = entityManager.getCriteriaBuilder().createQuery((entityClass));
         Root<T> tRoot = criteriaQuery.from(entityClass);

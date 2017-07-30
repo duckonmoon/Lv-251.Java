@@ -13,10 +13,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+<<<<<<< HEAD
 import org.springframework.web.servlet.LocaleContextResolver;
+=======
+import org.springframework.web.servlet.LocaleResolver;
+>>>>>>> f821345f540fde03fe47639e5ec8e20b1d2eb776
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -119,15 +124,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         javaMailProperties.put("mail.transport.protocol", "smtp");
         javaMailProperties.put("mail.debug", "true");
 
-
         javaMailSender.setJavaMailProperties(javaMailProperties);
         return javaMailSender;
     }
 
     @Bean
-    public CookieLocaleResolver localeResolver(){
+    public CookieLocaleResolver localeCookieResolver(){
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-        localeResolver.setDefaultLocale(new Locale("ua"));
+        localeResolver.setDefaultLocale(new Locale("uk"));
         localeResolver.setCookieName("my-locale-cookie");
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
@@ -139,6 +143,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         return interceptor;
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.ENGLISH); // change this
+        return localeResolver;
     }
 
     @Override

@@ -20,6 +20,8 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -172,9 +174,7 @@
         </div>
     </sec:authorize>
 
-
-
-<section id="site-content">
+    <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
 
@@ -187,6 +187,7 @@
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
+<script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 
 
 </body>

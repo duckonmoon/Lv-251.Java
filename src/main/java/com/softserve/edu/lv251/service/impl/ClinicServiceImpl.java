@@ -112,4 +112,13 @@ public class ClinicServiceImpl implements ClinicService {
         return listOfVariants;
     }
 
+
+    public List<Clinics> findByDistrict(String name) {
+        return clinicsDAO.findByDistrict(name);
+    }
+
+    @Override
+    public List<Clinics> searchByLetters(String letters) {
+        return clinicsDAO.searchByLetters(letters);
+    }
 }

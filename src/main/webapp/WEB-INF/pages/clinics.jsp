@@ -7,11 +7,22 @@
 
 <div class="container">
 
+
     <select name="size"  class="selectpicker show-menu-arrow">
         <c:forEach items="${listVariants}" var="variant">
             <option>${variant}</option>
         </c:forEach>
     </select>
+
+
+    <%--<select name="size"  class="selectpicker show-menu-arrow">--%>
+        <%--<option>10</option>--%>
+        <%--<option>20</option>--%>
+        <%--<option>50</option>--%>
+        <%--<option>100</option>--%>
+        <%--<option>200</option>--%>
+    <%--</select>--%>
+
 
     <%--<form method="GET">--%>
     <%--<input value="${numberChain = 10}" id="size" name="size" type="text">--%>
@@ -19,6 +30,7 @@
 
     <c:forEach items="${getClinics}" var="clinic">
         <a href="clinic/${clinic.id}">
+
             <div class="row row-content">
                 <div class="container-fluid">
                     <p>${clinic.clinic_name}</p>

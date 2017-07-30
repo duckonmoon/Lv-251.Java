@@ -95,13 +95,21 @@
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
+    <!--Login page-->
+    <definition name="login" extends="home">
+        <put-attribute name="login" value="Login" />
+        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+    </definition>
+
 
     <!-- Doctor_details Page -->
     <!-- Якщо хто-небудь ще раз відредагує получить по єбалу, я 2 години шукав помилку-->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
+
         <put-attribute name="current" value="doctorsss"/>
+
     </definition>
 
     <!-- Doctor_cabinet Page -->
@@ -114,9 +122,13 @@
     <!-- User cabinet Page -->
     <definition name="user_cabinet" extends="base-definition">
         <put-attribute name="title" value="Personal Cabinet" />
-        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet.jsp" />
+        <put-attribute name="body" value="user_cabinet.body" />
         <put-attribute name="current" value="user/cabinet"/>
     </definition>
 
+    <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
+    </definition>
 
 </tiles-definitions>

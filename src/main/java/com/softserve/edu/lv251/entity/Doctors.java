@@ -12,7 +12,7 @@ import java.util.List;
 public class Doctors extends Users {
     @Column(length = 10000)
     private String description;
-
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     private Clinics clinics;
 @JsonIgnore

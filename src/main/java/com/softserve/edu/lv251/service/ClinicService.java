@@ -28,4 +28,6 @@ public interface ClinicService {
     int numberOfPaging(Integer size);
 
     List<Clinics> getClinics(Integer chainIndex, Integer size);
+
+    public List<Integer> listOfVariants();
 }

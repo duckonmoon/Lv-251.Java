@@ -18,6 +18,7 @@
                 <h4 class="modal-title"><spring:message code="messages.createAccount"/></h4>
             </div>
             <div class="modal-body">
+                <div role="alert" content="123">
                 <form:form method="POST" modelAttribute="userForm">
                     <spring:bind path="firstName">
                         <div class="form-group">
@@ -63,6 +64,7 @@
                         <button class="btn btn-info"><spring:message code="messages.register"/></button>
                     </div>
                 </form:form>
+                </div>
             </div>
         </div>
     </div>

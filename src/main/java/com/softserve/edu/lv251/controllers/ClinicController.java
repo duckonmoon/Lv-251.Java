@@ -5,10 +5,7 @@ import com.softserve.edu.lv251.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -21,15 +18,25 @@ public class ClinicController {
     @Autowired
     private ClinicService clinicService;
 
+//    @Autowired
+//    private PagingSizeService<Clinics> pagingSizeService;
 
-    @RequestMapping(value = "/{current}", method = RequestMethod.GET)
-    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex){
+
+//    @RequestMapping(value = "/{current}", method = RequestMethod.GET)
+    @GetMapping("/{current}")
+    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex/*, @RequestParam("size") Integer size*/){
         ModelAndView model = new ModelAndView("clinics");
+//        model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, size));
+//        model.addObject("numberChain", pagingSizeService.numberOfPaging(size));
+//        model.addObject("listVariants", pagingSizeService.listOfVariants());
         model.addObject("getClinics", clinicService.getClinics(chainIndex, 10));
         model.addObject("numberChain", clinicService.numberOfPaging(10));
-        model.addObject("maxSize", clinicService.getAllClinics().size());
+//        model.addObject("listVariants", clinicService.listOfVariants());
         return model;
     }
+
+//    @PostMapping
+//    public
 
 
 

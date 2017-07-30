@@ -86,7 +86,7 @@
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class=""  href="?lang=ua"  style="padding: 20px 3px ; float: left ">
+                    <a class=""  href="?lang=uk"  style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>

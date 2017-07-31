@@ -226,6 +226,12 @@
             <version>1.9.13</version>
         </dependency>
 
+        <!--Password policy enforcement for Java-->
+        <dependency>
+            <groupId>org.passay</groupId>
+            <artifactId>passay</artifactId>
+            <version>1.0</version>
+        </dependency>
 
     </dependencies>
 

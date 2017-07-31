@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ *
+ */
 public class StoredImagesService {
 
     public static String getDefaultPictureBase64encoded(String filename) {

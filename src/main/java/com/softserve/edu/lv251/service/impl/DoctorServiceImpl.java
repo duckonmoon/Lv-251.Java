@@ -40,7 +40,8 @@ public class DoctorServiceImpl implements DoctorsService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
- private DoctorsDAO doctorsDAO;
+    private DoctorsDAO doctorsDAO;
+
     @Override
     public void addDoctor(Doctors doctors) {
         doctorsDAO.addEntity(doctors);
@@ -54,7 +55,6 @@ public class DoctorServiceImpl implements DoctorsService {
     @Override
     public void update(Doctors doctors) {
         doctorsDAO.updateEntity(doctors);
-
     }
 
     @Override

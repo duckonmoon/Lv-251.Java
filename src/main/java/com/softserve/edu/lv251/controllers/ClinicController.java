@@ -18,22 +18,32 @@ public class ClinicController {
     @Autowired
     private ClinicService clinicService;
 
-@ResponseBody
-    @RequestMapping(value = "/{current}", method = RequestMethod.GET)
-    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex){
+
+//    @Autowired
+//    private PagingSizeService<Clinics> pagingSizeService;
+
+
+//    @RequestMapping(value = "/{current}", method = RequestMethod.GET)
+    @GetMapping("/{current}")
+    public ModelAndView getClinics(@PathVariable("current") Integer chainIndex/*, @RequestParam("size") Integer size*/){
         ModelAndView model = new ModelAndView("clinics");
+//        model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, size));
+//        model.addObject("numberChain", pagingSizeService.numberOfPaging(size));
+//        model.addObject("listVariants", pagingSizeService.listOfVariants());
         model.addObject("getClinics", clinicService.getClinics(chainIndex, 10));
         model.addObject("numberChain", clinicService.numberOfPaging(10));
-        model.addObject("maxSize", clinicService.getAllClinics().size());
+//        model.addObject("listVariants", clinicService.listOfVariants());
         return model;
     }
+
+//    @PostMapping
+//    public
 
 
 
 
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
     public String clinicDetails(@PathVariable(name = "id", required = true)long id, Model model){
-
         Clinics clinic = clinicService.getClinicByID(id);
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());

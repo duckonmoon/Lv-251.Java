@@ -20,8 +20,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
-
-
+    <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
 </head>
 
 <body>
@@ -70,7 +69,7 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="${current == 'doctorCabinet' ? 'active': ''}">
+                <li class="${current == 'doctor/cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>
@@ -96,7 +95,7 @@
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class=""  href="?lang=ua"  style="padding: 20px 3px ; float: left ">
+                    <a class=""  href="?lang=uk"  style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>
@@ -182,9 +181,7 @@
         </div>
     </sec:authorize>
 
-
-
-<section id="site-content">
+    <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
 
@@ -192,13 +189,15 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
-    <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/search.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
+<script src="<c:url value="/resources/js/zxcvbn-async.min.js"/>"></script>
+<script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
+<script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
+<script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
-
 
 </body>
 </html>

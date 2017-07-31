@@ -41,6 +41,7 @@ public class HomeController {
     @RequestMapping(value = "/all/clinics")
     @ResponseBody
     public List<Clinics> autocompleteClinics(@RequestParam("name") String name){
+        System.out.println(name);
         System.out.println(clinicService.searchByLetters(name));
         return  clinicService.searchByLetters(name);
     }
@@ -81,7 +82,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping(value = "/search/doctors/by/spec/{name}")
     public List<Doctors>doctorsBySpec(@PathVariable("name")String name){
-        System.out.println(doctorsService.searchBySpecialization(name));
+        System.out.println(doctorsService.searchBySpecialization(name)+ name);
         return doctorsService.searchBySpecialization(name);
     }
 

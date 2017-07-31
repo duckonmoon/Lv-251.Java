@@ -28,6 +28,9 @@ public class Clinics extends BaseEntity {
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     private Contacts contact;
+    @JsonIgnore
+    @OneToOne(mappedBy = "clinic")
+    private Moderator moderator;
 
     public Clinics() {
     }
@@ -70,6 +73,14 @@ public class Clinics extends BaseEntity {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Moderator getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(Moderator moderator) {
+        this.moderator = moderator;
     }
 
     @Override

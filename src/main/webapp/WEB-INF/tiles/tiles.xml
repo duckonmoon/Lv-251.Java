@@ -130,5 +130,12 @@
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
     </definition>
+  <!-- Moderator cabinet Page   -->
+    <definition name="moderator_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet.jsp"/>
+        <put-attribute name="current" value="moderator/cabinet"/>
+
+    </definition>
 
 </tiles-definitions>

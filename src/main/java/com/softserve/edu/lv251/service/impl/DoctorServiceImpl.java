@@ -132,4 +132,9 @@ public class DoctorServiceImpl implements DoctorsService {
     public List<Doctors> searchBySpecialization(String name) {
         return doctorsDAO.searchBySpecialization(name);
     }
+
+    public List<Doctors> getByClinic(Long clinicId){
+        List<Doctors> doctors=doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
+        return doctors.isEmpty()? null : doctors;
+    }
 }

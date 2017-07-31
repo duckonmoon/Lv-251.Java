@@ -21,6 +21,7 @@
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
+
 </head>
 
 <body>
@@ -75,6 +76,11 @@
                         </a>
                     </sec:authorize>
                 </li>
+                <li class="${current=='moderator/cabinet'? 'active':''}"></li>
+                <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    </a>
+                </sec:authorize>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>

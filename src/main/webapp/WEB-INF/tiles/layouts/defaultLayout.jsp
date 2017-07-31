@@ -82,7 +82,15 @@
                     </a>
                 </li>
             </ul>
+
+
+
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a type="text">
+                        ${name}
+                    </a>
+                </li>
                 <li class="nav navbar-nav flags">
                     <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"

@@ -70,7 +70,7 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="${current == 'doctorCabinet' ? 'active': ''}">
+                <li class="${current == 'doctor/cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>

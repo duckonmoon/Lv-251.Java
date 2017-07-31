@@ -7,7 +7,7 @@ $(document).ready(function() {
         if($(this).val() == 0){
             $(".fa-user-md").removeClass("fa-user-md");
             $(".change").addClass("fa-ambulance");
-            $("#autocomplete").attr('placeholder','Введіть назву клініки');
+            $("#autocomplete").attr('placeholder',$("#p-clinic").html());
             clinicsByDistrict();
             console.log("You select 0");
             clinicsAll();
@@ -15,7 +15,7 @@ $(document).ready(function() {
         } if(($(this).val() == 1)) {
             $(".change ").removeClass("fa-ambulance");
             $(".change").addClass("fa-user-md");
-            $("#autocomplete").attr('placeholder','Введіть імя доктора ');
+            $("#autocomplete").attr('placeholder',$("#p-doctor").html());
             console.log("You select 1")
             console.log($("#selectDocOrClinic").val());
             doctorsByDistrict();
@@ -25,7 +25,7 @@ $(document).ready(function() {
          if (($(this).val() == 2)) {console.log("You select 2");
             $(".change ").removeClass("fa-ambulance");
             $(".change").addClass("fa-user-md");
-             $("#autocomplete").attr('placeholder','Введіть спеціалізацію доктора ');
+             $("#autocomplete").attr('placeholder',$("#option-doc-spec").html());
             doctorsBySpecialization();
             doctorsByDistrict();
         }

@@ -29,7 +29,7 @@
     <%--</form>--%>
 
     <c:forEach items="${getClinics}" var="clinic">
-        <a href="clinic/${clinic.id}">
+        <a href="clinics/details/${clinic.id}">
 
             <div class="row row-content">
                 <div class="container-fluid">

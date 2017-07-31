@@ -116,7 +116,7 @@
     <definition name="doctor_cabinet" extends="base-definition">
         <put-attribute name="title" value="Cabinet" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet.jsp" />
-        <put-attribute name="current" value="doctorCabinet"/>
+        <put-attribute name="current" value="doctor/сabinet"/>
     </definition>
 
     <!-- User cabinet Page -->

@@ -8,12 +8,14 @@ import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.service.VerificationTokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,6 +44,9 @@ public class RegistrationController {
     DoctorsService doctorsService;
 
     @Autowired
+    VerificationTokenService verificationTokenService;
+
+    @Autowired
     Logger logger;
 
     @Autowired
@@ -54,9 +59,9 @@ public class RegistrationController {
     ApplicationEventPublisher applicationEventPublisher;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model, Principal principal) {
+    public String registration(Model model) {
         model.addAttribute("userForm", new UserDTO());
-
+        //model.addAttribute("errors", errors);
 
         return "registration";
     }
@@ -143,6 +148,7 @@ public class RegistrationController {
 
         user.setEnabled(true);
         this.userService.updateUser(user);
+        this.verificationTokenService.deleteVerificationToken(verificationToken);
 
         return "successRegistration";
     }

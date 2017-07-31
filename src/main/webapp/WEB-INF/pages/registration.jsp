@@ -44,18 +44,20 @@
                     </spring:bind>
                     <spring:bind path="password">
                         <div class="form-group" id="eye_wrapper">
-
-                            <label class="sr-only" for="passwordReg"><spring:message code="messages.password" var="passwordRegMess"/></label>
-                            <form:input type="password" id="passwordReg" path="password"
-                                        name="passwordReg" class="form-control" placeholder="${passwordRegMess}" cssStyle="background-color: inherit; z-index: -1"/>
-                            <form:errors path="password"/>
+                            <div id="wrapper">
+                                <label class="sr-only" for="passwordReg"><spring:message code="messages.password" var="passwordRegMess"/></label>
+                                <form:input type="password" id="passwordReg" path="password"
+                                            name="passwordReg" class="form-control" placeholder="${passwordRegMess}" cssStyle="background-color: inherit; z-index: -1"/>
+                                <form:errors path="password"/>
+                                <div id="eye_button">
+                                    <button type="button" id="eye" style="z-index: 0;">
+                                        <img src="<c:url value="/resources/img/eye.png"/>" alt="eye" />
+                                    </button>
+                                </div>
+                            </div>
 
                             <div class="password-background" style="z-index: 0; pointer-events:none;"></div>
-                            <div id="eye_button">
-                                <button type="button" id="eye" style="z-index: 0;">
-                                    <img src="<c:url value="/resources/img/eye.png"/>" alt="eye" />
-                                </button>
-                            </div>
+
                                 <span class="strengthPsw" id="lengthWarn" style="pointer-events:none; float:left;"></span>
                                 <span class="strengthPsw" id="strengthPswId" style="pointer-events:none; float:left; white-space: pre; display: block"></span>
                         </div>
@@ -81,4 +83,15 @@
                     </div>
             </div>
         </div>
+</div>
+
+<div id="invisibleDiv" style="display: none; size: 0">
+    <p id="errorWordNotEmpty"><spring:message code="error.wordNotEmpty"/></p>
+    <p id="errorWordLength"><spring:message code="error.wordLength"/></p>
+    <p id="errorStrengthVeryWeak"><spring:message code="error.strengthVeryWeak"/></p>
+    <p id="errorStrengthWeak"><spring:message code="error.strengthWeak"/></p>
+    <p id="errorStrengthMedium"><spring:message code="error.strengthMedium"/></p>
+    <p id="errorStrengthStrong"><spring:message code="error.strengthStrong"/></p>
+    <p id="errorStrengthVeryStrong"><spring:message code="error.strengthVeryStrong"/></p>
+    <p id="errorPasswordMatch"><spring:message code="error.passwordMatch"/></p>
 </div>

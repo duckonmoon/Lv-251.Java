@@ -19,16 +19,16 @@ $( document ).ready(function() {
             if (password.length === 0) {
                 updateMeter("0%", "#ff383f", "");
             } else {
-                updateMeter("20%", "#ff383f", " Strength : Very weak");
+                updateMeter("20%", "#ff383f", document.getElementById("errorStrengthVeryWeak").innerHTML);
             }
         }
-        if (passwordScore === 1) updateMeter("40%", "#ff6d52", " Strength : Weak");
-        if (passwordScore === 2) updateMeter("60%", "#d59832", " Strength : Medium");
-        if (passwordScore === 3) updateMeter("80%", "#8dc64e", " Strength : Strong");
-        if (passwordScore === 4) updateMeter("100%", "#3ec91f", " Strength : Very strong"); // Color needs changing
-        if (document.getElementById("passwordReg").value.length < 8
-            && document.getElementById("passwordReg").value.length > 0) {
-            updatePasswordLengthWarn("Password must be at least 8 characters in length. ");
+        if (passwordScore === 1) updateMeter("40%", "#ff6d52", document.getElementById("errorStrengthWeak").innerHTML);
+        if (passwordScore === 2) updateMeter("60%", "#d59832", document.getElementById("errorStrengthVeryWeak").innerHTML);
+        if (passwordScore === 3) updateMeter("80%", "#8dc64e", document.getElementById("errorStrengthMedium").innerHTML);
+        if (passwordScore === 4) updateMeter("100%", "#3ec91f", document.getElementById("errorStrengthStrong").innerHTML); // Color needs changing
+        if (document.getElementById("passwordReg").innerHTML.length < 8
+            && document.getElementById("passwordReg").innerHTML.length > 0) {
+            updatePasswordLengthWarn(document.getElementById("errorWordLength").innerHTML.value);
         } else updatePasswordLengthWarn("");
     });
 
@@ -63,9 +63,9 @@ $( document ).ready(function() {
             $('#matchPsw').text(text).css('color', "#ff383f");
         };
 
-        if (document.getElementById("passwordConfirmReg").value !== ""
+        if (document.getElementById("passwordConfirmReg").innerHTML.length === 0
             && document.getElementById("passwordReg").value !== document.getElementById("passwordConfirmReg").value) {
-            updateMatch("Passwords doesn\'t match");
+            updateMatch(document.getElementById("errorPasswordMatch").innerHTML);
         }
         else updateMatch(" ");
     });
@@ -87,37 +87,28 @@ $('#registration').submit(function() {
         $('#emailWarn').text(text).css('color', "#ff383f");
     };
 
-    /*var updatePasswordLengthWarn = function(text) {
-        $('.lengthWarn').text(text).css('color', "#ffa0a0");
-    };*/
-
     var isReturn = function (goReturn) {
         if (goReturn) mustReturn = true;
         return mustReturn;
     };
 
-    if (document.getElementById("firstName").value.trim().length === 0) {
-        updateFirstNameWarn("May not be empty");
+    if (document.getElementById("firstName").innerHTML.trim().length === 0) {
+        updateFirstNameWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateFirstNameWarn("");
 
-    if (document.getElementById("lastName").value.trim().length === 0) {
-        updateLastNameWarn("May not be empty");
+    if (document.getElementById("lastName").innerHTML.trim().length === 0) {
+        updateLastNameWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateLastNameWarn("");
 
-    if (document.getElementById("emailReg").value.trim().length === 0) {
-        updateEmailWarn("May not be empty");
+    if (document.getElementById("emailReg").innerHTML.trim().length === 0) {
+        updateEmailWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateEmailWarn("");
 
-    /*if (document.getElementById("passwordReg").value.length < 8) {
-        updatePasswordLengthWarn("Password must be at least 8 characters in length");
-        isReturn(true);
-    } else updatePasswordLengthWarn("");*/
-
-    if (document.getElementById("passwordConfirmReg").value !== ""
-        && document.getElementById("passwordReg").value !== document.getElementById("passwordConfirmReg").value) {
+    if (document.getElementById("passwordConfirmReg").innerHTML.length === 0
+        && document.getElementById("passwordReg").innerHTML !== document.getElementById("passwordConfirmReg").innerHTML) {
         isReturn(true);
     }
 

@@ -21,14 +21,16 @@
                             <form:input type="text" id="firstName" path="firstName"
                                         name="firstName" class="form-control" placeholder="${firstNameMess}" autofocus="true"/>
                             <form:errors path="firstName"/>
+                            <span class="strengthPsw" id="firstNameWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                         </div>
                     </spring:bind>
                     <spring:bind path="lastName">
                         <div class="form-group">
                             <label class="sr-only" for="lastName"><spring:message code="messages.lastName" var="lastNameMess"/></label>
-                            <form:input type="text" id="emailReg" path="lastName" name="lastName"
+                            <form:input type="text" id="lastName" path="lastName" name="lastName"
                                         class="form-control" placeholder="${lastNameMess}" autofocus="true"/>
                             <form:errors path="lastName"/>
+                            <span class="strengthPsw" id="lastNameWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                         </div>
                     </spring:bind>
                     <spring:bind path="email">
@@ -37,6 +39,7 @@
                             <form:input type="text" id="emailReg" path="email"
                                         name="emailReg" class="form-control" placeholder="${emailRegMess}" autofocus="true"/>
                             <form:errors path="email"/>
+                            <span class="strengthPsw" id="emailWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                         </div>
                     </spring:bind>
                     <spring:bind path="password">
@@ -50,18 +53,25 @@
                             <div class="password-background" style="z-index: 0; pointer-events:none;"></div>
                             <div id="eye_button">
                                 <button type="button" id="eye" style="z-index: 0;">
-                                    <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye" />
+                                    <img src="<c:url value="/resources/img/eye.png"/>" alt="eye" />
                                 </button>
                             </div>
-                            <span class="strengthPsw"></span>
+                                <span class="strengthPsw" id="lengthWarn" style="pointer-events:none; float:left;"></span>
+                                <span class="strengthPsw" id="strengthPswId" style="pointer-events:none; float:left; white-space: pre; display: block"></span>
                         </div>
+                        <%--<div class="form-group">
+                            <div style="pointer-events:none; /*float:left;*/ /*display:inline-block;*/">
+                                <span class="strengthPsw" id="strengthPswId" style="pointer-events:none; float:left; /*white-space: pre;*/"></span>
+                            </div>
+                        </div>--%>
                     </spring:bind>
                     <spring:bind path="matchingPassword">
                         <div class="form-group">
                             <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.confirmPassword" var="passwordConfirmRegMess"/></label>
-                            <form:input type="password" id="passwordConfirmReg" path="matchingPassword"
+                            <form:input type="password" id="passwordConfirmReg" path="matchingPassword" cssStyle="z-index: 0"
                                         name="passwordConfirm" class="form-control" placeholder="${passwordConfirmRegMess}"/>
                             <form:errors path="matchingPassword"/>
+                            <span id="matchPsw"></span>
                         </div>
                     </spring:bind>
                     <div class="form-group">

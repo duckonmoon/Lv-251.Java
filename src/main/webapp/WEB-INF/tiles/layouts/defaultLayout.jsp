@@ -20,7 +20,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/passwordStrengthGood.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
 </head>
 
 <body>
@@ -187,7 +187,7 @@
 <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
 <script src="<c:url value="/resources/js/zxcvbn-async.min.js"/>"></script>
 <script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
-<script src="<c:url value="/resources/js/passwordStrengthGood.js"/>"></script>
+<script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 

@@ -24,7 +24,8 @@
 
                 <nav class="navbar navbar-inverse">
                     <div  class="container-fluid">
-
+                        <p id="p-doctor" style="display: none"><spring:message code="messages.searchDoctors" /></p>
+                        <p id="p-doc-by-spec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
                         <div class="navbar-form " >
                             <div class="form-group">
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class DoctorCabinetController {
-    @RequestMapping(value = "/doctorCabinet",method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/сabinet",method = RequestMethod.GET)
     public String home(ModelMap model){
         return "doctor_cabinet";
     }

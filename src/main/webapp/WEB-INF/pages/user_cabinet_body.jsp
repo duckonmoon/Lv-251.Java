@@ -2,6 +2,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
+
+
+
 <div class="container" style="width: 70%; float: right">
     <div class="row row-content">
     <hr>
@@ -29,37 +32,31 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">First name:</label>
                     <div class="col-lg-7">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" value="${userObject.firstname}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Last name:</label>
                     <div class="col-lg-7">
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" value="${userObject.lastname}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-7">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Username:</label>
-                    <div class="col-md-7">
-                        <input class="form-control" type="text" value="janeuser">
+                        <input class="form-control" type="text" value="${userObject.email}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Password:</label>
                     <div class="col-md-7">
-                        <input class="form-control" type="password" value="11111122333">
+                        <input class="form-control" type="password" value="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Confirm password:</label>
                     <div class="col-md-7">
-                        <input class="form-control" type="password" value="11111122333">
+                        <input class="form-control" type="password" value="">
                     </div>
                 </div>
                 <div class="form-group">

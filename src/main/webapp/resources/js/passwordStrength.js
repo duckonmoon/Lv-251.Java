@@ -26,9 +26,9 @@ $( document ).ready(function() {
         if (passwordScore === 2) updateMeter("60%", "#d59832", document.getElementById("errorStrengthVeryWeak").innerHTML);
         if (passwordScore === 3) updateMeter("80%", "#8dc64e", document.getElementById("errorStrengthMedium").innerHTML);
         if (passwordScore === 4) updateMeter("100%", "#3ec91f", document.getElementById("errorStrengthStrong").innerHTML); // Color needs changing
-        if (document.getElementById("passwordReg").innerHTML.length < 8
-            && document.getElementById("passwordReg").innerHTML.length > 0) {
-            updatePasswordLengthWarn(document.getElementById("errorWordLength").innerHTML.value);
+        if (document.getElementById("passwordReg").value.length < 8
+            && document.getElementById("passwordReg").value.length > 0) {
+            updatePasswordLengthWarn(document.getElementById("errorWordLength").innerHTML);
         } else updatePasswordLengthWarn("");
     });
 
@@ -63,11 +63,11 @@ $( document ).ready(function() {
             $('#matchPsw').text(text).css('color', "#ff383f");
         };
 
-        if (document.getElementById("passwordConfirmReg").innerHTML.length === 0
+        if (document.getElementById("passwordConfirmReg").innerHTML.trim().length === 0
             && document.getElementById("passwordReg").value !== document.getElementById("passwordConfirmReg").value) {
             updateMatch(document.getElementById("errorPasswordMatch").innerHTML);
         }
-        else updateMatch(" ");
+        else updateMatch("");
     });
 });
 
@@ -92,23 +92,23 @@ $('#registration').submit(function() {
         return mustReturn;
     };
 
-    if (document.getElementById("firstName").innerHTML.trim().length === 0) {
+    if (document.getElementById("firstName").value.trim().length === 0) {
         updateFirstNameWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateFirstNameWarn("");
 
-    if (document.getElementById("lastName").innerHTML.trim().length === 0) {
+    if (document.getElementById("lastName").value.trim().length === 0) {
         updateLastNameWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateLastNameWarn("");
 
-    if (document.getElementById("emailReg").innerHTML.trim().length === 0) {
+    if (document.getElementById("emailReg").value.trim().length === 0) {
         updateEmailWarn(document.getElementById("errorWordNotEmpty").innerHTML);
         isReturn(true);
     } else updateEmailWarn("");
 
-    if (document.getElementById("passwordConfirmReg").innerHTML.length === 0
-        && document.getElementById("passwordReg").innerHTML !== document.getElementById("passwordConfirmReg").innerHTML) {
+    if (document.getElementById("passwordConfirmReg").value.trim().length !== 0
+        && document.getElementById("passwordReg").value.trim() !== document.getElementById("passwordConfirmReg").value.trim()) {
         isReturn(true);
     }
 

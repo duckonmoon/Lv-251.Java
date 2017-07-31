@@ -193,7 +193,6 @@
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
-<script src="<c:url value="/resources/js/zxcvbn-async.min.js"/>"></script>
 <script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>

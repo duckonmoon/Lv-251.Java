@@ -3,19 +3,18 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-
 <div class="container">
-    <div class="row row-content">
-        <div class="list-group col-sm-3 doc-menu">
-            <a href="#" class="list-group-item active">
-                Calendar
-            </a>
-            <a href="#" class="list-group-item">
-                Patients
-            </a>
-        </div>
+    <div >
+        <tiles:insertAttribute name="menu"/>
+    </div>
+
+    <div>
+        <tiles:insertAttribute name="body"/>
     </div>
 </div>
+
+
+
 
 
 

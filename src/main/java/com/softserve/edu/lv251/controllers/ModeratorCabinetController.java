@@ -10,6 +10,8 @@ import com.softserve.edu.lv251.service.ModeratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -30,9 +32,23 @@ public class ModeratorCabinetController {
      public String moderatorCabinet(Principal principal, Model model){
      Moderator moderator=moderatorService.getByEmail(principal.getName());
      List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
-     model.addAttribute("doctorsSize",doctors.size());
+     model.addAttribute("doctors",doctors);
      model.addAttribute("moderator",moderator);
         return "moderator_cabinet";
      }
+     @GetMapping(value = "/cabinet/doctors")
+     public  String moderatorAllDoctors(Principal principal,Model model){
+         Moderator moderator=moderatorService.getByEmail(principal.getName());
+         List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
+
+         model.addAttribute("doctors",doctors);
+         model.addAttribute("moderator",moderator);
+         return "moderator_cabinet_doctors";
+     }
+     @GetMapping(value = "/cabinet/doctors/delete/{id}")
+       public String deleteDoctor(@PathVariable("id")Long id){
+         doctorsService.delete(doctorsService.find(id));
+         return "redirect:/moderator/cabinet/doctors";
+}
 
 }

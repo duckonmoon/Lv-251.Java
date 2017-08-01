@@ -24,6 +24,7 @@ public class Mapper extends ConfigurableMapper{
                 .exclude("matchingPassword")
                 .byDefault().register();
 
+
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)
                 .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {
                     @Override

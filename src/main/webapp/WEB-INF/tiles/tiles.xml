@@ -133,9 +133,28 @@
   <!-- Moderator cabinet Page   -->
     <definition name="moderator_cabinet" extends="base-definition">
         <put-attribute name="title" value="Moderator Cabinet"/>
-        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet.jsp"/>
+        <put-attribute name="body" value="moderator_cabinet.body"/>
         <put-attribute name="current" value="moderator/cabinet"/>
 
     </definition>
+
+    <definition name="moderator_cabinet.body" template="/WEB-INF/pages/moderator_cabinet.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/moderator_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet_body.jsp" />
+    </definition>
+     <!--Moderator cabinet doctors Page   -->
+    <definition name="moderator_cabinet_doctors.body" template="/WEB-INF/pages/moderator_cabinet_doctors.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/moderator_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet_doctors_body.jsp" />
+    </definition>
+
+    <definition name="moderator_cabinet_doctors" extends="moderator_cabinet">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="moderator_cabinet_doctors.body"/>
+        <put-attribute name="current" value="moderator/cabinet/doctors"/>
+
+    </definition>
+
+
 
 </tiles-definitions>

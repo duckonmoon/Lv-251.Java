@@ -86,9 +86,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a type="text">
-                        ${name}
-                    </a>
+                    <sec:authorize access="isAuthenticated()">
+                        <a type="text">
+                            <%= session.getAttribute("username") %>
+                        </a>
+                    </sec:authorize>
                 </li>
                 <li class="nav navbar-nav flags">
                     <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">

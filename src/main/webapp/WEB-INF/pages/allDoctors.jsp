@@ -1,5 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
+
+
 
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <div class="container">
@@ -73,11 +78,9 @@
                                 <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                             </a>
                             <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
-                            <a href="/appointment/to/doctor/${doctor.id}"><button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"><spring:message code="messages.addAppointment"/></button ></a>
-                        </div>
-
-                        <div>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal_${doctor.id}">Modal</button>
+                            <button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%" data-toggle="modal" data-target="#modal_${doctor.id}">
+                                <spring:message code="messages.addAppointment"/>
+                            </button >
                         </div>
 
                     </div>
@@ -120,6 +123,7 @@
                             <button class="btn btn-lg btn-primary btn-block">
                                 <spring:message code="messages.login"/>
                             </button>
+                            <h5 style="color: red; text-align: center" id="wrong-date"></h5>
                         </form>
                     </div>
                 </div>
@@ -139,3 +143,12 @@
     </c:otherwise>
 </c:choose>
 </div>
+
+<c:if test="${flag}">
+<script>
+    document.getElementById('wrong-date').innerHTML= '<spring:message code="messages.invalidDate"/>';
+    jQuery(window).load(function(){
+        jQuery('#modal_24').modal('show')
+    });
+</script>
+</c:if>

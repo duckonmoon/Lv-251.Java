@@ -5,11 +5,14 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
+import org.codehaus.janino.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.text.ParseException;
@@ -31,9 +34,12 @@ public class AppointmentsController {
 
 
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(@RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
+    public ModelAndView addAppointment(ModelMap modelMap, @RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
         Date date;
 
+        ModelAndView model = new ModelAndView("allDoctors");
+
+        model.addObject("doctors",doctorsService.getAll());
         try {
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(localdate.replace("T", " "));
             Appointments appointments = new Appointments();
@@ -43,12 +49,16 @@ public class AppointmentsController {
             appointments.setDoctors(doctorsService.find(doctorId));
 
             appointmentService.addAppointment(appointments);
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        } catch (Exception e) {
+            model.addObject("flag", true);
+
+            return model;
         }
+        model.addObject("flag", false);
 
-
-        return "home";
+        return model;
     }
+
 
 }

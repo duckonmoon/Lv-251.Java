@@ -122,7 +122,10 @@
     <definition name="doctor_cabinet.body" template="/WEB-INF/pages/doctor_cabinet.jsp">
         <put-attribute name="menu" value="/WEB-INF/pages/doctor_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_body.jsp" />
+        <put-attribute name="curent" value="doctor/сabinet"/>
     </definition>
+
+
     <!-- User cabinet Page -->
     <definition name="user_cabinet" extends="base-definition">
         <put-attribute name="title" value="Personal Cabinet" />

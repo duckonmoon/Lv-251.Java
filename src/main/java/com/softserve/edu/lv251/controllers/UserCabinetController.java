@@ -1,13 +1,15 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dto.pojos.ContactDTO;
+import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.UserService;
 import javassist.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -25,14 +27,29 @@ public class UserCabinetController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/user/cabinet",method = RequestMethod.GET)
-    public String home(ModelMap model, Principal principal){
+    @Autowired
+    Mapper mapper;
+
+    @GetMapping("/user/cabinet")
+    public String userProfileGET(@ModelAttribute PersonalInfoDTO personalInfoDTO ,ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
 
+        PersonalInfoDTO userDTO = new PersonalInfoDTO();
+        mapper.map(user, userDTO);
         model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("userObject", user);
-        
+        model.addAttribute("userObject", userDTO);
+
         return "user_cabinet";
     }
+
+    @PostMapping("/user/cabinet")
+    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO ,ModelMap model, Principal principal){
+
+
+
+            return "user_cabinet";
+    }
+
+
 }

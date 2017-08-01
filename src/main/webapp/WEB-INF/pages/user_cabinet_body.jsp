@@ -23,6 +23,7 @@
             </div>
 
 
+
             <!-- edit form column -->
             <div class="col-md-7 personal-info">
                 <div class="alert alert-info alert-dismissable">
@@ -31,64 +32,25 @@
                     This is an <strong>.alert</strong>. Use this to show important messages to the user.
                 </div>
                 <h3>Personal info</h3>
-                <form class="form-horizontal" role="form">
+                <form:form method="POST" modelAttribute="userObject">
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
                         <div class="col-lg-7">
-                            <input class="form-control" type="text" value="${userObject.firstname}">
+                            <form:input type="text" class="form-control" path="firstname"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"> <spring:message code="messages.userLastname"/>:</label>
                         <div class="col-lg-7">
-                            <input class="form-control" type="text" value="${userObject.lastname}">
+                            <form:input type="text" class="form-control" path="lastname"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                         <div class="col-lg-7">
-                            <input class="form-control" type="text" value="${userObject.email}">
+                            <form:input type="email" class="form-control" path="email"/>
                         </div>
                     </div>
-                    <hr>
-                    <h3>Address</h3>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userCity"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userZipcode"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userFirstPhone"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userSecondPhone"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userThirdPhone"/>:</label>
-                        <div class="col-lg-7">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-                    <hr>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-7">
@@ -97,6 +59,8 @@
                             <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>">
                         </div>
                     </div>
+                </form:form>
+                    <hr>
                     <h3>Change Password</h3>
                     <div class="form-group">
                         <label class="col-md-3 control-label"><spring:message code="messages.userPassword"/>:</label>
@@ -118,9 +82,8 @@
                             <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>">
                         </div>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>
 </div>
-<hr>

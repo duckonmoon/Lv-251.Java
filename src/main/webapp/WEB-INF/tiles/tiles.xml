@@ -95,6 +95,13 @@
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
+    <!-- Wrong date page -->
+    <definition name="badAppDate" extends="allDoctors">
+        <put-attribute name="title" value="badAppDate" />
+        <put-attribute name="body" value="/WEB-INF/pages/badAppDate.jsp" />
+        <put-attribute name="current" value="badAppDate"/>
+    </definition>
+
     <!--Login page-->
     <definition name="login" extends="home">
         <put-attribute name="login" value="Login" />

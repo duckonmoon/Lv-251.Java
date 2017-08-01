@@ -20,7 +20,6 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
-    <link href="<c:url value="/resources/css/profile.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
 </head>
 
@@ -87,9 +86,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a type="text">
-                        ${name}
-                    </a>
+                    <sec:authorize access="isAuthenticated()">
+                        <a type="text">
+                            <%= session.getAttribute("username") %>
+                        </a>
+                    </sec:authorize>
                 </li>
                 <li class="nav navbar-nav flags">
                     <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">

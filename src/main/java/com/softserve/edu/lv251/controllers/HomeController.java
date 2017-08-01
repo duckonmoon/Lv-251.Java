@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,12 +29,12 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String home(ModelMap model, Principal principal){
+    public String home(ModelMap model, Principal principal, HttpServletRequest request){
+
 
         if(principal!=null){
-            model.addAttribute("name",
-                    userService.findByEmail(principal.getName()).getFirstname() + " " +
-                            userService.findByEmail(principal.getName()).getLastname());
+            request.getSession().setAttribute("username",userService.findByEmail(principal.getName()).getFirstname() + " " +
+                    userService.findByEmail(principal.getName()).getLastname());
         }
         return "home";
     }

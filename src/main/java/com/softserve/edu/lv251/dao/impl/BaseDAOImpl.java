@@ -73,7 +73,6 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         TypedQuery<T> typedQuery = entityManager.createQuery(select);
         typedQuery.setFirstResult(chainIndex*size-size);
         typedQuery.setMaxResults(size);
-        List<T> list = typedQuery.getResultList();
-        return list;
+        return typedQuery.getResultList();
     }
 }

@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.config;
 
 import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
+import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.entity.Users;
@@ -24,6 +25,12 @@ public class Mapper extends ConfigurableMapper{
                 .exclude("matchingPassword")
                 .byDefault().register();
 
+        factory.classMap(PersonalInfoDTO.class, Users.class)
+                .field("firstname", "firstname")
+                .field("lastname", "lastname")
+                .field("email", "email")
+                .byDefault().register();
+
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)
                 .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {
@@ -34,11 +41,7 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setLat(lat);
                         latLng.setLng(lng);
                         latLng.setId(clinics.getId());
-
-
                     }
                 });
     }
-
-
 }

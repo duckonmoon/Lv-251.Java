@@ -70,7 +70,7 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="${current == 'doctor/cabinet' ? 'active': ''}">
+                <li class="${current == 'doctor/сabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>
@@ -93,9 +93,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a type="text">
-                        ${name}
-                    </a>
+                    <sec:authorize access="isAuthenticated()">
+                        <a type="text">
+                            <%= session.getAttribute("username") %>
+                        </a>
+                    </sec:authorize>
                 </li>
                 <li class="nav navbar-nav flags">
                     <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
@@ -195,6 +197,7 @@
     <footer id="footer">
         <tiles:insertAttribute name="footer"/>
     </footer>
+
 
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>

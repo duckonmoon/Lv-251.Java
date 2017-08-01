@@ -20,6 +20,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/profile.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
 </head>
 
@@ -69,7 +70,7 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="${current == 'doctor/cabinet' ? 'active': ''}">
+                <li class="${current == 'doctor/сabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>
@@ -191,6 +192,7 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
+<script src="<c:url value="/resources/js/profile.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>

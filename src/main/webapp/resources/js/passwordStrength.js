@@ -35,23 +35,30 @@ $( document ).ready(function() {
     function show() {
         var p = document.getElementById('passwordReg');
         p.setAttribute('type', 'text');
+        document.getElementById("eyeSymbol").className = "fa fa-eye-slash";
     }
 
     function hide() {
         var p = document.getElementById('passwordReg');
         p.setAttribute('type', 'password');
+        document.getElementById("eyeSymbol").className = "fa fa-eye";
     }
+
     var pwShown = 0;
 
-    document.getElementById("eye").addEventListener("click", function () {
-        if (pwShown === 0) {
-            pwShown = 1;
-            show();
-        } else {
-            pwShown = 0;
-            hide();
-        }
-    }, false);
+    var eye = document.getElementById("eye");
+    if (eye !== null) {
+
+        eye.addEventListener("click", function () {
+            if (pwShown === 0) {
+                pwShown = 1;
+                show();
+            } else {
+                pwShown = 0;
+                hide();
+            }
+        }, false);
+    }
 
 });
 

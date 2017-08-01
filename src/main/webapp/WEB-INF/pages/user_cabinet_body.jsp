@@ -89,6 +89,14 @@
                         </div>
                     </div>
                     <hr>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-7">
+                            <input type="button" class="btn btn-primary" value="<spring:message code="messages.saveChanges"/>">
+                            <span></span>
+                            <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>">
+                        </div>
+                    </div>
                     <h3>Change Password</h3>
                     <div class="form-group">
                         <label class="col-md-3 control-label"><spring:message code="messages.userPassword"/>:</label>

@@ -95,7 +95,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
-    public String registrationDoctor(Model model, Principal principal) {
+    public String registrationDoctor(Model model) {
         model.addAttribute("doctorForm", new UserDTO());
 
 
@@ -105,9 +105,7 @@ public class RegistrationController {
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
             @ModelAttribute("doctorForm") @Valid UserDTO accountDto,
-            BindingResult result,
-            WebRequest request,
-            Errors errors) {
+            BindingResult result) {
 
         Doctors registered = new Doctors();
         if (!result.hasErrors()) {
@@ -117,7 +115,7 @@ public class RegistrationController {
             result.rejectValue("email", "message.regError");
         }
         if (result.hasErrors()) {
-            return "registration";
+            return "registrationDoctor";
         } else {
             return "redirect:/";
         }

@@ -59,7 +59,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(recipientAddress);
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message + "http://localhost:8080" + confirmationUrl);
+        simpleMailMessage.setText(message + " http://localhost:8080" + confirmationUrl);
 
         javaMailSender.send(simpleMailMessage);
         logger.info(simpleMailMessage);

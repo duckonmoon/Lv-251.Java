@@ -16,12 +16,11 @@
                          height="100">
                     <h6>Upload a different photo...</h6>
                     <%--<form action="upload" method="post" enctype="multipart/form-data">--%>
-                        <%--<input class="btn btn-default" type="file"/>--%>
-                        <%--<input type="submit" class="btn btn-default"/>--%>
+                    <%--<input class="btn btn-default" type="file"/>--%>
+                    <%--<input type="submit" class="btn btn-default"/>--%>
                     <%--</form>--%>
                 </div>
             </div>
-
 
 
             <!-- edit form column -->
@@ -54,34 +53,76 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-7">
-                            <input type="submit" class="btn btn-primary" value="<spring:message code="messages.saveChanges"/>">
+                            <input type="submit" class="btn btn-primary"
+                                   value="<spring:message code="messages.saveChanges"/>">
                             <span></span>
-                            <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>">
+                            <input type="reset" class="btn btn-default"
+                                   value="<spring:message code="messages.cancel"/>">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h3><spring:message code="messages.addressInfo"/></h3>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="address"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userCity"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="city"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userZipcode"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="zipcode"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userFirstPhone"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="firstPhone"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userSecondPhone"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="secondPhone"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label"><spring:message code="messages.userThirdPhone"/>:</label>
+                        <div class="col-lg-7">
+                            <form:input type="text" class="form-control" path="thirdPhone"/>
                         </div>
                     </div>
                 </form:form>
-                    <hr>
-                    <h3>Change Password</h3>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><spring:message code="messages.userPassword"/>:</label>
-                        <div class="col-md-7">
-                            <input class="form-control" type="password" value="">
-                        </div>
+                <hr>
+                <h3>Change Password</h3>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><spring:message code="messages.userPassword"/>:</label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="password" value="">
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><spring:message code="messages.userConfirmPassword"/>:</label>
-                        <div class="col-md-7">
-                            <input class="form-control" type="password" value="">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"><spring:message code="messages.userConfirmPassword"/>:</label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="password" value="">
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-7">
-                            <input type="submit" class="btn btn-primary" value="<spring:message code="messages.saveChanges"/>"/>
-                            <span></span>
-                            <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-7">
+                        <input type="submit" class="btn btn-primary"
+                               value="<spring:message code="messages.saveChanges"/>"/>
+                        <span></span>
+                        <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>"/>
                     </div>
+                </div>
             </div>
         </div>
     </div>

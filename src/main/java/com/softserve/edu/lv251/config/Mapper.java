@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
@@ -29,6 +30,15 @@ public class Mapper extends ConfigurableMapper{
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
                 .field("email", "email")
+                .byDefault().register();
+
+        factory.classMap(PersonalInfoDTO.class, Contacts.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipcode", "zipcode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
                 .byDefault().register();
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)

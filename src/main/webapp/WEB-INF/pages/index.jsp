@@ -4,6 +4,9 @@
 
 <div class="container">
     <div class="row" style="margin-top: 50px">
+        <p id="p-clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
+        <p id="p-doctor" style="display: none"><spring:message code="messages.searchDoctors" /></p>
+        <p id="p-doc-by-spec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
 
         <nav class="navbar navbar-inverse">
             <div  class="container-fluid">
@@ -11,7 +14,7 @@
                     <div class="navbar-form " >
                         <div class="form-group">
 
-                                        <select class="selectpicker form-control"style="width:210px " id="selectDocOrClinic">
+                                        <select class="selectpicker form-control"style="width:210px " id="selectDocOrClinic" >
                                             <option id="option-clinic" value="0"><spring:message code="messages.clinicsSearch"/></option>
                                             <option  id="option-doc" value="1"><spring:message code="messages.doctorsSearch"/></option>
                                             <option  id="option-doc-spec" value="2"><spring:message code="messages.doctorsSearchBySpec"/></option>

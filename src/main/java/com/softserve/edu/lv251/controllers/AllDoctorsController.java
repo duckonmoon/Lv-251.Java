@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.service.DoctorsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/doctors/{id}",method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model){
-        model.addAttribute("doctor",doctorsService.find(id));
+        model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
         return "doctor_details";
     }
 }

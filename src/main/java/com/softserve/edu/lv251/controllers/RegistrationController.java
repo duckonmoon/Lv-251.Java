@@ -8,12 +8,15 @@ import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.service.VerificationTokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -42,6 +45,9 @@ public class RegistrationController {
     DoctorsService doctorsService;
 
     @Autowired
+    VerificationTokenService verificationTokenService;
+
+    @Autowired
     Logger logger;
 
     @Autowired
@@ -54,9 +60,8 @@ public class RegistrationController {
     ApplicationEventPublisher applicationEventPublisher;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model, Principal principal) {
+    public String registration(Model model) {
         model.addAttribute("userForm", new UserDTO());
-
 
         return "registration";
     }
@@ -80,7 +85,7 @@ public class RegistrationController {
 
         try {
             String appUrl = request.getContextPath();
-            applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+            applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, LocaleContextHolder.getLocale(), appUrl));
         } catch (Exception e) {
             logger.error(e);
             return "registration";
@@ -90,7 +95,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
-    public String registrationDoctor(Model model, Principal principal) {
+    public String registrationDoctor(Model model) {
         model.addAttribute("doctorForm", new UserDTO());
 
 
@@ -100,9 +105,7 @@ public class RegistrationController {
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
             @ModelAttribute("doctorForm") @Valid UserDTO accountDto,
-            BindingResult result,
-            WebRequest request,
-            Errors errors) {
+            BindingResult result) {
 
         Doctors registered = new Doctors();
         if (!result.hasErrors()) {
@@ -112,7 +115,7 @@ public class RegistrationController {
             result.rejectValue("email", "message.regError");
         }
         if (result.hasErrors()) {
-            return "registration";
+            return "registrationDoctor";
         } else {
             return "redirect:/";
         }
@@ -124,7 +127,7 @@ public class RegistrationController {
             Model model,
             WebRequest request) {
 
-        Locale locale = request.getLocale();
+        Locale locale = LocaleContextHolder.getLocale();
 
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
@@ -143,6 +146,7 @@ public class RegistrationController {
 
         user.setEnabled(true);
         this.userService.updateUser(user);
+        this.verificationTokenService.deleteVerificationToken(verificationToken);
 
         return "successRegistration";
     }

@@ -1,7 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 
 
 
@@ -101,7 +100,7 @@
                                 </div>
                                 <div class="col-xs-6 col-md-3 col-lg-3">
                                     <div class="row">
-                                        <h4 class="form-heading">Appointment</h4>
+                                        <h4 class="form-heading"><spring:message code="messages.appointmentTo"/></h4>
                                     </div>
                                     <div class="row">
                                         <span class="doc-name">${doctor.lastname}</span>
@@ -116,12 +115,12 @@
                     <div class="modal-content">
                         <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
                             <div class="form-group">
-                                <label for="first-date">First date:</label>
-                                <input type="datetime-local" class="form-control" id="first-date" name="datetime">
-                                <input name="doctorId" value="${doctor.id}" style="display: none">
+                                    <label for="first-date" style="margin-left: 5pt"><spring:message code="messages.date"/></label>
+                                    <input type="datetime-local" class="form-control" id="first-date" name="datetime">
+                                    <input name="doctorId" value="${doctor.id}" style="display: none">
                             </div>
                             <button class="btn btn-lg btn-primary btn-block">
-                                <spring:message code="messages.login"/>
+                                <spring:message code="messages.approve"/>
                             </button>
                             <h5 style="color: red; text-align: center" id="wrong-date"></h5>
                         </form>
@@ -144,11 +143,13 @@
 </c:choose>
 </div>
 
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
 <c:if test="${flag}">
 <script>
     document.getElementById('wrong-date').innerHTML= '<spring:message code="messages.invalidDate"/>';
     jQuery(window).load(function(){
-        jQuery('#modal_24').modal('show')
+        jQuery('#modal_${doc}').modal('show')
     });
 </script>
 </c:if>

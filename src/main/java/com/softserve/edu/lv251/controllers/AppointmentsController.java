@@ -52,10 +52,10 @@ public class AppointmentsController {
 
         } catch (Exception e) {
             model.addObject("flag", true);
+            model.addObject("doc", doctorId);
 
             return model;
         }
-        model.addObject("flag", false);
 
         return model;
     }

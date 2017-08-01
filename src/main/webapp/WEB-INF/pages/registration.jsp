@@ -53,7 +53,7 @@
                         <form:errors path="password"/>
                         <div id="eye_button">
                             <button type="button" id="eye" style="z-index: 0;">
-                                <img src="<c:url value="/resources/img/eye.png"/>" alt="eye" />
+                                <i class="fa fa-eye" id="eyeSymbol"></i>
                             </button>
                         </div>
                     </div>

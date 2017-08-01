@@ -40,11 +40,7 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setLat(lat);
                         latLng.setLng(lng);
                         latLng.setId(clinics.getId());
-
-
                     }
                 });
     }
-
-
 }

@@ -15,7 +15,7 @@
 <div class="container" style="width: 30%; float: left">
     <div class="row row-content">
         <div class="list-group doc-menu">
-            <a href="#" class="list-group-item active">
+            <a href="#" class= 'list-group-item active'>
                 <spring:message code="messages.schedule" />
             </a>
             <a href="#" class="list-group-item">

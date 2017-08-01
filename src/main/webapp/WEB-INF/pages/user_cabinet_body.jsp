@@ -31,7 +31,7 @@
                     <i class="fa fa-coffee"></i>
                     This is an <strong>.alert</strong>. Use this to show important messages to the user.
                 </div>
-                <h3>Personal info</h3>
+                <h3><spring:message code="messages.personalInfo"/></h3>
                 <form:form method="POST" modelAttribute="userObject">
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
@@ -77,12 +77,11 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-7">
-                            <input type="button" class="btn btn-primary" value="<spring:message code="messages.saveChanges"/>">
+                            <input type="submit" class="btn btn-primary" value="<spring:message code="messages.saveChanges"/>"/>
                             <span></span>
-                            <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>">
+                            <input type="reset" class="btn btn-default" value="<spring:message code="messages.cancel"/>"/>
                         </div>
                     </div>
-
             </div>
         </div>
     </div>

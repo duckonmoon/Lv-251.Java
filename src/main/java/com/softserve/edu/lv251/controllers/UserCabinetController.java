@@ -30,17 +30,7 @@ public class UserCabinetController {
 
         Users user = userService.findByEmail(principal.getName());
 
-        try{
-
-            byte[] imageByteArray = Base64.getDecoder().decode(user.getPhoto());
-            BufferedImage img = ImageIO.read(new ByteArrayInputStream(imageByteArray));
-            model.addAttribute("photo", img);
-
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-
+        model.addAttribute("photo", user.getPhoto());
         model.addAttribute("userObject", user);
         
         return "user_cabinet";

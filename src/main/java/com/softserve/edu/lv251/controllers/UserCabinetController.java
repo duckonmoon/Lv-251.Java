@@ -25,10 +25,10 @@ import java.util.Base64;
 public class UserCabinetController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal){
@@ -44,11 +44,11 @@ public class UserCabinetController {
     }
 
     @PostMapping("/user/cabinet")
-    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, ModelMap model, Principal principal){
+    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
         mapper.map(personalInfoDTO, user);
-
-        return "redirect:/user_cabinet";
+        userService.updateUser(user);
+        return "redirect:/user/cabinet";
     }
 }

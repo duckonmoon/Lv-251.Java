@@ -145,11 +145,13 @@
 
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 
+
 <c:if test="${flag}">
-<script>
+<c:set var="docId" value="${doc}"/>
+    <script>
     document.getElementById('wrong-date').innerHTML= '<spring:message code="messages.invalidDate"/>';
     jQuery(window).load(function(){
-        jQuery('#modal_${doc}').modal('show')
+        jQuery('#modal_${docId}').modal('show')
     });
 </script>
 </c:if>

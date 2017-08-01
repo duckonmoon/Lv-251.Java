@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -61,7 +62,6 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new UserDTO());
-        //model.addAttribute("errors", errors);
 
         return "registration";
     }
@@ -85,7 +85,7 @@ public class RegistrationController {
 
         try {
             String appUrl = request.getContextPath();
-            applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+            applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, LocaleContextHolder.getLocale(), appUrl));
         } catch (Exception e) {
             logger.error(e);
             return "registration";
@@ -129,7 +129,7 @@ public class RegistrationController {
             Model model,
             WebRequest request) {
 
-        Locale locale = request.getLocale();
+        Locale locale = LocaleContextHolder.getLocale();
 
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {

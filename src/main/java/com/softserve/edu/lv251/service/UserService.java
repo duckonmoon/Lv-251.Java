@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    void addUser (Users user);
+    void addUser(Users user);
 
     void updateUser(Users user);
 

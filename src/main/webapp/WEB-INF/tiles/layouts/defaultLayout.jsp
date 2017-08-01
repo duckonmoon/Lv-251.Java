@@ -72,7 +72,7 @@
                 </li>
                 <li class="${current == 'doctor/cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
-                        <a href="${pageContext.request.contextPath}/doctorCabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>
                     </sec:authorize>
                 </li>
@@ -82,7 +82,15 @@
                     </a>
                 </li>
             </ul>
+
+
+
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a type="text">
+                        ${name}
+                    </a>
+                </li>
                 <li class="nav navbar-nav flags">
                     <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
@@ -187,7 +195,6 @@
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
-<script src="<c:url value="/resources/js/zxcvbn-async.min.js"/>"></script>
 <script src="<c:url value="/resources/js/zxcvbn.min.js"/>"></script>
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>

@@ -31,7 +31,7 @@ public class UserCabinetController {
     Mapper mapper;
 
     @GetMapping("/user/cabinet")
-    public String userProfileGET(@ModelAttribute PersonalInfoDTO personalInfoDTO ,ModelMap model, Principal principal){
+    public String userProfileGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
 
@@ -44,12 +44,11 @@ public class UserCabinetController {
     }
 
     @PostMapping("/user/cabinet")
-    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO ,ModelMap model, Principal principal){
+    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, ModelMap model, Principal principal){
 
+        Users user = userService.findByEmail(principal.getName());
+        mapper.map(personalInfoDTO, user);
 
-
-            return "user_cabinet";
+        return "redirect:/user_cabinet";
     }
-
-
 }

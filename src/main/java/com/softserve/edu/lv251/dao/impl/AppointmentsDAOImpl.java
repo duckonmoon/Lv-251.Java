@@ -11,4 +11,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public class AppointmentsDAOImpl extends BaseDAOImpl<Appointments> implements AppointmentsDAO {
+
 }

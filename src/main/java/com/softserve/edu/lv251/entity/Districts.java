@@ -1,7 +1,5 @@
 package com.softserve.edu.lv251.entity;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;

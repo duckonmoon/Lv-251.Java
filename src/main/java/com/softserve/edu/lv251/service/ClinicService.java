@@ -25,13 +25,6 @@ public interface ClinicService {
 
     Clinics getFirst();
 
-    int numberOfPaging(Integer size);
-
-    List<Clinics> getClinics(Integer chainIndex, Integer size);
-
-
-    public List<Integer> listOfVariants();
-
     List<Clinics>findByDistrict(String name);
     List<Clinics>searchByLetters(String letters);
 

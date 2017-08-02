@@ -1,9 +1,6 @@
 package com.softserve.edu.lv251.config;
 
-import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
-import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
-import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.dto.pojos.UserDTO;
+import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.Clinics;
 
 import com.softserve.edu.lv251.entity.Doctors;
@@ -49,6 +46,20 @@ public class Mapper extends ConfigurableMapper{
                 .field("thirdPhone", "thirdPhone")
                 .byDefault().register();
 
+
+        factory.classMap(ClinicInfoDTO.class,Clinics.class)
+                .field("clinic_name","clinic_name")
+                .field("description","description")
+                .byDefault().register();
+
+         factory.classMap(ClinicInfoDTO.class,Contacts.class)
+                 .field("address", "address")
+                 .field("city", "city")
+                 .field("zipCode", "zipCode")
+                 .field("firstPhone", "firstPhone")
+                 .field("secondPhone", "secondPhone")
+                 .field("thirdPhone", "thirdPhone")
+                 .byDefault().register();
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)
                 .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {

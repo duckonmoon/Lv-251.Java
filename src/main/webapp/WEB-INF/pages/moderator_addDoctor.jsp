@@ -21,6 +21,17 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
+
+                <div class="col-md-3 col-md-offset-1">
+                    <div class="text-center">
+                        <img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle" alt="avatar" width="100"
+                             height="100">
+                        <h6>${moderator.clinics.clinic_name}</h6>
+                    </div>
+                </div>
+
+
+                <div class="col-md-7 personal-info">
 <form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm">
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
@@ -88,6 +99,7 @@
         </div>
 
 </form:form>
+                </div>
             </div>
             </div>
     </div>

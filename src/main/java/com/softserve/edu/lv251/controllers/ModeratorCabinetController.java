@@ -2,14 +2,13 @@ package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.binders.ClinicBinder;
 import com.softserve.edu.lv251.binders.SpecializationBinder;
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.ModeratorDAO;
+import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.ClinicService;
-import com.softserve.edu.lv251.service.DoctorsService;
-import com.softserve.edu.lv251.service.ModeratorService;
-import com.softserve.edu.lv251.service.SpecializationService;
+import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,16 +37,42 @@ public class ModeratorCabinetController {
     private SpecializationService specializationService;
     @Autowired
     private ClinicService clinicService;
+    @Autowired
+    private Mapper mapper;
+    @Autowired
+    private ContactsService contactsService;
 
 
-    @RequestMapping(value = "/cabinet")
+    @GetMapping(value = "/cabinet")
      public String moderatorCabinet(Principal principal, Model model){
      Moderator moderator=moderatorService.getByEmail(principal.getName());
      List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
+     Clinics clinics=moderator.getClinics();
+     Contacts contacts=clinics.getContact();
+        ClinicInfoDTO clinicDTO=new ClinicInfoDTO();
+    mapper.map(clinics,clinicDTO);
+    mapper.map(contacts,clinicDTO);
+
      model.addAttribute("doctors",doctors);
      model.addAttribute("moderator",moderator);
+     model.addAttribute("clinicDTO",clinicDTO);
         return "moderator_cabinet";
      }
+
+     @PostMapping("/cabinet")
+     public String edit(@ModelAttribute ClinicInfoDTO clinicInfoDTO,Principal principal){
+         Moderator moderator= moderatorService.getByEmail(principal.getName());
+         Clinics clinics= moderator.getClinics();
+         Contacts contacts= clinics.getContact();
+
+         mapper.map(clinicInfoDTO,clinics);
+         mapper.map(clinicInfoDTO,contacts);
+
+         clinicService.updateClinic(clinics);
+         contactsService.updateContacts(contacts);
+         return "redirect:/moderator/cabinet";
+     }
+
      @GetMapping(value = "/cabinet/doctors")
      public  String moderatorAllDoctors(Principal principal,Model model){
          Moderator moderator=moderatorService.getByEmail(principal.getName());

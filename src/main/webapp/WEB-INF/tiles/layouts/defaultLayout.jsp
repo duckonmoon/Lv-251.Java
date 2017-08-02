@@ -111,7 +111,7 @@
                 </li>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
+                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                     </li>
                 </sec:authorize>
@@ -190,6 +190,28 @@
         </div>
     </sec:authorize>
 
+
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
+<script>
+    function hideText() {
+        document.getElementById('wrong').innerHTML= '';
+    }
+</script>
+
+
+<c:if test="${flag}">
+    <script>
+        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
+        jQuery(window).load(function(){
+            jQuery('#loginModal').modal('show')
+        });
+        <c:set var="flag" value="false"/>
+    </script>
+</c:if>
+
+
+
     <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
@@ -197,7 +219,6 @@
     <footer id="footer">
         <tiles:insertAttribute name="footer"/>
     </footer>
-
 
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
@@ -207,6 +228,8 @@
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+
+
 
 </body>
 </html>

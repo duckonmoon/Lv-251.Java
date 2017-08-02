@@ -10,7 +10,8 @@ import java.util.List;
  */
 public interface ContactsService {
 
+    void addContacts(Contacts contact);
     void updateContacts(Contacts contacts);
-    List<Contacts> getUsersByColumnNameAndValue(String columnName, Object value);
-    Contacts getContactsByUserId(Long userId);
+    List<Contacts> getContactsByColumnNameAndValue(String columnName, Object value);
+    Contacts getContactsByUser(Users user);
 }

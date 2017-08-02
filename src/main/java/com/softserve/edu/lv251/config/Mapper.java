@@ -35,7 +35,7 @@ public class Mapper extends ConfigurableMapper{
         factory.classMap(PersonalInfoDTO.class, Contacts.class)
                 .field("address", "address")
                 .field("city", "city")
-                .field("zipcode", "zipcode")
+                .field("zipCode", "zipCode")
                 .field("firstPhone", "firstPhone")
                 .field("secondPhone", "secondPhone")
                 .field("thirdPhone", "thirdPhone")

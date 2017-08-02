@@ -39,7 +39,7 @@ public class UserCabinetController {
     public String userProfileGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = contactsService.getContactsByUserId(user.getId());
+        Contacts contacts = user.getContact();
 
         PersonalInfoDTO userDTO = new PersonalInfoDTO();
 
@@ -55,7 +55,7 @@ public class UserCabinetController {
     public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = contactsService.getContactsByUserId(user.getId());
+        Contacts contacts = user.getContact();
         mapper.map(personalInfoDTO, user);
         mapper.map(personalInfoDTO, contacts);
         userService.updateUser(user);

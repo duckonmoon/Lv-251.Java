@@ -47,17 +47,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="email" class="form-control" path="email"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-7">
-                            <input type="submit" class="btn btn-primary"
-                                   value="<spring:message code="messages.saveChanges"/>">
-                            <span></span>
-                            <input type="reset" class="btn btn-default"
-                                   value="<spring:message code="messages.cancel"/>">
+                            <form:input type="text" class="form-control" path="email" disabled="false" cssStyle="background-color: #ff9999;"/>
                         </div>
                     </div>
 
@@ -66,7 +56,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="address"/>
+                            <form:input type="text" class="form-control d" path="address" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -78,7 +68,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userZipcode"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="zipcode"/>
+                            <form:input type="text" class="form-control" path="zipCode"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -97,6 +87,16 @@
                         <label class="col-lg-3 control-label"><spring:message code="messages.userThirdPhone"/>:</label>
                         <div class="col-lg-7">
                             <form:input type="text" class="form-control" path="thirdPhone"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-7">
+                            <input type="submit" class="btn btn-primary"
+                                   value="<spring:message code="messages.saveChanges"/>">
+                            <span></span>
+                            <input type="reset" class="btn btn-default"
+                                   value="<spring:message code="messages.cancel"/>">
                         </div>
                     </div>
                 </form:form>

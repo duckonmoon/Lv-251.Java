@@ -6,6 +6,7 @@
 
 
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
 <div class="container">
     <%--<div class="row">--%>
         <%--<h2></h2>--%>
@@ -86,6 +87,7 @@
                 </div>
             </a>
 
+            <!--Modal-->
             <div id="modal_${doctor.id}" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -114,14 +116,20 @@
                     </div>
                     <div class="modal-content">
                         <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
-                            <div class="form-group">
+                            <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
+                                <div class="input-append date form_datetime" id="date-div">
                                     <label for="first-date" style="margin-left: 5pt"><spring:message code="messages.date"/></label>
-                                    <input type="datetime-local" class="form-control" id="first-date" name="datetime">
-                                    <input name="doctorId" value="${doctor.id}" style="display: none">
+                                    <input type="text" value="" readonly id="first-date" name="datetime">
+                                    <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
+                                    <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
+                                </div>
                             </div>
-                            <button class="btn btn-lg btn-primary btn-block">
-                                <spring:message code="messages.approve"/>
-                            </button>
+                            <input name="doctorId" value="${doctor.id}" style="display: none">
+                            <div style="text-align: center">
+                                <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
+                                    <spring:message code="messages.approve"/>
+                                </button>
+                            </div>
                             <h5 style="color: red; text-align: center" id="wrong-date"></h5>
                         </form>
                     </div>
@@ -144,7 +152,18 @@
 </div>
 
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
 
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: "dd/mm/yyyy - hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        minuteStep: 10
+    });
+</script>
 
 <c:if test="${flag}">
 <c:set var="docId" value="${doc}"/>

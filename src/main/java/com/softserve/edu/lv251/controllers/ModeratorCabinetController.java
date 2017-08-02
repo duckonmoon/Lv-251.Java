@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.dao.ModeratorDAO;
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Moderator;
 import com.softserve.edu.lv251.entity.Roles;
@@ -28,6 +29,7 @@ public class ModeratorCabinetController {
     private ModeratorService moderatorService;
     @Autowired
     private DoctorsService doctorsService;
+
     @RequestMapping(value = "/cabinet")
      public String moderatorCabinet(Principal principal, Model model){
      Moderator moderator=moderatorService.getByEmail(principal.getName());
@@ -49,6 +51,16 @@ public class ModeratorCabinetController {
        public String deleteDoctor(@PathVariable("id")Long id){
          doctorsService.delete(doctorsService.find(id));
          return "redirect:/moderator/cabinet/doctors";
+
+}         @GetMapping(value = "/cabinet/add/doctor")
+           public String addDoctor(Model model,Principal principal){
+           model.addAttribute("doctorForm",new DoctorDTO());
+        Moderator moderator=moderatorService.getByEmail(principal.getName());
+        List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
+        model.addAttribute("doctors",doctors);
+        model.addAttribute("moderator",moderator);
+
+           return "moderator_addDoctor";
 }
 
 }

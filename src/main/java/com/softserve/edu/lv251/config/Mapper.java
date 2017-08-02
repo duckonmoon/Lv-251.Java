@@ -1,9 +1,12 @@
 package com.softserve.edu.lv251.config;
 
 import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Moderator;
 import com.softserve.edu.lv251.entity.Users;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
@@ -30,6 +33,15 @@ public class Mapper extends ConfigurableMapper{
                 .field("lastname", "lastname")
                 .field("email", "email")
                 .byDefault().register();
+
+      factory.classMap(DoctorDTO.class, Doctors.class)
+              .field("firstname","firstname")
+              .field("lastname", "lastname")
+              .field("password", "password")
+              .field("email", "email")
+              .field("specialization","specialization")
+              .field("description","description")
+              .field("clinic","clinics").byDefault().register();
 
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)

@@ -102,9 +102,7 @@
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-
         <put-attribute name="current" value="doctorsss"/>
-
     </definition>
 
     <!-- Doctor_cabinet Page -->
@@ -131,6 +129,13 @@
     <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
+    </definition>
+
+    <!-- Medical_Card Page -->
+    <definition name="medical_card" extends="base-definition">
+        <put-attribute name="title" value="Medical Card" />
+        <put-attribute name="body" value="/WEB-INF/pages/medical_card.jsp" />
+        <put-attribute name="current" value="medical_card"/>
     </definition>
 
 </tiles-definitions>

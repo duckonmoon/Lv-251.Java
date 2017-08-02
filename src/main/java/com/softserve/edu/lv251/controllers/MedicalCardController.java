@@ -1,30 +1,25 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dto.pojos.ContactDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
-import javassist.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.*;
 import java.security.Principal;
-import java.util.Base64;
 
 /**
- * Author: Brynetskyi Marian
- * Updated: Kovalevskyy Vitaliy
+ * Added by Pavlo Kuchereshko
  */
 @Controller
-public class UserCabinetController {
+public class MedicalCardController {
 
     @Autowired
     private UserService userService;
@@ -35,8 +30,8 @@ public class UserCabinetController {
     @Autowired
     private Mapper mapper;
 
-    @GetMapping("/user/cabinet")
-    public String userProfileGET(ModelMap model, Principal principal){
+    @GetMapping("/medical_card")
+    public String medicalCardGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
@@ -48,11 +43,11 @@ public class UserCabinetController {
         model.addAttribute("photo", user.getPhoto());
         model.addAttribute("userObject", userDTO);
 
-        return "user_cabinet";
+        return "medical_card";
     }
 
-    @PostMapping("/user/cabinet")
-    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
+    @PostMapping("/medical_card")
+    public String medicalCardPOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
@@ -61,6 +56,6 @@ public class UserCabinetController {
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
 
-        return "redirect:/user/cabinet";
+        return "redirect:/medical_card";
     }
 }

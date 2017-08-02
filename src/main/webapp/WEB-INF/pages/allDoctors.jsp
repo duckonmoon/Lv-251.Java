@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
                                 <a href="#" class="thumbnail">
-                                    <img width="200" height="200" src="/resources/img/User_Default.png" alt="...">
+                                    <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}" alt="...">
                                 </a>
                             </div>
                             <a href="doctors/${doctor.id}" class="btn-link">

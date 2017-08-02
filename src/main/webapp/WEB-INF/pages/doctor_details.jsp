@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-block">
 
-            <img class="show-logo" alt="logo" src="<c:url value="/resources/img/clinic_logo.png"/>">
+            <img class="show-logo" alt="logo" src="data:image/jpeg;base64,${doctor.photo}">
             <h4>${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</h4>
             <p>Specialization:${doctor.specialization.name}</p>
     </div>

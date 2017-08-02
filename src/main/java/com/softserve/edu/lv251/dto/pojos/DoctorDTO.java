@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.dto.pojos;
 
 import com.softserve.edu.lv251.customannotations.PasswordMatches;
+import com.softserve.edu.lv251.customannotations.PasswordMatchesForDoctors;
 import com.softserve.edu.lv251.customannotations.ValidEmail;
 import com.softserve.edu.lv251.customannotations.ValidPassword;
 import com.softserve.edu.lv251.entity.Clinics;
@@ -11,13 +12,13 @@ import org.hibernate.validator.constraints.NotBlank;
 /**
  * Created by Admin on 02.08.2017.
  */
-@PasswordMatches
+@PasswordMatchesForDoctors
 public class DoctorDTO {
     @NotBlank
     private String firstname;
     @NotBlank
     private String lastname;
-    @NotBlank(message = "This field can not be null")
+    @NotBlank
     @ValidPassword
     private String password;
     @NotBlank
@@ -26,12 +27,11 @@ public class DoctorDTO {
     @ValidEmail
     private String email;
     @NotBlank
-    private Specialization specialization;
+    private String specialization;
     @NotBlank
     private String description;
-
     @NotBlank
-    private Clinics clinic;
+    private String clinic;
 
     public DoctorDTO() {
     }
@@ -76,11 +76,11 @@ public class DoctorDTO {
         this.email = email;
     }
 
-    public Specialization getSpecialization() {
+    public String getSpecialization() {
         return specialization;
     }
 
-    public void setSpecialization(Specialization specialization) {
+    public void setSpecialization(String specialization) {
         this.specialization = specialization;
     }
 
@@ -92,13 +92,25 @@ public class DoctorDTO {
         this.description = description;
     }
 
-
-
-    public Clinics getClinic() {
+    public String getClinic() {
         return clinic;
     }
 
-    public void setClinic(Clinics clinic) {
+    public void setClinic(String clinic) {
         this.clinic = clinic;
+    }
+
+    @Override
+    public String toString() {
+        return "DoctorDTO{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", password='" + password + '\'' +
+                ", matchingPassword='" + matchingPassword + '\'' +
+                ", email='" + email + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", description='" + description + '\'' +
+                ", clinic='" + clinic + '\'' +
+                '}';
     }
 }

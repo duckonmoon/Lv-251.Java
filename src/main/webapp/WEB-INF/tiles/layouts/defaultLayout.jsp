@@ -228,6 +228,7 @@
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+<script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 
 
 

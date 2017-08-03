@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface SpecializationService {
     List<Specialization> searchByLetters(String letters);
+    List<Specialization> findAll();
+    Specialization findByName(String name);
 }

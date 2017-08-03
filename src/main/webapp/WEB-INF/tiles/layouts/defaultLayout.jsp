@@ -21,6 +21,7 @@
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
+
 </head>
 
 <body>
@@ -74,6 +75,12 @@
                         <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
                         </a>
                     </sec:authorize>
+                </li>
+                <li class="${current=='moderator/cabinet'? 'active':''}">
+                <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    </a>
+                </sec:authorize>
                 </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
@@ -199,6 +206,7 @@
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+<script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 
 <script>
     function hideText() {

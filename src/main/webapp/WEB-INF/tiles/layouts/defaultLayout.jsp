@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="${current == 'allDoctors' ? 'active': ''}">
-                    <a href="${pageContext.request.contextPath}/allDoctors">
+                    <a href="${pageContext.request.contextPath}/allDoctors/1">
                         <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
@@ -62,7 +62,7 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
-                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                <li class="${current == 'user_cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>
@@ -189,6 +189,25 @@
         </div>
     </sec:authorize>
 
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
+<script>
+    function hideText() {
+        document.getElementById('wrong').innerHTML= '';
+    }
+</script>
+
+
+<c:if test="${flag}">
+    <script>
+        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
+        jQuery(window).load(function(){
+            jQuery('#loginModal').modal('show')
+        });
+        <c:set var="flag" value="false"/>
+    </script>
+</c:if>
+
 
     <section id="site-content">
         <tiles:insertAttribute name="body" />
@@ -208,22 +227,6 @@
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 
-<script>
-    function hideText() {
-        document.getElementById('wrong').innerHTML= '';
-    }
-</script>
-
-
-<c:if test="${flag}">
-    <script>
-        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
-        jQuery(window).load(function(){
-            jQuery('#loginModal').modal('show')
-        });
-        <c:set var="flag" value="false"/>
-    </script>
-</c:if>
 
 </body>
 </html>

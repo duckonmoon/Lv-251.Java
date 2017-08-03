@@ -121,6 +121,7 @@
                                         </div>
                                     </div>
                                     <input name="doctorId" value="${doctor.id}" style="display: none">
+                                    <input name="current" value="${current}" style="display: none">
                                     <div style="text-align: center">
                                         <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
                                             <spring:message code="messages.approve"/>

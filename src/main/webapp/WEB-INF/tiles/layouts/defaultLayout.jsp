@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="${current == 'allDoctors' ? 'active': ''}">
-                    <a href="${pageContext.request.contextPath}/allDoctors">
+                    <a href="${pageContext.request.contextPath}/allDoctors/1">
                         <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
@@ -62,7 +62,7 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
-                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                <li class="${current == 'user_cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>

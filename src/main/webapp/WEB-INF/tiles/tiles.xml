@@ -89,18 +89,6 @@
         <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
     <!--</definition>-->
 
-    <!--Wrong password page-->
-    <definition name="wrongPassword" extends="home">
-        <put-attribute name="wrong" value="Wrong" />
-        <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
-    </definition>
-
-    <!-- Wrong date page -->
-    <definition name="badAppDate" extends="allDoctors">
-        <put-attribute name="title" value="badAppDate" />
-        <put-attribute name="body" value="/WEB-INF/pages/badAppDate.jsp" />
-        <put-attribute name="current" value="badAppDate"/>
-    </definition>
 
     <!--Login page-->
     <definition name="login" extends="home">
@@ -114,9 +102,7 @@
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-
         <put-attribute name="current" value="doctorsss"/>
-
     </definition>
 
     <!-- Doctor_cabinet Page -->
@@ -152,6 +138,13 @@
 
     <definition name="user_cabinet_body_appointments" extends="user_cabinet_body_base">
         <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_appointments.jsp" />
+    </definition>
+
+    <!-- Medical_Card Page -->
+    <definition name="medical_card" extends="base-definition">
+        <put-attribute name="title" value="Medical Card" />
+        <put-attribute name="body" value="/WEB-INF/pages/medical_card.jsp" />
+        <put-attribute name="current" value="medical_card"/>
     </definition>
 
 </tiles-definitions>

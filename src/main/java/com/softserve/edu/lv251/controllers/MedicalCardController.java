@@ -8,7 +8,6 @@ import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,11 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 
 /**
- * Author: Brynetskyi Marian
- * Updated: Kovalevskyy Vitaliy
+ * Added by Pavlo Kuchereshko
  */
 @Controller
-public class UserCabinetController {
+public class MedicalCardController {
 
     @Autowired
     private UserService userService;
@@ -32,8 +30,8 @@ public class UserCabinetController {
     @Autowired
     private Mapper mapper;
 
-    @GetMapping("/user/cabinet")
-    public String userProfileGET(ModelMap model, Principal principal){
+    @GetMapping("/medical_card")
+    public String medicalCardGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
@@ -44,11 +42,13 @@ public class UserCabinetController {
         mapper.map(contacts, userDTO);
         model.addAttribute("photo", user.getPhoto());
         model.addAttribute("userObject", userDTO);
-        return "user_cabinet";
+
+        return "medical_card";
     }
 
-    @PostMapping("/user/cabinet")
-    public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
+    @PostMapping("/medical_card")
+    public String medicalCardPOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
+
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
         mapper.map(personalInfoDTO, user);
@@ -56,11 +56,6 @@ public class UserCabinetController {
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
 
-        return "redirect:/user/cabinet";
-    }
-
-    @GetMapping("/user/appointments")
-    public String userAppointments(Model model){
-        return "user_cabinet_body_appointments";
+        return "redirect:/medical_card";
     }
 }

@@ -6,6 +6,8 @@ import com.softserve.edu.lv251.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by kilopo on 31.07.2017.
  */
@@ -28,6 +30,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Appointments getAppointmentById(long id) {
         return appointmentsDAO.getEntityByID(id);
+    }
+
+    @Override
+    public List<Appointments> getAppiontmentbyDoctorsEmail(String email) {
+        return appointmentsDAO.getAppiontmentbyDoctorsEmail(email);
     }
 
 }

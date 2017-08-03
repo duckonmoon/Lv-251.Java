@@ -42,9 +42,13 @@
                 weekend: false, // disable events
                 editable: true, // allow to add
                 eventLimit: true, // allow "more" link when too many events
-                
-            });
+                events: {
+                    url: '/doctor/cabinet/getApp',
+                    type: 'POST',
+                    contentType: 'application/json'
+                }
 
+            });
         });
 
     </script>

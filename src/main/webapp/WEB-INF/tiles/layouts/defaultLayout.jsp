@@ -222,6 +222,5 @@
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 
 
-
 </body>
 </html>

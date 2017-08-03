@@ -13,7 +13,13 @@ public class Doctors extends Users {
     @Column(length = 10000)
     private String description;
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
     private Clinics clinics;
 @JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)

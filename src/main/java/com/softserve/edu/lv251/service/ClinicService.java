@@ -27,5 +27,5 @@ public interface ClinicService {
 
     List<Clinics>findByDistrict(String name);
     List<Clinics>searchByLetters(String letters);
-
+   Clinics getByName(String name);
 }

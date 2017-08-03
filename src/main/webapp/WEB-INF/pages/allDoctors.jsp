@@ -11,7 +11,6 @@
 
     <div class="container">
         <div class="row" style="margin-top: 50px">
-
             <nav class="navbar navbar-inverse">
                 <div  class="container-fluid">
                     <p id="p-doctor" style="display: none"><spring:message code="messages.searchDoctors" /></p>
@@ -32,13 +31,8 @@
                         </div>
                         <a href="/allDoctors"><button id="main-search-btn" class="btn btn-facebook"><spring:message code="messages.search"/></button></a>
                     </div>
-
                 </div>
-
             </nav>
-
-
-
         </div>
     </div>
 </div>
@@ -171,6 +165,8 @@
     </ul>
 </div>
 <%------------------------------------------------%>
+
+
 
 
 

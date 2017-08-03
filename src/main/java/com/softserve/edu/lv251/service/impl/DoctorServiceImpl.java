@@ -3,14 +3,17 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.RolesService;
+import com.softserve.edu.lv251.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,6 +44,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     private DoctorsDAO doctorsDAO;
+    @Autowired
+     private SpecializationService specializationService;
+    @Autowired
+    private ClinicService clinicService;
 
     @Override
     public void addDoctor(Doctors doctors) {
@@ -136,5 +143,33 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     @Override
     public BaseDAO<Doctors> getDao() {
         return doctorsDAO;
+    }
+
+    public List<Doctors> getByClinic(Long clinicId){
+        List<Doctors> doctors=doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
+        return doctors.isEmpty()? null : doctors;
+    }
+    @Transactional
+    public Doctors addDoctorAccount(DoctorDTO accountDto){
+        Doctors doctor= new Doctors();
+        doctor.setFirstname(accountDto.getFirstname());
+        doctor.setLastname(accountDto.getLastname());
+        doctor.setMiddlename("");
+        doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
+        doctor.setEmail(accountDto.getEmail());
+        doctor.setEnabled(true);
+        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+        doctor.setRoles(Arrays.asList(
+                rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
+        Contacts contact = new Contacts();
+        contact.setEmail(accountDto.getEmail());
+        this.contactsDAO.addEntity(contact);
+        doctor.setContact(contact);
+        doctor.setDescription(accountDto.getDescription());
+        doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
+
+        addDoctor(doctor);
+        return doctor;
     }
 }

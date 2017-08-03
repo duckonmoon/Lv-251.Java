@@ -95,8 +95,11 @@ function allDocs() {
                     success:function (result) {
                         console.log(result.firstname);
                         $("#content").empty();
-                        $("#content").append("<a href='"+"/doctors/"+result.id+"'><div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
-                            " "+result.lastname +"</div></div></div></a>")
+                        $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                            "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                            "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
+                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>:"+result.specialization.name+"</p> </div> </div>")
 
 
 

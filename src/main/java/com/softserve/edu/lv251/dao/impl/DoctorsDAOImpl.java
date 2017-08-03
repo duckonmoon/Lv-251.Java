@@ -36,7 +36,7 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctors> implements DoctorsDAO {
 
     @Override
     public List<Doctors> searchBySpecialization(String name) {
-        Query query=entityManager.createQuery("select d from Doctors d where d.specialization.name like :name ").setParameter("name",name);
+        Query query=entityManager.createQuery("select d from Doctors d join d.specialization s where s.name like :name ").setParameter("name",name);
         return query.getResultList();
     }
 

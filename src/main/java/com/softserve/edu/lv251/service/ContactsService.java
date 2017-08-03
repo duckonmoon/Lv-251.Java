@@ -12,6 +12,4 @@ public interface ContactsService {
 
     void addContacts(Contacts contact);
     void updateContacts(Contacts contacts);
-    List<Contacts> getContactsByColumnNameAndValue(String columnName, Object value);
-    Contacts getContactsByUser(Users user);
 }

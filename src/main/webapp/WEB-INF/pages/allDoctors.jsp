@@ -8,22 +8,7 @@
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
 <div class="container">
-    <%--<div class="row">--%>
-        <%--<h2></h2>--%>
-        <%--<div id="custom-search-input">--%>
 
-            <%--<div class="input-group col-md-12">--%>
-                <%--<input type="text" id="autocomplete" name="search" class="  search-query form-control" placeholder='<spring:message code="messages.searchDoctors"/>' />--%>
-                <%--<span class="input-group-btn">--%>
-                                    <%--<button class="btn btn-danger" onclick="task2()"  id="search-doctor">--%>
-                                        <%--<span class=" glyphicon glyphicon-search"></span>--%>
-                                    <%--</button>--%>
-
-                                <%--</span>--%>
-            <%--</div>--%>
-
-        <%--</div>--%>
-    <%--</div>--%>
         <div class="container">
             <div class="row" style="margin-top: 50px">
 

@@ -35,9 +35,9 @@
         </c:forEach>
 
         <div class="text-center">
-            <ul class="pagination">
+            <ul class="pagination ">
                 <c:if test="${current>1}">
-                    <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
+                    <li id="previous" class="page-item "><a class="page-link" href="${current-1}">&laquo;</a></li>
                 </c:if>
                 <c:forEach begin="1" end="${numberChain}" varStatus="loop">
                     <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a

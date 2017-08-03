@@ -129,20 +129,29 @@
     <definition name="doctor_cabinet.body" template="/WEB-INF/pages/doctor_cabinet.jsp">
         <put-attribute name="menu" value="/WEB-INF/pages/doctor_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_body.jsp" />
-        <put-attribute name="curent" value="doctor/сabinet"/>
+        <put-attribute name="current" value="doctor/сabinet"/>
     </definition>
-
 
     <!-- User cabinet Page -->
-    <definition name="user_cabinet" extends="base-definition">
+
+    <definition name="user_cabinet"  extends="base-definition" >
         <put-attribute name="title" value="Personal Cabinet" />
-        <put-attribute name="body" value="user_cabinet.body" />
-        <put-attribute name="current" value="user/cabinet"/>
+        <put-attribute name="body" value="user_cabinet_body_base"/>
+        <put-attribute name="current" value="user_cabinet"/>
     </definition>
 
-    <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
+    <definition name="user_cabinet_appointments"  extends="base-definition" >
+        <put-attribute name="title" value="Personal Cabinet" />
+        <put-attribute name="body" value="user_cabinet_body_appointments"/>
+    </definition>
+
+    <definition name="user_cabinet_body_base" template="/WEB-INF/pages/user_cabinet.jsp">
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
-        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_profile.jsp" />
+    </definition>
+
+    <definition name="user_cabinet_body_appointments" extends="user_cabinet_body_base">
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_appointments.jsp" />
     </definition>
 
 </tiles-definitions>

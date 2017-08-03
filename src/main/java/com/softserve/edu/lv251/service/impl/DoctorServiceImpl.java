@@ -1,12 +1,12 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.DoctorsService;
@@ -24,8 +24,8 @@ import java.util.List;
 /**
  * Created by Admin on 21.07.2017.
  */
-@Service
-public class DoctorServiceImpl implements DoctorsService {
+@Service("doctorService")
+public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements DoctorsService {
 
     @Autowired
     ContactsDAO contactsDAO;
@@ -131,5 +131,10 @@ public class DoctorServiceImpl implements DoctorsService {
     @Override
     public List<Doctors> searchBySpecialization(String name) {
         return doctorsDAO.searchBySpecialization(name);
+    }
+
+    @Override
+    public BaseDAO<Doctors> getDao() {
+        return doctorsDAO;
     }
 }

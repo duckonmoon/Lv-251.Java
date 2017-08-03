@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Taras on 14.07.2017.
  */
-@Service
+@Service("clinicService")
 public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
 
     @Autowired

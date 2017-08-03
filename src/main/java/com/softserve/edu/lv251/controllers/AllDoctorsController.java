@@ -3,11 +3,12 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.PagingSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -16,11 +17,19 @@ import java.util.List;
  */
 @Controller
 public class AllDoctorsController {
+
     @Autowired
     private DoctorsService doctorsService;
-    @RequestMapping(value = "/allDoctors",method = RequestMethod.GET)
-    public  String allDoctors(Model model){
-        model.addAttribute("doctors",doctorsService.getAll());
+
+    @Autowired
+    @Qualifier("doctorService")
+    private PagingSizeService<Doctors> pagingSizeService;
+
+    @RequestMapping(value = "/allDoctors/{current}",method = RequestMethod.GET)
+    public  String allDoctors(@PathVariable("current") Integer chainIndex, Model model){
+        model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
+        model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
+//        model.addAttribute("doctors",doctorsService.getAll());
         return "allDoctors";
     }
     @ResponseBody

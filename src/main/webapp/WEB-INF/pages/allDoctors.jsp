@@ -114,7 +114,9 @@
                                 <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
                                     <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
                                         <div class="input-append date form_datetime" id="date-div">
-                                            <label for="first-date" style="margin-left: 5pt"><spring:message code="messages.date"/></label>
+                                            <label for="first-date" style="margin-left: 5pt">
+                                                <spring:message code="messages.date"/>
+                                            </label>
                                             <input type="text" value="" readonly id="first-date" name="datetime">
                                             <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
                                             <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>

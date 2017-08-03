@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,30 +47,22 @@ public class AllDoctorsController {
         return "allDoctors";
     }
 
-    @RequestMapping(value = "/allDoctors/{flag}/{docId}", method = RequestMethod.GET)
-    public String allDoctors(Model model, @PathVariable(value = "flag") boolean flag,
-                             @PathVariable(value = "docId") long docId) {
-        model.addAttribute("doctors", doctorsService.getAll());
-        model.addAttribute("flag", true);
-        model.addAttribute("doc", docId);
-        return "allDoctors";
-    }
-
-
     /**
      * Created by Marian Brynetskyi
-     * @param modelMap
-     * @param localdate
-     * @param doctorId
-     * @param principal
+     * @param modelMap - model
+     * @param localdate - date of ppointment
+     * @param doctorId - docId with wrong date
+     * @param chainIndex - id of page
+     * @param principal - user
      * @return
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
-                                 @RequestParam("doctorId") long doctorId,
-                                 @RequestParam("current") Integer chainIndex, Principal principal) {
+    public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+                                       @RequestParam("doctorId") long doctorId,
+                                       @RequestParam("current") Integer chainIndex, Principal principal) {
         Date date;
 
+        ModelAndView modelAndView = new ModelAndView();
         try {
             date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
             if(date.before(new Date())){
@@ -85,11 +79,15 @@ public class AllDoctorsController {
         } catch (Exception e) {
             logger.info("Wrong date.",e);
 
-            modelMap.addAttribute("flag", true);
-            modelMap.addAttribute("doc", doctorId);
-            return allDoctors(chainIndex, modelMap);
+            modelAndView.addObject("flag", true);
+            modelAndView.addObject("doc", doctorId);
+
+            modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
+            return modelAndView;
         }
-        return allDoctors(chainIndex, modelMap);
+
+        modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
+        return modelAndView;
     }
 
     @ResponseBody

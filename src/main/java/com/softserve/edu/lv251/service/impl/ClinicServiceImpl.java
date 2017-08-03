@@ -87,4 +87,9 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     public List<Clinics> searchByLetters(String letters) {
         return clinicsDAO.searchByLetters(letters);
     }
+
+    @Override
+    public Clinics getByName(String name) {
+        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name",name).get(0);
+    }
 }

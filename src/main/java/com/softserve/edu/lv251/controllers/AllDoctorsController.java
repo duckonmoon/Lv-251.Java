@@ -53,7 +53,7 @@ public class AllDoctorsController {
 
         //model.addObject("doctors", doctorsService.getAll());
         try {
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(localdate.replace("T", " "));
+            date = new SimpleDateFormat("dd/mm/yyyy - HH:mm").parse(localdate);
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
             appointments.setStatus(false);

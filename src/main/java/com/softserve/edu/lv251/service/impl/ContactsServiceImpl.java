@@ -28,15 +28,4 @@ public class ContactsServiceImpl implements ContactsService{
         this.contactsDAO.updateEntity(contacts);
     }
 
-    @Override
-    public List<Contacts> getContactsByColumnNameAndValue(String columnName, Object value) {
-        return this.contactsDAO.getEntitiesByColumnNameAndValue(columnName, value);
-    }
-
-    @Override
-    public Contacts getContactsByUser(Users user) {
-        List<Contacts> contacts = getContactsByColumnNameAndValue("users", user.getId());
-        return contacts.isEmpty() ? null : contacts.get(0);
-    }
-
 }

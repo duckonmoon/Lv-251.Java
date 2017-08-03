@@ -6,11 +6,11 @@ import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.PagingSizeService;
 import com.softserve.edu.lv251.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -31,9 +31,11 @@ public class AllDoctorsController {
     private PagingSizeService<Doctors> pagingSizeService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    AppointmentService appointmentService;
+    private AppointmentService appointmentService;
+    @Autowired
+    private Logger logger;
 
 
     @RequestMapping(value = "/allDoctors/{current}",method = RequestMethod.GET)
@@ -53,14 +55,18 @@ public class AllDoctorsController {
     }
 
 
-
+    /**
+     * Created by Marian Brynetskyi
+     * @param modelMap
+     * @param localdate
+     * @param doctorId
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
     public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
         Date date;
 
-        //ModelAndView model = new ModelAndView("allDoctors");
-
-        //model.addObject("doctors", doctorsService.getAll());
         try {
             date = new SimpleDateFormat("dd/mm/yyyy - HH:mm").parse(localdate);
             Appointments appointments = new Appointments();
@@ -72,16 +78,13 @@ public class AllDoctorsController {
             appointmentService.addAppointment(appointments);
 
         } catch (Exception e) {
-            //model.setViewName("redirect:/allDoctors/true/" + doctorId);
+            logger.info("Wrong date.",e);
 
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("doc", doctorId);
-
             return allDoctors(1, modelMap);
-            //return model;
         }
         return allDoctors(1, modelMap);
-        //return model;
     }
 
     @ResponseBody

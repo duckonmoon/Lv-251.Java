@@ -6,6 +6,7 @@ import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -91,5 +92,12 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     @Override
     public Clinics getByName(String name) {
         return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name",name).get(0);
+    }
+    @Override
+    public void updatePhoto(MultipartFile file,Clinics clinics){
+        String photo=StoredImagesService.getBase64encodedMultipartFile(file);
+        System.out.println("###################################################################" + photo.length());
+        clinics.setPhoto(photo);
+        clinicsDAO.updateEntity(clinics);
     }
 }

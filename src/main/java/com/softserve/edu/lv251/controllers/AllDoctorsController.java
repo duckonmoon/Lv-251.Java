@@ -64,11 +64,16 @@ public class AllDoctorsController {
      * @return
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
+    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+                                 @RequestParam("doctorId") long doctorId,
+                                 @RequestParam("current") Integer chainIndex, Principal principal) {
         Date date;
 
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy - HH:mm").parse(localdate);
+            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
+            if(date.before(new Date())){
+                throw new Exception();
+            }
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
             appointments.setStatus(false);
@@ -82,9 +87,9 @@ public class AllDoctorsController {
 
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("doc", doctorId);
-            return allDoctors(1, modelMap);
+            return allDoctors(chainIndex, modelMap);
         }
-        return allDoctors(1, modelMap);
+        return allDoctors(chainIndex, modelMap);
     }
 
     @ResponseBody

@@ -31,14 +31,36 @@
                         <!-- left column -->
                         <div class="col-md-3 col-md-offset-1">
                             <div class="text-center">
-                                <img src="data:image/jpeg;base64,${photo}" class="avatar img-circle" alt="avatar" width="100"
-                                     height="100">
-                                <h6>Upload a different photo...</h6>
-                                <%--<form action="upload" method="post" enctype="multipart/form-data">--%>
-                                <%--<input class="btn btn-default" type="file"/>--%>
-                                <%--<input type="submit" class="btn btn-default"/>--%>
-                                <%--</form>--%>
+                                <div class="image-container ">
+                                <img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle image img-responsive "  alt="avatar" width="100%"height="100%">
+                                    <div class="middle">
+                                        <div class="text">Change</div>
+                                    </div>
+                                </div>
+
+                                <form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data">
+                                    <div class="col-lg-7">
+
+                                        <%--<span class="btn btn-default btn-file">--%>
+                                      <%--<i class="fa fa-camera-retro" aria-hidden="true"></i> <input name="file" type="file">--%>
+                                           <%--</span>--%>
+                                        <%--<button type="submit">Change</button>--%>
+                                            <div style="position:relative;">
+                                                <a class='btn btn-file' href='javascript:;'>
+                                                    Choose File...
+                                                    <input type="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                                </a>
+                                                &nbsp;
+                                                <span class='label label-info' id="upload-file-info"></span>
+                                                <button class='btn btn-github' type="submit" style="margin-top: 5px;margin-left: 20px">Change</button>
+                                            </div>
+
+                                    </div>
+
+                                </form>
+
                             </div>
+                            <div></div>
                         </div>
                         <div class="col-md-7 personal-info">
                     <form:form method="POST" modelAttribute="clinicDTO" action="/moderator/cabinet">
@@ -102,10 +124,10 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-7">
-                            <input type="submit" class="btn btn-primary"
+                            <input type="submit" class="btn btn-clinic"
                                    value="<spring:message code="messages.saveChanges"/>">
                             <span></span>
-                            <input type="reset" class="btn btn-default"
+                            <input type="reset" class="btn btn-github"
                                    value="<spring:message code="messages.cancel"/>">
                         </div>
                     </div>

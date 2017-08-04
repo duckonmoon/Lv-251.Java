@@ -25,6 +25,7 @@ import java.util.List;
  */
 @Controller
 public class DoctorCabinetController {
+
     @Autowired
     AppointmentService appointmentService;
 
@@ -39,4 +40,11 @@ public class DoctorCabinetController {
     {
         return new Gson().toJson(AppointmentsDTO.convert(appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())));
     }
+
+
+    @RequestMapping(value = "doctor/patients",method = RequestMethod.GET)
+    public String patients(){
+        return "doctor_cabinet_patients";
+    }
+
 }

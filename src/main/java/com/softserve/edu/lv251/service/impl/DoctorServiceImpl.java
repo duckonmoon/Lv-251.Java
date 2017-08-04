@@ -1,9 +1,10 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.BaseDAO;
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
-import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
+import com.softserve.edu.lv251.dto.pojos.PatientDTO;
+import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +50,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
      private SpecializationService specializationService;
     @Autowired
     private ClinicService clinicService;
+
+    @Autowired
+    Mapper mapper;
+
 
     @Override
     public void addDoctor(Doctors doctors) {
@@ -141,6 +147,19 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
+
+    public List<PatientDTO> getDoctorPatients(long doctorId) {
+        List<PatientDTO> patients = new ArrayList<>();
+        Doctors doctor = doctorsDAO.getEntityByID(doctorId);
+        List<Appointments> appointments = doctor.getDocAppointments();
+        for (Appointments a: appointments){
+            PatientDTO patient = new PatientDTO();
+            mapper.map(patient, a.getUsers());
+            patients.add(patient);
+        }
+
+        return patients;
+
     public BaseDAO<Doctors> getDao() {
         return doctorsDAO;
     }

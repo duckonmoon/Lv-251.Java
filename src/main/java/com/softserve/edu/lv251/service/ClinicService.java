@@ -2,6 +2,8 @@ package com.softserve.edu.lv251.service;
 
 
 import com.softserve.edu.lv251.entity.Clinics;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -28,4 +30,5 @@ public interface ClinicService {
     List<Clinics>findByDistrict(String name);
     List<Clinics>searchByLetters(String letters);
    Clinics getByName(String name);
+   void updatePhoto(MultipartFile file,Clinics clinics);
 }

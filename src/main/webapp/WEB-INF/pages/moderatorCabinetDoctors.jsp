@@ -40,11 +40,10 @@
                                         <div class="col-xs-6 col-md-8 col-lg-9">
                                             <div class="row">
                                                 <div> ${doctor.firstname}  ${doctor.lastname}</div>
-                                                <p>Specialization: ${doctor.specialization.name}</p>
+                                                <p><spring:message code="messages.specialization"/>: ${doctor.specialization.name}</p>
                                             </div>
                                             <div class="row">
-                                                <a href="/moderator/cabinet/doctors/edit/${doctor.id}"><button  class="btn btn-facebook " >Edit doctor</button ></a>
-                                                <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-facebook" >Delete doctor</button ></a>
+                                                <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-github" ><spring:message code="messages.delete"/></button ></a>
                                             </div>
                                             <hr>
                                         </div>

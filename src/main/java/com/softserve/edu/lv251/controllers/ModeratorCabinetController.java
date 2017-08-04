@@ -1,26 +1,21 @@
 package com.softserve.edu.lv251.controllers;
 
-import com.softserve.edu.lv251.binders.ClinicBinder;
-import com.softserve.edu.lv251.binders.SpecializationBinder;
+
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dao.ModeratorDAO;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.*;
+import com.softserve.edu.lv251.service.impl.StoredImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -56,7 +51,7 @@ public class ModeratorCabinetController {
      model.addAttribute("doctors",doctors);
      model.addAttribute("moderator",moderator);
      model.addAttribute("clinicDTO",clinicDTO);
-        return "moderator_cabinet";
+        return "moderatorCabinet";
      }
 
      @PostMapping("/cabinet")
@@ -80,7 +75,7 @@ public class ModeratorCabinetController {
 
          model.addAttribute("doctors",doctors);
          model.addAttribute("moderator",moderator);
-         return "moderator_cabinet_doctors";
+         return "moderatorCabinetDoctors";
      }
      @GetMapping(value = "/cabinet/doctors/delete/{id}")
        public String deleteDoctor(@PathVariable("id")Long id){
@@ -94,21 +89,29 @@ public class ModeratorCabinetController {
         List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
         model.addAttribute("doctors",doctors);
         model.addAttribute("moderator",moderator);
-           return "moderator_addDoctor";
+           return "moderatorAddDoctor";
 }
 
 @PostMapping(value = "/add/doctor")
- public String registerDoctor(@ModelAttribute("doctorForm")@Valid DoctorDTO doctorDTO, BindingResult bindingResult,WebRequest request,
-                              Errors errors){
+ public String registerDoctor(@ModelAttribute("doctorForm")@Valid DoctorDTO doctorDTO, BindingResult bindingResult){
             if(bindingResult.hasErrors()){
      System.out.println("has errors");
                 System.out.println(doctorDTO.toString());
 
-     return "moderator_addDoctor";
+     return "moderatorAddDoctor";
             }else {
                 doctorsService.addDoctorAccount(doctorDTO);
                 System.out.println(doctorDTO.toString());
             return "redirect:/moderator/cabinet/doctors";}
  }
+@PostMapping(value = "/upload/clinicPhoto")
+ public String uploadPhoto(@RequestParam("file") MultipartFile file,Principal principal){
+    String photo=StoredImagesService.getBase64encodedMultipartFile(file);
+//    System.out.println("before");
+//    System.out.println(photo);
+    clinicService.updatePhoto(file,moderatorService.getByEmail(principal.getName()).getClinics());
+     return "redirect:/moderator/cabinet";
+ }
+
 
 }

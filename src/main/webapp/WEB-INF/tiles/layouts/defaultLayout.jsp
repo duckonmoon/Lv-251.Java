@@ -78,7 +78,7 @@
                 </li>
                 <li class="${current=='moderator/cabinet'? 'active':''}">
                 <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
-                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
                     </a>
                 </sec:authorize>
                 </li>

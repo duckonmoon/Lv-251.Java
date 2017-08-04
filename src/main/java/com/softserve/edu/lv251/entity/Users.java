@@ -21,7 +21,7 @@ public class Users extends BaseEntity {
     @Column(name = "tokenExpired", nullable = false, columnDefinition="bit(1) default 1")
     private boolean tokenExpired;
 
-    @Column(name = "photo", length = 65535, columnDefinition="TEXT")
+    @Column(name = "photo", columnDefinition="MEDIUMTEXT")
     private String photo;
 
     @JsonIgnore

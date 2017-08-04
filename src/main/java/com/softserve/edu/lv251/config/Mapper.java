@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.config;
 
 import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
+import com.softserve.edu.lv251.dto.pojos.PatientDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Clinics;
@@ -40,6 +41,17 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setLat(lat);
                         latLng.setLng(lng);
                         latLng.setId(clinics.getId());
+                    }
+                });
+        factory.classMap(PatientDTO.class, Users.class)
+                .customize(new CustomMapper<PatientDTO, Users>() {
+                    @Override
+                    public void mapAtoB(PatientDTO patientDTO, Users users, MappingContext context) {
+                        patientDTO.setId(users.getId());
+                        String fullName = users.getLastname() + " "
+                                + users.getFirstname() + " "
+                                + users.getLastname();
+                        patientDTO.setFullName(fullName);
                     }
                 });
     }

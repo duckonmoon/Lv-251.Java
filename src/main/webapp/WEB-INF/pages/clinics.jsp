@@ -6,6 +6,9 @@
 
 
 <div class="container">
+
+    <%--Pagination--%>
+    <%-----------------------------------------------------%>
     <div class="text-center">
         <ul class="pagination">
             <c:if test="${current>1}">
@@ -21,28 +24,40 @@
             </c:if>
         </ul>
     </div>
+    <%-----------------------------------------------------%>
 
-    <c:forEach items="${getClinics}" var="clinic">
-    <a href="clinic/${clinic.id}">
-        <a href="clinics/details/${clinic.id}">
-            <div class="row row-content">
-                <div class="container-fluid">
-                    <p>${clinic.clinic_name}</p>
-                    <img class="show-logo" alt="logo" src="<c:url value="/resources/img/clinic_logo.png"/>">
+
+        <c:forEach items="${getClinics}" var="clinic">
+            <a href="clinic/${clinic.id}">
+                <div class="row row-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3">
+                                <a href="#" class="thumbnail">
+                                    <img width="200" height="200" src="/resources/img/clinic_logo.png"
+                                         alt="...">
+                                </a>
+                            </div>
+                            <a href="#" class="btn-link">
+                                <span class="doc-name">${clinic.clinic_name}</span>
+                            </a>
+                    </div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
         </c:forEach>
 
+
+        <%--Pagination--%>
+        <%-----------------------------------------------------%>
         <div class="text-center">
-            <ul class="pagination">
+            <ul class="pagination ">
                 <c:if test="${current>1}">
-                    <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
+                    <li id="previous" class="page-item "><a class="page-link" href="${current-1}">&laquo;</a></li>
                 </c:if>
                 <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
-                            class="page-link"
-                            href="/clinics/${loop.index}">${loop.index}</a>
+                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
+                                                                                                           href="/clinics/${loop.index}">${loop.index}</a>
                     </li>
                 </c:forEach>
                 <c:if test="${current < numberChain}">
@@ -50,6 +65,7 @@
                 </c:if>
             </ul>
         </div>
+        <%-----------------------------------------------------%>
 </div>
 
 

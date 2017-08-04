@@ -8,6 +8,7 @@ import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,13 +44,11 @@ public class UserCabinetController {
         mapper.map(contacts, userDTO);
         model.addAttribute("photo", user.getPhoto());
         model.addAttribute("userObject", userDTO);
-
         return "user_cabinet";
     }
 
     @PostMapping("/user/cabinet")
     public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
-
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
         mapper.map(personalInfoDTO, user);
@@ -58,5 +57,10 @@ public class UserCabinetController {
         contactsService.updateContacts(contacts);
 
         return "redirect:/user/cabinet";
+    }
+
+    @GetMapping("/user/appointments")
+    public String userAppointments(Model model){
+        return "user_cabinet_body_appointments";
     }
 }

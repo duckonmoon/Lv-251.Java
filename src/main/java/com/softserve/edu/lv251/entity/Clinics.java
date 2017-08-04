@@ -21,13 +21,22 @@ public class Clinics extends BaseEntity {
     private String description;
 
 
-    @OneToMany(mappedBy = "clinics")
+    @OneToMany(mappedBy = "clinics",cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
     @JsonIgnore
     private List<Doctors> doctors;
 
     @JsonIgnore
     @OneToOne(cascade = {CascadeType.ALL})
     private Contacts contact;
+    @JsonIgnore
+    @OneToOne(mappedBy = "clinic")
+    private Moderator moderator;
 
     public Clinics() {
     }
@@ -70,6 +79,14 @@ public class Clinics extends BaseEntity {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Moderator getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(Moderator moderator) {
+        this.moderator = moderator;
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Taras on 14.07.2017.
  */
-@Service
+@Service("clinicService")
 public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
 
     @Autowired
@@ -86,5 +86,10 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     @Override
     public List<Clinics> searchByLetters(String letters) {
         return clinicsDAO.searchByLetters(letters);
+    }
+
+    @Override
+    public Clinics getByName(String name) {
+        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name",name).get(0);
     }
 }

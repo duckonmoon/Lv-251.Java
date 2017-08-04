@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.PatientDTO;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
@@ -152,13 +153,14 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<PatientDTO> patients = new ArrayList<>();
         Doctors doctor = doctorsDAO.getEntityByID(doctorId);
         List<Appointments> appointments = doctor.getDocAppointments();
-        for (Appointments a: appointments){
+        for (Appointments a : appointments) {
             PatientDTO patient = new PatientDTO();
             mapper.map(patient, a.getUsers());
             patients.add(patient);
         }
 
         return patients;
+    }
 
     public BaseDAO<Doctors> getDao() {
         return doctorsDAO;

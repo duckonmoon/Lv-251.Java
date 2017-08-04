@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.PagingSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ public class ClinicController {
     private ClinicService clinicService;
 
     @Autowired
+    @Qualifier("clinicService")
     private PagingSizeService<Clinics> pagingSizeService;
 
     @GetMapping("/{current}")

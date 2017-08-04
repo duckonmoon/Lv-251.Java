@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.customannotations;
 
 import com.softserve.edu.lv251.validators.DoctorsPasswordMatchesValidator;
-import com.softserve.edu.lv251.validators.PasswordMatchesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

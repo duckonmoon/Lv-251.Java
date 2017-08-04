@@ -5,6 +5,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.entity.*;
+import com.softserve.edu.lv251.model.FileBucket;
 import com.softserve.edu.lv251.service.*;
 import com.softserve.edu.lv251.service.impl.StoredImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class ModeratorCabinetController {
         ClinicInfoDTO clinicDTO=new ClinicInfoDTO();
     mapper.map(clinics,clinicDTO);
     mapper.map(contacts,clinicDTO);
-
+    model.addAttribute("photoForm",new FileBucket());
      model.addAttribute("doctors",doctors);
      model.addAttribute("moderator",moderator);
      model.addAttribute("clinicDTO",clinicDTO);
@@ -55,17 +56,21 @@ public class ModeratorCabinetController {
      }
 
      @PostMapping("/cabinet")
-     public String edit(@ModelAttribute ClinicInfoDTO clinicInfoDTO,Principal principal){
+     public String edit(@ModelAttribute @Valid ClinicInfoDTO clinicInfoDTO,Principal principal,BindingResult bindingResult){
          Moderator moderator= moderatorService.getByEmail(principal.getName());
          Clinics clinics= moderator.getClinics();
          Contacts contacts= clinics.getContact();
-
+if(!bindingResult.hasErrors()){
          mapper.map(clinicInfoDTO,clinics);
          mapper.map(clinicInfoDTO,contacts);
 
          clinicService.updateClinic(clinics);
          contactsService.updateContacts(contacts);
-         return "redirect:/moderator/cabinet";
+         return "redirect:/moderator/cabinet";}
+         else {
+
+    return "moderatorCabinet";
+         }
      }
 
      @GetMapping(value = "/cabinet/doctors")
@@ -104,14 +109,21 @@ public class ModeratorCabinetController {
                 System.out.println(doctorDTO.toString());
             return "redirect:/moderator/cabinet/doctors";}
  }
-@PostMapping(value = "/upload/clinicPhoto")
- public String uploadPhoto(@RequestParam("file") MultipartFile file,Principal principal){
-    String photo=StoredImagesService.getBase64encodedMultipartFile(file);
-//    System.out.println("before");
-//    System.out.println(photo);
-    clinicService.updatePhoto(file,moderatorService.getByEmail(principal.getName()).getClinics());
-     return "redirect:/moderator/cabinet";
+//@PostMapping(value = "/upload/clinicPhoto")
+// public String uploadPhoto(@RequestParam("file") MultipartFile file,Principal principal){
+//    clinicService.updatePhoto(file,moderatorService.getByEmail(principal.getName()).getClinics());
+//    System.out.println(file.getContentType());
+//    System.out.println(file.getName());
+//    System.out.println(file.isEmpty());
+//     return "redirect:/moderator/cabinet";
+// }
+    @PostMapping(value = "/upload/clinicPhoto")
+ public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket, Principal principal,BindingResult bindingResult){
+     if (bindingResult.hasErrors()){
+         return "moderatorCabinet";
+     }else{
+    clinicService.updatePhoto(fileBucket.getMultipartFile(),moderatorService.getByEmail(principal.getName()).getClinics());
+     return "redirect:/moderator/cabinet";}
  }
-
 
 }

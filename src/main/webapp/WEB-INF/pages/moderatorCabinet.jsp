@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
 
-                                <form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data">
+                                <form:form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data" modelAttribute="photoForm">
                                     <div class="col-lg-7">
 
                                         <%--<span class="btn btn-default btn-file">--%>
@@ -48,16 +48,17 @@
                                             <div style="position:relative;">
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
-                                                    <input type="file" name="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                                    <form:input path="multipartFile" type="file"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
                                                 </a>
                                                 &nbsp;
                                                 <span class='label label-info' id="upload-file-info"></span>
-                                                <button class='btn btn-github' type="submit" style="margin-top: 5px;margin-left: 20px">Change</button>
+                                                <form:errors path="multipartFile"></form:errors>
+                                                <button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</button>
                                             </div>
 
                                     </div>
 
-                                </form>
+                                </form:form>
 
                             </div>
                             <div></div>
@@ -67,6 +68,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
                         <div class="col-lg-7">
+                            <form:errors path="clinic_name"></form:errors>
                             <form:input type="text" class="form-control" path="clinic_name"/>
                         </div>
                     </div>
@@ -82,10 +84,7 @@
                             <form:input type="text" class="form-control" path="email" value="${clinic.contact.email}" disabled="false" cssStyle="background-color: #72d9b9;"/>
                         </div>
                     </div>
-
-
-
-                    <div class="form-group">
+                        <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
                         <div class="col-lg-7">
                             <form:input type="text" class="form-control d" path="address" />

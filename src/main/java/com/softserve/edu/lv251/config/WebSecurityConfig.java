@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAuthority(WebRoles.ROLE_DOCTOR.name())
 
                 .antMatchers("/moderator/*")
-                .hasAuthority(WebRoles.ROLE_DOCTOR.name())
+                .hasAuthority(WebRoles.ROLE_MODERATOR.name())
 
                 .antMatchers("/admin/*")
                 .hasAuthority(WebRoles.ROLE_DOCTOR.name())

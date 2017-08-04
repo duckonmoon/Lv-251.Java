@@ -19,4 +19,14 @@ public class SpecializationServiceImpl implements SpecializationService {
     public List<Specialization> searchByLetters(String letters) {
         return specializationDAO.searchByLetters(letters);
     }
+
+    @Override
+    public Specialization findByName(String name) {
+        return specializationDAO.getEntitiesByColumnNameAndValue("name",name).get(0);
+    }
+
+    @Override
+    public List<Specialization> findAll() {
+        return specializationDAO.getAllEntities();
+    }
 }

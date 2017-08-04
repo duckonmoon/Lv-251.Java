@@ -21,6 +21,7 @@
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
+
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                     </a>
                 </li>
                 <li class="${current == 'allDoctors' ? 'active': ''}">
-                    <a href="${pageContext.request.contextPath}/allDoctors">
+                    <a href="${pageContext.request.contextPath}/allDoctors/1">
                         <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
@@ -61,7 +62,7 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
-                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                <li class="${current == 'user_cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>
@@ -75,14 +76,18 @@
                         </a>
                     </sec:authorize>
                 </li>
+                <li class="${current=='moderator/cabinet'? 'active':''}">
+                <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    </a>
+                </sec:authorize>
+                </li>
                 <li>
                     <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
                     </a>
                 </li>
             </ul>
-
-
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -93,18 +98,19 @@
                     </sec:authorize>
                 </li>
                 <li class="nav navbar-nav flags">
-                    <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
+                    <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class=""  href="?lang=uk"  style="padding: 20px 3px ; float: left ">
+                    <a class="" href="?lang=uk"  style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>
+                    <span>&nbsp;&nbsp;</span>
                 </li>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <li><a type="button" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
+                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                     </li>
                 </sec:authorize>
@@ -183,6 +189,26 @@
         </div>
     </sec:authorize>
 
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
+<script>
+    function hideText() {
+        document.getElementById('wrong').innerHTML= '';
+    }
+</script>
+
+
+<c:if test="${flag}">
+    <script>
+        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
+        jQuery(window).load(function(){
+            jQuery('#loginModal').modal('show')
+        });
+        <c:set var="flag" value="false"/>
+    </script>
+</c:if>
+
+
     <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
@@ -190,7 +216,6 @@
     <footer id="footer">
         <tiles:insertAttribute name="footer"/>
     </footer>
-
 
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
@@ -200,6 +225,8 @@
 <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+<script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
+
 
 </body>
 </html>

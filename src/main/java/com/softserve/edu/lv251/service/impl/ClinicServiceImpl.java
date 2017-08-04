@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ClinicsDAO;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -17,11 +18,12 @@ import java.util.List;
 /**
  * Created by Taras on 14.07.2017.
  */
-@Service
-public class ClinicServiceImpl implements ClinicService {
+@Service("clinicService")
+public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
 
     @Autowired
     private ClinicsDAO clinicsDAO;
+
     @Autowired
     private EntityManager entityManager;
 
@@ -72,46 +74,10 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicsDAO.getEntityByID(1L);
     }
 
-
     @Override
-    public int numberOfPaging(Integer size) {
-        int n = clinicsDAO.getAllEntities().size();
-        return ((int) Math.ceil((double) n/size));
+    public BaseDAO<Clinics> getDao() {
+        return clinicsDAO;
     }
-
-    @Override
-    public List<Clinics> getClinics(Integer chainIndex, Integer size) {
-        return clinicsDAO.pagination(chainIndex, size);
-    }
-
-    @Override
-    public List<Integer> listOfVariants(){
-        List<Integer> listOfVariants = null;
-        Integer countEntity = clinicsDAO.getAllEntities().size();
-        if (countEntity <= 10) {
-            listOfVariants.add(countEntity);
-        } else  if (countEntity <= 20) {
-            listOfVariants.add(10);
-            listOfVariants.add(countEntity);
-        } else if (countEntity <= 50){
-            listOfVariants.add(10);
-            listOfVariants.add(20);
-            listOfVariants.add(countEntity);
-        } else if (countEntity <= 100) {
-            listOfVariants.add(10);
-            listOfVariants.add(20);
-            listOfVariants.add(50);
-            listOfVariants.add(countEntity);
-        } else {
-            listOfVariants.add(10);
-            listOfVariants.add(20);
-            listOfVariants.add(50);
-            listOfVariants.add(100);
-            listOfVariants.add(countEntity);
-        }
-        return listOfVariants;
-    }
-
 
     public List<Clinics> findByDistrict(String name) {
         return clinicsDAO.findByDistrict(name);
@@ -120,5 +86,10 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     public List<Clinics> searchByLetters(String letters) {
         return clinicsDAO.searchByLetters(letters);
+    }
+
+    @Override
+    public Clinics getByName(String name) {
+        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name",name).get(0);
     }
 }

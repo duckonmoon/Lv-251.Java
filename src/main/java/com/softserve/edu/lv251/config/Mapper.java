@@ -1,10 +1,14 @@
 package com.softserve.edu.lv251.config;
 
-import com.softserve.edu.lv251.dto.pojos.ClinicLatLngDTO;
-import com.softserve.edu.lv251.dto.pojos.PatientDTO;
-import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.dto.pojos.UserDTO;
+
+import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.Clinics;
+
+import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Moderator;
+
+import com.softserve.edu.lv251.entity.Contacts;
+
 import com.softserve.edu.lv251.entity.Users;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
@@ -31,6 +35,32 @@ public class Mapper extends ConfigurableMapper{
                 .field("lastname", "lastname")
                 .field("email", "email")
                 .byDefault().register();
+
+
+
+        factory.classMap(PersonalInfoDTO.class, Contacts.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipCode", "zipCode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
+                .byDefault().register();
+
+
+        factory.classMap(ClinicInfoDTO.class,Clinics.class)
+                .field("clinic_name","clinic_name")
+                .field("description","description")
+                .byDefault().register();
+
+         factory.classMap(ClinicInfoDTO.class,Contacts.class)
+                 .field("address", "address")
+                 .field("city", "city")
+                 .field("zipCode", "zipCode")
+                 .field("firstPhone", "firstPhone")
+                 .field("secondPhone", "secondPhone")
+                 .field("thirdPhone", "thirdPhone")
+                 .byDefault().register();
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)
                 .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {

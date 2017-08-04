@@ -1,6 +1,8 @@
 package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.PatientDTO;
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
+
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -25,6 +27,11 @@ public interface DoctorsService {
     List<Appointments> appointmentsInThisMonth(Long id, Date date);
     List<Doctors>searchByDistrict(String name);
     List<Doctors>searchBySpecialization(String name);
+
     List<PatientDTO> getDoctorPatients(long doctorId);
+
+    public List<Doctors> getByClinic(Long clinicId);
+    public Doctors addDoctorAccount(DoctorDTO accountDto);
+
 
 }

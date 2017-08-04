@@ -154,7 +154,10 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            return "wrongPassword";
+            model.addAttribute("flag", true);
+
+            return "home";
+
         }
 
         if (logout != null) {

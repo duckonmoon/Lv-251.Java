@@ -48,8 +48,6 @@ function clinicsAll() {
     console.log($("#selectDocOrClinic").val());
     $("#autocomplete").autocomplete({
         serviceUrl: '/all/clinics',
-        noSuggestionNotice:'No results',
-        showNoSuggestionNotice:true,
         paramName: "name",
         delimiter: ",",
            transformResult: function (response) {
@@ -80,9 +78,12 @@ function clinicsAll() {
                 success: function (result) {
                     console.log(result.clinic_name);
                     $(".content").empty();
-                    $(".content").append("<a href='"+"/clinics/details/"+result.id+"'><div class='container'><div class='row row-content'><div class='container-fluid'>" + result.clinic_name + "" +
-                        " " + result.description + "</div></div></div></a>")
-                    $("#autocomplete").removeAttr('value');
+                    $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                        "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                        "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
+                        "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a>"+
+                        " </div> </div>");
+
                 }
 
             })
@@ -228,10 +229,10 @@ function  doctorsBySpecialization() {
                     $(".content").empty();
                     for (var i = 0; i < res.length; i++) {
                         console.log("Doctors search by districts");
-                        $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                        $(".content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
-                            "<a href='"+"clinic/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<a href='"+"doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
                             "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
                     }
 

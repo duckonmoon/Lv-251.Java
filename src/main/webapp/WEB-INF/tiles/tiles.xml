@@ -89,13 +89,14 @@
         <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
     <!--</definition>-->
 
+
     <!--Wrong password page-->
     <definition name="wrongPassword" extends="home">
         <put-attribute name="wrong" value="Wrong" />
         <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
     </definition>
 
-    <!-- Wrong date page -->
+     <!--Wrong date page -->
     <definition name="badAppDate" extends="allDoctors">
         <put-attribute name="title" value="badAppDate" />
         <put-attribute name="body" value="/WEB-INF/pages/badAppDate.jsp" />
@@ -114,9 +115,7 @@
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
-
         <put-attribute name="current" value="doctorsss"/>
-
     </definition>
 
     <!-- Doctor_cabinet Page -->
@@ -129,27 +128,67 @@
     <definition name="doctor_cabinet.body" template="/WEB-INF/pages/doctor_cabinet.jsp">
         <put-attribute name="menu" value="/WEB-INF/pages/doctor_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_body.jsp" />
-        <put-attribute name="curent" value="doctor/сabinet"/>
+        <put-attribute name="current" value="doctor/сabinet"/>
     </definition>
-
 
     <!-- User cabinet Page -->
-    <definition name="user_cabinet" extends="base-definition">
+
+    <definition name="user_cabinet"  extends="base-definition" >
         <put-attribute name="title" value="Personal Cabinet" />
-        <put-attribute name="body" value="user_cabinet.body" />
-        <put-attribute name="current" value="user/cabinet"/>
+        <put-attribute name="body" value="user_cabinet_body_base"/>
+        <put-attribute name="current" value="user_cabinet"/>
     </definition>
 
-    <definition name="user_cabinet.body" template="/WEB-INF/pages/user_cabinet.jsp">
-    <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
-    <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body.jsp" />
-</definition>
 
-    <definition name="doctor_cabinet_patients" extends="base-definition">
+
+ <definition name="doctor_cabinet_patients" extends="base-definition">
         <put-attribute name="title" value="Patients" />
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients.jsp" />
         <put-attribute name="current" value="doctor/patients"/>
+   
+    <definition name="user_cabinet_appointments"  extends="base-definition" >
+        <put-attribute name="title" value="Personal Cabinet" />
+        <put-attribute name="body" value="user_cabinet_body_appointments"/>
+    </definition>
+
+    <definition name="user_cabinet_body_base" template="/WEB-INF/pages/user_cabinet.jsp">
+        <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_profile.jsp" />
+    </definition>
+
+    <definition name="user_cabinet_body_appointments" extends="user_cabinet_body_base">
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_appointments.jsp" />
+    </definition>
+  <!-- Moderator cabinet Page   -->
+    <definition name="moderator_cabinet" extends="base-definition">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet.jsp"/>
+        <put-attribute name="current" value="moderator/cabinet"/>
+    </definition>
+
+     <!--Moderator cabinet doctors Page   -->
+
+    <definition name="moderator_cabinet_doctors" extends="moderator_cabinet">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="/WEB-INF/pages/moderator_cabinet_doctors.jsp"/>
+        <put-attribute name="current" value="moderator_cabinet_doctors"/>
+    </definition>
+
+<definition name="moderator_addDoctor" extends="base-definition">
+    <put-attribute name="title" value="Moderator Cabinet"/>
+    <put-attribute name="body" value="/WEB-INF/pages/moderator_addDoctor.jsp"/>
+    <put-attribute name="current" value="moderator_cabinet_doctors"/>
+
+</definition>
+
+
+
+    <!-- Medical_Card Page -->
+    <definition name="medical_card" extends="base-definition">
+        <put-attribute name="title" value="Medical Card" />
+        <put-attribute name="body" value="/WEB-INF/pages/medical_card.jsp" />
+        <put-attribute name="current" value="medical_card"/>
     </definition>
 
 </tiles-definitions>

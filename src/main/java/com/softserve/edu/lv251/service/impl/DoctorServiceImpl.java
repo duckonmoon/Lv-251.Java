@@ -1,11 +1,12 @@
 package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.PatientDTO;
-import com.softserve.edu.lv251.dao.BaseDAO;
+import com.softserve.edu.lv251.dto.pojos.SearchResultDoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
@@ -16,6 +17,7 @@ import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,7 +46,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    @Autowired
+    Mapper mapper;
+    @Autowired
+    Logger logger;
     @Autowired
     private DoctorsDAO doctorsDAO;
 
@@ -79,7 +84,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Override
     public void delete(Doctors doctors) {
-     doctorsDAO.deleteEntity(doctors);
+        doctorsDAO.deleteEntity(doctors);
     }
 
     @Override
@@ -130,7 +135,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
-        return doctorsDAO.appointmentsInThisMonth(id,date);
+        return doctorsDAO.appointmentsInThisMonth(id, date);
     }
 
     @Override
@@ -166,6 +171,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         return doctorsDAO;
     }
 
+
     @Override
     public List<Doctors> getByClinic(Long clinicId){
         List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
@@ -197,5 +203,22 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         addDoctor(doctor);
 
         return doctor;
+    }
+
+    public List<SearchResultDoctorDTO> getDoctorByNameWithLimitAndOffset(String name, int offset, int limit) {
+        List<Doctors> doctors;
+        if (name == null) {
+            doctors = doctorsDAO.getWithOffsetAndLimit(offset, limit);
+        } else {
+            doctors = doctorsDAO.searchByNameAndSpecialisationWithOffsetAndLimit(name, offset, limit);
+        }
+        List<SearchResultDoctorDTO> results = new ArrayList<>();
+        for (Doctors doctor : doctors) {
+            SearchResultDoctorDTO result = new SearchResultDoctorDTO();
+            mapper.map(result, doctor);
+            results.add(result);
+
+        }
+        return results;
     }
 }

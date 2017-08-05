@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.service;
 
 
+import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
 import com.softserve.edu.lv251.entity.Clinics;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +24,7 @@ public interface ClinicService {
 
     void deleteClinic(Clinics clinic);
 
-    List<Clinics> getWithOffsetOrderedByName(int offset, int limit);
+    List<SearchResultClinicDTO> getWithOffsetOrderedByName(String name, int offset, int limit);
 
     Clinics getFirst();
 

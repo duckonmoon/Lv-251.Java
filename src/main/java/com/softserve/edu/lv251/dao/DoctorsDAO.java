@@ -14,4 +14,7 @@ public interface DoctorsDAO extends BaseDAO<Doctors>{
     List<Appointments> appointmentsInThisMonth(Long id, Date date);
     List<Doctors>searchByDistrict(String name);
     List<Doctors>searchBySpecialization(String name);
+    List<Doctors>getWithOffsetAndLimit(int offset, int limit);
+    List<Doctors>searchByNameAndSpecialisationWithOffsetAndLimit(String value, int offset, int limit);
+
 }

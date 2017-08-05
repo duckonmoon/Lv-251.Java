@@ -70,7 +70,7 @@
                                             <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}" alt="...">
                                         </a>
                                     </div>
-                                    <a href="doctors/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
                                     <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
@@ -121,6 +121,7 @@
                                         </div>
                                     </div>
                                     <input name="doctorId" value="${doctor.id}" style="display: none">
+                                    <input name="current" value="${current}" style="display: none">
                                     <div style="text-align: center">
                                         <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
                                             <spring:message code="messages.approve"/>

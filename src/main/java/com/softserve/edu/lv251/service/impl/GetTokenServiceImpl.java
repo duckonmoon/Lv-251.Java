@@ -39,15 +39,17 @@ public class GetTokenServiceImpl implements GetTokenService {
             tokenData.put("username", username);
             tokenData.put("token_create_date", new Date().getTime());
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.YEAR, 100);
-            tokenData.put("token_expiration_date", calendar.getTime());
+            calendar.add(Calendar.YEAR, 1);
+            tokenData.put("token_expiration_date", calendar.getTime().getTime());
             JwtBuilder jwtBuilder = Jwts.builder();
             jwtBuilder.setExpiration(calendar.getTime());
             jwtBuilder.setClaims(tokenData);
 
-            String key = "abc123";
+            String key = "key123";
             String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
             logger.log(Priority.INFO, token);
+            logger.log(Priority.INFO, "strt: " + new Date().getTime());
+            logger.log(Priority.INFO, "exp: " + calendar.getTime().getTime());
             return token;
         } else {
             throw new Exception("Authentication error");

@@ -53,9 +53,9 @@ public class TokenAuthenticationManager implements AuthenticationManager {
         } catch (Exception ex) {
             throw new AuthenticationServiceException("Token corrupted");
         }
-        if (claims.get("TOKEN_EXPIRATION_DATE", Long.class) == null)
+        if (claims.get("token_expiration_date", Long.class) == null)
             throw new AuthenticationServiceException("Invalid token");
-        Date expiredDate = new Date(claims.get("TOKEN_EXPIRATION_DATE", Long.class));
+        Date expiredDate = new Date(claims.get("token_expiration_date", Long.class));
         if (expiredDate.after(new Date()))
             return buildFullTokenAuthentication(authentication, claims);
         else
@@ -63,7 +63,7 @@ public class TokenAuthenticationManager implements AuthenticationManager {
     }
 
     private TokenAuthentication buildFullTokenAuthentication(TokenAuthentication authentication, DefaultClaims claims) {
-        User user = (User) customUserDetailsService.loadUserByUsername(claims.get("USERNAME", String.class));
+        User user = (User) customUserDetailsService.loadUserByUsername(claims.get("username", String.class));
         if (user.isEnabled()) {
             Principal principal = new PrincipalImpl(user.getUsername());
             Collection<GrantedAuthority> authorities = user.getAuthorities();

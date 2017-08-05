@@ -6,7 +6,7 @@
 
 <link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
 
-<div class="container-fluid" style="a">
+<div class="container-fluid">
     <div class="row content">
         <br>
         <div <%--class="list-group doc-menu"--%> id="menu_mcard">

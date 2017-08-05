@@ -52,10 +52,15 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     Logger logger;
     @Autowired
     private DoctorsDAO doctorsDAO;
+
     @Autowired
     private SpecializationService specializationService;
+
     @Autowired
     private ClinicService clinicService;
+
+    @Autowired
+    Mapper mapper;
 
     @Override
     public void addDoctor(Doctors doctors) {
@@ -129,7 +134,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         return doctor;
     }
 
-
     public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
         return doctorsDAO.appointmentsInThisMonth(id, date);
     }
@@ -149,7 +153,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-
     public List<PatientDTO> getDoctorPatients(long doctorId) {
         List<PatientDTO> patients = new ArrayList<>();
         Doctors doctor = doctorsDAO.getEntityByID(doctorId);
@@ -163,27 +166,32 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         return patients;
     }
 
+    @Override
     public BaseDAO<Doctors> getDao() {
         return doctorsDAO;
     }
 
-    public List<Doctors> getByClinic(Long clinicId) {
-        List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
-        return doctors.isEmpty() ? null : doctors;
+
+    @Override
+    public List<Doctors> getByClinic(Long clinicId){
+        List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
+        return doctors.isEmpty()? null : doctors;
     }
 
+    @Override
     @Transactional
-    public Doctors addDoctorAccount(DoctorDTO accountDto) {
+    public Doctors addDoctorAccount(DoctorDTO accountDto){
         Doctors doctor = new Doctors();
-        doctor.setFirstname(accountDto.getFirstname());
-        doctor.setLastname(accountDto.getLastname());
+        doctor.setFirstname(accountDto.getFirstName());
+        doctor.setLastname(accountDto.getLastName());
         doctor.setMiddlename("");
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         doctor.setRoles(Arrays.asList(
-                rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
+                rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
+                rolesService.findByName(WebRoles.ROLE_USER.name())));
         Contacts contact = new Contacts();
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
@@ -193,6 +201,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
 
         addDoctor(doctor);
+
         return doctor;
     }
 

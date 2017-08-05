@@ -78,7 +78,7 @@
                 </li>
                 <li class="${current=='moderator/cabinet'? 'active':''}">
                 <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
-                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
                     </a>
                 </sec:authorize>
                 </li>
@@ -189,6 +189,25 @@
         </div>
     </sec:authorize>
 
+<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
+
+<script>
+    function hideText() {
+        document.getElementById('wrong').innerHTML= '';
+    }
+</script>
+
+
+<c:if test="${flag}">
+    <script>
+        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
+        jQuery(window).load(function(){
+            jQuery('#loginModal').modal('show')
+        });
+        <c:set var="flag" value="false"/>
+    </script>
+</c:if>
+
 
     <section id="site-content">
         <tiles:insertAttribute name="body" />
@@ -208,22 +227,6 @@
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 
-<script>
-    function hideText() {
-        document.getElementById('wrong').innerHTML= '';
-    }
-</script>
-
-
-<c:if test="${flag}">
-    <script>
-        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
-        jQuery(window).load(function(){
-            jQuery('#loginModal').modal('show')
-        });
-        <c:set var="flag" value="false"/>
-    </script>
-</c:if>
 
 </body>
 </html>

@@ -68,7 +68,10 @@ public class AllDoctorsController {
         Date date;
 
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy - HH:mm").parse(localdate);
+            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
+            if(date.before(new Date())){
+                throw new Exception();
+            }
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
             appointments.setApproved(false);

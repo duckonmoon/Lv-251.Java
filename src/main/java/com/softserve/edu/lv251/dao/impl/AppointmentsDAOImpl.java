@@ -18,4 +18,9 @@ public class AppointmentsDAOImpl extends BaseDAOImpl<Appointments> implements Ap
     public List<Appointments> appointmentsWithDoctor() {
         return entityManager.createQuery("select a from Appointments a join a.doctors d join d.specialization s").getResultList();
     }
+
+    public List<Appointments> getAppiontmentbyDoctorsEmail(String email) {
+        return entityManager.createQuery("select a from Appointments a where a.doctors.email= ?1").setParameter(1,email).getResultList();
+    }
 }
+

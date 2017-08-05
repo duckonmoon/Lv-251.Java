@@ -15,6 +15,10 @@ public interface AppointmentService {
 
     Appointments getAppointmentById(long id);
 
+
     List<Appointments> listAppointmensWithDoctor();
+
+
+    List<Appointments> getAppiontmentbyDoctorsEmail(String email);
 
 }

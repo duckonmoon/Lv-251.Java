@@ -37,4 +37,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentsDAO.appointmentsWithDoctor();
     }
 
+    public List<Appointments> getAppiontmentbyDoctorsEmail(String email) {
+        return appointmentsDAO.getAppiontmentbyDoctorsEmail(email);
+    }
 }

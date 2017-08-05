@@ -11,13 +11,13 @@
         <br>
         <div <%--class="list-group doc-menu"--%> id="menu_mcard">
             <ul>
-                <li><a href="#" class="active list-group-item">Appointments history</a></li>
-                <li><a href="#" class="list-group-item">Pending appointments</a></li>
+                <li><a href="#" class="active list-group-item" style="height: 61px">Appointments history</a></li>
+                <li><a href="#" class="list-group-item" style="height: 61px">Pending appointments</a></li>
             </ul>
         </div>
 
         <div class="col-sm-9">
-            <div class="well">
+            <div class="well" id="mcard_content">
                 <div class="col-sm-6">
                     <div class="medical-card">
                         <div class="media">

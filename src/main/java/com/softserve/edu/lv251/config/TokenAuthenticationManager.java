@@ -10,13 +10,16 @@ import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import sun.security.acl.PrincipalImpl;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Date;
 
@@ -62,9 +65,10 @@ public class TokenAuthenticationManager implements AuthenticationManager {
     private TokenAuthentication buildFullTokenAuthentication(TokenAuthentication authentication, DefaultClaims claims) {
         User user = (User) customUserDetailsService.loadUserByUsername(claims.get("USERNAME", String.class));
         if (user.isEnabled()) {
+            Principal principal = new PrincipalImpl(user.getUsername());
             Collection<GrantedAuthority> authorities = user.getAuthorities();
             TokenAuthentication fullTokenAuthentication =
-                    new TokenAuthentication(authentication.getToken(), authorities, true, user, user);
+                    new TokenAuthentication(authentication.getToken(), authorities, true, principal, user);
             return fullTokenAuthentication;
         } else {
             throw new AuthenticationServiceException("User disabled");

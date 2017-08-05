@@ -6,7 +6,7 @@
 #menu_mcard ul
 {
     display: inline-block;
-    padding: 0em 2em;
+    padding: 0em 2em 0em 18px;
     text-align: center;
 }
 
@@ -30,13 +30,16 @@
 
 #menu_mcard li:hover a, #menu_mcard li.active a, #menu_mcard li a, #menu_mcard li.active span
 {
-    /*background: #79aeaf;*/
     border-radius: 4px 4px 0px 0px;
-    /*color: #237365;*/
+    height: 60px;
 }
 
 #menu_mcard .current_page_item a
 {
+}
+
+#mcard_content {
+    border: 1px solid #2f6fa8;
 }
 
 .medical-card {

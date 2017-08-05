@@ -59,6 +59,41 @@ public class UserCabinetController {
         return "redirect:/user/cabinet";
     }
 
+    /**
+     * Added by Pavlo Kuchereshko
+     */
+    @GetMapping("/user/medicalcard")
+    public String medicalCardGET(ModelMap model, Principal principal){
+
+        Users user = userService.findByEmail(principal.getName());
+        Contacts contacts = user.getContact();
+
+        PersonalInfoDTO userDTO = new PersonalInfoDTO();
+
+        mapper.map(user, userDTO);
+        mapper.map(contacts, userDTO);
+        model.addAttribute("photo", user.getPhoto());
+        model.addAttribute("userObject", userDTO);
+
+        return "user_cabinet_body_medicalcard";
+    }
+
+    /**
+     * Added by Pavlo Kuchereshko
+     */
+    @PostMapping("/user/medicalcard")
+    public String medicalCardPOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
+
+        Users user = userService.findByEmail(principal.getName());
+        Contacts contacts = user.getContact();
+        mapper.map(personalInfoDTO, user);
+        mapper.map(personalInfoDTO, contacts);
+        userService.updateUser(user);
+        contactsService.updateContacts(contacts);
+
+        return "user_cabinet_body_medicalcard";
+    }
+
     @GetMapping("/user/appointments")
     public String userAppointments(Model model){
         return "user_cabinet_body_appointments";

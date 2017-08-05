@@ -40,7 +40,7 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
                     disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
-                .addFilterAfter(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/rest/*").authenticated();
                 .antMatchers("/rest/api/doctor/**")

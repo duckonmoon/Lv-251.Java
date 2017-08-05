@@ -64,7 +64,10 @@ public class AllDoctorsController {
      * @return
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(@PathVariable("current") Integer chainIndex, Model modelMap, @RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
+    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+                                 @RequestParam("doctorId") long doctorId,
+                                 @RequestParam("current") Integer chainIndex, Principal principal) {
+
         Date date;
 
         try {
@@ -77,16 +80,13 @@ public class AllDoctorsController {
             appointments.setApproved(false);
             appointments.setUsers(userService.findByEmail(principal.getName()));
             appointments.setDoctors(doctorsService.find(doctorId));
-
             appointmentService.addAppointment(appointments);
 
         } catch (Exception e) {
             logger.info("Wrong date.",e);
-
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("doc", doctorId);
             modelMap.addAttribute("current", chainIndex);
-
             return allDoctors(chainIndex, modelMap);
         }
         return allDoctors(chainIndex, modelMap);

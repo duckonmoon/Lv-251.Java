@@ -12,23 +12,6 @@ import org.hibernate.validator.constraints.NotBlank;
 public class DoctorDTO extends UserDTO {
 
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    private String firstName;
-
-    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    private String lastName;
-
-    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    @ValidPassword
-    private String password;
-
-    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    private String matchingPassword;
-
-    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    @ValidEmail
-    private String email;
-
-    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String specialization;
 
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
@@ -64,11 +47,11 @@ public class DoctorDTO extends UserDTO {
     @Override
     public String toString() {
         return "DoctorDTO{" +
-                " firstname='" + firstName + '\'' +
-                ", lastname='" + lastName + '\'' +
-                ", password='" + password + '\'' +
-                ", matchingPassword='" + matchingPassword + '\'' +
-                ", email='" + email + '\'' +
+                " firstname='" + this.getFirstName() + '\'' +
+                ", lastname='" + this.getLastName() + '\'' +
+                ", password='" + this.getPassword() + '\'' +
+                ", matchingPassword='" + this.getMatchingPassword() + '\'' +
+                ", email='" + this.getEmail() + '\'' +
                 ", specialization='" + specialization + '\'' +
                 ", description='" + description + '\'' +
                 ", clinic='" + clinic + '\'' +

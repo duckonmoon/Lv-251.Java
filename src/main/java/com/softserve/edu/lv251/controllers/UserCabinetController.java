@@ -64,10 +64,10 @@ public class UserCabinetController {
     }
 
     @GetMapping("/user/appointments")
-    public String userAppointments(Model model){
-        model.addAttribute("listAppointmens", appointmentService.listAppointmensWithDoctor());
+    public String userAppointments(Model model, Principal principal){
+        Users user = userService.findByEmail(principal.getName());
+        model.addAttribute("listAppointmens", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("date", new Date());
         return "userCabinetAppointments";
     }
-
 }

@@ -32,11 +32,11 @@ public class Appointments extends BaseEntity {
     public Appointments() {
     }
 
-    public Boolean getApproved() {
+    public Boolean getIsApproved() {
         return isApproved;
     }
 
-    public void setApproved(Boolean approved) {
+    public void setIsApproved(Boolean approved) {
         isApproved = approved;
     }
 

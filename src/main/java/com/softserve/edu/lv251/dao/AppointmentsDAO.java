@@ -10,7 +10,8 @@ import java.util.List;
 public interface AppointmentsDAO extends BaseDAO<Appointments>{
 
 
-    List<Appointments> appointmentsWithDoctor ();
+    List<Appointments> appointmentsWithDoctor (Long id);
+
 
     List<Appointments> getAppiontmentbyDoctorsEmail(String email);
 

@@ -77,7 +77,7 @@ public class AllDoctorsController {
             }
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
-            appointments.setApproved(false);
+            appointments.setIsApproved(false);
             appointments.setUsers(userService.findByEmail(principal.getName()));
             appointments.setDoctors(doctorsService.find(doctorId));
             appointmentService.addAppointment(appointments);

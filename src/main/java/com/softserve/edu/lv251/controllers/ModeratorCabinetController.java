@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -56,7 +57,7 @@ public class ModeratorCabinetController {
      }
 
      @PostMapping("/cabinet")
-     public String edit(@ModelAttribute @Valid ClinicInfoDTO clinicInfoDTO,Principal principal,BindingResult bindingResult){
+     public String edit(@ModelAttribute @Valid ClinicInfoDTO clinicInfoDTO,BindingResult bindingResult,Principal principal){
          Moderator moderator= moderatorService.getByEmail(principal.getName());
          Clinics clinics= moderator.getClinics();
          Contacts contacts= clinics.getContact();
@@ -118,8 +119,9 @@ if(!bindingResult.hasErrors()){
 //     return "redirect:/moderator/cabinet";
 // }
     @PostMapping(value = "/upload/clinicPhoto")
- public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket, Principal principal,BindingResult bindingResult){
+ public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket,BindingResult bindingResult, Principal principal,RedirectAttributes model){
      if (bindingResult.hasErrors()){
+
          return "moderatorCabinet";
      }else{
     clinicService.updatePhoto(fileBucket.getMultipartFile(),moderatorService.getByEmail(principal.getName()).getClinics());

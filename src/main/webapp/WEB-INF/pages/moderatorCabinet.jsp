@@ -48,11 +48,12 @@
                                             <div style="position:relative;">
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
+                                                    <form:errors path="multipartFile"></form:errors>
                                                     <form:input path="multipartFile" type="file"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
                                                 </a>
                                                 &nbsp;
                                                 <span class='label label-info' id="upload-file-info"></span>
-                                                <form:errors path="multipartFile"></form:errors>
+
                                                 <button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</button>
                                             </div>
 

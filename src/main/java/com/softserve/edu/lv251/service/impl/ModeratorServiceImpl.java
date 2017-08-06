@@ -13,8 +13,10 @@ import java.util.List;
  */
 @Service
 public class ModeratorServiceImpl  implements ModeratorService {
+
     @Autowired
     private ModeratorDAO moderatorDAO;
+
     @Override
     public Moderator getByEmail(String email) {
        List<Moderator> moderators= moderatorDAO.getEntitiesByColumnNameAndValue("email",email);

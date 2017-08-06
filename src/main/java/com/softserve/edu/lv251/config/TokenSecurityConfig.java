@@ -35,16 +35,20 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/rest/api/*")
+        http.antMatcher("/rest/api/**")
                 .csrf().
                     disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
-                .addFilterAfter(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/rest/*").authenticated();
-                .antMatchers("/rest/api/*")
+                .antMatchers("/rest/api/doctor/**")
                 .hasAuthority(WebRoles.ROLE_DOCTOR.name())
+
+                .antMatchers("/rest/api/user/**")
+                .hasAuthority(WebRoles.ROLE_USER.name())
+
 
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

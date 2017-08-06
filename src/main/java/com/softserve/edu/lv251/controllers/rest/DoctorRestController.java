@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Taras on 01.08.2017.
  */
 @RestController
-@RequestMapping("/rest/doctor")
+@RequestMapping("/rest")
 public class DoctorRestController {
 
     @Autowired
@@ -26,10 +26,17 @@ public class DoctorRestController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/patients")
+    @RequestMapping("/doctor/patients")
     public List<PatientDTO> getPatients(Principal principal){
         Users users = userService.findByEmail(principal.getName());
-
         return doctorsService.getDoctorPatients(users.getId());
     }
+
+    @RequestMapping("/api/doctor/patients")
+    public String getPatientsApi(Principal principal){
+//        Users users = userService.findByEmail(principal.getName());
+//        return doctorsService.getDoctorPatients(users.getId());
+        return "erehdf";
+    }
+
 }

@@ -1,19 +1,17 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ClinicsDAO;
+import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,22 +21,31 @@ import java.util.List;
 public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
 
     @Autowired
-    private ClinicsDAO clinicsDAO;
+    Mapper mapper;
 
     @Autowired
-    private EntityManager entityManager;
+    Logger logger;
+
+    @Autowired
+    private ClinicsDAO clinicsDAO;
 
     @Override
-    @Transactional
-    public List<Clinics> getWithOffsetOrderedByName(int offset, int limit) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Clinics> criteriaQuery = criteriaBuilder.createQuery(Clinics.class);
-        Root<Clinics> from = criteriaQuery.from(Clinics.class);
-        CriteriaQuery<Clinics> select = criteriaQuery.select(from);
-        TypedQuery<Clinics> typedQuery = entityManager.createQuery(select);
-        typedQuery.setFirstResult(offset);
-        typedQuery.setMaxResults(limit);
-        return typedQuery.getResultList();
+    public List<SearchResultClinicDTO> getWithOffsetOrderedByName(String name, int offset, int limit) {
+        List<Clinics> clinics;
+        if (name == null || name.isEmpty()) {
+            clinics = clinicsDAO.getWithOffsetAndLimit(offset, limit);
+        } else {
+            clinics = clinicsDAO.getByNameWithOffsetAndLimit(name, offset, limit);
+        }
+        List<SearchResultClinicDTO> results = new ArrayList<>();
+
+        for (Clinics clinic : clinics) {
+            SearchResultClinicDTO result = new SearchResultClinicDTO();
+            mapper.map(clinic, result);
+            results.add(result);
+        }
+
+        return results;
     }
 
     @Override
@@ -91,12 +98,12 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public Clinics getByName(String name) {
-        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name",name).get(0);
+        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name).get(0);
     }
+
     @Override
-    public void updatePhoto(MultipartFile file,Clinics clinics){
-        String photo=StoredImagesService.getBase64encodedMultipartFile(file);
-        System.out.println("###################################################################" + photo.length());
+    public void updatePhoto(MultipartFile file, Clinics clinics) {
+        String photo = StoredImagesService.getBase64encodedMultipartFile(file);
         clinics.setPhoto(photo);
         clinicsDAO.updateEntity(clinics);
     }

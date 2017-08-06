@@ -32,4 +32,29 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinics> implements ClinicsDAO {
 
         return query.getResultList();
     }
+
+    @Override
+    public List<Clinics> getWithOffsetAndLimit(int offset, int limit) {
+        Query query = entityManager.createQuery(
+                "select c " +
+                        "from Clinics c")
+                .setFirstResult(offset)
+                .setMaxResults(limit);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Clinics> getByNameWithOffsetAndLimit(String value, int offset, int limit) {
+        String name = "%" + value + "%";
+
+        Query query=entityManager.createQuery(
+                "select c " +
+                        "from Clinics c " +
+                        "where c.clinic_name like :name ")
+                .setParameter("name",name)
+                .setFirstResult(offset)
+                .setMaxResults(limit);
+        return query.getResultList();
+    }
 }

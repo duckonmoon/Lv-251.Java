@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Taras on 03.08.2017.
  */
-@Controller
+@RestController
 public class TokenAuthenticationController {
 
     @Autowired
@@ -19,7 +20,7 @@ public class TokenAuthenticationController {
     @Autowired
     Logger logger;
 
-    @RequestMapping("/auth")
+    @RequestMapping("rest/auth")
     public String auth(@RequestParam(name = "email")String email,
                        @RequestParam(name = "password")String password){
         try {

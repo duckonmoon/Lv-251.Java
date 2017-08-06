@@ -5,7 +5,6 @@ import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.Clinics;
 
 import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Moderator;
 
 import com.softserve.edu.lv251.entity.Contacts;
 
@@ -15,6 +14,9 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Mapper extends ConfigurableMapper{
@@ -72,7 +74,7 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setLng(lng);
                         latLng.setId(clinics.getId());
                     }
-                });
+                }).register();
         factory.classMap(PatientDTO.class, Users.class)
                 .customize(new CustomMapper<PatientDTO, Users>() {
                     @Override
@@ -83,6 +85,64 @@ public class Mapper extends ConfigurableMapper{
                                 + users.getLastname();
                         patientDTO.setFullName(fullName);
                     }
-                });
-    }
+                }).register();
+        factory.classMap(SearchResultDoctorDTO.class, Doctors.class).customize(new CustomMapper<SearchResultDoctorDTO, Doctors>() {
+            @Override
+            public void mapAtoB(SearchResultDoctorDTO searchResultDoctorDTO, Doctors doctor, MappingContext context) {
+                super.mapAtoB(searchResultDoctorDTO, doctor, context);
+                searchResultDoctorDTO.setId(doctor.getId());
+                searchResultDoctorDTO.setDescription(doctor.getDescription());
+                searchResultDoctorDTO.setFirstName(doctor.getFirstname());
+                searchResultDoctorDTO.setLastName(doctor.getLastname());
+                searchResultDoctorDTO.setMiddleName(doctor.getMiddlename());
+                searchResultDoctorDTO.setSpecialisation(doctor.getSpecialization().getName());
+                searchResultDoctorDTO.setPhoto(doctor.getPhoto());
+
+                ContactsDTO contacts = new ContactsDTO();
+                contacts.setAddress(doctor.getContact().getAddress());
+                contacts.setLatitude(doctor.getContact().getLatitude());
+                contacts.setLongitude(doctor.getContact().getLongitude());
+                contacts.setCity(doctor.getContact().getCity());
+                contacts.setDistrict(doctor.getContact().getDistrict().getName());
+                contacts.setEmail(doctor.getContact().getEmail());
+                List<String> phones = new ArrayList<>();
+                phones.add(doctor.getContact().getFirstPhone());
+                phones.add(doctor.getContact().getSecondPhone());
+                phones.add(doctor.getContact().getThirdPhone());
+                contacts.setPhones(phones);
+                searchResultDoctorDTO.setContacts(contacts);
+
+                searchResultDoctorDTO.setClinicId(doctor.getClinics().getId());
+                searchResultDoctorDTO.setClinicName(doctor.getClinics().getClinic_name());
+
+            }
+        });
+
+        factory.classMap(Clinics.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinics, SearchResultClinicDTO>() {
+            @Override
+            public void mapAtoB(Clinics clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {
+
+
+                searchResultClinicDTO.setId(clinic.getId());
+                searchResultClinicDTO.setName(clinic.getClinic_name());
+                searchResultClinicDTO.setDescription(clinic.getDescription());
+                searchResultClinicDTO.setPhoto(clinic.getPhoto());
+
+                ContactsDTO contacts = new ContactsDTO();
+                contacts.setAddress(clinic.getContact().getAddress());
+                contacts.setLatitude(clinic.getContact().getLatitude());
+                contacts.setLongitude(clinic.getContact().getLongitude());
+                contacts.setCity(clinic.getContact().getCity());
+                contacts.setDistrict(clinic.getContact().getDistrict().getName());
+                contacts.setEmail(clinic.getContact().getEmail());
+                List<String> phones = new ArrayList<>();
+                phones.add(clinic.getContact().getFirstPhone());
+                phones.add(clinic.getContact().getSecondPhone());
+                phones.add(clinic.getContact().getThirdPhone());
+                contacts.setPhones(phones);
+                searchResultClinicDTO.setContacts(contacts);
+
+            }
+        }).register();
 }
+    }

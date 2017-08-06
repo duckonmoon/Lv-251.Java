@@ -70,7 +70,6 @@
         <put-attribute name="current" value="clinics"/>
     </definition>
 
-
     <!--Contact page-->
     <definition name="contact" extends="base-definition">
         <put-attribute name="title" value="Contact" />
@@ -88,7 +87,6 @@
         <!--<put-attribute name="title" value="Map" />-->
         <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
     <!--</definition>-->
-
 
     <!--Wrong password page-->
     <definition name="wrongPassword" extends="home">
@@ -109,9 +107,7 @@
         <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
     </definition>
 
-
     <!-- Doctor_details Page -->
-    <!-- Якщо хто-небудь ще раз відредагує получить по єбалу, я 2 години шукав помилку-->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_details.jsp" />
@@ -131,6 +127,7 @@
         <put-attribute name="current" value="doctor/сabinet"/>
     </definition>
 
+
     <!-- User cabinet Page -->
 
     <definition name="userCabinet"  extends="base-definition" >
@@ -143,8 +140,6 @@
         <put-attribute name="body" value="/WEB-INF/pages/userCabinetAppointments.jsp"/>
     </definition>
 
-
-
     <definition name="doctor_cabinet_patients" extends="base-definition">
         <put-attribute name="title" value="Patients" />
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
@@ -152,36 +147,31 @@
         <put-attribute name="current" value="doctor/patients"/>
     </definition>
 
+    <!--Medical_Card Page-->
+    <definition name="user_cabinet_body_medicalcard" extends="base-definition">
+        <put-attribute name="title" value="Medical Card" />
+        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_medicalcard.jsp" />
+        <put-attribute name="current" value="user_cabinet_body_medicalcard"/>
+    </definition>
 
-  <!-- Moderator cabinet Page   -->
+    <!-- Moderator cabinet Page -->
     <definition name="moderatorCabinet" extends="base-definition">
         <put-attribute name="title" value="Moderator Cabinet"/>
         <put-attribute name="body" value="/WEB-INF/pages/moderatorCabinet.jsp"/>
         <put-attribute name="current" value="moderator/cabinet"/>
     </definition>
 
-     <!--Moderator cabinet doctors Page   -->
-
+     <!--Moderator cabinet doctors Page -->
     <definition name="moderatorCabinetDoctors" extends="moderatorCabinet">
         <put-attribute name="title" value="Moderator Cabinet"/>
         <put-attribute name="body" value="/WEB-INF/pages/moderatorCabinetDoctors.jsp"/>
         <put-attribute name="current" value="moderator_cabinet_doctors"/>
     </definition>
 
-<definition name="moderatorAddDoctor" extends="base-definition">
-    <put-attribute name="title" value="Moderator Cabinet"/>
-    <put-attribute name="body" value="/WEB-INF/pages/moderatorAddDoctor.jsp"/>
-    <put-attribute name="current" value="moderator_cabinet_doctors"/>
-
-</definition>
-
-
-
-    <!-- Medical_Card Page -->
-    <definition name="medical_card" extends="base-definition">
-        <put-attribute name="title" value="Medical Card" />
-        <put-attribute name="body" value="/WEB-INF/pages/medical_card.jsp" />
-        <put-attribute name="current" value="medical_card"/>
+    <definition name="moderatorAddDoctor" extends="base-definition">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="/WEB-INF/pages/moderatorAddDoctor.jsp"/>
+        <put-attribute name="current" value="moderator_cabinet_doctors"/>
     </definition>
 
 </tiles-definitions>

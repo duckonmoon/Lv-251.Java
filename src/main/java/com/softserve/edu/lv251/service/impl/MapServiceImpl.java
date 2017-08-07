@@ -30,7 +30,7 @@ public class MapServiceImpl implements MapService {
 
         for (Clinics clinic: clinics){
             ClinicLatLngDTO latlang = new ClinicLatLngDTO();
-            mapper.map(latlang, clinic);
+            mapper.map(clinic, latlang);
             if(latlang.getLat() != 0 && latlang.getLng() != 0){
                 dtoList.add(latlang);
             }

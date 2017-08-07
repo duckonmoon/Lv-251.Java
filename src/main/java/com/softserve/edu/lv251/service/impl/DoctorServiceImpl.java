@@ -46,8 +46,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    Mapper mapper;
+
     @Autowired
     Logger logger;
     @Autowired
@@ -159,7 +158,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<Appointments> appointments = doctor.getDocAppointments();
         for (Appointments a : appointments) {
             PatientDTO patient = new PatientDTO();
-            mapper.map(patient, a.getUsers());
+            mapper.map(a.getUsers(), patient);
             patients.add(patient);
         }
 
@@ -215,10 +214,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<SearchResultDoctorDTO> results = new ArrayList<>();
         for (Doctors doctor : doctors) {
             SearchResultDoctorDTO result = new SearchResultDoctorDTO();
-            mapper.map(result, doctor);
+            mapper.map(doctor, result);
             results.add(result);
-
         }
+
         return results;
     }
 }

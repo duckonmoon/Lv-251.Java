@@ -14,6 +14,7 @@
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item navbar-inverse">
                         <spring:message code="messages.addDoctors" />
                     </a>
+
                 </div>
             </div>
         </div>
@@ -69,28 +70,28 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-3 control-label">Specialization:</label>
+        <label class="col-lg-3 control-label"><spring:message code="messages.specialization"/>:</label><i class="fa fa-plus " style="margin-top: 12px;color: gray"  data-toggle="tooltip" title="add new Specialization" aria-hidden="true"></i>
         <div class="col-lg-7">
             <form:errors path="specialization"/>
             <form:input type="text" class="form-control" id="autocomplete-spec" path="specialization"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-3 control-label">Clinic name:</label>
+        <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
         <div class="col-lg-7">
             <form:errors path="clinic"/>
             <form:input type="text" value="${moderator.clinics.clinic_name}" class="form-control" path="clinic" />
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-3 control-label">Description:</label>
+        <label class="col-lg-3 control-label"><spring:message code="messages.Description"/>:</label>
         <div class="col-lg-7">
             <form:errors path="description"/>
             <form:input type="text" class="form-control" path="description"/>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-3 control-label">Photo:</label>
+        <label class="col-lg-3 control-label"><spring:message code="messages.photo"/>:</label>
         <div class="col-lg-7">
             <form:errors path="multipartFile"/>
             <form:input type="file" class="form-control" path="multipartFile"/>

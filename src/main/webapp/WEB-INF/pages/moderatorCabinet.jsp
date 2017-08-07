@@ -67,7 +67,7 @@
                         <div class="col-md-7 personal-info">
                     <form:form method="POST" modelAttribute="clinicDTO" action="/moderator/cabinet">
                     <div class="form-group">
-                        <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
+                        <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                         <div class="col-lg-7">
 
                             <form:errors path="clinic_name"></form:errors>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-3 control-label"> <spring:message code="messages.userLastname"/>:</label>
+                        <label class="col-lg-3 control-label"> <spring:message code="messages.Description"/>:</label>
                         <div class="col-lg-7">
                             <form:textarea cssClass="form-control" path="description" value="${clinicDTO.description}"/>
                         </div>
@@ -136,6 +136,7 @@
                         </div>
                 </div>
             </div>
+
 
         </div>
     </div>

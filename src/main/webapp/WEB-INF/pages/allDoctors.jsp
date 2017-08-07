@@ -70,10 +70,12 @@
                                             <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}" alt="...">
                                         </a>
                                     </div>
-                                    <a href="/doctors/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${flag}/${doctor.id}" class="btn-link">
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
                                     <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
+                                    <hr>
+                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinics.clinic_name}</p>
                                     <button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%" data-toggle="modal" data-target="#modal_${doctor.id}">
                                         <spring:message code="messages.addAppointment"/>
                                     </button >

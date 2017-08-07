@@ -34,7 +34,7 @@
                                 <div class="col-xs-6 col-sm-6 col-md-10 col-lg-10 col-md-offset-1 ">
                                     <div class="row">
                                         <div class="col-xs-6 col-md-3 col-lg-2">
-                                            <img src="/resources/img/User_Default.png" width="100" class="avatar img-circle" alt="avatar">
+                                            <img src="data:image/jpeg;base64,${doctor.photo}" width="100" class="avatar img-circle" alt="avatar">
                                         </div>
                                         <div class="col-md-1 col-lg-1"></div>
                                         <div class="col-xs-6 col-md-8 col-lg-9">

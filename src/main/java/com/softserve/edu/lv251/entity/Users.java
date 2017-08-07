@@ -20,8 +20,8 @@ public class Users extends BaseEntity {
 
     @Column(name = "tokenExpired", nullable = false, columnDefinition="bit(1) default 1")
     private boolean tokenExpired;
-
-    @Column(name = "photo", columnDefinition="MEDIUMTEXT")
+    @Lob
+    @Column(name = "photo", nullable = false, columnDefinition="MEDIUMTEXT")
     private String photo;
 
     @JsonIgnore

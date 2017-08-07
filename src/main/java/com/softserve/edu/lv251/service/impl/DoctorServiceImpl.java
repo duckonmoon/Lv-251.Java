@@ -11,6 +11,7 @@ import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -46,8 +47,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    Mapper mapper;
+
     @Autowired
     Logger logger;
     @Autowired
@@ -118,9 +118,12 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
-        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+
         doctor.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name()),
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
+
+
+        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         //user.setAppointments(new ArrayList<>());
         //user.setMedicalCards(new ArrayList<>());
         //user.setTestsResults(new ArrayList<>());
@@ -188,7 +191,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
-        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));
+//        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
@@ -197,7 +201,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);
         doctor.setDescription(accountDto.getDescription());
-        doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        if(specializationService.findByName(accountDto.getSpecialization())==null){
+            Specialization specialization= new Specialization();
+            specialization.setName(accountDto.getSpecialization());
+            specializationService.add(specialization);
+            doctor.setSpecialization(specialization);
+        }else{ doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        }
         doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
 
         addDoctor(doctor);

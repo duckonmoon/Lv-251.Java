@@ -40,21 +40,17 @@
 
                                 <form:form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data" modelAttribute="photoForm">
                                     <div class="col-lg-7">
-
-                                        <%--<span class="btn btn-default btn-file">--%>
-                                      <%--<i class="fa fa-camera-retro" aria-hidden="true"></i> <input name="file" type="file">--%>
-                                           <%--</span>--%>
-                                        <%--<button type="submit">Change</button>--%>
                                             <div style="position:relative;">
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
                                                     <form:errors path="multipartFile"></form:errors>
-                                                    <form:input path="multipartFile" type="file"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
+                                                    <div class="errors" style="display: none"></div>
+                                                    <form:input path="multipartFile" type="file" id="photo"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'/>
                                                 </a>
                                                 &nbsp;
                                                 <span class='label label-info' id="upload-file-info"></span>
 
-                                                <button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</button>
+                                                <button class='btn btn-github'onclick="err()" style="margin-top: 5px;margin-left: 20px">Change</button>
                                             </div>
 
                                     </div>

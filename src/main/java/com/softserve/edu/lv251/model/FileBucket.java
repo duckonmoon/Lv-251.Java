@@ -19,4 +19,5 @@ public class FileBucket {
     public void setMultipartFile(MultipartFile multipartFile) {
         this.multipartFile = multipartFile;
     }
+
 }

@@ -77,10 +77,11 @@ function clinicsAll() {
 
                 success: function (result) {
                     console.log(result.clinic_name);
+
                     $(".content").empty();
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
-                        "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
+                        "<img width=200' height='200' src='data:image/jpeg;base64,'"+result.photo+" alt='...'></a></div>"+
                         "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a>"+
                         " </div> </div>");
 
@@ -226,10 +227,10 @@ function  doctorsBySpecialization() {
                 contentType: 'application/json',
                 success: function (res) {
                     console.log(res.length);
-                    $(".content").empty();
+                    $("#content").empty();
                     for (var i = 0; i < res.length; i++) {
                         console.log("Doctors search by districts");
-                        $(".content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                        $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
                             "<a href='"+"doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+

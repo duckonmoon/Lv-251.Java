@@ -32,7 +32,7 @@
 
 
                 <div class="col-md-7 personal-info">
-<form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm">
+<form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm" enctype="multipart/form-data">
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
         <div class="col-lg-7">
@@ -87,6 +87,13 @@
         <div class="col-lg-7">
             <form:errors path="description"/>
             <form:input type="text" class="form-control" path="description"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label">Photo:</label>
+        <div class="col-lg-7">
+            <form:errors path="multipartFile"/>
+            <form:input type="file" class="form-control" path="multipartFile"/>
         </div>
     </div>
          <div class="form-group">

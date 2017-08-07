@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,18 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointments> listAppointmensWithDoctor(Long id) {
+        Date date = new Date();
+        List<Appointments> list = appointmentsDAO.appointmentsWithDoctor(id);
+        for (Appointments appointments : list) {
+            if (appointments.getAppointmentDate().before(date) && !appointments.getIsApproved()){
+                appointments.setStatus(false);
+                appointmentsDAO.updateEntity(appointments);
+            }
+        }
+        return list;
+    }
+
     public List<Appointments> getAppiontmentbyDoctorsEmail(String email) {
         return appointmentsDAO.getAppiontmentbyDoctorsEmail(email);
     }

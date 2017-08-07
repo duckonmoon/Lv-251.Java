@@ -22,20 +22,19 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Autowired
     Mapper mapper;
+
     @Autowired
     Logger logger;
+
     @Autowired
     private ClinicsDAO clinicsDAO;
 
     @Override
     public List<SearchResultClinicDTO> getWithOffsetOrderedByName(String name, int offset, int limit) {
         List<Clinics> clinics;
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
             clinics = clinicsDAO.getWithOffsetAndLimit(offset, limit);
         } else {
-            if (name.equals("")) {
-                clinics = clinicsDAO.getWithOffsetAndLimit(offset, limit);
-            }
             clinics = clinicsDAO.getByNameWithOffsetAndLimit(name, offset, limit);
         }
         List<SearchResultClinicDTO> results = new ArrayList<>();
@@ -44,8 +43,8 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
             SearchResultClinicDTO result = new SearchResultClinicDTO();
             mapper.map(clinic, result);
             results.add(result);
-
         }
+
         return results;
     }
 
@@ -105,7 +104,6 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     @Override
     public void updatePhoto(MultipartFile file, Clinics clinics) {
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
-        System.out.println("###################################################################" + photo.length());
         clinics.setPhoto(photo);
         clinicsDAO.updateEntity(clinics);
     }

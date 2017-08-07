@@ -70,7 +70,7 @@
                                             <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}" alt="...">
                                         </a>
                                     </div>
-                                    <a href="doctors/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
                                     <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>

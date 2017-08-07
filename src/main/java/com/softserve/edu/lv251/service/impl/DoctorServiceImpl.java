@@ -46,10 +46,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    Mapper mapper;
+
     @Autowired
     Logger logger;
+    
     @Autowired
     private DoctorsDAO doctorsDAO;
 

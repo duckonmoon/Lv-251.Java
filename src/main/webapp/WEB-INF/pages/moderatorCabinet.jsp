@@ -2,6 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container">
     <div >
@@ -14,7 +15,7 @@
                     <a href="/moderator/cabinet/doctors" class=" list-group-item ">
                         <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
                     </a>
-                    <a href="/moderator/cabinet/add/doctor" class="list-group-item">
+                    <a href="/moderator/cabinet/add/doctor" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />
                     </a>
                 </div>
@@ -25,6 +26,7 @@
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
                 <h3 class="text-center na">${moderator.clinics.clinic_name}</h3>
+                <c:if test="${message != null}"><div role="alert" class=" ${classCss} text-center">${message}</div></c:if>
                 <hr>
                 <div class="row">
                     <div class="row">
@@ -50,7 +52,9 @@
                                                 &nbsp;
                                                 <span class='label label-info' id="upload-file-info"></span>
 
-                                                <button class='btn btn-github'onclick="err()" style="margin-top: 5px;margin-left: 20px">Change</button>
+
+                                                <button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</button>
+
                                             </div>
 
                                     </div>
@@ -65,6 +69,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
                         <div class="col-lg-7">
+
                             <form:errors path="clinic_name"></form:errors>
                             <form:input type="text" class="form-control" path="clinic_name"/>
                         </div>

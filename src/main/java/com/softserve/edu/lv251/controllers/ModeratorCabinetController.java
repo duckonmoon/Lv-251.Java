@@ -9,6 +9,8 @@ import com.softserve.edu.lv251.model.FileBucket;
 import com.softserve.edu.lv251.service.*;
 import com.softserve.edu.lv251.service.impl.StoredImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Admin on 31.07.2017.
@@ -38,10 +41,12 @@ public class ModeratorCabinetController {
     private Mapper mapper;
     @Autowired
     private ContactsService contactsService;
+    @Autowired
+    MessageSource messageSource;
 
 
     @GetMapping(value = "/cabinet")
-     public String moderatorCabinet(Principal principal, Model model){
+     public String moderatorCabinet( Principal principal, Model model){
      Moderator moderator=moderatorService.getByEmail(principal.getName());
      List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
      Clinics clinics=moderator.getClinics();
@@ -57,7 +62,10 @@ public class ModeratorCabinetController {
      }
 
      @PostMapping("/cabinet")
-     public String edit(@ModelAttribute @Valid ClinicInfoDTO clinicInfoDTO,BindingResult bindingResult,Principal principal){
+     public String edit(@ModelAttribute("clinicDTO") @Valid ClinicInfoDTO clinicInfoDTO,BindingResult bindingResult,Principal principal,RedirectAttributes model){
+         Locale currentLocale = LocaleContextHolder.getLocale();
+
+         String messageError = messageSource.getMessage("messages.errorClinicName", null, currentLocale);
          Moderator moderator= moderatorService.getByEmail(principal.getName());
          Clinics clinics= moderator.getClinics();
          Contacts contacts= clinics.getContact();
@@ -69,7 +77,8 @@ if(!bindingResult.hasErrors()){
          contactsService.updateContacts(contacts);
          return "redirect:/moderator/cabinet";}
          else {
-
+    model.addFlashAttribute("classCss", "alert alert-warning");
+    model.addFlashAttribute("message", messageError);
     return "redirect:/moderator/cabinet";
          }
      }
@@ -105,6 +114,7 @@ if(!bindingResult.hasErrors()){
                 System.out.println(doctorDTO.getMultipartFile().getSize());
                 System.out.println(doctorDTO.toString());
 
+
      return "moderatorAddDoctor";
             }else {
                 System.out.println(doctorDTO.getMultipartFile().getSize());
@@ -112,18 +122,16 @@ if(!bindingResult.hasErrors()){
                 System.out.println(doctorDTO.toString());
             return "redirect:/moderator/cabinet/doctors";}
  }
-//@PostMapping(value = "/upload/clinicPhoto")
-// public String uploadPhoto(@RequestParam("file") MultipartFile file,Principal principal){
-//    clinicService.updatePhoto(file,moderatorService.getByEmail(principal.getName()).getClinics());
-//    System.out.println(file.getContentType());
-//    System.out.println(file.getName());
-//    System.out.println(file.isEmpty());
-//     return "redirect:/moderator/cabinet";
-// }
-    @PostMapping(value = "/upload/clinicPhoto")
- public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket,BindingResult bindingResult, Principal principal){
-     if (bindingResult.hasErrors()){
 
+    @PostMapping(value = "/upload/clinicPhoto")
+ public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket,BindingResult bindingResult, Principal principal,RedirectAttributes model){
+     if (bindingResult.hasErrors()){
+         Locale currentLocale = LocaleContextHolder.getLocale();
+
+
+         String messageError = messageSource.getMessage("messages.errorPhoto", null, currentLocale);
+         model.addFlashAttribute("classCss", "alert alert-danger");
+         model.addFlashAttribute("message", messageError);
          return "redirect:/moderator/cabinet";
      }else{
     clinicService.updatePhoto(fileBucket.getMultipartFile(),moderatorService.getByEmail(principal.getName()).getClinics());

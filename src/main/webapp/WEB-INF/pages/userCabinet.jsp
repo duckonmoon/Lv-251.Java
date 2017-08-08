@@ -42,7 +42,7 @@
                             <h6>Upload a different photo...</h6>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
-                                <span class="fileupload-exists">Change</span>         <input type="file" /></span>
+                                <span class="fileupload-exists">Change</span>         <form:input  path="photo" type="file" /></span>
                                 <span class="fileupload-preview"></span>
                                 <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">?</a>
                             </div>
@@ -82,7 +82,6 @@
                                 </div>
                             </div>
 
-                            <hr>
                             <h3><spring:message code="messages.addressInfo"/></h3>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label"><spring:message

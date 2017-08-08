@@ -6,6 +6,7 @@ import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
 
 import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;
@@ -50,8 +51,18 @@ public class Mapper extends ConfigurableMapper{
         factory.classMap(PersonalInfoDTO.class, Users.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
-                .field("email", "email")
-                .byDefault().register();
+                .field("email", "email").customize(new CustomMapper<PersonalInfoDTO, Users>() {
+            @Override
+            public void mapBtoA(Users user, PersonalInfoDTO personalInfoDTO, MappingContext context) {
+                personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
+            }
+            @Override
+            public void mapAtoB(PersonalInfoDTO personalInfoDTO, Users user, MappingContext context) {
+                String photo= StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
+                user.setPhoto(photo);
+            }
+        })
+                .register();
 
 
 

@@ -18,8 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 @Component
@@ -192,5 +195,32 @@ public class Mapper extends ConfigurableMapper{
             }
         }).register();
 
+        factory.classMap(Appointments.class,AppointmentsDTO.class)
+                .customize(new CustomMapper<Appointments, AppointmentsDTO>() {
+                    @Override
+                    public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
+                        super.mapAtoB(appointments, appointmentsDTO, context);
+                        appointmentsDTO.setId(appointments.getId());
+                        appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
+                        if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate())<0) {
+                            appointmentsDTO.setColor(appointments.getStatus() ? "#4CAF50" : "#E53935");
+                        }
+                        else
+                        {
+                            appointmentsDTO.setColor(appointments.getStatus() ? "#424242" : "#546E7A");
+                        }
+                        appointments
+                                .getAppointmentDate()
+                                .setTime(
+                                        appointments
+                                                .getAppointmentDate()
+                                                .getTime()
+                                                -Calendar.getInstance()
+                                                .getTimeZone()
+                                                .getRawOffset());
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
+                    }
+                }).register();
 }
     }

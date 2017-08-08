@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers.rest;
 
+import com.softserve.edu.lv251.dto.pojos.TokenAuthenticationDTO;
 import com.softserve.edu.lv251.service.GetTokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class TokenAuthenticationController {
     Logger logger;
 
     @RequestMapping("rest/auth")
-    public String auth(@RequestParam(name = "email")String email,
-                       @RequestParam(name = "password")String password){
+    public TokenAuthenticationDTO auth(@RequestParam(name = "email")String email,
+                                       @RequestParam(name = "password")String password){
         try {
             return getTokenService.getToken(email, password);
         } catch (Exception e) {

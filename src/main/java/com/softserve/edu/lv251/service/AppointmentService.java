@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface AppointmentService {
 
     List<Appointments> getAppiontmentbyDoctorsEmail(String email);
 
+    List<AppointmentDTO> getAppointmentByUserEmail(String email);
 }

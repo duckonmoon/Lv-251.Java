@@ -7,6 +7,9 @@
 
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
+
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
 <div class="container">
 
     <div class="container">
@@ -37,6 +40,10 @@
     </div>
 </div>
 <div id="content">
+
+<script>
+
+</script>
 
     <%--Pagination--%>
     <%------------------------------------------------%>
@@ -113,12 +120,62 @@
                             <div class="modal-content">
                                 <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
                                     <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
-                                        <div class="input-append date form_datetime" id="date-div">
-                                            <label for="first-date" style="margin-left: 5pt"><spring:message code="messages.date"/></label>
+                                        <div class="input-append date form_datetime" id="date-div-${doctor.id}">
+                                            <label for="first-date" style="margin-left: 5pt">
+                                                <spring:message code="messages.date"/>
+                                            </label>
                                             <input type="text" value="" readonly id="first-date" name="datetime">
                                             <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
                                             <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
                                         </div>
+
+
+                                        <script type="text/javascript">
+
+                                            $("#date-div-${doctor.id}").datetimepicker({
+                                                format: "dd/mm/yyyy - hh:ii",
+                                                autoclose: true,
+                                                todayBtn: true,
+                                                minuteStep: 15,
+                                                startDate: new Date(),
+                                                daysOfWeekDisabled: [0, 6],
+                                                hoursDisabled: [1, 2, 3, 4, 5, 6, 22, 23, 0],
+                                                onRenderMinute: function (date) {
+
+                                                    var dates = [];
+                                                    var dd;
+                                                    <c:choose>
+                                                        <c:when test="${docApps.size()>0}">
+                                                            <c:forEach items="${docApps}" var="apointments">
+                                                                <c:if test="${apointments.doctors == doctor.id}">
+                                                                    dd = new Date("${apointments.appointmentDate}");
+                                                                    dd.setHours(dd.getHours()+3);
+                                                                    dates.push(dd);
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    
+                                                    var i = 0;
+                                                    for (i = 0; i < dates.length; i++) {
+                                                        if (date.getTime() === dates[i].getTime()) {
+                                                            console.log("day" + date.getDay() + "test" + dates[i].getDay())
+                                                            console.log("month" + date.getMonth() + "test" + dates[i].getMonth())
+                                                            console.log("year" + date.getYear() + "test" + dates[i].getYear())
+                                                            console.log("hour" + date.getHours() + "test" + dates[i].getHours())
+                                                            console.log("minutes" + date.getUTCMinutes() + "test" + dates[i].getUTCMinutes())
+                                                            console.log("date" + date + "test" + dates[i])
+                                                            console.log("date" + date.getTime() + "test" + dates[i].getTime())
+
+                                                            console.log("---------------------------")
+                                                            return ['disabled'];
+                                                        }
+//                                                    })
+                                                    }
+                                                }
+                                            });
+                                        </script>
+
                                     </div>
                                     <input name="doctorId" value="${doctor.id}" style="display: none">
                                     <input name="current" value="${current}" style="display: none">
@@ -171,17 +228,8 @@
 
 
 
-<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
 
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-        format: "dd/mm/yyyy - hh:ii",
-        autoclose: true,
-        todayBtn: true,
-        minuteStep: 10
-    });
-</script>
+
 
 <c:if test="${flag}">
     <c:set var="docId" value="${doc}"/>

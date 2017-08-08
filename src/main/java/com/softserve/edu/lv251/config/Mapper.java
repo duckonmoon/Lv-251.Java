@@ -51,12 +51,8 @@ public class Mapper extends ConfigurableMapper{
                 .field("lastName", "lastname")
                 .field("password", "password")
                 .field("email", "email")
-                .customize(new CustomMapper<UserDTO, Users>() {
-                    @Override
-                    public void mapAtoB(UserDTO userDTO, Users users, MappingContext context) {
-
-                    }
-                }).register();
+                .exclude("matchingPassword")
+                .byDefault().register();
 
         factory.classMap(PersonalInfoDTO.class, Users.class)
                 .field("firstname", "firstname")

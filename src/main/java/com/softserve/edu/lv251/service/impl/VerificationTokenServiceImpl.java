@@ -62,7 +62,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     @Override
     public VerificationToken findByUser(Users user) {
-        List<VerificationToken> tokens = getVerificationTokensByColumnNameAndValue("token", user);
+        List<VerificationToken> tokens = getVerificationTokensByColumnNameAndValue("user", user);
         return tokens.isEmpty() ? null : tokens.get(0);
     }
 }

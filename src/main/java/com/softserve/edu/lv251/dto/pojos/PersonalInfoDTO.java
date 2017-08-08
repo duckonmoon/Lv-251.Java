@@ -1,5 +1,9 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.mail.Multipart;
+
 /**
  * Created by Kovalevskyy Vitaliy.
  */
@@ -9,6 +13,7 @@ public class PersonalInfoDTO {
     private String firstname;
     private String lastname;
     private String email;
+    private MultipartFile photo;
     private String password;
 
     //data from Contacts
@@ -95,4 +100,13 @@ public class PersonalInfoDTO {
     public void setThirdPhone(String thirdPhone) {
         this.thirdPhone = thirdPhone;
     }
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
+
+
 }

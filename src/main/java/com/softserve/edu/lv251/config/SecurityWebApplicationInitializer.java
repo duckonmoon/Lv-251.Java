@@ -7,10 +7,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  */
 public class SecurityWebApplicationInitializer
         extends AbstractSecurityWebApplicationInitializer {
-
-//    @Bean
-//    public UpdatableUserDetails updatableUserDetails(User user){
-//        UpdatableUserDetails updatableUserDetails = new UpdatableUserDetails(user.getUsername(), user.getPassword(), user.getAuthorities());
-//        return updatableUserDetails;
-//    }
 }

@@ -45,12 +45,12 @@ public class UserCabinetController {
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
-        PersonalInfoDTO userDTO = new PersonalInfoDTO();
+        PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
 
-        mapper.map(user, userDTO);
-        mapper.map(contacts, userDTO);
+        mapper.map(user, personalInfoDTO);
+        mapper.map(contacts, personalInfoDTO);
         model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("userObject", userDTO);
+        model.addAttribute("userObject", personalInfoDTO);
         return "userCabinet";
     }
 

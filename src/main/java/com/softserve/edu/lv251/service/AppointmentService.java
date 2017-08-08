@@ -15,7 +15,7 @@ public interface AppointmentService {
 
     void updateAppointment(Appointments appointments);
 
-    Appointments getAppointmentById(long id);
+    Appointments getAppointmentById(Long id);
 
     List<AppointmentsForCreationDTO> getAllDoctorAppointmentsAfterNow(long doctorId);
 

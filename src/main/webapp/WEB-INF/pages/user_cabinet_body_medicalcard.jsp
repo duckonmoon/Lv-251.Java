@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row content">
         <br>
-        <div <%--class="list-group doc-menu"--%> id="menu_mcard">
+        <div id="menu_mcard">
             <ul>
                 <li><a href="#" class="active list-group-item" style="height: 61px">Appointments history</a></li>
                 <li><a href="#" class="list-group-item" style="height: 61px">Pending appointments</a></li>

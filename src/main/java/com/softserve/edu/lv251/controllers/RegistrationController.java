@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Users;
@@ -109,7 +110,7 @@ public class RegistrationController {
 
         Doctors registered = new Doctors();
         if (!result.hasErrors()) {
-            registered = createDoctorAccount(accountDto, result);
+//            registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");
@@ -154,7 +155,6 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            //return "wrongPassword";
             model.addAttribute("flag", true);
 
             return "home";
@@ -180,7 +180,7 @@ public class RegistrationController {
         return registered;
     }
 
-    private Doctors createDoctorAccount(UserDTO accountDto, BindingResult result) {
+    private Doctors createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
         Doctors registered;
         try {
             registered = doctorsService.registerNewDoctorAccount(accountDto);

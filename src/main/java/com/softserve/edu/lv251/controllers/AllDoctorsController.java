@@ -1,18 +1,17 @@
 package com.softserve.edu.lv251.controllers;
-
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.PagingSizeService;
 import com.softserve.edu.lv251.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,16 +22,26 @@ import java.util.List;
  */
 @Controller
 public class AllDoctorsController {
+
     @Autowired
     private DoctorsService doctorsService;
-    @Autowired
-    UserService userService;
-    @Autowired
-    AppointmentService appointmentService;
 
-    @RequestMapping(value = "/allDoctors", method = RequestMethod.GET)
-    public String allDoctors(Model model) {
-        model.addAttribute("doctors", doctorsService.getAll());
+    @Autowired
+    @Qualifier("doctorService")
+    private PagingSizeService<Doctors> pagingSizeService;
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AppointmentService appointmentService;
+    @Autowired
+    private Logger logger;
+
+
+    @RequestMapping(value = "/allDoctors/{current}",method = RequestMethod.GET)
+    public  String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
+        model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
+        model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
         return "allDoctors";
     }
 
@@ -45,34 +54,42 @@ public class AllDoctorsController {
         return "allDoctors";
     }
 
+
+    /**
+     * Created by Marian Brynetskyi
+     * @param modelMap
+     * @param localdate
+     * @param doctorId
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate, @RequestParam("doctorId") long doctorId, Principal principal) {
+    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+                                 @RequestParam("doctorId") long doctorId,
+                                 @RequestParam("current") Integer chainIndex, Principal principal) {
+
         Date date;
 
-        //ModelAndView model = new ModelAndView("allDoctors");
-
-        //model.addObject("doctors", doctorsService.getAll());
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy - HH:mm").parse(localdate);
+            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
+            if(date.before(new Date())){
+                throw new Exception();
+            }
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
-            appointments.setStatus(false);
+            appointments.setIsApproved(false);
             appointments.setUsers(userService.findByEmail(principal.getName()));
             appointments.setDoctors(doctorsService.find(doctorId));
-
             appointmentService.addAppointment(appointments);
 
         } catch (Exception e) {
-            //model.setViewName("redirect:/allDoctors/true/" + doctorId);
-
+            logger.info("Wrong date.",e);
             modelMap.addAttribute("flag", true);
             modelMap.addAttribute("doc", doctorId);
-
-            return allDoctors(modelMap);
-            //return model;
+            modelMap.addAttribute("current", chainIndex);
+            return allDoctors(chainIndex, modelMap);
         }
-        return allDoctors(modelMap);
-        //return model;
+        return allDoctors(chainIndex, modelMap);
     }
 
     @ResponseBody
@@ -105,4 +122,6 @@ public class AllDoctorsController {
         model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
         return "doctor_details";
     }
+
+
 }

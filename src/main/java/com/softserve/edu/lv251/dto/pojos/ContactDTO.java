@@ -9,7 +9,6 @@ import javax.validation.constraints.Pattern;
  */
 public class ContactDTO {
 
-
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String name;
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")

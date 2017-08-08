@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 
@@ -16,9 +17,11 @@ public interface AppointmentService {
 
     Appointments getAppointmentById(Long id);
 
+    List<AppointmentsForCreationDTO> getAllDoctorAppointmentsAfterNow(long doctorId);
+
+    List<AppointmentsForCreationDTO> getAllDoctorsAppointmentsAfterNow();
 
     List<Appointments> listAppointmensWithDoctor(Long id);
-
 
     List<Appointments> getAppiontmentbyDoctorsEmail(String email);
 

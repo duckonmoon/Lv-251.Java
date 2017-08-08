@@ -7,8 +7,9 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
-import com.softserve.edu.lv251.UserDetailsEditor.UpdatableUserDetails;
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -62,6 +63,7 @@ public class UserCabinetController {
         mapper.map(personalInfoDTO, contacts);
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
+        ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).setUsername(personalInfoDTO.getEmail());
         return "redirect:/user/cabinet";
     }
 

@@ -1,7 +1,4 @@
 package com.softserve.edu.lv251.config;
-import com.softserve.edu.lv251.UserDetailsEditor.UpdatableUserDetails;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 /**

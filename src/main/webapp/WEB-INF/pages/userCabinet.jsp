@@ -33,6 +33,7 @@
                 <hr>
                 <div class="row">
                     <!-- left column -->
+                    <form:form method="POST" modelAttribute="userObject" enctype="multipart/form-data" action="/user/cabinet">
                     <div class="col-md-3 col-md-offset-1">
                         <div class="text-center">
                             <img src="data:image/jpeg;base64,${photo}" class="avatar img-circle" alt="avatar"
@@ -61,7 +62,7 @@
                             This is an <strong>.alert</strong>. Use this to show important messages to the user.
                         </div>
                         <h3><spring:message code="messages.personalInfo"/></h3>
-                        <form:form method="POST" modelAttribute="userObject" action="/user/cabinet">
+
                             <div class="form-group">
                                 <label class="col-lg-3 control-label"><spring:message
                                         code="messages.userFirstname"/>:</label>
@@ -139,7 +140,7 @@
                                            value="<spring:message code="messages.cancel"/>">
                                 </div>
                             </div>
-                        </form:form>
+
                         <hr>
                         <h3>Change Password</h3>
                         <div class="form-group">
@@ -159,14 +160,15 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-7">
-                                <input type="submit" class="btn btn-primary"
-                                       value="<spring:message code="messages.saveChanges"/>"/>
+                                <%--<input type="submit" class="btn btn-primary"--%>
+                                       <%--value="<spring:message code="messages.saveChanges"/>"/>--%>
                                 <span></span>
                                 <input type="reset" class="btn btn-default"
                                        value="<spring:message code="messages.cancel"/>"/>
                             </div>
                         </div>
                     </div>
+                    </form:form>
                 </div>
             </div>
         </div>

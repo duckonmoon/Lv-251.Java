@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.UserDetailsEditor;
+package com.softserve.edu.lv251.entity.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

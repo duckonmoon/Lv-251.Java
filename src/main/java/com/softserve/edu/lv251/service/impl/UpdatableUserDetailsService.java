@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.UserDetailsEditor.UpdatableUserDetails;
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.entity.Roles;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.UserService;

@@ -40,9 +40,9 @@ public class UserCabinetController {
 
 
     @GetMapping("/user/cabinet")
-    public String userProfileGET(ModelMap model, UpdatableUserDetails principal){
+    public String userProfileGET(ModelMap model, Principal principal){
 
-        Users user = userService.findByEmail(principal.getUsername());
+        Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
         PersonalInfoDTO userDTO = new PersonalInfoDTO();
 

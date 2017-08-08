@@ -1,8 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
+
+<link href="<c:url value="/resources/css/profile.css"/>" rel="stylesheet">
 
 <div class="container">
     <div>
@@ -40,6 +43,12 @@
                             <%--<input class="btn btn-default" type="file"/>--%>
                             <%--<input type="submit" class="btn btn-default"/>--%>
                             <%--</form>--%>
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
+                                <span class="fileupload-exists">Change</span>         <input type="file" /></span>
+                                <span class="fileupload-preview"></span>
+                                <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">?</a>
+                            </div>
                         </div>
                     </div>
 

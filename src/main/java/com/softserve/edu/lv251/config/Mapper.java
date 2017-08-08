@@ -65,6 +65,7 @@ public class Mapper extends ConfigurableMapper{
                 .field("firstPhone", "firstPhone")
                 .field("secondPhone", "secondPhone")
                 .field("thirdPhone", "thirdPhone")
+                .field("email", "email")
                 .byDefault().register();
 
 

@@ -4,17 +4,18 @@ package com.softserve.edu.lv251.service.impl;
  * Created by Taras on 03.08.2017.
  */
 
+import com.softserve.edu.lv251.dto.pojos.TokenAuthenticationDTO;
+import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.GetTokenService;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,7 +30,7 @@ public class GetTokenServiceImpl implements GetTokenService {
     private CustomUserDetailsService userDetailsService;
 
     @Override
-    public String getToken(String username, String password) throws Exception {
+    public TokenAuthenticationDTO getToken(String username, String password) throws Exception {
         if (username == null || password == null)
             return null;
         User user = (User) userDetailsService.loadUserByUsername(username);
@@ -47,10 +48,23 @@ public class GetTokenServiceImpl implements GetTokenService {
 
             String key = "key123";
             String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
-            logger.log(Priority.INFO, token);
-            logger.log(Priority.INFO, "strt: " + new Date().getTime());
-            logger.log(Priority.INFO, "exp: " + calendar.getTime().getTime());
-            return token;
+
+            TokenAuthenticationDTO authentication = new TokenAuthenticationDTO();
+
+            authentication.setToken(token);
+            authentication.setUsername(user.getUsername());
+            for(GrantedAuthority authority: user.getAuthorities()){
+                logger.log(Priority.INFO, authority.getAuthority());
+                if(authority.getAuthority().equals(WebRoles.ROLE_USER.name())){
+                    authentication.setIsUser(true);
+                }
+                if(authority.getAuthority().equals(WebRoles.ROLE_DOCTOR.name())){
+                    authentication.setIsDoctor(true);
+                }
+            }
+
+
+            return authentication;
         } else {
             throw new Exception("Authentication error");
         }

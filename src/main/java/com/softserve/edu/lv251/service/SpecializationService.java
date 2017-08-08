@@ -13,4 +13,5 @@ public interface SpecializationService {
     List<Specialization> searchByLetters(String letters);
     List<Specialization> findAll();
     Specialization findByName(String name);
+    public  void  add(Specialization specialization);
 }

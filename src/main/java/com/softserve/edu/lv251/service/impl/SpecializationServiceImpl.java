@@ -22,11 +22,19 @@ public class SpecializationServiceImpl implements SpecializationService {
 
     @Override
     public Specialization findByName(String name) {
-        return specializationDAO.getEntitiesByColumnNameAndValue("name",name).get(0);
+        System.out.println(name);
+        if (specializationDAO.getEntitiesByColumnNameAndValue("name",name).size()>0){
+        return specializationDAO.getEntitiesByColumnNameAndValue("name",name).get(0);}
+        else {
+            return null;
+        }
     }
 
     @Override
     public List<Specialization> findAll() {
         return specializationDAO.getAllEntities();
     }
+     public  void  add(Specialization specialization){
+        specializationDAO.addEntity(specialization);
+     }
 }

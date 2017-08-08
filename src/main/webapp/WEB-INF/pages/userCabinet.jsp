@@ -40,10 +40,6 @@
                                  width="100"
                                  height="100">
                             <h6>Upload a different photo...</h6>
-                            <%--<form action="upload" method="post" enctype="multipart/form-data">--%>
-                            <%--<input class="btn btn-default" type="file"/>--%>
-                            <%--<input type="submit" class="btn btn-default"/>--%>
-                            <%--</form>--%>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
                                 <span class="fileupload-exists">Change</span>         <input type="file" /></span>
@@ -82,7 +78,7 @@
                                         code="messages.userEmail"/>:</label>
                                 <div class="col-lg-7">
                                     <form:input type="text" class="form-control" path="email" disabled="false"
-                                                cssStyle="background-color: #ff9999;"/>
+                                    />
                                 </div>
                             </div>
 

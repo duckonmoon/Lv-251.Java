@@ -1,4 +1,5 @@
 package com.softserve.edu.lv251.controllers;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -44,6 +45,7 @@ public class AllDoctorsController {
     public  String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
+        model.addAttribute("docApps",appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
     }
 
@@ -121,5 +123,17 @@ public class AllDoctorsController {
         return "doctor_details";
     }
 
+    /**
+     * Created by Marian Brynetskyi. Return doctor appointments where date after now.
+     * @param doctorId
+     * @return
+     */
+    @RequestMapping(value = "/allDoctors/appointments/{docId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AppointmentsForCreationDTO> getAllDoctorsAppointments(@PathVariable("docId") long doctorId){
+
+        List<AppointmentsForCreationDTO> appointmentsForCreationDTOS =  appointmentService.getAllDoctorAppointmentsAfterNow(doctorId);
+        return appointmentsForCreationDTOS;
+    }
 
 }

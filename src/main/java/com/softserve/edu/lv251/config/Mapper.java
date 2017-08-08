@@ -1,13 +1,9 @@
 package com.softserve.edu.lv251.config;
 
 import com.softserve.edu.lv251.dto.pojos.*;
+import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Clinics;
-
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Moderator;
-
 import com.softserve.edu.lv251.entity.Contacts;
-
 import com.softserve.edu.lv251.entity.Users;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
@@ -16,7 +12,7 @@ import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Mapper extends ConfigurableMapper{
+public class Mapper extends ConfigurableMapper {
 
     @Override
     protected void configure(MapperFactory factory) {
@@ -36,7 +32,6 @@ public class Mapper extends ConfigurableMapper{
                 .byDefault().register();
 
 
-
         factory.classMap(PersonalInfoDTO.class, Contacts.class)
                 .field("address", "address")
                 .field("city", "city")
@@ -47,19 +42,19 @@ public class Mapper extends ConfigurableMapper{
                 .byDefault().register();
 
 
-        factory.classMap(ClinicInfoDTO.class,Clinics.class)
-                .field("clinic_name","clinic_name")
-                .field("description","description")
+        factory.classMap(ClinicInfoDTO.class, Clinics.class)
+                .field("clinic_name", "clinic_name")
+                .field("description", "description")
                 .byDefault().register();
 
-         factory.classMap(ClinicInfoDTO.class,Contacts.class)
-                 .field("address", "address")
-                 .field("city", "city")
-                 .field("zipCode", "zipCode")
-                 .field("firstPhone", "firstPhone")
-                 .field("secondPhone", "secondPhone")
-                 .field("thirdPhone", "thirdPhone")
-                 .byDefault().register();
+        factory.classMap(ClinicInfoDTO.class, Contacts.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipCode", "zipCode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
+                .byDefault().register();
 
         factory.classMap(ClinicLatLngDTO.class, Clinics.class)
                 .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {
@@ -72,5 +67,16 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setId(clinics.getId());
                     }
                 });
+
+        factory.classMap(Appointments.class, AppointmentsForCreationDTO.class)
+                .field("appointmentDate", "appointmentDate")
+                .field("duration", "duration")
+                .customize(new CustomMapper<Appointments, AppointmentsForCreationDTO>() {
+                    @Override
+                    public void mapAtoB(Appointments a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
+                        b.setDoctors(a.getDoctors().getId());
+                    }
+                })
+                .register();
     }
 }

@@ -176,14 +176,14 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
 
     @Override
-    public List<Doctors> getByClinic(Long clinicId){
+    public List<Doctors> getByClinic(Long clinicId) {
         List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
-        return doctors.isEmpty()? null : doctors;
+        return doctors.isEmpty() ? null : doctors;
     }
 
     @Override
     @Transactional
-    public Doctors addDoctorAccount(DoctorDTO accountDto){
+    public Doctors addDoctorAccount(DoctorDTO accountDto) {
         Doctors doctor = new Doctors();
 //        doctor.setFirstname(accountDto.getFirstName());
 //        doctor.setLastname(accountDto.getLastName());
@@ -209,7 +209,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 //        }else{ doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
 //        }
 //        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
-mapper.map(accountDto,doctor);
+        mapper.map(accountDto,doctor);
         addDoctor(doctor);
 
         return doctor;

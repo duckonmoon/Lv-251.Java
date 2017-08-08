@@ -24,12 +24,16 @@ import java.util.List;
 
 @Component
 public class Mapper extends ConfigurableMapper{
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     RolesService rolesService;
+
     @Autowired
     ContactsDAO contactsDAO;
+
     @Autowired
     private SpecializationService specializationService;
 
@@ -44,16 +48,18 @@ public class Mapper extends ConfigurableMapper{
                 .field("lastName", "lastname")
                 .field("password", "password")
                 .field("email", "email")
-                .exclude("matchingPassword")
-                .byDefault().register();
+                .customize(new CustomMapper<UserDTO, Users>() {
+                    @Override
+                    public void mapAtoB(UserDTO userDTO, Users users, MappingContext context) {
+
+                    }
+                }).register();
 
         factory.classMap(PersonalInfoDTO.class, Users.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
                 .field("email", "email")
                 .byDefault().register();
-
-
 
         factory.classMap(PersonalInfoDTO.class, Contacts.class)
                 .field("address", "address")
@@ -63,7 +69,6 @@ public class Mapper extends ConfigurableMapper{
                 .field("secondPhone", "secondPhone")
                 .field("thirdPhone", "thirdPhone")
                 .byDefault().register();
-
 
         factory.classMap(ClinicInfoDTO.class,Clinics.class)
                 .field("clinic_name","clinic_name")
@@ -90,6 +95,7 @@ public class Mapper extends ConfigurableMapper{
                         latLng.setId(clinics.getId());
                     }
                 }).register();
+
         factory.classMap(PatientDTO.class, Users.class)
                 .customize(new CustomMapper<PatientDTO, Users>() {
                     @Override
@@ -101,6 +107,7 @@ public class Mapper extends ConfigurableMapper{
                         patientDTO.setFullName(fullName);
                     }
                 }).register();
+
         factory.classMap(SearchResultDoctorDTO.class, Doctors.class).customize(new CustomMapper<SearchResultDoctorDTO, Doctors>() {
             @Override
             public void mapAtoB(SearchResultDoctorDTO searchResultDoctorDTO, Doctors doctor, MappingContext context) {
@@ -129,14 +136,12 @@ public class Mapper extends ConfigurableMapper{
 
                 searchResultDoctorDTO.setClinicId(doctor.getClinics().getId());
                 searchResultDoctorDTO.setClinicName(doctor.getClinics().getClinic_name());
-
             }
         });
 
         factory.classMap(Clinics.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinics, SearchResultClinicDTO>() {
             @Override
             public void mapAtoB(Clinics clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {
-
 
                 searchResultClinicDTO.setId(clinic.getId());
                 searchResultClinicDTO.setName(clinic.getClinic_name());
@@ -156,21 +161,19 @@ public class Mapper extends ConfigurableMapper{
                 phones.add(clinic.getContact().getThirdPhone());
                 contacts.setPhones(phones);
                 searchResultClinicDTO.setContacts(contacts);
-
             }
         }).register();
 
-
-        factory.classMap(DoctorDTO.class,Doctors.class)
+        factory.classMap(DoctorDTO.class, Doctors.class)
                 .field("firstName", "firstname")
                 .field("lastName", "lastname")
                 .field("description","description")
                 .field("email", "email").customize(new CustomMapper<DoctorDTO, Doctors>() {
             @Override
             public void mapAtoB(DoctorDTO doctorDTO, Doctors doctors, MappingContext context) {
-                String password=bCryptPasswordEncoder.encode(doctorDTO.getPassword());
+                String password = bCryptPasswordEncoder.encode(doctorDTO.getPassword());
                 doctors.setPassword(password);
-                String photo= StoredImagesService.getBase64encodedMultipartFile(doctorDTO.getMultipartFile());
+                String photo = StoredImagesService.getBase64encodedMultipartFile(doctorDTO.getMultipartFile());
                 doctors.setPhoto(photo);
                 doctors.setRoles(Arrays.asList(
                         rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
@@ -180,17 +183,15 @@ public class Mapper extends ConfigurableMapper{
                 contactsDAO.addEntity(contact);
                 doctors.setContact(contact);
                 doctors.setDescription(doctorDTO.getDescription());
-                if(specializationService.findByName(doctorDTO.getSpecialization())==null){
-                    Specialization specialization= new Specialization();
+                if (specializationService.findByName(doctorDTO.getSpecialization()) == null) {
+                    Specialization specialization = new Specialization();
                     specialization.setName(doctorDTO.getSpecialization());
                     specializationService.add(specialization);
                     doctors.setSpecialization(specialization);
-                }else{ doctors.setSpecialization(specializationService.findByName(doctorDTO.getSpecialization()));
+                } else { doctors.setSpecialization(specializationService.findByName(doctorDTO.getSpecialization()));
                 }
                 doctors.setClinics(clinicService.getByName(doctorDTO.getClinic()));
-
             }
         }).register();
-
-}
     }
+}

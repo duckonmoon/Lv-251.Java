@@ -5,14 +5,12 @@ import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
+import com.softserve.edu.lv251.entity.MedicalCard;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.MailService;
-import com.softserve.edu.lv251.service.RolesService;
-import com.softserve.edu.lv251.service.UserService;
-import com.softserve.edu.lv251.service.VerificationTokenService;
+import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,13 +32,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    ContactsDAO contactsDAO;
-
-    @Autowired
     UsersDAO usersDAO;
 
     @Autowired
     RolesService rolesService;
+
+    @Autowired
+    ContactsService contactsService;
+
+    @Autowired
+    MedicalCardService medicalCardService;
 
     @Autowired
     VerificationTokenService verificationTokenService;
@@ -118,21 +119,19 @@ public class UserServiceImpl implements UserService {
             throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
         }
         Users user = new Users();
-        user.setFirstname(accountDto.getFirstName());
-        user.setLastname(accountDto.getLastName());
+        mapper.map(accountDto, user);
         user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
-        user.setEmail(accountDto.getEmail());
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
-        //user.setAppointments(new ArrayList<>());
-        //user.setMedicalCards(new ArrayList<>());
-        //user.setTestsResults(new ArrayList<>());
         Contacts contact = new Contacts();
         contact.setUsers(user);
         contact.setEmail(accountDto.getEmail());
-        this.contactsDAO.addEntity(contact);
+        MedicalCard medicalCard = new MedicalCard();
+        medicalCard.setUser(user);
+        this.contactsService.addContacts(contact);
+        this.medicalCardService.addMedicalCard(medicalCard);
         user.setContact(contact);
         addUser(user);
 

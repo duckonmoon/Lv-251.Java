@@ -29,7 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointments getAppointmentById(long id) {
+    public Appointments getAppointmentById(Long id) {
         return appointmentsDAO.getEntityByID(id);
     }
 

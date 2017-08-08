@@ -7,24 +7,27 @@
 
 <div class="container">
 
-    <%--Pagination--%>
-    <%-----------------------------------------------------%>
-    <div class="text-center">
-        <ul class="pagination">
-            <c:if test="${current>1}">
-                <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
-            </c:if>
-            <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-                <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
-                                                                                                       href="/clinics/${loop.index}">${loop.index}</a>
-                </li>
-            </c:forEach>
-            <c:if test="${current < numberChain}">
-                <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
-            </c:if>
-        </ul>
-    </div>
-    <%-----------------------------------------------------%>
+
+    <div class="container" style="width: 70%; float: left">
+        <%--Pagination--%>
+        <%-----------------------------------------------------%>
+        <div class="text-center">
+            <ul class="pagination">
+                <c:if test="${current>1}">
+                    <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
+                </c:if>
+                <c:forEach begin="1" end="${numberChain}" varStatus="loop">
+                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
+                            class="page-link"
+                            href="/clinics/${loop.index}">${loop.index}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${current < numberChain}">
+                    <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
+                </c:if>
+            </ul>
+        </div>
+        <%-----------------------------------------------------%>
 
 
         <c:forEach items="${getClinics}" var="clinic">
@@ -38,10 +41,10 @@
                                          alt="...">
                                 </a>
                             </div>
-                            <a href="#" class="btn-link">
+                            <a href="details/${clinic.id}" class="btn-link">
                                 <span class="doc-name">${clinic.clinic_name}</span>
                             </a>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -56,8 +59,9 @@
                     <li id="previous" class="page-item "><a class="page-link" href="${current-1}">&laquo;</a></li>
                 </c:if>
                 <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
-                                                                                                           href="/clinics/${loop.index}">${loop.index}</a>
+                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
+                            class="page-link"
+                            href="/clinics/${loop.index}">${loop.index}</a>
                     </li>
                 </c:forEach>
                 <c:if test="${current < numberChain}">
@@ -66,6 +70,7 @@
             </ul>
         </div>
         <%-----------------------------------------------------%>
+    </div>
 </div>
 
 

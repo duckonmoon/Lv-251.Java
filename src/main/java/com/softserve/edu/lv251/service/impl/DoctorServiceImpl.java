@@ -49,7 +49,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     Logger logger;
-    
+
     @Autowired
     private DoctorsDAO doctorsDAO;
 

@@ -7,16 +7,18 @@ import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.security.Principal;
 import java.util.Date;
+
 
 /**
  * Author: Brynetskyi Marian
@@ -37,12 +39,12 @@ public class UserCabinetController {
     @Autowired
     private Mapper mapper;
 
+
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
-
         PersonalInfoDTO userDTO = new PersonalInfoDTO();
 
         mapper.map(user, userDTO);
@@ -53,6 +55,7 @@ public class UserCabinetController {
     }
 
     @PostMapping("/user/cabinet")
+
     public String userProfilePOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
@@ -60,6 +63,7 @@ public class UserCabinetController {
         mapper.map(personalInfoDTO, contacts);
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
+        ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).setUsername(personalInfoDTO.getEmail());
         return "redirect:/user/cabinet";
     }
 
@@ -90,10 +94,10 @@ public class UserCabinetController {
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
+
         mapper.map(personalInfoDTO, user);
         mapper.map(personalInfoDTO, contacts);
         userService.updateUser(user);
-        contactsService.updateContacts(contacts);
 
         return "user_cabinet_body_medicalcard";
     }

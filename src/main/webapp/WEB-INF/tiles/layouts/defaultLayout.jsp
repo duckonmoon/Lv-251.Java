@@ -62,7 +62,7 @@
                     <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
-                <li class="${current == 'user_cabinet' ? 'active': ''}">
+                <li class="${current == 'userCabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>
@@ -78,7 +78,7 @@
                 </li>
                 <li class="${current=='moderator/cabinet'? 'active':''}">
                 <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
-                    <a href="${pageContext.request.contextPath}/moderator/cabinet/"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
+                    <a href="${pageContext.request.contextPath}/moderator/cabinet"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
                     </a>
                 </sec:authorize>
                 </li>
@@ -225,7 +225,7 @@
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
-
+<script src="<c:url value="/resources/js/profile.js"/>"></script>
 
 </body>
 </html>

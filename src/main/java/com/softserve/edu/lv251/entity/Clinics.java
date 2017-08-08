@@ -15,7 +15,7 @@ import java.util.List;
 public class Clinics extends BaseEntity {
     private String clinic_name;
 
-    @Column(name = "photo", nullable = false, length = 65535, columnDefinition="TEXT")
+    @Column(name = "photo", nullable = false, columnDefinition="MEDIUMTEXT")
     private String photo;
 
     private String description;

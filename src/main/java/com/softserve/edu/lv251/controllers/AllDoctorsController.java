@@ -72,15 +72,13 @@ public class AllDoctorsController {
             }
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
-            appointments.setStatus(false);
+            appointments.setIsApproved(false);
             appointments.setUsers(userService.findByEmail(principal.getName()));
             appointments.setDoctors(doctorsService.find(doctorId));
-
             appointmentService.addAppointment(appointments);
 
         } catch (Exception e) {
             logger.info("Wrong date.",e);
-
             modelAndView.addObject("flag", true);
             modelAndView.addObject("doc", doctorId);
 
@@ -121,19 +119,6 @@ public class AllDoctorsController {
     public String Doctor(@PathVariable Long id, Model model) {
         model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
         return "doctor_details";
-    }
-
-    /**
-     * Created by Marian Brynetskyi. Return doctor appointments where date after now.
-     * @param doctorId
-     * @return
-     */
-    @RequestMapping(value = "/allDoctors/appointments/{docId}", method = RequestMethod.GET)
-    @ResponseBody
-    public List<AppointmentsForCreationDTO> getAllDoctorsAppointments(@PathVariable("docId") long doctorId){
-
-        List<AppointmentsForCreationDTO> appointmentsForCreationDTOS =  appointmentService.getAllDoctorAppointmentsAfterNow(doctorId);
-        return appointmentsForCreationDTOS;
     }
 
 }

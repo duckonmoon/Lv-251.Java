@@ -32,61 +32,68 @@
 
 
                 <div class="col-md-7 personal-info">
-<form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm">
+<form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm" enctype="multipart/form-data">
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstname"/>:</label>
         <div class="col-lg-7">
-            <form:errors path="firstname"></form:errors>
-            <form:input type="text" class="form-control" path="firstname"/>
+            <form:errors path="firstName"/>
+            <form:input type="text" class="form-control" path="firstName"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label"> <spring:message code="messages.userLastname"/>:</label>
         <div class="col-lg-7">
-            <form:errors path="lastname"></form:errors>
-            <form:input type="text" class="form-control" path="lastname"/>
+            <form:errors path="lastName"/>
+            <form:input type="text" class="form-control" path="lastName"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
         <div class="col-lg-7">
-            <form:errors path="email"></form:errors>
+            <form:errors path="email"/>
             <form:input type="text" class="form-control" path="email" disabled="false" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.password"/>:</label>
         <div class="col-lg-7">
-            <form:errors path="password"></form:errors>
+            <form:errors path="password"/>
             <form:input type="text" class="form-control d" path="password" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label"><spring:message code="messages.confirmPassword"/>:</label>
         <div class="col-lg-7">
-            <form:errors path="matchingPassword"></form:errors>
+            <form:errors path="matchingPassword"/>
             <form:input type="text" class="form-control" path="matchingPassword"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label">Specialization:</label>
         <div class="col-lg-7">
-            <form:errors path="specialization"></form:errors>
+            <form:errors path="specialization"/>
             <form:input type="text" class="form-control" id="autocomplete-spec" path="specialization"/>
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label">Clinic name:</label>
         <div class="col-lg-7">
-            <form:errors path="clinic"></form:errors>
+            <form:errors path="clinic"/>
             <form:input type="text" value="${moderator.clinics.clinic_name}" class="form-control" path="clinic" />
         </div>
     </div>
     <div class="form-group">
         <label class="col-lg-3 control-label">Description:</label>
         <div class="col-lg-7">
-            <form:errors path="description"></form:errors>
+            <form:errors path="description"/>
             <form:input type="text" class="form-control" path="description"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 control-label">Photo:</label>
+        <div class="col-lg-7">
+            <form:errors path="multipartFile"/>
+            <form:input type="file" class="form-control" path="multipartFile"/>
         </div>
     </div>
          <div class="form-group">

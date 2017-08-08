@@ -5,6 +5,7 @@ package com.softserve.edu.lv251.dto.pojos;
  */
 public class ClinicLatLngDTO {
     private long id;
+    private String name;
     private double lat;
     private double lng;
 
@@ -30,5 +31,13 @@ public class ClinicLatLngDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.entity.Roles;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.UserService;
@@ -8,7 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + email);
         }
 
-        return new User(
+        return new UpdatableUserDetails(
                 user.getEmail().toLowerCase(),
                 user.getPassword(),
                 true, /*enabled*/

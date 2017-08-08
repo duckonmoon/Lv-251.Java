@@ -9,6 +9,7 @@ public class PersonalInfoDTO {
     private String firstname;
     private String lastname;
     private String email;
+    private String password;
 
     //data from Contacts
     private String address;
@@ -17,6 +18,8 @@ public class PersonalInfoDTO {
     private String firstPhone;
     private String secondPhone;
     private String thirdPhone;
+
+
 
     public PersonalInfoDTO() {
     }

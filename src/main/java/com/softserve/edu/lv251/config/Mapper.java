@@ -230,11 +230,9 @@ public class Mapper extends ConfigurableMapper{
                     else {
                         appointmentsDTO.setColor(appointments.getStatus() ? "#424242" : "#546E7A");
                     }
-                    appointments.getAppointmentDate().setTime(appointments
-                                            .getAppointmentDate()
-                                            .getTime() - Calendar.getInstance()
-                                            .getTimeZone()
-                                            .getRawOffset());
+                    appointments.getAppointmentDate().setTime(
+                            appointments.getAppointmentDate().getTime()
+                            - Calendar.getInstance().getTimeZone().getRawOffset());
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                     appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
                 }

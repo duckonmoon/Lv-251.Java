@@ -97,20 +97,19 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute("doctorForm", new UserDTO());
-
+        model.addAttribute("doctorForm", new DoctorDTO());
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute("doctorForm") @Valid UserDTO accountDto,
+            @ModelAttribute("doctorForm") @Valid DoctorDTO accountDto,
             BindingResult result) {
 
         Doctors registered = new Doctors();
         if (!result.hasErrors()) {
-//            registered = createDoctorAccount(accountDto, result);
+            registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");

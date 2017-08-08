@@ -11,16 +11,16 @@
         <div class="container" style="width: 30%; float: left">
             <div class="row row-content">
                 <div class="list-group doc-menu">
-                    <a href="/user/cabinet" class="list-group-item">
+                    <a href="<c:url value="/user/cabinet"/>" class="list-group-item">
                         <spring:message code="messages.profile"/>
                     </a>
                     <a href="#" class="list-group-item">
                         <spring:message code="messages.doctors"/>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
                         <spring:message code="messages.medicalCard"/>
                     </a>
-                    <a href="/user/appointments" class="active list-group-item">
+                    <a href="<c:url value="/user/appointments"/>" class="active list-group-item">
                         <spring:message code="messages.appointments"/>
                     </a>
                 </div>
@@ -40,7 +40,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${listAppointmens}" var="appointment" varStatus="loop">
+                    <c:forEach items="${listAppointments}" var="appointment" varStatus="loop">
                         <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>
                         <c:choose>
                             <c:when test="${appointment.appointmentDate > date && !appointment.isApproved}">

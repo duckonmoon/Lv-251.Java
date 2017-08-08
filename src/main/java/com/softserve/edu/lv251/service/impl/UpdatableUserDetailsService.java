@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,13 +18,23 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Vitaliy Kovalevskyy
+ */
 @Service
 @Transactional
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class CustomUserDetailsService implements UserDetailsService {
+public class UpdatableUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserService userService;
+
+
+    public void setNewEmail(String oldEmail, String newEmail) {
+        Users user = userService.findByEmail(oldEmail);
+        user.setEmail(newEmail);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -34,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + email);
         }
 
-        return new User(
+        return new UpdatableUserDetails(
                 user.getEmail().toLowerCase(),
                 user.getPassword(),
                 true, /*enabled*/

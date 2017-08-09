@@ -217,7 +217,6 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
-<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>
@@ -226,6 +225,7 @@
 <script src="<c:url value="/resources/js/search.js"/>"></script>
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
+<script src="<c:url value="/resources/js/profile.js"/>"></script>
 
 </body>
 </html>

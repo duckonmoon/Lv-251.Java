@@ -1,5 +1,4 @@
 package com.softserve.edu.lv251.config;
-
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 /**

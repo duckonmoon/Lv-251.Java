@@ -18,13 +18,23 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Vitaliy Kovalevskyy
+ */
 @Service
 @Transactional
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class CustomUserDetailsService implements UserDetailsService {
+public class UpdatableUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserService userService;
+
+
+    public void setNewEmail(String oldEmail, String newEmail) {
+        Users user = userService.findByEmail(oldEmail);
+        user.setEmail(newEmail);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

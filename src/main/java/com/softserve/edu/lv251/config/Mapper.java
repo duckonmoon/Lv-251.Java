@@ -1,15 +1,8 @@
 package com.softserve.edu.lv251.config;
 
-import com.softserve.edu.lv251.dto.pojos.*;
-import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Clinics;
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Users;
-
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -106,12 +99,14 @@ public class Mapper extends ConfigurableMapper{
         factory.classMap(Clinics.class, ClinicLatLngDTO.class)
                 .customize(new CustomMapper<Clinics, ClinicLatLngDTO>() {
                     @Override
-                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng,  MappingContext context) {
-                        double lat = clinics.getContact().getLatitude();
-                        double lng = clinics.getContact().getLongitude();
-                        latLng.setLat(lat);
-                        latLng.setLng(lng);
-                        latLng.setId(clinics.getId());
+                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng, MappingContext context) {
+                        if(clinics.getContact()!=null){
+                            double lat = clinics.getContact().getLatitude();
+                            double lng = clinics.getContact().getLongitude();
+                            latLng.setLat(lat);
+                            latLng.setLng(lng);
+                            latLng.setId(clinics.getId());
+                        }
                     }
                 });
 
@@ -200,7 +195,7 @@ public class Mapper extends ConfigurableMapper{
             public void mapAtoB(Appointments appointments, AppointmentDTO appointmentDTO, MappingContext context) {
                 appointmentDTO.setAppointmentDate(appointments.getAppointmentDate().getTime());
                 appointmentDTO.setDuration(appointments.getDuration());
-                appointmentDTO.setStatus(appointments.getStatus());
+                appointmentDTO.setStatus(appointments.getIsApproved());
 
                 appointmentDTO.setPatientId(appointments.getUsers().getId());
                 appointmentDTO.setPatientFirstName(appointments.getUsers().getFirstname());
@@ -255,10 +250,10 @@ public class Mapper extends ConfigurableMapper{
                     appointmentsDTO.setId(appointments.getId());
                     appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
                     if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate())<0) {
-                        appointmentsDTO.setColor(appointments.getStatus() ? "#4CAF50" : "#E53935");
+                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
                     }
                     else {
-                        appointmentsDTO.setColor(appointments.getStatus() ? "#424242" : "#546E7A");
+                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
                     }
                     appointments.getAppointmentDate().setTime(
                             appointments.getAppointmentDate().getTime()

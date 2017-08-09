@@ -11,7 +11,6 @@ import java.util.Date;
 public class Appointments extends BaseEntity {
 
     private Date appointmentDate;
-    private Boolean status = true;
     private Boolean isApproved;
     private double duration;
 
@@ -54,14 +53,6 @@ public class Appointments extends BaseEntity {
 
     public void setUsers(Users users) {
         this.users = users;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     public double getDuration() {

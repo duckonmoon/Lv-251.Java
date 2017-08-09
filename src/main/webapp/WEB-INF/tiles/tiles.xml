@@ -88,25 +88,6 @@
         <!--<put-attribute name="body" value="/WEB-INF/pages/map.jsp" />-->
     <!--</definition>-->
 
-    <!--Wrong password page-->
-    <definition name="wrongPassword" extends="home">
-        <put-attribute name="wrong" value="Wrong" />
-        <put-attribute name="body" value="/WEB-INF/pages/wrongPassword.jsp" />
-    </definition>
-
-     <!--Wrong date page -->
-    <definition name="badAppDate" extends="allDoctors">
-        <put-attribute name="title" value="badAppDate" />
-        <put-attribute name="body" value="/WEB-INF/pages/badAppDate.jsp" />
-        <put-attribute name="current" value="badAppDate"/>
-    </definition>
-
-    <!--Login page-->
-    <definition name="login" extends="home">
-        <put-attribute name="login" value="Login" />
-        <put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
-    </definition>
-
     <!-- Doctor_details Page -->
     <definition name="doctor_details" extends="base-definition">
         <put-attribute name="title" value="Doctor" />

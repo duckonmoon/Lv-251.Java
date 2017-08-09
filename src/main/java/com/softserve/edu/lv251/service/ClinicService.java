@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.service;
 
 
+import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
 import com.softserve.edu.lv251.entity.Clinics;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,8 @@ public interface ClinicService {
 
     void updateClinic(Clinics clinic);
 
-    Clinics getClinicByID(Long clinicId);
+    Clinics  getClinicByID(Long clinicId);
+    ClinicSearchDTO  clinicSearchById(Long clinicId);
 
     List<Clinics> getClinicsByColumnNameAndValue(String columnName, Object value);
 
@@ -28,8 +30,9 @@ public interface ClinicService {
 
     Clinics getFirst();
 
-    List<Clinics>findByDistrict(String name);
-    List<Clinics>searchByLetters(String letters);
+    List<ClinicSearchDTO>findByDistrict(String name);
+
+    List<ClinicSearchDTO> searchByLetters(String letters);
    Clinics getByName(String name);
    void updatePhoto(MultipartFile file,Clinics clinics);
 }

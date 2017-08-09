@@ -10,7 +10,7 @@ $(document).ready(function() {
 console.log("before"+response.toString());
             return {
                 suggestions: $.map($.parseJSON(response), function (item) {
-                    var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
+                    var i=item.firstname+" "+item.lastname+" "+item.specialization;
                     console.log(i);
                     return {value:i, data:item.id};
                 })
@@ -55,7 +55,7 @@ function allDocs() {
                 console.log("before"+response.toString());
                 return {
                     suggestions: $.map($.parseJSON(response), function (item) {
-                        var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
+                        var i=item.firstname+" "+item.lastname +" "+item.specialisation;
                         console.log(i);
                         return {value:i, data:item.id};
 
@@ -77,8 +77,8 @@ function allDocs() {
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
-                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+result.specialization.name+"</p> </div> </div>")
+                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>:"+result.specialisation+"</p> </div> </div>")
 
 
 

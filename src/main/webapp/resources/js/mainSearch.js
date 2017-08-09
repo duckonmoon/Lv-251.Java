@@ -7,7 +7,7 @@ $(document).ready(function() {
         if($(this).val() == 0){
             $(".fa-user-md").removeClass("fa-user-md");
             $(".change").addClass("fa-ambulance");
-            $("#autocomplete").attr('placeholder',$("#p-clinic").html());
+            $("#autocomplete").attr('placeholder',$("#clinic").html());
             clinicsByDistrict();
             console.log("You select 0");
             clinicsAll();
@@ -15,7 +15,7 @@ $(document).ready(function() {
         } if(($(this).val() == 1)) {
             $(".change ").removeClass("fa-ambulance");
             $(".change").addClass("fa-user-md");
-            $("#autocomplete").attr('placeholder',$("#p-doctor").html());
+            $("#autocomplete").attr('placeholder',$("#doctor").html());
             console.log("You select 1")
             console.log($("#selectDocOrClinic").val());
             doctorsByDistrict();
@@ -25,7 +25,7 @@ $(document).ready(function() {
          if (($(this).val() == 2)) {console.log("You select 2");
             $(".change ").removeClass("fa-ambulance");
             $(".change").addClass("fa-user-md");
-             $("#autocomplete").attr('placeholder',$("#option-doc-spec").html());
+             $("#autocomplete").attr('placeholder',$("#docByspec").html());
             doctorsBySpecialization();
             doctorsByDistrict();
         }
@@ -81,7 +81,7 @@ function clinicsAll() {
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                         "<img width=200' height='200' src='data:image/jpeg;base64,"+result.photo+"' alt='...'></a></div>"+
-                        "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a>"+
+                        "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
                         " </div> </div>");
 
                 }
@@ -100,8 +100,6 @@ function clinicsByDistrict() {
     $("#autocomplete-districts").autocomplete({
         serviceUrl: '/districts/byName',
         paramName: "name",
-        noSuggestionNotice:'No results',
-        showNoSuggestionNotice:true,
         delimiter: ",",
         transformResult: function (response) {
             console.log("before clinics by districts");

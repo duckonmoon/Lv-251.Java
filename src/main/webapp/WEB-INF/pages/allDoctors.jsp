@@ -8,7 +8,9 @@
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
 <div class="container">
-
+    <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
+    <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
+    <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
     <div class="container">
         <div class="row" style="margin-top: 50px">
             <nav class="navbar navbar-inverse">

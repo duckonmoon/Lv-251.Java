@@ -82,12 +82,14 @@ public class Mapper extends ConfigurableMapper{
         factory.classMap(Clinics.class, ClinicLatLngDTO.class)
                 .customize(new CustomMapper<Clinics, ClinicLatLngDTO>() {
                     @Override
-                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng,  MappingContext context) {
-                        double lat = clinics.getContact().getLatitude();
-                        double lng = clinics.getContact().getLongitude();
-                        latLng.setLat(lat);
-                        latLng.setLng(lng);
-                        latLng.setId(clinics.getId());
+                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng, MappingContext context) {
+                        if(clinics.getContact()!=null){
+                            double lat = clinics.getContact().getLatitude();
+                            double lng = clinics.getContact().getLongitude();
+                            latLng.setLat(lat);
+                            latLng.setLng(lng);
+                            latLng.setId(clinics.getId());
+                        }
                     }
                 }).register();
 
@@ -167,7 +169,7 @@ public class Mapper extends ConfigurableMapper{
             public void mapAtoB(Appointments appointments, AppointmentDTO appointmentDTO, MappingContext context) {
                 appointmentDTO.setAppointmentDate(appointments.getAppointmentDate().getTime());
                 appointmentDTO.setDuration(appointments.getDuration());
-                appointmentDTO.setStatus(appointments.getStatus());
+                appointmentDTO.setStatus(appointments.getIsApproved());
 
                 appointmentDTO.setPatientId(appointments.getUsers().getId());
                 appointmentDTO.setPatientFirstName(appointments.getUsers().getFirstname());

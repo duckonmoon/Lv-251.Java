@@ -44,13 +44,16 @@
                         <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>
                         <c:choose>
                             <c:when test="${appointment.appointmentDate > date && !appointment.isApproved}">
-                                <c:set var="cssClass" value="warning"/>
+                                <c:set var="cssClass" value="active"/>
                             </c:when>
                             <c:when test="${appointment.appointmentDate > date && appointment.isApproved}">
                                 <c:set var="cssClass" value="success"/>
                             </c:when>
-                            <c:otherwise>
+                            <c:when test="${appointment.appointmentDate < date && appointment.isApproved}">
                                 <c:set var="cssClass" value="info"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:set var="cssClass" value="danger"/>
                             </c:otherwise>
                         </c:choose>
                         <tr class="${cssClass}">

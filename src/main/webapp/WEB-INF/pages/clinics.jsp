@@ -6,6 +6,7 @@
 
 
 <div class="container">
+
     <div class="row" style="margin-top: 50px">
         <p style="display: none"><spring:message code="messages.searchClinics" /></p>
         <p  style="display: none"><spring:message code="messages.searchDoctors" /></p>
@@ -63,39 +64,57 @@
                                 <a href="#" class="thumbnail">
                                     <img width="200" height="200" src="data:image/jpeg;base64,${clinic.photo}"
                                          alt="...">
+
                                 </a>
                             </div>
-                            <a href="#" class="btn-link">
-                                <span class="doc-name">${clinic.clinic_name}</span>
-                            </a>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </a>
-        </c:forEach>
+            </c:forEach>
 
 
-        <%--Pagination--%>
-        <%-----------------------------------------------------%>
-        <div class="text-center">
-            <ul class="pagination ">
-                <c:if test="${current>1}">
-                    <li id="previous" class="page-item "><a class="page-link" href="${current-1}">&laquo;</a></li>
-                </c:if>
-                <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
-                                                                                                           href="/clinics/${loop.index}">${loop.index}</a>
-                    </li>
-                </c:forEach>
-                <c:if test="${current < numberChain}">
-                    <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
-                </c:if>
-            </ul>
+            <%--Pagination--%>
+            <%-----------------------------------------------------%>
+            <div class="text-center">
+                <ul class="pagination ">
+                    <c:if test="${current>1}">
+                        <li id="previous" class="page-item "><a class="page-link" href="${current-1}">&laquo;</a></li>
+                    </c:if>
+                    <c:forEach begin="1" end="${numberChain}" varStatus="loop">
+                        <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
+                                class="page-link"
+                                href="/clinics/${loop.index}">${loop.index}</a>
+                        </li>
+                    </c:forEach>
+                    <c:if test="${current < numberChain}">
+                        <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
+                    </c:if>
+                </ul>
+            </div>
+            <%-----------------------------------------------------%>
         </div>
-        <%-----------------------------------------------------%>
+
+        <div class="container col-md-4" style="overflow: inherit">
+            <div style="width: 100%; height: 100%; position: fixed">
+                <div>
+                    <div >
+                        <div id="map" style="width: 100%; height: 100%"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/js/map.js"/>"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVONjkQbC8wtyxPapK8TvGe8IbIYfIIEA&callback=initMap">
+</script>
 
 
 

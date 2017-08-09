@@ -42,14 +42,41 @@
                 weekend: false, // disable events
                 editable: true, // allow to add
                 eventLimit: true, // allow "more" link when too many events
+                draggable: false,
                 events: {
                     url: '/doctor/cabinet/getApp',
                     type: 'POST',
                     contentType: 'application/json'
-                }
+                },
+                eventClick: function(event) {
+                    if (event.color === "#E53935") {
+                        if (confirm("Do u want to confirm event?")) {
+                            $.ajax({
+                                url: '/doctor/cabinet/setApp/' + event.id,
+                                method: 'GET',
+                                contentType: 'application/json',
 
+
+                                success: function (result) {
+                                    $('#calendar').fullCalendar({
+                                        events: {
+                                            url: '/doctor/cabinet/getApp',
+                                            type: 'POST',
+                                            contentType: 'application/json'
+                                        }
+                                    });
+                                    $('#calendar').fullCalendar( 'rerenderEvents' );
+                                    $('#calendar').fullCalendar( 'refetchEvents' );
+                                    $('#calendar').fullCalendar( 'refresh' )
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                }
             });
         });
+
 
     </script>
     <style>
@@ -274,7 +301,7 @@
             <ul class="list-unstyled">
                 <li><a href=<c:url value="/"/>><spring:message code="messages.home" /></a></li>
                 <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics" /></a></li>
-                <li><a href=<c:url value="/allDoctors"/>><spring:message code="messages.doctors"/> </a></li>
+                <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>
         </div>

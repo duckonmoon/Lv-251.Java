@@ -20,6 +20,7 @@ public class MapServiceImpl implements MapService {
     @Autowired
     Mapper mapper;
 
+
     @Autowired
     ClinicService clinicService;
 
@@ -30,10 +31,12 @@ public class MapServiceImpl implements MapService {
 
         for (Clinics clinic: clinics){
             ClinicLatLngDTO latlang = new ClinicLatLngDTO();
-            mapper.map(latlang, clinic);
+
+
             if(latlang.getLat() != 0 && latlang.getLng() != 0){
                 dtoList.add(latlang);
             }
+
         }
         return dtoList;
     }

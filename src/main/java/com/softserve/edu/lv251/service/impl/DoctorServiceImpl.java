@@ -43,7 +43,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     Logger logger;
-    
+
     @Autowired
     private DoctorsDAO doctorsDAO;
 
@@ -166,7 +166,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<Appointments> appointments = doctor.getDocAppointments();
         for (Appointments a : appointments) {
             PatientDTO patient = new PatientDTO();
-            mapper.map(patient, a.getUsers());
+            mapper.map(a.getUsers(), patient);
             patients.add(patient);
         }
 
@@ -180,15 +180,16 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
 
     @Override
-    public List<Doctors> getByClinic(Long clinicId){
+    public List<Doctors> getByClinic(Long clinicId) {
         List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
-        return doctors.isEmpty()? null : doctors;
+        return doctors.isEmpty() ? null : doctors;
     }
 
     @Override
     @Transactional
-    public Doctors addDoctorAccount(DoctorDTO accountDto){
+    public Doctors addDoctorAccount(DoctorDTO accountDto) {
         Doctors doctor = new Doctors();
+
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
 
@@ -216,6 +217,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         }
         doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
 //mapper.map(accountDto,doctor);
+
         addDoctor(doctor);
 
         return doctor;
@@ -231,10 +233,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<SearchResultDoctorDTO> results = new ArrayList<>();
         for (Doctors doctor : doctors) {
             SearchResultDoctorDTO result = new SearchResultDoctorDTO();
-            mapper.map(result, doctor);
+            mapper.map(doctor, result);
             results.add(result);
-
         }
+
         return results;
     }
 

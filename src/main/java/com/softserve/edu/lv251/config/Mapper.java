@@ -1,11 +1,10 @@
 package com.softserve.edu.lv251.config;
 
-
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-
 import com.softserve.edu.lv251.idl.WebRoles;
+import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;
@@ -18,18 +17,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 @Component
 public class Mapper extends ConfigurableMapper{
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     RolesService rolesService;
+
     @Autowired
     ContactsDAO contactsDAO;
+
     @Autowired
     private SpecializationService specializationService;
 
@@ -50,10 +56,20 @@ public class Mapper extends ConfigurableMapper{
         factory.classMap(PersonalInfoDTO.class, Users.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
-                .field("email", "email")
-                .byDefault().register();
+                .field("email", "email").customize(new CustomMapper<PersonalInfoDTO, Users>() {
 
+            @Override
+            public void mapBtoA(Users user, PersonalInfoDTO personalInfoDTO, MappingContext context) {
+                personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
+            }
 
+            @Override
+            public void mapAtoB(PersonalInfoDTO personalInfoDTO, Users user, MappingContext context) {
+                String photo= StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
+                user.setPhoto(photo);
+            }
+        })
+                .register();
 
         factory.classMap(PersonalInfoDTO.class, Contacts.class)
                 .field("address", "address")
@@ -62,38 +78,53 @@ public class Mapper extends ConfigurableMapper{
                 .field("firstPhone", "firstPhone")
                 .field("secondPhone", "secondPhone")
                 .field("thirdPhone", "thirdPhone")
+                .field("email", "email")
                 .byDefault().register();
 
+        factory.classMap(ClinicInfoDTO.class, Clinics.class)
+                .field("clinic_name", "clinic_name")
+                .field("description", "description")
 
-        factory.classMap(ClinicInfoDTO.class,Clinics.class)
-                .field("clinic_name","clinic_name")
-                .field("description","description")
                 .byDefault().register();
 
-         factory.classMap(ClinicInfoDTO.class,Contacts.class)
-                 .field("address", "address")
-                 .field("city", "city")
-                 .field("zipCode", "zipCode")
-                 .field("firstPhone", "firstPhone")
-                 .field("secondPhone", "secondPhone")
-                 .field("thirdPhone", "thirdPhone")
-                 .byDefault().register();
+        factory.classMap(ClinicInfoDTO.class, Contacts.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipCode", "zipCode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
+                .byDefault().register();
 
-        factory.classMap(ClinicLatLngDTO.class, Clinics.class)
-                .customize(new CustomMapper<ClinicLatLngDTO, Clinics>() {
+        factory.classMap(Clinics.class, ClinicLatLngDTO.class)
+                .customize(new CustomMapper<Clinics, ClinicLatLngDTO>() {
                     @Override
-                    public void mapAtoB(ClinicLatLngDTO latLng, Clinics clinics, MappingContext context) {
-                        double lat = clinics.getContact().getLatitude();
-                        double lng = clinics.getContact().getLongitude();
-                        latLng.setLat(lat);
-                        latLng.setLng(lng);
-                        latLng.setId(clinics.getId());
+                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng, MappingContext context) {
+                        if(clinics.getContact()!=null){
+                            double lat = clinics.getContact().getLatitude();
+                            double lng = clinics.getContact().getLongitude();
+                            latLng.setLat(lat);
+                            latLng.setLng(lng);
+                            latLng.setId(clinics.getId());
+                        }
                     }
-                }).register();
-        factory.classMap(PatientDTO.class, Users.class)
-                .customize(new CustomMapper<PatientDTO, Users>() {
+                });
+
+        factory.classMap(Appointments.class, AppointmentsForCreationDTO.class)
+                .field("appointmentDate", "appointmentDate")
+                .field("duration", "duration")
+                .customize(new CustomMapper<Appointments, AppointmentsForCreationDTO>() {
                     @Override
-                    public void mapAtoB(PatientDTO patientDTO, Users users, MappingContext context) {
+                    public void mapAtoB(Appointments a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
+                        b.setDoctors(a.getDoctors().getId());
+                    }
+                })
+                .register();
+
+        factory.classMap(Users.class, PatientDTO.class)
+                .customize(new CustomMapper<Users, PatientDTO>() {
+                    @Override
+                    public void mapAtoB(Users users, PatientDTO patientDTO, MappingContext context) {
                         patientDTO.setId(users.getId());
                         String fullName = users.getLastname() + " "
                                 + users.getFirstname() + " "
@@ -101,10 +132,10 @@ public class Mapper extends ConfigurableMapper{
                         patientDTO.setFullName(fullName);
                     }
                 }).register();
-        factory.classMap(SearchResultDoctorDTO.class, Doctors.class).customize(new CustomMapper<SearchResultDoctorDTO, Doctors>() {
+
+        factory.classMap(Doctors.class, SearchResultDoctorDTO.class).customize(new CustomMapper<Doctors, SearchResultDoctorDTO>() {
             @Override
-            public void mapAtoB(SearchResultDoctorDTO searchResultDoctorDTO, Doctors doctor, MappingContext context) {
-                super.mapAtoB(searchResultDoctorDTO, doctor, context);
+            public void mapAtoB(Doctors doctor, SearchResultDoctorDTO searchResultDoctorDTO, MappingContext context) {
                 searchResultDoctorDTO.setId(doctor.getId());
                 searchResultDoctorDTO.setDescription(doctor.getDescription());
                 searchResultDoctorDTO.setFirstName(doctor.getFirstname());
@@ -129,7 +160,6 @@ public class Mapper extends ConfigurableMapper{
 
                 searchResultDoctorDTO.setClinicId(doctor.getClinics().getId());
                 searchResultDoctorDTO.setClinicName(doctor.getClinics().getClinic_name());
-
             }
         });
 
@@ -160,6 +190,28 @@ public class Mapper extends ConfigurableMapper{
             }
         }).register();
 
+        factory.classMap(Appointments.class, AppointmentDTO.class).customize(new CustomMapper<Appointments, AppointmentDTO>() {
+            @Override
+            public void mapAtoB(Appointments appointments, AppointmentDTO appointmentDTO, MappingContext context) {
+                appointmentDTO.setAppointmentDate(appointments.getAppointmentDate().getTime());
+                appointmentDTO.setDuration(appointments.getDuration());
+                appointmentDTO.setStatus(appointments.getIsApproved());
+
+                appointmentDTO.setPatientId(appointments.getUsers().getId());
+                appointmentDTO.setPatientFirstName(appointments.getUsers().getFirstname());
+                appointmentDTO.setPatientLastName(appointments.getUsers().getLastname());
+                appointmentDTO.setPatientMiddleName(appointments.getUsers().getMiddlename());
+
+                appointmentDTO.setDoctorId(appointments.getDoctors().getId());
+                appointmentDTO.setDoctorFirstName(appointments.getDoctors().getFirstname());
+                appointmentDTO.setDoctorLastName(appointments.getDoctors().getLastname());
+                appointmentDTO.setDoctorMiddleName(appointments.getDoctors().getMiddlename());
+                appointmentDTO.setDoctorSpecialisation(appointments.getDoctors().getSpecialization().getName());
+
+                appointmentDTO.setClinicId(appointments.getDoctors().getClinics().getId());
+                appointmentDTO.setClinicName(appointments.getDoctors().getClinics().getClinic_name());
+            }
+        }).register();
 
         factory.classMap(Clinics.class,ClinicSearchDTO.class)
                 .field("id","id")
@@ -221,5 +273,27 @@ public class Mapper extends ConfigurableMapper{
 //            }
 //        }).register();
 
-}
+
+        factory.classMap(Appointments.class,AppointmentsDTO.class).customize(new CustomMapper<Appointments, AppointmentsDTO>() {
+                @Override
+                public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
+                    super.mapAtoB(appointments, appointmentsDTO, context);
+                    appointmentsDTO.setId(appointments.getId());
+                    appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
+                    if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate())<0) {
+                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
+                    }
+                    else {
+                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
+                    }
+                    appointments.getAppointmentDate().setTime(appointments
+                                            .getAppointmentDate()
+                                            .getTime() - Calendar.getInstance()
+                                            .getTimeZone()
+                                            .getRawOffset());
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                    appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
+                }
+            }).register();
     }
+}

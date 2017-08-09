@@ -11,12 +11,17 @@ import java.util.Date;
 public class Appointments extends BaseEntity {
 
     private Date appointmentDate;
-    private Boolean status = true;
     private Boolean isApproved;
     private double duration;
 
     @ManyToOne
     private Doctors doctors;
+
+    @ManyToOne
+    private Users users;
+
+    public Appointments() {
+    }
 
     public Date getAppointmentDate() {
         return appointmentDate;
@@ -24,12 +29,6 @@ public class Appointments extends BaseEntity {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
-    }
-
-    @ManyToOne
-    private Users users;
-
-    public Appointments() {
     }
 
     public Boolean getIsApproved() {
@@ -54,14 +53,6 @@ public class Appointments extends BaseEntity {
 
     public void setUsers(Users users) {
         this.users = users;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     public double getDuration() {

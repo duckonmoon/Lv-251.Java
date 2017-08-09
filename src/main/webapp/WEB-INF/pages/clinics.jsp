@@ -8,9 +8,9 @@
 <div class="container">
 
     <div class="row" style="margin-top: 50px">
-        <p style="display: none"><spring:message code="messages.searchClinics" /></p>
-        <p  style="display: none"><spring:message code="messages.searchDoctors" /></p>
-        <p style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
+        <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
+        <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
+        <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
 
         <nav class="navbar navbar-inverse">
             <div  class="container-fluid">
@@ -34,6 +34,7 @@
 
         </nav>
     </div>
+    <div class="container col-md-8">
     <%--Pagination--%>
     <%-----------------------------------------------------%>
     <div class="content">
@@ -94,9 +95,9 @@
             </div>
             <%-----------------------------------------------------%>
         </div>
-
+    </div>
         <div class="container col-md-4" style="overflow: inherit">
-            <div style="width: 100%; height: 100%; position: fixed">
+            <div style="width: 100%; height: 100%;">
                 <div>
                     <div >
                         <div id="map" style="width: 100%; height: 100%"/>

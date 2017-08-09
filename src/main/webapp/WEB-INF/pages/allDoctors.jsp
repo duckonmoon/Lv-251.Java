@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8" type="text/javascript"></script>
 <div class="container">
 
     <div class="container">
@@ -129,31 +132,25 @@
                             </div>
                             <div class="modal-content">
                                 <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
-<<<<<<< HEAD
-                                    <div class="form-group"
-                                         style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
-                                        <div class="input-append date form_datetime" id="date-div">
-                                            <label for="first-date" style="margin-left: 5pt"><spring:message
-                                                    code="messages.date"/></label>
-=======
+
                                     <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
                                         <div class="input-append date form_datetime" id="date-div-${doctor.id}">
                                             <label for="first-date" style="margin-left: 5pt">
                                                 <spring:message code="messages.date"/>
                                             </label>
->>>>>>> develop
+
                                             <input type="text" value="" readonly id="first-date" name="datetime">
                                             <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
                                             <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
                                         </div>
 
 
-                                        <script type="text/javascript">
+                                        <script type="text/javascript" charset="UTF-8">
 
                                             $("#date-div-${doctor.id}").datetimepicker({
+                                                language:'${pageContext.response.locale}',
                                                 format: "dd/mm/yyyy - hh:ii",
                                                 autoclose: true,
-                                                todayBtn: true,
                                                 minuteStep: 15,
                                                 startDate: new Date(),
                                                 daysOfWeekDisabled: [0, 6],
@@ -167,31 +164,21 @@
                                                             <c:forEach items="${docApps}" var="apointments">
                                                                 <c:if test="${apointments.doctors == doctor.id}">
                                                                     dd = new Date("${apointments.appointmentDate}");
-                                                                    dd.setHours(dd.getHours()+3);
+                                                                    dd.setHours(dd.getHours());
                                                                     dates.push(dd);
                                                                 </c:if>
                                                             </c:forEach>
                                                         </c:when>
                                                     </c:choose>
-                                                    
-                                                    var i = 0;
-                                                    for (i = 0; i < dates.length; i++) {
-                                                        if (date.getTime() === dates[i].getTime()) {
-                                                            console.log("day" + date.getDay() + "test" + dates[i].getDay())
-                                                            console.log("month" + date.getMonth() + "test" + dates[i].getMonth())
-                                                            console.log("year" + date.getYear() + "test" + dates[i].getYear())
-                                                            console.log("hour" + date.getHours() + "test" + dates[i].getHours())
-                                                            console.log("minutes" + date.getUTCMinutes() + "test" + dates[i].getUTCMinutes())
-                                                            console.log("date" + date + "test" + dates[i])
-                                                            console.log("date" + date.getTime() + "test" + dates[i].getTime())
 
-                                                            console.log("---------------------------")
+                                                    for (var i = 0; i < dates.length; i++) {
+                                                        if (date.getTime() === dates[i].getTime()) {
                                                             return ['disabled'];
                                                         }
-//                                                    })
                                                     }
                                                 }
                                             });
+
                                         </script>
 
                                     </div>

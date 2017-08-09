@@ -78,14 +78,8 @@ public class UserCabinetController {
     public String medicalCardGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
-
-        PersonalInfoDTO userDTO = new PersonalInfoDTO();
-
-        mapper.map(user, userDTO);
-        mapper.map(contacts, userDTO);
-        model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("userObject", userDTO);
+        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(user.getEmail()));
+        model.addAttribute("date", new Date());
 
         return "userCabinetMedicalCard";
     }
@@ -93,21 +87,21 @@ public class UserCabinetController {
     /**
      * Added by Pavlo Kuchereshko
      */
-    @PostMapping("/user/medicalcard")
-    public String medicalCardPOST(/*@ModelAttribute PersonalInfoDTO personalInfoDTO,*/ Model model, Principal principal){
+    /*@PostMapping("/user/medicalcard")
+    public String medicalCardPOST(*//*@ModelAttribute PersonalInfoDTO personalInfoDTO,*//* Model model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        /*Contacts contacts = user.getContact();*/
+        *//*Contacts contacts = user.getContact();*//*
 
-        /*mapper.map(personalInfoDTO, user);
+        *//*mapper.map(personalInfoDTO, user);
         mapper.map(personalInfoDTO, contacts);
-        userService.updateUser(user);*/
+        userService.updateUser(user);*//*
 
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(user.getEmail()));
         model.addAttribute("date", new Date());
 
         return "userCabinetMedicalCard";
-    }
+    }*/
 
     @GetMapping("/user/appointments")
     public String userAppointments(Model model, Principal principal){

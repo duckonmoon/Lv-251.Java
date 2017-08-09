@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class DoctorCabinetController {
     public void setApp(@PathVariable(value = "id") long id)
     {
         Appointments appointments = appointmentService.getAppointmentById(id);
-        appointments.setStatus(true);
+        appointments.setIsApproved(true);
         appointmentService.updateAppointment(appointments);
     }
 

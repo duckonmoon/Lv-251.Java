@@ -44,7 +44,6 @@
                 <div class="form-group">
                     <button class="btn btn-info pull-right"><spring:message code="messages.contactButton"/></button>
                 </div>
-                <br>
             </form:form>
         </div>
     </div>

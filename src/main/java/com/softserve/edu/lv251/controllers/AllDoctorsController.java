@@ -72,8 +72,6 @@ public class AllDoctorsController {
             isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             date = isoFormat.parse(localdate);
 
-
-//            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
             if(date.before(new Date())){
                 throw new Exception();
             }

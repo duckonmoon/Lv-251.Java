@@ -2,14 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-
-
-
 <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap-datetimepicker.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datetimepicker.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8" type="text/javascript"></script>
 <div class="container">
 
     <div class="container">
@@ -132,31 +129,8 @@
 
                                         <script type="text/javascript" charset="UTF-8">
 
-                                            <c:choose>
-                                                <c:when test="${pageContext.response.locale == 'uk'}">
-                                                    $.fn.datetimepicker.dates['en'] = {
-                                                        days: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четверг", "П'ятниця", "Субота", "Неділя"],
-                                                        daysShort: ["Нед", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб", "Нед"],
-                                                        daysMin: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
-                                                        months: ["Cічень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
-                                                        monthsShort: ["Січ", "Лют", "Бер", "Квт", "Трв", "Чер", "Лип", "Сер", "Вер", "Жов", "Лис", "Грд"],
-                                                        today: "Сьогодні",
-                                                        weekStart: 1
-                                                    };
-                                                </c:when>
-                                                <c:otherwise>
-                                                    $.fn.datetimepicker.dates['en'] = {
-                                                        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                                                        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                                                        daysMin: ["S1", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-                                                        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                                                        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                                                        today: "Today"
-                                                    };
-                                                </c:otherwise>
-                                            </c:choose>
-
                                             $("#date-div-${doctor.id}").datetimepicker({
+                                                language:'${pageContext.response.locale}',
                                                 format: "dd/mm/yyyy - hh:ii",
                                                 autoclose: true,
                                                 minuteStep: 15,
@@ -178,22 +152,11 @@
                                                             </c:forEach>
                                                         </c:when>
                                                     </c:choose>
-                                                    
-                                                    var i = 0;
-                                                    for (i = 0; i < dates.length; i++) {
-                                                        if (date.getTime() === dates[i].getTime()) {
-                                                            console.log("day" + date.getDay() + "test" + dates[i].getDay())
-                                                            console.log("month" + date.getMonth() + "test" + dates[i].getMonth())
-                                                            console.log("year" + date.getYear() + "test" + dates[i].getYear())
-                                                            console.log("hour" + date.getHours() + "test" + dates[i].getHours())
-                                                            console.log("minutes" + date.getUTCMinutes() + "test" + dates[i].getUTCMinutes())
-                                                            console.log("date" + date + "test" + dates[i])
-                                                            console.log("date" + date.getTime() + "test" + dates[i].getTime())
 
-                                                            console.log("---------------------------")
+                                                    for (var i = 0; i < dates.length; i++) {
+                                                        if (date.getTime() === dates[i].getTime()) {
                                                             return ['disabled'];
                                                         }
-//                                                    })
                                                     }
                                                 }
                                             });

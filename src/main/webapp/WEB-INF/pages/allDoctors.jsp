@@ -130,12 +130,35 @@
                                         </div>
 
 
-                                        <script type="text/javascript">
+                                        <script type="text/javascript" charset="UTF-8">
+
+                                            <c:choose>
+                                                <c:when test="${pageContext.response.locale == 'uk'}">
+                                                    $.fn.datetimepicker.dates['en'] = {
+                                                        days: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четверг", "П'ятниця", "Субота", "Неділя"],
+                                                        daysShort: ["Нед", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб", "Нед"],
+                                                        daysMin: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
+                                                        months: ["Cічень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
+                                                        monthsShort: ["Січ", "Лют", "Бер", "Квт", "Трв", "Чер", "Лип", "Сер", "Вер", "Жов", "Лис", "Грд"],
+                                                        today: "Сьогодні",
+                                                        weekStart: 1
+                                                    };
+                                                </c:when>
+                                                <c:otherwise>
+                                                    $.fn.datetimepicker.dates['en'] = {
+                                                        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                                                        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                                                        daysMin: ["S1", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+                                                        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                                                        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                                                        today: "Today"
+                                                    };
+                                                </c:otherwise>
+                                            </c:choose>
 
                                             $("#date-div-${doctor.id}").datetimepicker({
                                                 format: "dd/mm/yyyy - hh:ii",
                                                 autoclose: true,
-                                                todayBtn: true,
                                                 minuteStep: 15,
                                                 startDate: new Date(),
                                                 daysOfWeekDisabled: [0, 6],
@@ -149,7 +172,7 @@
                                                             <c:forEach items="${docApps}" var="apointments">
                                                                 <c:if test="${apointments.doctors == doctor.id}">
                                                                     dd = new Date("${apointments.appointmentDate}");
-                                                                    dd.setHours(dd.getHours()+3);
+                                                                    dd.setHours(dd.getHours());
                                                                     dates.push(dd);
                                                                 </c:if>
                                                             </c:forEach>
@@ -174,6 +197,7 @@
                                                     }
                                                 }
                                             });
+
                                         </script>
 
                                     </div>

@@ -19,6 +19,7 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by Yana on 23.07.2017.
@@ -66,7 +67,13 @@ public class AllDoctorsController {
 
         ModelAndView modelAndView = new ModelAndView();
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
+
+            SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            date = isoFormat.parse(localdate);
+
+
+//            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
             if(date.before(new Date())){
                 throw new Exception();
             }

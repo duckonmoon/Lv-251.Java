@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
+import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.service.AppointmentService;
@@ -97,27 +98,27 @@ public class AllDoctorsController {
 
     @ResponseBody
     @RequestMapping(value = "/all/doc")
-    public List<Doctors> searchDoctors(@RequestParam String name) {
-        System.out.println(name);
-        System.out.println(doctorsService.searchByLetters("Zyrr"));
-        System.out.println(doctorsService.searchByLetters(name));
-        return doctorsService.searchByLetters(name);
-
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/{name}")
-    public List<Doctors> searchAll(@PathVariable("name") String name) {
-        System.out.println("in search ");
+    public List<DoctorsSearchDTO> searchDoctors(@RequestParam String name) {
         System.out.println(name);
         return doctorsService.searchByLetters(name);
 
     }
+
+//    @ResponseBody
+//    @RequestMapping(value = "/search/{name}")
+//    public List<Doctors> searchAll(@PathVariable("name") String name) {
+//        System.out.println("in search ");
+//        System.out.println(name);
+//        return doctorsService.searchByLetters(name);
+//
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/searchResult/{id}")
-    public Doctors s(@PathVariable Long id) {
-        return doctorsService.find(id);
+    public DoctorsSearchDTO doctorById(@PathVariable Long id) {
+        System.out.println(id);
+        System.out.println(doctorsService.findById(id));
+        return doctorsService.findById(id);
     }
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)

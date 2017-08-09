@@ -28,13 +28,13 @@ public class Clinics extends BaseEntity {
                     CascadeType.REFRESH,
                     CascadeType.PERSIST
             })
-    @JsonIgnore
+
     private List<Doctors> doctors;
 
-    @JsonIgnore
+
     @OneToOne(cascade = {CascadeType.ALL})
     private Contacts contact;
-    @JsonIgnore
+
     @OneToOne(mappedBy = "clinic")
     private Moderator moderator;
 

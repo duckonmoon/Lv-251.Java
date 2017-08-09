@@ -8,7 +8,9 @@
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8" type="text/javascript"></script>
 <div class="container">
-
+    <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
+    <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
+    <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
     <div class="container">
         <div class="row" style="margin-top: 50px">
             <nav class="navbar navbar-inverse">
@@ -82,13 +84,15 @@
                                                  alt="...">
                                         </a>
                                     </div>
-                                    <a href="/doctors/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${flag}/${doctor.id}" class="btn-link">
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
-                                    <p><spring:message
-                                            code="messages.specialization"/>:${doctor.specialization.name}</p>
-                                    <button class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"
-                                            data-toggle="modal" data-target="#modal_${doctor.id}">
+
+                                    <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
+                                    <hr>
+                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinics.clinic_name}</p>
+                                    <button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%" data-toggle="modal" data-target="#modal_${doctor.id}">
+
                                         <spring:message code="messages.addAppointment"/>
                                     </button>
                                 </div>

@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ClinicsDAO;
+import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -60,7 +61,15 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public Clinics getClinicByID(Long clinicId) {
-        return this.clinicsDAO.getEntityByID(clinicId);
+        return clinicsDAO.getEntityByID(clinicId);
+    }
+
+    @Override
+    public ClinicSearchDTO clinicSearchById(Long clinicId) {
+        Clinics clinics=clinicsDAO.getEntityByID(clinicId);
+        ClinicSearchDTO clinicSearchDTO=new ClinicSearchDTO();
+        mapper.map(clinics,clinicSearchDTO);
+        return clinicSearchDTO ;
     }
 
     @Override
@@ -87,13 +96,31 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
         return clinicsDAO;
     }
 
-    public List<Clinics> findByDistrict(String name) {
-        return clinicsDAO.findByDistrict(name);
+    public List<ClinicSearchDTO> findByDistrict(String name)
+
+    {
+        List<Clinics> clinics=clinicsDAO.findByDistrict(name);
+        List<ClinicSearchDTO> results = new ArrayList<>();
+
+        for (Clinics clinic : clinics) {
+            ClinicSearchDTO result = new ClinicSearchDTO();
+            mapper.map(clinic, result);
+            results.add(result);
+        }
+        return results;
     }
 
     @Override
-    public List<Clinics> searchByLetters(String letters) {
-        return clinicsDAO.searchByLetters(letters);
+    public List<ClinicSearchDTO> searchByLetters(String letters) {
+        List<Clinics> clinics=clinicsDAO.searchByLetters(letters);
+        List<ClinicSearchDTO> results = new ArrayList<>();
+
+        for (Clinics clinic : clinics) {
+            ClinicSearchDTO result = new ClinicSearchDTO();
+            mapper.map(clinic, result);
+            results.add(result);
+        }
+        return results;
     }
 
     @Override

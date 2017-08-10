@@ -18,6 +18,7 @@ public class AppointmentsDTO {
 
     public  AppointmentsDTO(){}
 
+
     public Long getId() {
         return id;
     }

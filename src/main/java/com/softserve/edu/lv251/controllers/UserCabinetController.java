@@ -78,7 +78,7 @@ public class UserCabinetController {
     public String medicalCardGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(user.getEmail()));
+        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("date", new Date());
 
         return "userCabinetMedicalCard";

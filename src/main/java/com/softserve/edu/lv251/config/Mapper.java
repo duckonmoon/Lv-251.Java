@@ -232,6 +232,26 @@ public class Mapper extends ConfigurableMapper{
                 .field("name","name")
                 .byDefault().register();
 
+
+        factory.classMap(Appointments.class,AppointmentsDTO.class)
+                .customize(new CustomMapper<Appointments, AppointmentsDTO>() {
+                    @Override
+                    public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
+                        super.mapAtoB(appointments, appointmentsDTO, context);
+                        appointmentsDTO.setId(appointments.getId());
+                        appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
+                        if (appointments.getIsApproved()!=null) {
+                            if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
+                                appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
+                            } else {
+                                appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
+                            }
+                        }
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
+                    }
+                }).register();
+
           factory.classMap(Doctors.class,DoctorsSearchDTO.class)
                   .field("id","id")
                   .field("firstname", "firstname")
@@ -281,25 +301,5 @@ public class Mapper extends ConfigurableMapper{
 //            }
 //        }).register();
 
-
-        factory.classMap(Appointments.class,AppointmentsDTO.class).customize(new CustomMapper<Appointments, AppointmentsDTO>() {
-                @Override
-                public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
-                    super.mapAtoB(appointments, appointmentsDTO, context);
-                    appointmentsDTO.setId(appointments.getId());
-                    appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
-                    if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate())<0) {
-                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
-                    }
-                    else {
-                        appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
-                    }
-                    appointments.getAppointmentDate().setTime(
-                            appointments.getAppointmentDate().getTime()
-                            - Calendar.getInstance().getTimeZone().getRawOffset());
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                    appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
-                }
-            }).register();
     }
 }

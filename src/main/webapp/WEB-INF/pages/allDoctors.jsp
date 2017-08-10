@@ -110,7 +110,7 @@
                                         <div class="col-xs-6 col-md-9 col-lg-9">
                                             <div class="row">
                                                 <div class="col-xs-6 col-md-3 col-lg-2">
-                                                    <img width="200" height="200" src="/resources/img/User_Default.png"
+                                                    <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}"
                                                          alt="...">
                                                 </div>
                                             </div>

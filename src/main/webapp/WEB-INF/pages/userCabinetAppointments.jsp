@@ -20,7 +20,7 @@
                     <a href="#" class="list-group-item">
                         <spring:message code="messages.medicalCard"/>
                     </a>
-                    <a href="/user/appointments" class="active list-group-item">
+                    <a href="/user/appointments" class="navbar-inverse list-group-item">
                         <spring:message code="messages.appointments"/>
                     </a>
                 </div>

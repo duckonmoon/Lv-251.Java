@@ -12,7 +12,7 @@
         <div class="container" style="width: 30%; float: left">
             <div class="row row-content">
                 <div class="list-group doc-menu">
-                    <a href="/user/cabinet" class="active list-group-item">
+                    <a href="/user/cabinet" class="navbar-inverse list-group-item">
                         <spring:message code="messages.profile"/>
                     </a>
                     <a href="#" class="list-group-item">

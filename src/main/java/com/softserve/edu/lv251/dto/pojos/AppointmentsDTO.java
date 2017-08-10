@@ -11,13 +11,13 @@ import java.util.*;
  */
 public class AppointmentsDTO {
 
-
     private Long id;
     private String title;
     private String start;
     private String color;
 
     public  AppointmentsDTO(){}
+
 
     public Long getId() {
         return id;

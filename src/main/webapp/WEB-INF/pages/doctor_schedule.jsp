@@ -14,7 +14,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <meta charset='utf-8' />
+    <meta charset='utf-8'/>
     <title>Schedule</title>
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-theme.min.css"/>" rel="stylesheet">
@@ -23,8 +23,8 @@
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
-    <link href='<c:url value="/resources/calendarResourses/fullcalendar.min.css"/>' rel='stylesheet' />
-    <link href='<c:url value="/resources/calendarResourses/fullcalendar.print.css"/>' rel='stylesheet' media='print' />
+    <link href='<c:url value="/resources/calendarResourses/fullcalendar.min.css"/>' rel='stylesheet'/>
+    <link href='<c:url value="/resources/calendarResourses/fullcalendar.print.css"/>' rel='stylesheet' media='print'/>
     <script src='<c:url value="/resources/calendarResourses/moment.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/jquery.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/fullcalendar.min.js"/>'></script>
@@ -36,11 +36,11 @@
     <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
     <script>
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $('#calendar').fullCalendar({
                 weekend: false, // disable events
-                editable: true, // allow to add
+                editable: false, // allow to add
                 eventLimit: true, // allow "more" link when too many events
                 draggable: false,
                 events: {
@@ -48,7 +48,7 @@
                     type: 'POST',
                     contentType: 'application/json'
                 },
-                eventClick: function(event) {
+                eventClick: function (event) {
                     if (event.color === "#E53935") {
                         if (confirm("Do u want to confirm event?")) {
                             $.ajax({
@@ -65,9 +65,9 @@
                                             contentType: 'application/json'
                                         }
                                     });
-                                    $('#calendar').fullCalendar( 'rerenderEvents' );
-                                    $('#calendar').fullCalendar( 'refetchEvents' );
-                                    $('#calendar').fullCalendar( 'refresh' )
+                                    $('#calendar').fullCalendar('rerenderEvents');
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    $('#calendar').fullCalendar('refresh')
                                 }
                             });
                             return false;
@@ -84,13 +84,18 @@
         body {
             margin: 40px 10px;
             padding: 0;
-            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
             font-size: 14px;
         }
 
         #calendar {
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        #calendar .fc-today {
+            background: #B2EBF2;
+            border: 3px #fff81c;
         }
 
     </style>
@@ -112,35 +117,38 @@
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
-            <ul  class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> <spring:message code="messages.home" />
+            <ul class="nav navbar-nav">
+                <li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span>
+                    <spring:message code="messages.home"/>
                 </a></li>
                 <li>
                     <a href="${pageContext.request.contextPath}/clinics/1">
-                        <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics" />
+                        <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics"/>
                     </a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/allDoctors">
-                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
+                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors"/>
                     </a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
+                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i>
+                        <spring:message code="messages.contact"/>
                     </a>
                 </li>
                 <li class="${current == 'user/cabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>
-                            <spring:message code="messages.userCabinet" />
+                            <spring:message code="messages.userCabinet"/>
                         </a>
                     </sec:authorize>
                 </li>
                 <li class="active">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
-                        <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i>
+                            <spring:message code="messages.doctorCabinet"/>
                         </a>
                     </sec:authorize>
                 </li>
@@ -152,7 +160,6 @@
             </ul>
 
 
-
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <sec:authorize access="isAuthenticated()">
@@ -162,25 +169,27 @@
                     </sec:authorize>
                 </li>
                 <li class="nav navbar-nav flags">
-                    <a class=""  href="?lang=en" style="padding: 20px 0 ; float: left">
+                    <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class=""  href="?lang=uk"  style="padding: 20px 3px ; float: left ">
+                    <a class="" href="?lang=uk" style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>
                 </li>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
+                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal"
+                           data-target="#loginModal" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                     </li>
                 </sec:authorize>
 
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a type="button" id="logoutBtn" style="cursor:pointer;" href="${pageContext.request.contextPath}/logout">
+                        <a type="button" id="logoutBtn" style="cursor:pointer;"
+                           href="${pageContext.request.contextPath}/logout">
                             <span class="glyphicon glyphicon-log-out"></span> <spring:message code="messages.logout"/>
                         </a>
                     </li>
@@ -242,7 +251,8 @@
                                 <spring:message code="messages.login"/>
                             </button>
                             <h4 class="text-center">
-                                <a href="<c:url value="/registration"/>"><spring:message code="messages.createAccount"/></a>
+                                <a href="<c:url value="/registration"/>"><spring:message
+                                        code="messages.createAccount"/></a>
                             </h4>
                         </div>
                     </div>
@@ -253,18 +263,17 @@
 </sec:authorize>
 
 
-
 <script>
     function hideText() {
-        document.getElementById('wrong').innerHTML= '';
+        document.getElementById('wrong').innerHTML = '';
     }
 </script>
 
 
 <c:if test="${flag}">
     <script>
-        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
-        jQuery(window).load(function(){
+        document.getElementById('wrong').innerHTML = '<spring:message code="messages.invalidLoginOrPassword"/>';
+        jQuery(window).load(function () {
             jQuery('#loginModal').modal('show')
         });
         <c:set var="flag" value="false"/>
@@ -272,20 +281,29 @@
 </c:if>
 
 
-
-
-
 <div class="container">
     <div class="container" style="width: 30%; float: left">
         <div class="row row-content">
             <div class="list-group doc-menu">
-                <a href="#" class= 'list-group-item active'>
-                    <spring:message code="messages.schedule" />
+                <a href="#" class='list-group-item active'>
+                    <spring:message code="messages.schedule"/>
                 </a>
                 <a href="#" class="list-group-item">
-                    <spring:message code="messages.patients" />
+                    <spring:message code="messages.patients"/>
                 </a>
             </div>
+        </div>
+        <div class="row row-content">
+            <ul style="font-size: 14px">
+                <li style="color: #4CAF50;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                    "> <spring:message code="messages.dotActive"/> </span></li>
+                <li style="color: #E53935;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                    "> <spring:message code="messages.dotPassive"/> </span></li>
+                <li style="color: #424242;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                    "> <spring:message code="messages.dotPActive"/> </span></li>
+                <li style="color: #546E7A;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                    "> <spring:message code="messages.dotPPassive"/> </span></li>
+            </ul>
         </div>
     </div>
 
@@ -293,14 +311,13 @@
 </div>
 
 
-
 <div class="container">
     <div class="row row-footer">
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5><spring:message code="messages.links"/></h5>
             <ul class="list-unstyled">
-                <li><a href=<c:url value="/"/>><spring:message code="messages.home" /></a></li>
-                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics" /></a></li>
+                <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
+                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics"/></a></li>
                 <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>

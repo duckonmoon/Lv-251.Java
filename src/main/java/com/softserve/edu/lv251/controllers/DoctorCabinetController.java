@@ -36,7 +36,7 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
     @ResponseBody
-    public String getApp(Principal principal)
+    public  List<AppointmentsDTO> getApp(Principal principal)
     {
         List<AppointmentsDTO> appointmentsDTOs = new LinkedList<>();
         for(Appointments appo: appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())){
@@ -44,7 +44,7 @@ public class DoctorCabinetController {
             mapper.map(appo, appointmentsDTO);
             appointmentsDTOs.add(appointmentsDTO);
         }
-        return new Gson().toJson(appointmentsDTOs);
+        return appointmentsDTOs;
     }
 
 

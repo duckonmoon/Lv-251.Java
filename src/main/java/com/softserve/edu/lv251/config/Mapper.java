@@ -195,6 +195,7 @@ public class Mapper extends ConfigurableMapper{
             public void mapAtoB(Appointments appointments, AppointmentDTO appointmentDTO, MappingContext context) {
                 appointmentDTO.setAppointmentDate(appointments.getAppointmentDate().getTime());
                 appointmentDTO.setDuration(appointments.getDuration());
+                appointmentDTO.setDescription(appointments.getDescription());
                 appointmentDTO.setStatus(appointments.getIsApproved());
 
                 appointmentDTO.setPatientId(appointments.getUsers().getId());
@@ -202,14 +203,21 @@ public class Mapper extends ConfigurableMapper{
                 appointmentDTO.setPatientLastName(appointments.getUsers().getLastname());
                 appointmentDTO.setPatientMiddleName(appointments.getUsers().getMiddlename());
 
-                appointmentDTO.setDoctorId(appointments.getDoctors().getId());
-                appointmentDTO.setDoctorFirstName(appointments.getDoctors().getFirstname());
-                appointmentDTO.setDoctorLastName(appointments.getDoctors().getLastname());
-                appointmentDTO.setDoctorMiddleName(appointments.getDoctors().getMiddlename());
-                appointmentDTO.setDoctorSpecialisation(appointments.getDoctors().getSpecialization().getName());
+                appointmentDTO.setDoctorId(
+                        appointments.getDoctors().getId());
+                appointmentDTO.setDoctorFirstName(
+                        appointments.getDoctors().getFirstname());
+                appointmentDTO.setDoctorLastName(
+                        appointments.getDoctors().getLastname());
+                appointmentDTO.setDoctorMiddleName(
+                        appointments.getDoctors().getMiddlename());
+                appointmentDTO.setDoctorSpecialisation(
+                        appointments.getDoctors().getSpecialization().getName());
 
-                appointmentDTO.setClinicId(appointments.getDoctors().getClinics().getId());
-                appointmentDTO.setClinicName(appointments.getDoctors().getClinics().getClinic_name());
+                appointmentDTO.setClinicId(
+                        appointments.getDoctors().getClinics().getId());
+                appointmentDTO.setClinicName(
+                        appointments.getDoctors().getClinics().getClinic_name());
             }
         }).register();
 
@@ -286,11 +294,9 @@ public class Mapper extends ConfigurableMapper{
                     else {
                         appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
                     }
-                    appointments.getAppointmentDate().setTime(appointments
-                                            .getAppointmentDate()
-                                            .getTime() - Calendar.getInstance()
-                                            .getTimeZone()
-                                            .getRawOffset());
+                    appointments.getAppointmentDate().setTime(
+                            appointments.getAppointmentDate().getTime()
+                            - Calendar.getInstance().getTimeZone().getRawOffset());
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                     appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
                 }

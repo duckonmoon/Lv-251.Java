@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class AppointmentsDTO {
 
-
     private Long id;
     private String title;
     private String start;

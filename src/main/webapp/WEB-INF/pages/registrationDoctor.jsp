@@ -59,6 +59,30 @@
                             <form:errors path="matchingPassword"/>
                         </div>
                     </spring:bind>
+                    <spring:bind path="specialization">
+                        <div class="form-group">
+                            <label class="sr-only" for="specialization"><spring:message code="messages.firstName" var="specializationMess"/></label>
+                            <form:input type="text" id="specialization" path="specialization"
+                                        name="specialization" class="form-control" placeholder="${specializationMess}" autofocus="true"/>
+                            <form:errors path="specialization"/>
+                        </div>
+                    </spring:bind>
+                    <spring:bind path="description">
+                        <div class="form-group">
+                            <label class="sr-only" for="description"><spring:message code="messages.firstName" var="descriptionMess"/></label>
+                            <form:input type="text" id="description" path="description"
+                                        name="description" class="form-control" placeholder="${descriptionMess}" autofocus="true"/>
+                            <form:errors path="description"/>
+                        </div>
+                    </spring:bind>
+                    <spring:bind path="clinic">
+                        <div class="form-group">
+                            <label class="sr-only" for="firstName"><spring:message code="messages.firstName" var="clinicMess"/></label>
+                            <form:input type="text" id="clinic" path="clinic"
+                                        name="clinic" class="form-control" placeholder="${clinicMess}" autofocus="true"/>
+                            <form:errors path="clinic"/>
+                        </div>
+                    </spring:bind>
                     <div class="form-group">
                         <button class="btn btn-info"><spring:message code="messages.register"/></button>
                     </div>

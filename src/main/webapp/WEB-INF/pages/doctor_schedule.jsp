@@ -305,6 +305,29 @@
                     "> <spring:message code="messages.dotPPassive"/> </span></li>
             </ul>
         </div>
+        <div class="row row-content">
+            <input type="text" class="form-control " id="autocom" style="width: 80%; margin: 2% 10% 2% 10%"
+                   placeholder='<spring:message code="messages.UserFirstName"/>' aria-describedby="sizing-addon1">
+            <script>
+                $("#autocom").autocomplete({
+                    serviceUrl: '/users/search',
+                    paramName: "name",
+                    transformResult: function (response) {
+                        console.log("I hate my life");
+                        return {
+                            suggestions: $.map($.parseJSON(response), function (item) {
+                                var i = item.firstname + " " + item.lastname;
+                                console.log(i);
+                                return {value: i, date : item.id};
+                            })
+                        };
+                    },
+
+
+                });
+            </script>
+
+        </div>
     </div>
 
     <div class="container" style="width: 70%; float: right; margin-top: 1.5%" id='calendar'></div>

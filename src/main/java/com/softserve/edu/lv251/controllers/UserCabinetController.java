@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
+import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
@@ -14,6 +15,7 @@ import com.softserve.edu.lv251.service.UserService;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -26,6 +28,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -54,11 +57,13 @@ public class UserCabinetController {
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
+        PasswordDTO passwordDTO = new PasswordDTO();
 
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
         model.addAttribute("photo", user.getPhoto());
         model.addAttribute("personalInfoDTO", personalInfoDTO);
+        model.addAttribute("passwordDTO", passwordDTO);
         return "userCabinet";
     }
 
@@ -79,6 +84,13 @@ public class UserCabinetController {
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
         ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).setUsername(personalInfoDTO.getEmail());
+        return "redirect:/user/cabinet";
+    }
+
+    @PostMapping("/user/changePassword")
+    public String savePassword(@ModelAttribute PasswordDTO passwordDTO, Principal principal) {
+        Users user = userService.findByEmail(principal.getName());
+        userService.changePassword(user, passwordDTO);
         return "redirect:/user/cabinet";
     }
 

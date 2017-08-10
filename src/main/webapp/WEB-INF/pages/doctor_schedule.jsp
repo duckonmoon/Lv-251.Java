@@ -52,6 +52,7 @@
                 eventClick: function (event) {
                     if (event.color === "#E53935") {
                         $(this).confirmation({
+                            title: "Do you want to confirm?",
                             container: 'body',
                             onConfirm: function () {
                                 $.ajax({

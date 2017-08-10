@@ -33,7 +33,7 @@
                         <br>
                             <div id="menu_mcard" style="cursor: pointer">
                                 <ul>
-                                    <li><a id="appointmentsHistoryLink" class="active list-group-item"><spring:message code="messages.appointmentsHistory"/></a></li>
+                                    <li><a id="appointmentsHistoryLink" class="navbar-inverse list-group-item"><spring:message code="messages.appointmentsHistory"/></a></li>
                                     <li><a id="pendingAppointmentsLink" class="list-group-item"><spring:message code="messages.pendingAppointments"/></a></li>
                                 </ul>
                             </div>
@@ -119,8 +119,8 @@
                                 var showAppointmentHistory = function () {
                                     $("#appointmentsHistory").show();
                                     $("#pendingAppointments").hide();
-                                    $("#appointmentsHistoryLink").addClass("active");
-                                    $("#pendingAppointmentsLink").removeClass("active");
+                                    $("#appointmentsHistoryLink").addClass("navbar-inverse");
+                                    $("#pendingAppointmentsLink").removeClass("navbar-inverse");
                                     if (listPastAppointmentsLength == 0) {
                                         $("#appointmentsHistoryListIsEmpty").show();
                                         $("#pendingAppointmentsListIsEmpty").hide();
@@ -135,8 +135,8 @@
                                 var showPendingAppointments = function () {
                                     $("#appointmentsHistory").hide();
                                     $("#pendingAppointments").show();
-                                    $("#pendingAppointmentsLink").addClass("active");
-                                    $("#appointmentsHistoryLink").removeClass("active");
+                                    $("#pendingAppointmentsLink").addClass("navbar-inverse");
+                                    $("#appointmentsHistoryLink").removeClass("navbar-inverse");
                                     if (listPendingAppointmentsLength == 0) {
                                         $("#pendingAppointmentsListIsEmpty").show();
                                         $("#appointmentsHistoryListIsEmpty").hide();

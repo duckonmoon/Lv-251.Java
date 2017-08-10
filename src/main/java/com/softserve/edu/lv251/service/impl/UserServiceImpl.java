@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.MedicalCard;
@@ -12,6 +13,7 @@ import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -171,5 +173,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public VerificationToken getVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken);
+    }
+
+    @Transactional
+    @Override
+    public Users changePassword(Users user, PasswordDTO passwordDTO){
+        user.setPassword(bCryptPasswordEncoder.encode(passwordDTO.getPassword()));
+        updateUser(user);
+
+        return user;
     }
 }

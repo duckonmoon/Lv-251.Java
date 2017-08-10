@@ -56,19 +56,23 @@
                                     <c:choose>
                                         <c:when test="${appointment.appointmentDate > date && !appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-warning"/>
-                                            <c:set var="appointmentSatatus" value="Is not approved"/>
+                                            <spring:message code="messages.appointmentIsNotApproved" var="appointmentIsNotApproved"/>
+                                            <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
                                         </c:when>
                                         <c:when test="${appointment.appointmentDate > date && appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-success"/>
-                                            <c:set var="appointmentSatatus" value="Done"/>
+                                            <spring:message code="messages.appointmentIsDone" var="appointmentIsDone"/>
+                                            <c:set var="appointmentSatatus" value="${appointmentIsDone}"/>
                                         </c:when>
                                         <c:when test="${appointment.appointmentDate < date && appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-info"/>
-                                            <c:set var="appointmentSatatus" value="Approved"/>
+                                            <spring:message code="messages.appointmentIsApproved" var="appointmentIsApproved"/>
+                                            <c:set var="appointmentSatatus" value="${appointmentIsApproved}"/>
                                         </c:when>
                                         <c:otherwise>
                                             <c:set var="cssClass" value="label label-danger"/>
-                                            <c:set var="appointmentSatatus" value="Rejected by doctor"/>
+                                            <spring:message code="messages.appointmentIsRejected" var="appointmentIsRejected"/>
+                                            <c:set var="appointmentSatatus" value="${appointmentIsRejected}"/>
                                         </c:otherwise>
                                     </c:choose>
                                     <div id="${showAppointmentClass}">

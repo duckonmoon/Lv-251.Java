@@ -53,6 +53,10 @@ public class Mapper extends ConfigurableMapper{
                 .exclude("matchingPassword")
                 .byDefault().register();
 
+        factory.classMap(PasswordDTO.class, Users.class)
+                .field("password", "password")
+                .byDefault().register();
+
         factory.classMap(PersonalInfoDTO.class, Users.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")

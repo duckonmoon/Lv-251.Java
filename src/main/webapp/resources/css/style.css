@@ -11,6 +11,10 @@
 .navbar-brand, .navbar-brand.pull-right {
     padding: 10px 15px;
 }
+.active a{
+    background-color: #35bfae !important;
+    border-color:  #35bfae !important;
+}
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
@@ -205,6 +209,8 @@ address{
     padding: 16px 32px;
 
 }
+
+
 
 .btn-clinic{color:#fff;background-color: #72d9b9;border-color:rgba(0,0,0,0.2)}  .btn-dropbox:hover,.btn-dropbox:focus,.btn-dropbox:active,.btn-dropbox.active,.open .dropdown-toggle.btn-dropbox{color:#fff;background-color:#0d70b7;border-color:rgba(0,0,0,0.2)}
 .btn-clinic:active,.btn-dropbox.active,.open .dropdown-toggle.btn-dropbox{background-image:none}

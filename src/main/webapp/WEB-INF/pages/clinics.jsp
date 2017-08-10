@@ -6,7 +6,6 @@
 
 
 <div class="container">
-
     <div class="row" style="margin-top: 50px">
         <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
         <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
@@ -29,6 +28,7 @@
                     </div>
                     <a href="/"><button id="main-search-btn" class="btn btn-facebook"><spring:message code="messages.search"/></button></a>
                 </div>
+
 
             </div>
 

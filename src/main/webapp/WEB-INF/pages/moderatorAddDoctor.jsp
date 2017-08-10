@@ -21,20 +21,18 @@
     </div>
     <div>
         <div class="container" style="width: 70%; float: right">
-            <div class="row row-content">
+            <div class="row row-content "style="border: #58d9b9 solid 1px ">
 
                 <div class="col-md-3 col-md-offset-1">
                     <div class="text-center">
                         <%--<img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle" alt="avatar" width="100"--%>
                         <%--height="100">--%>
 
-
-                        <%--<h6>${moderator.clinics.clinic_name}</h6>--%>
                     </div>
                 </div>
 
 
-                <div class="col-md-7 personal-info">
+                <div class="col-md-7 personal-info" >
                     <form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm"
                                enctype="multipart/form-data">
                         <div class="form-group">

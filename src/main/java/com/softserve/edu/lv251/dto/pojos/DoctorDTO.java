@@ -1,8 +1,6 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import com.softserve.edu.lv251.customannotations.PasswordMatches;
-import com.softserve.edu.lv251.customannotations.ValidEmail;
-import com.softserve.edu.lv251.customannotations.ValidPassword;
+import com.softserve.edu.lv251.customannotations.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +18,7 @@ public class DoctorDTO extends UserDTO {
 
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String clinic;
-
+    @ValidPhoto
     private MultipartFile multipartFile;
 
     public String getSpecialization() {

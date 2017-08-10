@@ -8,8 +8,9 @@ import javax.validation.Valid;
 /**
  * Created by Admin on 04.08.2017.
  */
-@ValidFile(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
+@ValidFile
 public class FileBucket {
+
     private MultipartFile multipartFile;
 
     public MultipartFile getMultipartFile() {

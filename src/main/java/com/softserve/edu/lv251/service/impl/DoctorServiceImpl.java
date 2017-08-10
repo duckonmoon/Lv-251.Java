@@ -198,7 +198,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
         if(accountDto.getMultipartFile()!=null){
-        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));}else{
+        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));}
+        else{
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));}
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),

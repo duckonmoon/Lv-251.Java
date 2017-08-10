@@ -123,7 +123,7 @@
 
     <definition name="doctor_cabinet_patients" extends="base-definition">
         <put-attribute name="title" value="Patients" />
-        <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
+
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients.jsp" />
         <put-attribute name="current" value="doctor/patients"/>
     </definition>
@@ -154,5 +154,14 @@
         <put-attribute name="body" value="/WEB-INF/pages/moderatorAddDoctor.jsp"/>
         <put-attribute name="current" value="moderator_cabinet_doctors"/>
     </definition>
+
+    <definition name="moderatorMakeDoctor" extends="base-definition">
+        <put-attribute name="title" value="Moderator Cabinet"/>
+        <put-attribute name="body" value="/WEB-INF/pages/moderatorMakeDoctor.jsp"/>
+        <put-attribute name="current" value="moderator_cabinet_doctors"/>
+    </definition>
+
+
+
 
 </tiles-definitions>

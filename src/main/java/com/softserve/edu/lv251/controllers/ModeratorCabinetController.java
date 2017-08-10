@@ -111,13 +111,12 @@ if(!bindingResult.hasErrors()){
  public String registerDoctor(@ModelAttribute("doctorForm")@Valid DoctorDTO doctorDTO, BindingResult bindingResult){
             if(bindingResult.hasErrors()){
      System.out.println("has errors");
-                System.out.println(doctorDTO.getMultipartFile().getSize());
-                System.out.println(doctorDTO.toString());
+
 
 
      return "moderatorAddDoctor";
             }else {
-                System.out.println(doctorDTO.getMultipartFile().getSize());
+
                 doctorsService.addDoctorAccount(doctorDTO);
                 System.out.println(doctorDTO.toString());
             return "redirect:/moderator/cabinet/doctors";}
@@ -137,5 +136,11 @@ if(!bindingResult.hasErrors()){
     clinicService.updatePhoto(fileBucket.getMultipartFile(),moderatorService.getByEmail(principal.getName()).getClinics());
      return "redirect:/moderator/cabinet";}
  }
+
+ @GetMapping(value = "/cabinet/make/doctor")
+ public  String makeDoctor(Principal principal,Model model){
+     return "moderatorMakeDoctor";
+ }
+
 
 }

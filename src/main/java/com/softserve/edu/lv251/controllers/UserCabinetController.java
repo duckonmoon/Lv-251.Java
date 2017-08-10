@@ -1,7 +1,10 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
+import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.AppointmentService;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -74,38 +78,35 @@ public class UserCabinetController {
     public String medicalCardGET(ModelMap model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
+        model.addAttribute("date", new Date());
 
-        PersonalInfoDTO userDTO = new PersonalInfoDTO();
-
-        mapper.map(user, userDTO);
-        mapper.map(contacts, userDTO);
-        model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("userObject", userDTO);
-
-        return "user_cabinet_body_medicalcard";
+        return "userCabinetMedicalCard";
     }
 
     /**
      * Added by Pavlo Kuchereshko
      */
-    @PostMapping("/user/medicalcard")
-    public String medicalCardPOST(@ModelAttribute PersonalInfoDTO personalInfoDTO, Principal principal){
+    /*@PostMapping("/user/medicalcard")
+    public String medicalCardPOST(*//*@ModelAttribute PersonalInfoDTO personalInfoDTO,*//* Model model, Principal principal){
 
         Users user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        *//*Contacts contacts = user.getContact();*//*
 
-        mapper.map(personalInfoDTO, user);
+        *//*mapper.map(personalInfoDTO, user);
         mapper.map(personalInfoDTO, contacts);
-        userService.updateUser(user);
+        userService.updateUser(user);*//*
 
-        return "user_cabinet_body_medicalcard";
-    }
+        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(user.getEmail()));
+        model.addAttribute("date", new Date());
+
+        return "userCabinetMedicalCard";
+    }*/
 
     @GetMapping("/user/appointments")
     public String userAppointments(Model model, Principal principal){
         Users user = userService.findByEmail(principal.getName());
-        model.addAttribute("listAppointmens", appointmentService.listAppointmensWithDoctor(user.getId()));
+        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("date", new Date());
         return "userCabinetAppointments";
     }

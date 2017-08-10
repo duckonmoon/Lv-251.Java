@@ -1,6 +1,6 @@
 #menu_mcard
 {
-    height: 60px;
+    height: 41px;
 }
 
 #menu_mcard ul
@@ -15,7 +15,7 @@
     display: inline-block;
 }
 
-#menu_mcard li a, #menu_mcard li span
+/*#menu_mcard li a, #menu_mcard li span
 {
     display: inline-block;
     padding: 0em 1.5em;
@@ -26,28 +26,22 @@
     line-height: 60px;
     outline: 0;
     color: #274142;
-}
+}*/
 
 #menu_mcard li:hover a, #menu_mcard li.active a, #menu_mcard li a, #menu_mcard li.active span
 {
     border-radius: 4px 4px 0px 0px;
-    height: 60px;
 }
 
-#menu_mcard .current_page_item a
+/*#menu_mcard .current_page_item a
 {
-}
-
-#mcard_content {
-    border: 1px solid #2f6fa8;
-}
+}*/
 
 .medical-card {
-    border: 1px solid #cccccc;
-    background: #f8f8f8;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 10px;
     border-radius: 4px;
-    margin-bottom: 10px;
 }
 .profile-img {
     height: 120px;
@@ -64,4 +58,17 @@
 .well {
     overflow: auto;
     background: white;
+}
+
+.mcard_content {
+    border: 1px solid #2f6fa8;
+    margin-bottom: 0;
+}
+
+#appointmentsHistoryListIsEmpty {
+    display: none;
+}
+
+#pendingAppointmentsListIsEmpty {
+    display: none;
 }

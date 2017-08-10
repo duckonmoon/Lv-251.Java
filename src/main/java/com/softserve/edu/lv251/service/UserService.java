@@ -40,4 +40,6 @@ public interface UserService {
     Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 
     void sendRegistrationEmail(Users user);
+
+    List<Users> searchByLetters(String search);
 }

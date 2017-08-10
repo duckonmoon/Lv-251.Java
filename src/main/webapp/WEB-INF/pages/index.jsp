@@ -4,9 +4,11 @@
 
 <div class="container">
     <div class="row" style="margin-top: 50px">
-        <p style="display: none"><spring:message code="messages.searchClinics"/></p>
-        <p style="display: none"><spring:message code="messages.searchDoctors"/></p>
-        <p style="display: none"><spring:message code="messages.doctorsSearchBySpec"/></p>
+
+        <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
+        <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
+        <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
+
 
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">

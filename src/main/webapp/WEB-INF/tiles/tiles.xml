@@ -121,18 +121,22 @@
         <put-attribute name="body" value="/WEB-INF/pages/userCabinetAppointments.jsp"/>
     </definition>
 
+    <!--Medical_Card Page-->
+    <definition name="userCabinetMedicalCard"  extends="userCabinet" >
+        <put-attribute name="body" value="/WEB-INF/pages/userCabinetMedicalCard.jsp"/>
+    </definition>
+
+    <!--<definition name="userCabinetBodyMedicalCard" extends="base-definition">
+        <put-attribute name="title" value="Medical Card" />
+        <put-attribute name="body" value="/WEB-INF/pages/userCabinetBodyMedicalCard.jsp" />
+        <put-attribute name="current" value="userCabinetMedicalCard"/>
+    </definition>-->
+
     <definition name="doctor_cabinet_patients" extends="base-definition">
         <put-attribute name="title" value="Patients" />
         <put-attribute name="menu" value="/WEB-INF/pages/user_cabinet_menu.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/doctor_cabinet_patients.jsp" />
         <put-attribute name="current" value="doctor/patients"/>
-    </definition>
-
-    <!--Medical_Card Page-->
-    <definition name="user_cabinet_body_medicalcard" extends="base-definition">
-        <put-attribute name="title" value="Medical Card" />
-        <put-attribute name="body" value="/WEB-INF/pages/user_cabinet_body_medicalcard.jsp" />
-        <put-attribute name="current" value="user_cabinet_body_medicalcard"/>
     </definition>
 
     <!-- Moderator cabinet Page -->

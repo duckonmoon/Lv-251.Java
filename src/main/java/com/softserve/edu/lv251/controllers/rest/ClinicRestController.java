@@ -31,9 +31,5 @@ public class ClinicRestController {
         return mapService.getAllClinicsCoordinates();
     }
 
-    @RequestMapping("/{id}")
-    Clinics getByID(@PathVariable(name = "id", required = true)long id){
 
-        return clinicService.getClinicByID(id);
-    }
 }

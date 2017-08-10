@@ -10,7 +10,7 @@ $(document).ready(function() {
 console.log("before"+response.toString());
             return {
                 suggestions: $.map($.parseJSON(response), function (item) {
-                    var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
+                    var i=item.firstname+" "+item.lastname+" "+item.specialization;
                     console.log(i);
                     return {value:i, data:item.id};
                 })
@@ -45,28 +45,6 @@ console.log("before"+response.toString());
     });
 });
 
-function task2() {
-    var url='/search/'+$("#autocomplete").val();
-    $.ajax({
-        url:url,
-        type:"GET",
-        success:function (res) {
-            console.log("222");
-            $("#content").empty();
-            for (var i = 0; i < res.length; i++) {
-                console.log(res.length);
-                $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
-                    "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
-                    "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
-                    "<a href='"+"doctor/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                    "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
-            }
-
-
-
-        }
-    });
-}
 
 function allDocs() {
           $("#autocomplete").autocomplete({
@@ -77,7 +55,7 @@ function allDocs() {
                 console.log("before"+response.toString());
                 return {
                     suggestions: $.map($.parseJSON(response), function (item) {
-                        var i=item.firstname+" "+item.lastname+" "+item.specialization.name;
+                        var i=item.firstname+" "+item.lastname +" "+item.specialisation;
                         console.log(i);
                         return {value:i, data:item.id};
 
@@ -94,12 +72,13 @@ function allDocs() {
 
                     success:function (result) {
                         console.log(result.firstname);
+                        var photo="data:image/jpeg;base64,"+result.photo;
                         $("#content").empty();
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
-                            "<img width=200' height='200' src='/resources/img/User_Default.png' alt='...'></a></div>"+
-                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+result.specialization.name+"</p> </div> </div>")
+                            "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
+                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>:"+result.specialisation+"</p> </div> </div>")
 
 
 

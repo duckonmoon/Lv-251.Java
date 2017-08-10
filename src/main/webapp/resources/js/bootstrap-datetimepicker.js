@@ -112,8 +112,8 @@
     this.timezone = options.timezone || timeZoneAbbreviation();
 
     this.icons = {
-      leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'glyphicon-arrow-left' : 'icon-arrow-left'),
-      rightArrow: this.fontAwesome ? 'fa-arrow-right' : (this.bootcssVer === 3 ? 'glyphicon-arrow-right' : 'icon-arrow-right')
+      leftArrow: this.fontAwesome ? 'fa-arrow-left' : (this.bootcssVer === 3 ? 'fa fa-arrow-left' : 'fa fa-arrow-left'),
+      rightArrow: this.fontAwesome ? 'fa-arrow-right' : (this.bootcssVer === 3 ? 'fa fa-arrow-right' : 'fa fa-arrow-right')
     }
     this.icontype = this.fontAwesome ? 'fa' : 'glyphicon';
 
@@ -1504,6 +1504,19 @@
       suffix:      ['st', 'nd', 'rd', 'th'],
       today:       'Today',
       clear:       'Clear'
+    },
+
+   uk: {
+      days:        ["Неділя", "Понеділок", "Вівторок", "Середа", "Четверг", "П'ятниця", "Субота", "Неділя"],
+      daysShort:   ["Нед", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб", "Нед"],
+      daysMin:     ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"],
+      months:      ["Cічень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
+      monthsShort: ["Січ", "Лют", "Бер", "Квт", "Трв", "Чер", "Лип", "Сер", "Вер", "Жов", "Лис", "Грд"],
+      meridiem:    ['am', 'pm'],
+      suffix:      ['st', 'nd', 'rd', 'th'],
+      today:       'Сьогодні',
+      clear:       'Очистити',
+      weekStart: 1
     }
   };
 

@@ -151,6 +151,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Users> searchByLetters(String search) {
+        return usersDAO.searchByLetters(search);
+    }
+
+    @Override
     public Users getUserByVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken).getUser();
     }

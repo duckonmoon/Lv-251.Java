@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Date;
@@ -11,9 +12,11 @@ import java.util.Date;
 public class Appointments extends BaseEntity {
 
     private Date appointmentDate;
-    private Boolean status = true;
     private Boolean isApproved;
     private double duration;
+
+    @Column(columnDefinition="MEDIUMTEXT")
+    private String description;
 
     @ManyToOne
     private Doctors doctors;
@@ -56,19 +59,19 @@ public class Appointments extends BaseEntity {
         this.users = users;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public double getDuration() {
         return duration;
     }
 
     public void setDuration(double duration) {
         this.duration = duration;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,7 +1,7 @@
-/*#menu_mcard
+#menu_mcard
 {
-    height: 60px;
-}*/
+    height: 41px;
+}
 
 #menu_mcard ul
 {
@@ -38,8 +38,8 @@
 }*/
 
 .medical-card {
-    border: 1px solid #cccccc;
-    background: #f8f8f8;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 10px;
     border-radius: 4px;
 }
@@ -62,14 +62,13 @@
 
 .mcard_content {
     border: 1px solid #2f6fa8;
+    margin-bottom: 0;
 }
 
-.appointmentsHistoryListIsEmpty {
-    visibility: hidden;
-    height: 0;
+#appointmentsHistoryListIsEmpty {
+    display: none;
 }
 
-.pendingAppointmentsListIsEmpty {
-    visibility: hidden;
-    height: 0;
+#pendingAppointmentsListIsEmpty {
+    display: none;
 }

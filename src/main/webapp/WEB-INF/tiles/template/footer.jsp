@@ -28,7 +28,7 @@
                 <spring:message code="messages.Ukraine"/><br>
                 <i class="fa fa-phone"></i>: +382 1234 5678<br>
                 <i class="fa fa-fax"></i>: +382 8765 4321<br>
-                <i class="fa fa-envelope"></i>:<a href="mailto:confusion@food.net">heartbeat@clinic.net</a>
+                <i class="fa fa-envelope"></i>: <a href="mailto:lv251clinics@gmail.com">lv251clinics@gmail.com</a>
             </address>
         </div>
         <div class="col-xs-12 col-sm-4">

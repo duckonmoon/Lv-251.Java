@@ -40,6 +40,10 @@ public class DatabaseConfig {
         dataSource.setUrl(env.getProperty("db.url"));
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
+        dataSource.setTestWhileIdle(Boolean.parseBoolean(env.getProperty("db.testWhileIdle")));
+        dataSource.setTimeBetweenEvictionRunsMillis(Long.parseLong(env.getProperty("db.timeBetweenEvictionRunsMillis")));
+        dataSource.setValidationQuery(env.getProperty("db.validationQuery"));
+
         return dataSource;
     }
 

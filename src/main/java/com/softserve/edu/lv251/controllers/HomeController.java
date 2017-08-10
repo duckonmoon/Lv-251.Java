@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
+import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,28 +43,28 @@ public class HomeController {
 
     @RequestMapping(value = "/all/clinics")
     @ResponseBody
-    public List<Clinics> autocompleteClinics(@RequestParam("name") String name){
+    public  List<ClinicSearchDTO>  autocompleteClinics(@RequestParam("name") String name){
         System.out.println(name);
         System.out.println(clinicService.searchByLetters(name));
         return  clinicService.searchByLetters(name);
     }
     @ResponseBody
     @RequestMapping(value = "/search/clinics/{id}")
-    public Clinics searchClinics(@PathVariable ("id") Long id){
-        return clinicService.getClinicByID(id);
+    public ClinicSearchDTO searchClinics(@PathVariable ("id") Long id){
+        return clinicService.clinicSearchById(id);
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/districts/byName")
-    public List<Districts> autocompletedistricts(@RequestParam("name")String name){
+    public List<DistrictsDTO> autocompletedistricts(@RequestParam("name")String name){
         System.out.println("in");
         System.out.println(districtsService.findByName(name));
         return  districtsService.findByName(name);
     }
     @ResponseBody
     @RequestMapping(value = "/search/clinics/by/district/{name}")
-    public List<Clinics>clinicsByDistrict(@PathVariable("name")String name){
+    public List<ClinicSearchDTO>clinicsByDistrict(@PathVariable("name")String name){
         System.out.println(clinicService.findByDistrict(name));
         return clinicService.findByDistrict(name);
     }

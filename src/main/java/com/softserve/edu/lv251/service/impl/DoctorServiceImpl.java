@@ -4,14 +4,8 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
-import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
-import com.softserve.edu.lv251.dto.pojos.PatientDTO;
-import com.softserve.edu.lv251.dto.pojos.SearchResultDoctorDTO;
-import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Specialization;
+import com.softserve.edu.lv251.dto.pojos.*;
+import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -49,7 +43,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     Logger logger;
-    
+
     @Autowired
     private DoctorsDAO doctorsDAO;
 
@@ -88,8 +82,18 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public List<Doctors> searchByLetters(String letters) {
-        return doctorsDAO.searchByLetters(letters);
+    public List<DoctorsSearchDTO> searchByLetters(String letters) {
+        List<Doctors> doctors= doctorsDAO.searchByLetters(letters);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctors doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
+
     }
 
     @Override
@@ -176,40 +180,44 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
 
     @Override
-    public List<Doctors> getByClinic(Long clinicId){
+    public List<Doctors> getByClinic(Long clinicId) {
         List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
-        return doctors.isEmpty()? null : doctors;
+        return doctors.isEmpty() ? null : doctors;
     }
 
     @Override
     @Transactional
-    public Doctors addDoctorAccount(DoctorDTO accountDto){
+    public Doctors addDoctorAccount(DoctorDTO accountDto) {
         Doctors doctor = new Doctors();
-//        doctor.setFirstname(accountDto.getFirstName());
-//        doctor.setLastname(accountDto.getLastName());
-//        doctor.setMiddlename("");
-//        doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
-//        doctor.setEmail(accountDto.getEmail());
-//        doctor.setEnabled(true);
-//        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));
-////        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-//        doctor.setRoles(Arrays.asList(
-//                rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
-//                rolesService.findByName(WebRoles.ROLE_USER.name())));
-//        Contacts contact = new Contacts();
-//        contact.setEmail(accountDto.getEmail());
-//        this.contactsDAO.addEntity(contact);
-//        doctor.setContact(contact);
-//        doctor.setDescription(accountDto.getDescription());
-//        if(specializationService.findByName(accountDto.getSpecialization())==null){
-//            Specialization specialization= new Specialization();
-//            specialization.setName(accountDto.getSpecialization());
-//            specializationService.add(specialization);
-//            doctor.setSpecialization(specialization);
-//        }else{ doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
-//        }
-//        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
-mapper.map(accountDto,doctor);
+
+        doctor.setFirstname(accountDto.getFirstName());
+        doctor.setLastname(accountDto.getLastName());
+
+        doctor.setMiddlename("");
+        doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
+        doctor.setEmail(accountDto.getEmail());
+        doctor.setEnabled(true);
+        if(accountDto.getMultipartFile()!=null){
+        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));}else{
+        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));}
+        doctor.setRoles(Arrays.asList(
+                rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
+                rolesService.findByName(WebRoles.ROLE_USER.name())));
+        Contacts contact = new Contacts();
+        contact.setEmail(accountDto.getEmail());
+        this.contactsDAO.addEntity(contact);
+        doctor.setContact(contact);
+        doctor.setDescription(accountDto.getDescription());
+        if(specializationService.findByName(accountDto.getSpecialization())==null){
+            Specialization specialization= new Specialization();
+            specialization.setName(accountDto.getSpecialization());
+            specializationService.add(specialization);
+            doctor.setSpecialization(specialization);
+        }else{ doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        }
+        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
+//mapper.map(accountDto,doctor);
+
         addDoctor(doctor);
 
         return doctor;
@@ -230,5 +238,15 @@ mapper.map(accountDto,doctor);
         }
 
         return results;
+    }
+
+
+    @Override
+    public DoctorsSearchDTO findById(long id) {
+        Doctors doctors= doctorsDAO.getEntityByID(id);
+        DoctorsSearchDTO doctorsSearchDTO= new DoctorsSearchDTO();
+        mapper.map(doctors,doctorsSearchDTO);
+
+        return doctorsSearchDTO;
     }
 }

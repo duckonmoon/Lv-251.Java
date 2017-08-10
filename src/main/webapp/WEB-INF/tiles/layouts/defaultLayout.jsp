@@ -39,6 +39,20 @@
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                 <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
             </a>
+
+            <div class="hidden-lg hidden-md hidden-sm col-xs-6 pull-right">
+                <li class="nav navbar-nav flags pull-right">
+                    <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
+                             alt="Great Britain"/>
+                    </a>
+                    <a class="" href="?lang=uk"  style="padding: 20px 3px ; float: left ">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
+                             alt="Ukraine"/>
+                    </a>
+                    <span>&nbsp;&nbsp;</span>
+                </li>
+            </div>
         </div>
 
         <tilesx:useAttribute name="current"/>
@@ -83,7 +97,7 @@
                 </sec:authorize>
                 </li>
                 <li>
-                    <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
+                    <a class="navbar-brand pull-right hidden-xs" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
                     </a>
                 </li>
@@ -97,7 +111,7 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="nav navbar-nav flags">
+                <li class="nav navbar-nav flags hidden-xs">
                     <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
@@ -208,6 +222,16 @@
     </script>
 </c:if>
 
+<c:if test="${login}">
+    <script>
+        document.getElementById('wrong').innerHTML= '';
+        jQuery(window).load(function(){
+            jQuery('#loginModal').modal('show')
+        });
+        <c:set var="login" value="false"/>
+    </script>
+</c:if>
+
 
     <section id="site-content">
         <tiles:insertAttribute name="body" />
@@ -217,7 +241,6 @@
         <tiles:insertAttribute name="footer"/>
     </footer>
 
-<script src="<c:url value="/resources/js/jquery.1.10.2.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.autocomplete.min.js"/>"></script>

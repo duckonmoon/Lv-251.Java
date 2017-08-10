@@ -1,5 +1,7 @@
 package com.softserve.edu.lv251.controllers;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
+import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.service.AppointmentService;
@@ -12,10 +14,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by Yana on 23.07.2017.
@@ -42,36 +47,32 @@ public class AllDoctorsController {
     public  String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
+        model.addAttribute("docApps",appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
     }
-
-    @RequestMapping(value = "/allDoctors/{flag}/{docId}", method = RequestMethod.GET)
-    public String allDoctors(Model model, @PathVariable(value = "flag") boolean flag,
-                             @PathVariable(value = "docId") long docId) {
-        model.addAttribute("doctors", doctorsService.getAll());
-        model.addAttribute("flag", true);
-        model.addAttribute("doc", docId);
-        return "allDoctors";
-    }
-
 
     /**
      * Created by Marian Brynetskyi
-     * @param modelMap
-     * @param localdate
-     * @param doctorId
-     * @param principal
+     * @param modelMap - model
+     * @param localdate - date of ppointment
+     * @param doctorId - docId with wrong date
+     * @param chainIndex - id of page
+     * @param principal - user
      * @return
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
-    public String addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
-                                 @RequestParam("doctorId") long doctorId,
-                                 @RequestParam("current") Integer chainIndex, Principal principal) {
-
+    public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
+                                       @RequestParam("doctorId") long doctorId,
+                                       @RequestParam("current") Integer chainIndex, Principal principal) {
         Date date;
 
+        ModelAndView modelAndView = new ModelAndView();
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy - HH:mm").parse(localdate);
+
+            SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            date = isoFormat.parse(localdate);
+
             if(date.before(new Date())){
                 throw new Exception();
             }
@@ -84,37 +85,40 @@ public class AllDoctorsController {
 
         } catch (Exception e) {
             logger.info("Wrong date.",e);
-            modelMap.addAttribute("flag", true);
-            modelMap.addAttribute("doc", doctorId);
-            modelMap.addAttribute("current", chainIndex);
-            return allDoctors(chainIndex, modelMap);
+            modelAndView.addObject("flag", true);
+            modelAndView.addObject("doc", doctorId);
+
+            modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
+            return modelAndView;
         }
-        return allDoctors(chainIndex, modelMap);
+
+        modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
+        return modelAndView;
     }
 
     @ResponseBody
     @RequestMapping(value = "/all/doc")
-    public List<Doctors> searchDoctors(@RequestParam String name) {
-        System.out.println(name);
-        System.out.println(doctorsService.searchByLetters("Zyrr"));
-        System.out.println(doctorsService.searchByLetters(name));
-        return doctorsService.searchByLetters(name);
-
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/{name}")
-    public List<Doctors> searchAll(@PathVariable("name") String name) {
-        System.out.println("in search ");
+    public List<DoctorsSearchDTO> searchDoctors(@RequestParam String name) {
         System.out.println(name);
         return doctorsService.searchByLetters(name);
 
     }
+
+//    @ResponseBody
+//    @RequestMapping(value = "/search/{name}")
+//    public List<Doctors> searchAll(@PathVariable("name") String name) {
+//        System.out.println("in search ");
+//        System.out.println(name);
+//        return doctorsService.searchByLetters(name);
+//
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/searchResult/{id}")
-    public Doctors s(@PathVariable Long id) {
-        return doctorsService.find(id);
+    public DoctorsSearchDTO doctorById(@PathVariable Long id) {
+        System.out.println(id);
+        System.out.println(doctorsService.findById(id));
+        return doctorsService.findById(id);
     }
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
@@ -122,6 +126,5 @@ public class AllDoctorsController {
         model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
         return "doctor_details";
     }
-
 
 }

@@ -34,6 +34,7 @@
     <script src="<c:url value="/resources/js/passwordStrength.js"/>"></script>
     <script src="<c:url value="/resources/js/search.js"/>"></script>
     <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
+    <script src="<c:url value="/resources/calendarResourses/bootstrap-confirmation.min.js"/>"></script>
     <script>
 
         $(document).ready(function () {
@@ -50,28 +51,30 @@
                 },
                 eventClick: function (event) {
                     if (event.color === "#E53935") {
-                        if (confirm("Do u want to confirm event?")) {
-                            $.ajax({
-                                url: '/doctor/cabinet/setApp/' + event.id,
-                                method: 'GET',
-                                contentType: 'application/json',
-
-
-                                success: function (result) {
-                                    $('#calendar').fullCalendar({
-                                        events: {
-                                            url: '/doctor/cabinet/getApp',
-                                            type: 'POST',
-                                            contentType: 'application/json'
-                                        }
-                                    });
-                                    $('#calendar').fullCalendar('rerenderEvents');
-                                    $('#calendar').fullCalendar('refetchEvents');
-                                    $('#calendar').fullCalendar('refresh')
-                                }
-                            });
-                            return false;
-                        }
+                        $(this).confirmation({
+                            container: 'body',
+                            onConfirm: function () {
+                                $.ajax({
+                                    url: '/doctor/cabinet/setApp/' + event.id,
+                                    method: 'GET',
+                                    contentType: 'application/json',
+                                    success: function (result) {
+                                        $('#calendar').fullCalendar({
+                                            events: {
+                                                url: '/doctor/cabinet/getApp',
+                                                type: 'POST',
+                                                contentType: 'application/json'
+                                            }
+                                        });
+                                        $('#calendar').fullCalendar('rerenderEvents');
+                                        $('#calendar').fullCalendar('refetchEvents');
+                                        $('#calendar').fullCalendar('refresh')
+                                    }
+                                });
+                            },
+                            placement: 'top'
+                        }).appendTo('calendar');
+                        $(this).confirmation('show');
                     }
                 }
             });
@@ -80,6 +83,10 @@
 
     </script>
     <style>
+
+        .popover.confirmation {
+
+        }
 
         body {
             margin: 40px 10px;
@@ -295,13 +302,17 @@
         </div>
         <div class="row row-content">
             <ul style="font-size: 14px">
-                <li style="color: #4CAF50;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                <li style="color: #4CAF50;"><span style="font-family: " Lucida Grande", Helvetica, Arial, Verdana,
+                    sans-serif;
                     "> <spring:message code="messages.dotActive"/> </span></li>
-                <li style="color: #E53935;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                <li style="color: #E53935;"><span style="font-family: " Lucida Grande", Helvetica, Arial, Verdana,
+                    sans-serif;
                     "> <spring:message code="messages.dotPassive"/> </span></li>
-                <li style="color: #424242;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                <li style="color: #424242;"><span style="font-family: " Lucida Grande", Helvetica, Arial, Verdana,
+                    sans-serif;
                     "> <spring:message code="messages.dotPActive"/> </span></li>
-                <li style="color: #546E7A;"><span style="font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                <li style="color: #546E7A;"><span style="font-family: " Lucida Grande", Helvetica, Arial, Verdana,
+                    sans-serif;
                     "> <spring:message code="messages.dotPPassive"/> </span></li>
             </ul>
         </div>
@@ -318,7 +329,7 @@
                             suggestions: $.map($.parseJSON(response), function (item) {
                                 var i = item.firstname + " " + item.lastname;
                                 console.log(i);
-                                return {value: i, date : item.id};
+                                return {value: i, date: item.id};
                             })
                         };
                     },
@@ -326,6 +337,7 @@
 
                 });
             </script>
+
 
         </div>
     </div>

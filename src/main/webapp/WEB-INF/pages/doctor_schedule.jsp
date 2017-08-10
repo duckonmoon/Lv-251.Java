@@ -40,7 +40,7 @@
 
             $('#calendar').fullCalendar({
                 weekend: false, // disable events
-                editable: true, // allow to add
+                editable: false, // allow to add
                 eventLimit: true, // allow "more" link when too many events
                 draggable: false,
                 events: {
@@ -91,6 +91,12 @@
         #calendar {
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        #calendar .fc-today
+        {
+            background:#B2EBF2;
+            border: 3px #fff81c;
         }
 
     </style>
@@ -285,6 +291,11 @@
                 <a href="#" class="list-group-item">
                     <spring:message code="messages.patients" />
                 </a>
+            </div>
+        </div>
+        <div class="row row-content">
+            <div class="list-group doc-menu">
+
             </div>
         </div>
     </div>

@@ -44,7 +44,10 @@ public class UserCabinetController {
     @Autowired
     private Mapper mapper;
 
-
+    /**
+     * Author: Brynetskyi Marian
+     * Updated: Kovalevskyy Vitaliy
+     */
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal) {
 
@@ -61,9 +64,12 @@ public class UserCabinetController {
         return "userCabinet";
     }
 
+    /**
+     * Author: Kovalevskyy Vitaliy
+     */
     @PostMapping("/user/cabinet")
-    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
 
+    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
         Users user = userService.findByEmail(principal.getName());
 
         if (bindingResult.hasErrors()) {
@@ -77,13 +83,30 @@ public class UserCabinetController {
         mapper.map(personalInfoDTO, contacts);
         userService.updateUser(user);
         contactsService.updateContacts(contacts);
-        ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).setUsername(personalInfoDTO.getEmail());
+        ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+                .setUsername(personalInfoDTO.getEmail());
         return "redirect:/user/cabinet";
     }
 
+    /**
+     * Author: Kovalevskyy Vitaliy
+     */
     @PostMapping("/user/changePassword")
-    public String savePassword(@ModelAttribute PasswordDTO passwordDTO, Principal principal) {
+    public String savePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult bindingPasswordDTO,
+                               @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingInfoDTO,
+                               Principal principal,  ModelMap model) {
         Users user = userService.findByEmail(principal.getName());
+        Contacts contacts = user.getContact();
+
+        if (bindingPasswordDTO.hasErrors()){
+            personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
+            mapper.map(user, personalInfoDTO);
+            mapper.map(contacts, personalInfoDTO);
+            model.addAttribute("photo", user.getPhoto());
+            model.addAttribute("personalInfoDTO", personalInfoDTO);
+            return "userCabinet";
+        }
+
         userService.changePassword(user, passwordDTO);
         return "redirect:/user/cabinet";
     }
@@ -101,24 +124,6 @@ public class UserCabinetController {
         return "userCabinetMedicalCard";
     }
 
-    /**
-     * Added by Pavlo Kuchereshko
-     */
-    /*@PostMapping("/user/medicalcard")
-    public String medicalCardPOST(*//*@ModelAttribute PersonalInfoDTO personalInfoDTO,*//* Model model, Principal principal){
-
-        Users user = userService.findByEmail(principal.getName());
-        *//*Contacts contacts = user.getContact();*//*
-
-        *//*mapper.map(personalInfoDTO, user);
-        mapper.map(personalInfoDTO, contacts);
-        userService.updateUser(user);*//*
-
-        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(user.getEmail()));
-        model.addAttribute("date", new Date());
-
-        return "userCabinetMedicalCard";
-    }*/
     @GetMapping("/user/appointments")
     public String userAppointments(Model model, Principal principal) {
         Users user = userService.findByEmail(principal.getName());

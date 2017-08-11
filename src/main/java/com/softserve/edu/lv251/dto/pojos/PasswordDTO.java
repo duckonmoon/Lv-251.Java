@@ -1,19 +1,17 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import com.softserve.edu.lv251.customannotations.PasswordMatches;
+import com.softserve.edu.lv251.customannotations.ValidPassword;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * Created by Shmidt on 10.08.2017.
  */
-public class PasswordDTO {
-    private String password;
-
-    public PasswordDTO() {
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+@PasswordMatches
+public class PasswordDTO extends UserDTO{
+    public PasswordDTO(){
+        super.setEmail("test@mail.com");
+        super.setFirstName("name");
+        super.setLastName("lastname");
     }
 }

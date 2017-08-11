@@ -3,7 +3,6 @@ package com.softserve.edu.lv251.config;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;

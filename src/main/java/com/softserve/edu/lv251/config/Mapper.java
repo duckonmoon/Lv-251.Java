@@ -284,11 +284,6 @@ public class Mapper extends ConfigurableMapper {
                     }
                 })
                 .register();
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> develop
     }
 }

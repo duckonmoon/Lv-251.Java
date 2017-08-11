@@ -17,13 +17,10 @@ public class FileValidator implements ConstraintValidator<ValidFile, Object> {
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-<<<<<<< HEAD
-        FileBucket fileBucket= (FileBucket) o;
-        if ((fileBucket.getMultipartFile().getContentType().equals("image/jpeg")||
-=======
+
         FileBucket fileBucket = (FileBucket) o;
         if ((fileBucket.getMultipartFile().getContentType().equals("image/jpeg") ||
->>>>>>> develop
+
                 fileBucket.getMultipartFile().getContentType().equals("image/png")) &&
                 !fileBucket.getMultipartFile().isEmpty()
                 ) {

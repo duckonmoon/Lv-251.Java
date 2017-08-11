@@ -245,6 +245,9 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointments, appointmentsDTO, context);
                         appointmentsDTO.setId(appointments.getId());
+                        appointments.getAppointmentDate().setTime(
+                                appointments.getAppointmentDate().getTime()
+                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
                         if (appointments.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
@@ -253,9 +256,6 @@ public class Mapper extends ConfigurableMapper {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
                             }
                         }
-                        appointments.getAppointmentDate().setTime(
-                                appointments.getAppointmentDate().getTime()
-                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
                     }

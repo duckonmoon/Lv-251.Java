@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.dto.pojos;
 import java.util.Date;
 
 /**
- * Created by kilopo on 07.08.2017.
+ * Created by Marian Brynetskyi on 07.08.2017.
  */
 public class AppointmentsForCreationDTO {
     private Date appointmentDate;

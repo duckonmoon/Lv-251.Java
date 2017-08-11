@@ -1,5 +1,5 @@
 package com.softserve.edu.lv251.controllers;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
+
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Appointments;
@@ -24,6 +24,7 @@ import java.util.TimeZone;
 
 /**
  * Created by Yana on 23.07.2017.
+ * Updated: Brynetskyi Marian
  */
 @Controller
 public class AllDoctorsController {
@@ -43,21 +44,22 @@ public class AllDoctorsController {
     private Logger logger;
 
 
-    @RequestMapping(value = "/allDoctors/{current}",method = RequestMethod.GET)
-    public  String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
+    @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
+    public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
-        model.addAttribute("docApps",appointmentService.getAllDoctorsAppointmentsAfterNow());
+        model.addAttribute("docApps", appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
     }
 
     /**
      * Created by Marian Brynetskyi
-     * @param modelMap - model
-     * @param localdate - date of ppointment
-     * @param doctorId - docId with wrong date
+     *
+     * @param modelMap   - model
+     * @param localdate  - date of ppointment
+     * @param doctorId   - docId with wrong date
      * @param chainIndex - id of page
-     * @param principal - user
+     * @param principal  - user
      * @return
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
@@ -73,7 +75,7 @@ public class AllDoctorsController {
             isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             date = isoFormat.parse(localdate);
 
-            if(date.before(new Date())){
+            if (date.before(new Date())) {
                 throw new Exception();
             }
             Appointments appointments = new Appointments();
@@ -84,7 +86,7 @@ public class AllDoctorsController {
             appointmentService.addAppointment(appointments);
 
         } catch (Exception e) {
-            logger.info("Wrong date.",e);
+            logger.info("Wrong date.", e);
             modelAndView.addObject("flag", true);
             modelAndView.addObject("doc", doctorId);
 
@@ -103,15 +105,6 @@ public class AllDoctorsController {
         return doctorsService.searchByLetters(name);
 
     }
-
-//    @ResponseBody
-//    @RequestMapping(value = "/search/{name}")
-//    public List<Doctors> searchAll(@PathVariable("name") String name) {
-//        System.out.println("in search ");
-//        System.out.println(name);
-//        return doctorsService.searchByLetters(name);
-//
-//    }
 
     @ResponseBody
     @RequestMapping(value = "/searchResult/{id}")

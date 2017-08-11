@@ -1,33 +1,19 @@
 package com.softserve.edu.lv251.idl;
 
 import com.softserve.edu.lv251.entity.Roles;
-import com.softserve.edu.lv251.entity.Users;
-import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.service.RolesService;
-import com.softserve.edu.lv251.service.UserService;
-import com.softserve.edu.lv251.service.VerificationTokenService;
-import com.softserve.edu.lv251.service.impl.StoredImagesService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.MessageSource;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.UUID;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Component
-public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent>{
+public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private boolean isAlreadySetup = false;
 

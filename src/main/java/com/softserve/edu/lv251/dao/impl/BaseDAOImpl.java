@@ -71,7 +71,7 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         Root<T> from = criteriaQuery.from(entityClass);
         CriteriaQuery<T> select = criteriaQuery.select(from);
         TypedQuery<T> typedQuery = entityManager.createQuery(select);
-        typedQuery.setFirstResult(chainIndex*size-size);
+        typedQuery.setFirstResult(chainIndex * size - size);
         typedQuery.setMaxResults(size);
         return typedQuery.getResultList();
     }

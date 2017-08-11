@@ -47,9 +47,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p->p.getDoctors().getId() == doctorId)
-                .filter(p->p.getAppointmentDate().after(new Date()))
-                .forEach(p-> appointmentsForCreationDTOS.add(mapper.map(p,AppointmentsForCreationDTO.class)));
+                .filter(p -> p.getDoctors().getId() == doctorId)
+                .filter(p -> p.getAppointmentDate().after(new Date()))
+                .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;
 
     }
@@ -59,18 +59,18 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p->p.getAppointmentDate().after(new Date()))
-                .forEach(p-> appointmentsForCreationDTOS.add(mapper.map(p,AppointmentsForCreationDTO.class)));
+                .filter(p -> p.getAppointmentDate().after(new Date()))
+                .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;
     }
 
     @Override
     public List<AppointmentsForDateTimePickerInDocDTO> getAllDoctorsAppointmentsAfterNow(String email, Date date) {
         List<AppointmentsForDateTimePickerInDocDTO> appointmentsForDateTimePickerInDocDTOS = new LinkedList<>();
-        for (Appointments a:
-             appointmentsDAO.getAppointmentByDoctorsEmailAfterSomeDate(email,date)) {
+        for (Appointments a :
+                appointmentsDAO.getAppointmentByDoctorsEmailAfterSomeDate(email, date)) {
             AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO = new AppointmentsForDateTimePickerInDocDTO();
-            mapper.map(a,appointmentsForDateTimePickerInDocDTO);
+            mapper.map(a, appointmentsForDateTimePickerInDocDTO);
             appointmentsForDateTimePickerInDocDTOS.add(appointmentsForDateTimePickerInDocDTO);
         }
         return appointmentsForDateTimePickerInDocDTOS;
@@ -88,7 +88,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDTO> getAppointmentByUserEmail(String email) {
         List<AppointmentDTO> results = new ArrayList<>();
 
-        for (Appointments appointment: appointmentsDAO.getAppointmentByUserEmail(email)){
+        for (Appointments appointment : appointmentsDAO.getAppointmentByUserEmail(email)) {
             AppointmentDTO res = new AppointmentDTO();
             mapper.map(appointment, res);
             results.add(res);

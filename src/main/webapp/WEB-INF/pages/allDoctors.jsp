@@ -158,13 +158,11 @@
                                                 onRenderMinute: function (date) {
 
                                                     var dates = [];
-                                                    var dd;
                                                     <c:choose>
                                                         <c:when test="${docApps.size()>0}">
                                                             <c:forEach items="${docApps}" var="apointments">
                                                                 <c:if test="${apointments.doctors == doctor.id}">
                                                                     dd = new Date("${apointments.appointmentDate}");
-                                                                    dd.setHours(dd.getHours());
                                                                     dates.push(dd);
                                                                 </c:if>
                                                             </c:forEach>

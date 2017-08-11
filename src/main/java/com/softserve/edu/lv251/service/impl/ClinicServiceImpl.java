@@ -22,10 +22,10 @@ import java.util.List;
 public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Autowired
     private ClinicsDAO clinicsDAO;
@@ -66,10 +66,10 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public ClinicSearchDTO clinicSearchById(Long clinicId) {
-        Clinics clinics=clinicsDAO.getEntityByID(clinicId);
-        ClinicSearchDTO clinicSearchDTO=new ClinicSearchDTO();
-        mapper.map(clinics,clinicSearchDTO);
-        return clinicSearchDTO ;
+        Clinics clinics = clinicsDAO.getEntityByID(clinicId);
+        ClinicSearchDTO clinicSearchDTO = new ClinicSearchDTO();
+        mapper.map(clinics, clinicSearchDTO);
+        return clinicSearchDTO;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     public List<ClinicSearchDTO> findByDistrict(String name)
 
     {
-        List<Clinics> clinics=clinicsDAO.findByDistrict(name);
+        List<Clinics> clinics = clinicsDAO.findByDistrict(name);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
         for (Clinics clinic : clinics) {
@@ -112,7 +112,7 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public List<ClinicSearchDTO> searchByLetters(String letters) {
-        List<Clinics> clinics=clinicsDAO.searchByLetters(letters);
+        List<Clinics> clinics = clinicsDAO.searchByLetters(letters);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
         for (Clinics clinic : clinics) {

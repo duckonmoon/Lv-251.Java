@@ -67,7 +67,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * Configure TilesConfigurer.
      */
     @Bean
-    public TilesConfigurer tilesConfigurer(){
+    public TilesConfigurer tilesConfigurer() {
         TilesConfigurer tilesConfigurer = new TilesConfigurer();
         tilesConfigurer.setDefinitions("/WEB-INF/tiles/tiles.xml");
         tilesConfigurer.setCheckRefresh(true);
@@ -85,11 +85,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-    Next 3 beans and override is for localization
-     Created by Taras
-    */
+     * Next 3 beans and override is for localization
+     * Created by Taras
+     */
     @Bean
-    public ReloadableResourceBundleMessageSource messageSource(){
+    public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setBasename("classpath:messages");
@@ -106,7 +106,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      * @return JavaMailSender.
      */
     @Bean
-    public JavaMailSender getMailSender(){
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         //Using gmail
@@ -126,7 +126,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public CookieLocaleResolver localeCookieResolver(){
+    public CookieLocaleResolver localeCookieResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
         localeResolver.setDefaultLocale(new Locale("uk"));
         localeResolver.setCookieName("my-locale-cookie");
@@ -136,7 +136,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LocaleChangeInterceptor localeInterceptor(){
+    public LocaleChangeInterceptor localeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
         return interceptor;
@@ -157,7 +157,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
         return resolver;
     }

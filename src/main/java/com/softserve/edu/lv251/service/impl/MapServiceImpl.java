@@ -18,22 +18,21 @@ import java.util.List;
 public class MapServiceImpl implements MapService {
 
     @Autowired
-    Mapper mapper;
-
+    private Mapper mapper;
 
     @Autowired
-    ClinicService clinicService;
+    private ClinicService clinicService;
 
     @Override
     public List<ClinicLatLngDTO> getAllClinicsCoordinates() {
         List<ClinicLatLngDTO> dtoList = new ArrayList<>();
         List<Clinics> clinics = clinicService.getAllClinics();
 
-        for (Clinics clinic: clinics){
+        for (Clinics clinic : clinics) {
             ClinicLatLngDTO latlang = new ClinicLatLngDTO();
 
 
-            if(latlang.getLat() != 0 && latlang.getLng() != 0){
+            if (latlang.getLat() != 0 && latlang.getLng() != 0) {
                 dtoList.add(latlang);
             }
 

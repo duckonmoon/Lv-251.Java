@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by kilopo on 13.07.2017.
+ * Created by Brynetskyi Marian on 13.07.2017.
  */
 @Transactional
 @Repository

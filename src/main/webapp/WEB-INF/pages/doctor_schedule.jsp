@@ -26,6 +26,7 @@
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.min.css"/>' rel='stylesheet'/>
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.print.css"/>' rel='stylesheet' media='print'/>
     <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/calendarResourses/bootstrap-dialog.css"/>" rel="stylesheet">
     <script src='<c:url value="/resources/calendarResourses/moment.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/jquery.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/fullcalendar.min.js"/>'></script>
@@ -38,9 +39,22 @@
     <script src="<c:url value="/resources/calendarResourses/bootstrap-confirmation.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
             type="text/javascript"></script>
+    <script src="<c:url value="/resources/calendarResourses/bootstrap-dialog.js"/>" ></script>
+
     <script>
 
         $(document).ready(function () {
+
+            var dialogInstance2 = new BootstrapDialog();
+            dialogInstance2.setTitle('Wrong input!');
+            dialogInstance2.setMessage('Wrong input!');
+            dialogInstance2.setType(BootstrapDialog.TYPE_DANGER);
+
+            // Using chain callings
+            var dialogInstance3 = new BootstrapDialog()
+                .setTitle('Success!')
+                .setMessage('Event added')
+                .setType(BootstrapDialog.TYPE_SUCCESS);
 
             $('#calendar').fullCalendar({
                 weekend: false, // disable events
@@ -148,13 +162,13 @@
                             $("#first-date").val("");
                             $("#temp1").html("");
                             $("#autocom").val("");
-                            $(".alert").alert()
+                            dialogInstance3.open();
                         }
                     });
                 }
                 else
                 {
-                    alert("Wrong input");
+                    dialogInstance2.open();
                 }
 
             });
@@ -423,13 +437,6 @@
     <div class="container" style="width: 70%; float: right; margin-top: 1.5%" id='calendar'></div>
 </div>
 
-<div class="alert alert-success" data-dismiss="alert" role="alert">
-    <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
-</div>
-
-<div class="alert alert-danger" data-dismiss="alert" role="alert">
-    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
-</div>
 <div class="container">
     <div class="row row-footer">
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">

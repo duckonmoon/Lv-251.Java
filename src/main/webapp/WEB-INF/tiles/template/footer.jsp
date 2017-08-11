@@ -9,7 +9,7 @@
 <!-- FOOTER*****************************************************************************************************************************************-->
 
 
-<div class="container">
+<footer>
     <div class="row row-footer">
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5><spring:message code="messages.links"/></h5>
@@ -46,5 +46,5 @@
             <p align="center">© Copyright 2017 SoftServe Inc.</p>
         </div>
     </div>
-</div>
+</footer>
 

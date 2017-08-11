@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.service;
 
 
+import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
@@ -40,4 +41,9 @@ public interface UserService {
     Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 
     void sendRegistrationEmail(Users user);
+
+    List<Users> searchByLetters(String search);
+
+    Users changePassword(Users user, PasswordDTO passwordDTO);
+
 }

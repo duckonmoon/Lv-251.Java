@@ -1,8 +1,9 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import com.softserve.edu.lv251.customannotations.ValidEmail;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.mail.Multipart;
 
 /**
  * Created by Kovalevskyy Vitaliy.
@@ -10,11 +11,18 @@ import javax.mail.Multipart;
 public class PersonalInfoDTO {
 
     //data from Users
+    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String firstname;
+
+    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String lastname;
+
+    @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
+    @ValidEmail
     private String email;
+
     private MultipartFile photo;
-    private String password;
+
 
     //data from Contacts
     private String address;

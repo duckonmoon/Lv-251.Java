@@ -20,9 +20,6 @@
                     <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">
                         <spring:message code="messages.medicalCard"/>
                     </a>
-                    <a href="<c:url value="/user/appointments"/>" class="active list-group-item">
-                        <spring:message code="messages.appointments"/>
-                    </a>
                 </div>
             </div>
         </div>

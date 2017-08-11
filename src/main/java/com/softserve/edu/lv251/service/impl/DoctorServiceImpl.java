@@ -8,13 +8,13 @@ import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
+
 import com.softserve.edu.lv251.service.*;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,18 +28,18 @@ import java.util.List;
 public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements DoctorsService {
 
     @Autowired
-    ContactsDAO contactsDAO;
+    private ContactsDAO contactsDAO;
 
-    @Autowired
-    RolesService rolesService;
-@Autowired
+
+   @Autowired
    private UserService userService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private RolesService rolesService;
+
 
     @Autowired
-    Logger logger;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private DoctorsDAO doctorsDAO;
@@ -54,7 +54,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     ModeratorService moderatorService;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
+
 
     @Override
     public void addDoctor(Doctors doctors) {
@@ -83,7 +84,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
-        List<Doctors> doctors= doctorsDAO.searchByLetters(letters);
+        List<Doctors> doctors = doctorsDAO.searchByLetters(letters);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctors doctor : doctors) {
@@ -128,9 +129,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
 
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        //user.setAppointments(new ArrayList<>());
-        //user.setMedicalCards(new ArrayList<>());
-        //user.setTestsResults(new ArrayList<>());
         Contacts contact = new Contacts();
         contact.setUsers(doctor);
         contact.setEmail(accountDto.getEmail());
@@ -181,7 +179,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Override
     public List<Doctors> getByClinic(Long clinicId) {
-        List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics",clinicId);
+        List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
         return doctors.isEmpty() ? null : doctors;
     }
 
@@ -197,10 +195,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
-        if(accountDto.getMultipartFile()!=null){
-        doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));}
-        else{
-        doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));}
+
+        if (accountDto.getMultipartFile() != null) {
+            doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));
+        } else {
+            doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
+        }
+
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
@@ -209,16 +210,15 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);
         doctor.setDescription(accountDto.getDescription());
-        if(specializationService.findByName(accountDto.getSpecialization())==null){
-            Specialization specialization= new Specialization();
+        if (specializationService.findByName(accountDto.getSpecialization()) == null) {
+            Specialization specialization = new Specialization();
             specialization.setName(accountDto.getSpecialization());
             specializationService.add(specialization);
             doctor.setSpecialization(specialization);
-        }else{ doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        } else {
+            doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
         }
         doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
-//mapper.map(accountDto,doctor);
-
         addDoctor(doctor);
 
         return doctor;
@@ -244,9 +244,9 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Override
     public DoctorsSearchDTO findById(long id) {
-        Doctors doctors= doctorsDAO.getEntityByID(id);
-        DoctorsSearchDTO doctorsSearchDTO= new DoctorsSearchDTO();
-        mapper.map(doctors,doctorsSearchDTO);
+        Doctors doctors = doctorsDAO.getEntityByID(id);
+        DoctorsSearchDTO doctorsSearchDTO = new DoctorsSearchDTO();
+        mapper.map(doctors, doctorsSearchDTO);
 
         return doctorsSearchDTO;
     }
@@ -264,8 +264,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setPhoto(user.getPhoto());
         doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
         doctor.setClinics(clinics);
-    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7");
-    System.out.println(clinics);
         doctor.setContact(user.getContact());
         doctor.setDescription(userToDoctor.getDescription());
         doctor.setRoles(Arrays.asList(

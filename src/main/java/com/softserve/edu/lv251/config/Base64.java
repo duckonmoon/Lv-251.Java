@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.service;
+package com.softserve.edu.lv251.config;
 
 import org.springframework.web.multipart.MultipartFile;
 

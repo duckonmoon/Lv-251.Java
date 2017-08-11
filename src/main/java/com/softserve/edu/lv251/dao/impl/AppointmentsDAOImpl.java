@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by kilopo on 13.07.2017.
+ * Created by Brynetskyi Marian on 13.07.2017.
  */
 @Transactional
 @Repository
@@ -35,14 +35,6 @@ public class AppointmentsDAOImpl extends BaseDAOImpl<Appointments> implements Ap
 
     @Override
     public List<Appointments> getAppointmentByUserEmail(String email) {
-        /*return entityManager.createQuery("" +
-                "select a " +
-                "from Appointments a " +
-                "join Users s " +
-                "where s.email = :email")
-                .setParameter("email",email)
-                .getResultList();*/
-
         return entityManager.createQuery("select a from Appointments a where a.users.email= ?1").setParameter(1,email).getResultList();
     }
 }

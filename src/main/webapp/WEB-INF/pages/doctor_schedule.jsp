@@ -26,6 +26,7 @@
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.min.css"/>' rel='stylesheet'/>
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.print.css"/>' rel='stylesheet' media='print'/>
     <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/calendarResourses/bootstrap-dialog.css"/>" rel="stylesheet">
     <script src='<c:url value="/resources/calendarResourses/moment.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/jquery.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/fullcalendar.min.js"/>'></script>
@@ -38,9 +39,22 @@
     <script src="<c:url value="/resources/calendarResourses/bootstrap-confirmation.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
             type="text/javascript"></script>
+    <script src="<c:url value="/resources/calendarResourses/bootstrap-dialog.js"/>" ></script>
+
     <script>
 
         $(document).ready(function () {
+
+            var dialogInstance2 = new BootstrapDialog();
+            dialogInstance2.setTitle('Wrong input!');
+            dialogInstance2.setMessage('Wrong input!');
+            dialogInstance2.setType(BootstrapDialog.TYPE_DANGER);
+
+            // Using chain callings
+            var dialogInstance3 = new BootstrapDialog()
+                .setTitle('Success!')
+                .setMessage('Event added')
+                .setType(BootstrapDialog.TYPE_SUCCESS);
 
             $('#calendar').fullCalendar({
                 weekend: false, // disable events
@@ -82,14 +96,6 @@
                     }
                 }
             });
-        });
-
-
-    </script>
-
-    <script type="text/javascript" charset="UTF-8">
-
-        $(document).ready(function () {
             $("#date-div").datetimepicker({
                 language: '${pageContext.response.locale}',
                 format: "dd/mm/yyyy - hh:ii",
@@ -119,9 +125,58 @@
                     }
                 }
             });
+
+
+            $("#autocom").autocomplete({
+                serviceUrl: '/users/search',
+                paramName: "name",
+                transformResult: function (response) {
+                    return {
+                        suggestions: $.map($.parseJSON(response), function (item) {
+                            var i = item.firstname + " " + item.lastname;
+                            return {value: i, data: item.id};
+                        })
+                    };
+                },
+                onSelect: function (suggestion) {
+                    $("#temp1").html(suggestion.data);
+                }
+
+            });
+
+
+
+            $( "#control-button" ).click(function() {
+                if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
+                    $.ajax({
+                        url: '/users/addApp/',
+                        method: 'POST',
+                        data: {
+                            "datatime": $("#first-date").val(),
+                            "input": $("#temp1").html()
+                        },
+                        success: function (result) {
+                            $('#calendar').fullCalendar('rerenderEvents');
+                            $('#calendar').fullCalendar('refetchEvents');
+                            $('#calendar').fullCalendar('refresh');
+                            $("#first-date").val("");
+                            $("#temp1").html("");
+                            $("#autocom").val("");
+                            dialogInstance3.open();
+                        }
+                    });
+                }
+                else
+                {
+                    dialogInstance2.open();
+                }
+
+            });
         });
 
+
     </script>
+
     <style>
 
         .popover.confirmation {
@@ -359,50 +414,28 @@
         <div class="row row-content">
             <input type="text" class="form-control " id="autocom" style="width: 80%; margin: 2% 10% 2% 10%"
                    placeholder='<spring:message code="messages.UserFirstName"/>' aria-describedby="sizing-addon1">
-            <script>
-                $("#autocom").autocomplete({
-                    serviceUrl: '/users/search',
-                    paramName: "name",
-                    transformResult: function (response) {
-                        console.log("I hate my life");
-                        return {
-                            suggestions: $.map($.parseJSON(response), function (item) {
-                                var i = item.firstname + " " + item.lastname;
-                                console.log(i);
-                                return {value: i, date: item.id};
-                            })
-                        };
-                    },
-
-
-                });
-            </script>
             <div>
-                <form action="${pageContext.request.contextPath}/doctor/addAppointment" method="post">
-                    <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
-                        <div class="input-append date form_datetime" id="date-div">
-                            <label for="first-date" style="margin-left: 5pt">
-                                <spring:message code="messages.date"/>
-                            </label>
-                            <input type="text" value="" readonly id="first-date" name="datetime">
-                            <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
-                            <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
-                        </div>
+                <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
+                    <div class="input-append date form_datetime" id="date-div">
+                        <label for="first-date" style="margin-left: 5pt">
+                            <spring:message code="messages.date"/>
+                        </label>
+                        <input type="text" value="" readonly id="first-date" name="datetime">
+                        <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
+                        <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
                     </div>
-                    <div style="text-align: center">
-                        <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
-                            <spring:message code="messages.approve"/>
-                        </button>
-                    </div>
-                    <h5 style="color: red; text-align: center" id="wrong-date"></h5>
-                </form>
+                </div>
+                <div style="text-align: center">
+                    <button id = "control-button" class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
+                        <spring:message code="messages.approve"/>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container" style="width: 70%; float: right; margin-top: 1.5%" id='calendar'></div>
 </div>
-
 
 <div class="container">
     <div class="row row-footer">
@@ -443,6 +476,8 @@
     </div>
 </div>
 
+
+<p style="display: none" id = "temp1" name="allInfo"></p>
 </body>
 </html>
 

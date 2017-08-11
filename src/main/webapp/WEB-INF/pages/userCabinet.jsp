@@ -141,27 +141,22 @@
                         <div class="col-md-7 col-md-offset-4">
                         <hr>
                         <h3>Change Password</h3>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-md-3 control-label"><spring:message--%>
-                            <%--code="messages.userPassword"/>:</label>--%>
-                            <%--<div class="col-md-7">--%>
-                            <%--<input class="form-control" type="password" value="">--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><spring:message
                                         code="messages.userNewPassword"/>:</label>
                                 <div class="col-md-7">
                                     <form:input type="password" class="form-control" path="password"/>
+                                    <form:errors path="password" cssClass="text-danger"/>
                                 </div>
                             </div>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-md-3 control-label"><spring:message--%>
-                            <%--code="messages.userConfirmPassword"/>:</label>--%>
-                            <%--<div class="col-md-7">--%>
-                            <%--<input class="form-control" type="password" value="">--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><spring:message
+                                        code="messages.userConfirmPassword"/>:</label>
+                                <div class="col-md-7">
+                                    <form:input type="password" class="form-control" path="matchingPassword"/>
+                                    <form:errors path="matchingPassword" cssClass="text-danger"/>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-7">

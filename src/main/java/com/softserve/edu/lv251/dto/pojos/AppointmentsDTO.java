@@ -1,11 +1,5 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import com.softserve.edu.lv251.entity.Appointments;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 /**
  * Created by User on 02.08.2017.
  */
@@ -16,7 +10,8 @@ public class AppointmentsDTO {
     private String start;
     private String color;
 
-    public  AppointmentsDTO(){}
+    public AppointmentsDTO() {
+    }
 
 
     public Long getId() {

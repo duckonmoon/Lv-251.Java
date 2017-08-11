@@ -21,8 +21,8 @@ public class Doctors extends Users {
                     CascadeType.PERSIST
             })
     private Clinics clinics;
-@JsonIgnore
-    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointments> docAppointments;
 
     @ManyToOne

@@ -12,7 +12,7 @@ import java.util.List;
 public class RolesServiceImpl implements RolesService {
 
     @Autowired
-    RolesDAO rolesDAO;
+    private RolesDAO rolesDAO;
 
     @Override
     public void addRole(Roles role) {

@@ -1,8 +1,8 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.entity.Roles;
 import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,14 +27,12 @@ import java.util.List;
 public class UpdatableUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserService userService;
-
+    private UserService userService;
 
     public void setNewEmail(String oldEmail, String newEmail) {
         Users user = userService.findByEmail(oldEmail);
         user.setEmail(newEmail);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

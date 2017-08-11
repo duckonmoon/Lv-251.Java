@@ -15,14 +15,14 @@ import java.util.List;
 public class DoctorImageDTO extends Doctors {
     private BufferedImage img;
 
-    DoctorImageDTO(){}
+    DoctorImageDTO() {
+    }
 
-    DoctorImageDTO(Doctors doctors)
-    {
+    DoctorImageDTO(Doctors doctors) {
         try {
             this.setImg(ImageIO.read(new ByteArrayInputStream(Base64.getDecoder().decode(doctors.getPhoto()))));
+        } catch (Exception e) {
         }
-        catch (Exception e){}
         setLastname(doctors.getLastname());
         setAppointments(doctors.getAppointments());
         setClinics(doctors.getClinics());
@@ -45,8 +45,6 @@ public class DoctorImageDTO extends Doctors {
         setMedicalCards(doctors.getMedicalCards());
 
 
-
-
     }
 
     public BufferedImage getImg() {
@@ -57,18 +55,16 @@ public class DoctorImageDTO extends Doctors {
         this.img = img;
     }
 
-    public static List<DoctorImageDTO> convert(List<Doctors> list)
-    {
+    public static List<DoctorImageDTO> convert(List<Doctors> list) {
         List<DoctorImageDTO> list1 = new LinkedList<>();
-        for (Doctors d:
-             list) {
+        for (Doctors d :
+                list) {
             list1.add(new DoctorImageDTO(d));
         }
         return list1;
     }
 
-    public static DoctorImageDTO convert(Doctors doctors)
-    {
+    public static DoctorImageDTO convert(Doctors doctors) {
         return new DoctorImageDTO(doctors);
     }
 }

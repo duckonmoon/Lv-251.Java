@@ -4,19 +4,11 @@ package com.softserve.edu.lv251.config;
  * Created by Taras on 03.08.2017.
  */
 
-import com.softserve.edu.lv251.idl.WebRoles;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
+
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class TokenAuthentication implements Authentication {
     private String token;

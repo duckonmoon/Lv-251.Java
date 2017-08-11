@@ -12,14 +12,14 @@ import java.util.List;
  * Created by Admin on 31.07.2017.
  */
 @Service
-public class ModeratorServiceImpl  implements ModeratorService {
+public class ModeratorServiceImpl implements ModeratorService {
 
     @Autowired
     private ModeratorDAO moderatorDAO;
 
     @Override
     public Moderator getByEmail(String email) {
-       List<Moderator> moderators= moderatorDAO.getEntitiesByColumnNameAndValue("email",email);
-       return moderators.isEmpty() ? null : moderators.get(0);
+        List<Moderator> moderators = moderatorDAO.getEntitiesByColumnNameAndValue("email", email);
+        return moderators.isEmpty() ? null : moderators.get(0);
     }
 }

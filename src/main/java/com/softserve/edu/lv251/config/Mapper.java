@@ -3,8 +3,6 @@ package com.softserve.edu.lv251.config;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -245,6 +242,9 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointments, appointmentsDTO, context);
                         appointmentsDTO.setId(appointments.getId());
+                        appointments.getAppointmentDate().setTime(
+                                appointments.getAppointmentDate().getTime()
+                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
                         if (appointments.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
@@ -253,9 +253,6 @@ public class Mapper extends ConfigurableMapper {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
                             }
                         }
-                        appointments.getAppointmentDate().setTime(
-                                appointments.getAppointmentDate().getTime()
-                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
                     }
@@ -287,8 +284,11 @@ public class Mapper extends ConfigurableMapper {
                     }
                 })
                 .register();
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> develop
     }
 }

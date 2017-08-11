@@ -22,7 +22,7 @@
                     <label class="sr-only" for="firstName"><spring:message code="messages.firstName" var="firstNameMess"/></label>
                     <form:input type="text" id="firstName" path="firstName"
                                 name="firstName" class="form-control" placeholder="${firstNameMess}" autofocus="true"/>
-                    <form:errors path="firstName"/>
+                    <form:errors path="firstName" cssClass="text-danger"/>
                     <span class="strengthPsw" id="firstNameWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                 </div>
             </spring:bind>
@@ -31,7 +31,7 @@
                     <label class="sr-only" for="lastName"><spring:message code="messages.lastName" var="lastNameMess"/></label>
                     <form:input type="text" id="lastName" path="lastName" name="lastName"
                                 class="form-control" placeholder="${lastNameMess}" autofocus="true"/>
-                    <form:errors path="lastName"/>
+                    <form:errors path="lastName" cssClass="text-danger"/>
                     <span class="strengthPsw" id="lastNameWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                 </div>
             </spring:bind>
@@ -40,7 +40,7 @@
                     <label class="sr-only" for="emailReg"><spring:message code="messages.email" var="emailRegMess"/></label>
                     <form:input type="text" id="emailReg" path="email"
                                 name="emailReg" class="form-control" placeholder="${emailRegMess}" autofocus="true"/>
-                    <form:errors path="email"/>
+                    <form:errors path="email" cssClass="text-danger"/>
                     <span class="strengthPsw" id="emailWarn" style="pointer-events:none; float:left; white-space: pre;"></span>
                 </div>
             </spring:bind>
@@ -50,7 +50,7 @@
                         <label class="sr-only" for="passwordReg"><spring:message code="messages.password" var="passwordRegMess"/></label>
                         <form:input type="password" id="passwordReg" path="password"
                                     name="passwordReg" class="form-control" placeholder="${passwordRegMess}" cssStyle="background-color: inherit; z-index: -1"/>
-                        <form:errors path="password"/>
+                        <form:errors path="password" cssClass="text-danger"/>
                         <div id="eye_button">
                             <button type="button" id="eye" style="z-index: 0;">
                                 <i class="fa fa-eye" id="eyeSymbol"></i>
@@ -67,7 +67,7 @@
                     <label class="sr-only" for="passwordConfirmReg"><spring:message code="messages.confirmPassword" var="passwordConfirmRegMess"/></label>
                     <form:input type="password" id="passwordConfirmReg" path="matchingPassword" cssStyle="z-index: 0"
                                 name="passwordConfirm" class="form-control" placeholder="${passwordConfirmRegMess}"/>
-                    <form:errors path="matchingPassword"/>
+                    <form:errors path="matchingPassword" cssClass="text-danger"/>
                     <span id="matchPsw"></span>
                 </div>
             </spring:bind>

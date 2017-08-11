@@ -33,7 +33,6 @@ public class PersonalInfoDTO {
     private String thirdPhone;
 
 
-
     public PersonalInfoDTO() {
     }
 
@@ -108,6 +107,7 @@ public class PersonalInfoDTO {
     public void setThirdPhone(String thirdPhone) {
         this.thirdPhone = thirdPhone;
     }
+
     public MultipartFile getPhoto() {
         return photo;
     }

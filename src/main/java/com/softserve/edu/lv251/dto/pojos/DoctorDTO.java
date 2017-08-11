@@ -1,6 +1,9 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import com.softserve.edu.lv251.customannotations.*;
+
+import com.softserve.edu.lv251.customannotations.PasswordMatches;
+
+import com.softserve.edu.lv251.customannotations.ValidPhoto;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 

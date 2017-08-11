@@ -25,6 +25,7 @@
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.min.css"/>' rel='stylesheet'/>
     <link href='<c:url value="/resources/calendarResourses/fullcalendar.print.css"/>' rel='stylesheet' media='print'/>
+    <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
     <script src='<c:url value="/resources/calendarResourses/moment.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/jquery.min.js"/>'></script>
     <script src='<c:url value="/resources/calendarResourses/fullcalendar.min.js"/>'></script>
@@ -35,6 +36,8 @@
     <script src="<c:url value="/resources/js/search.js"/>"></script>
     <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
     <script src="<c:url value="/resources/calendarResourses/bootstrap-confirmation.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
+            type="text/javascript"></script>
     <script>
 
         $(document).ready(function () {
@@ -81,6 +84,42 @@
             });
         });
 
+
+    </script>
+
+    <script type="text/javascript" charset="UTF-8">
+
+        $(document).ready(function () {
+            $("#date-div").datetimepicker({
+                language: '${pageContext.response.locale}',
+                format: "dd/mm/yyyy - hh:ii",
+                autoclose: true,
+                minuteStep: 15,
+                startDate: new Date(),
+                daysOfWeekDisabled: [0, 6],
+                hoursDisabled: [1, 2, 3, 4, 5, 6, 22, 23, 0],
+                onRenderMinute: function (date) {
+
+                    var dates = [];
+                    var dd;
+                    <c:choose>
+                    <c:when test="${docApps.size()>0}">
+                    <c:forEach items="${docApps}" var="apointments">
+                    dd = new Date("${apointments.appointmentDate}");
+                    dd.setHours(dd.getHours());
+                    dates.push(dd);
+                    </c:forEach>
+                    </c:when>
+                    </c:choose>
+
+                    for (var i = 0; i < dates.length; i++) {
+                        if (date.getTime() === dates[i].getTime()) {
+                            return ['disabled'];
+                        }
+                    }
+                }
+            });
+        });
 
     </script>
     <style>
@@ -338,8 +377,26 @@
 
                 });
             </script>
-
-
+            <div>
+                <form action="${pageContext.request.contextPath}/doctor/addAppointment" method="post">
+                    <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
+                        <div class="input-append date form_datetime" id="date-div">
+                            <label for="first-date" style="margin-left: 5pt">
+                                <spring:message code="messages.date"/>
+                            </label>
+                            <input type="text" value="" readonly id="first-date" name="datetime">
+                            <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
+                            <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
+                            <spring:message code="messages.approve"/>
+                        </button>
+                    </div>
+                    <h5 style="color: red; text-align: center" id="wrong-date"></h5>
+                </form>
+            </div>
         </div>
     </div>
 

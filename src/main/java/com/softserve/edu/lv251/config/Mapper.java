@@ -273,7 +273,17 @@ public class Mapper extends ConfigurableMapper{
                       }
                   }).register();
 
-
+        factory.classMap(Appointments.class, AppointmentsForDateTimePickerInDocDTO.class)
+                .field("appointmentDate", "appointmentDate")
+                .field("duration", "duration")
+                .customize(new CustomMapper<Appointments, AppointmentsForDateTimePickerInDocDTO>() {
+                    @Override
+                    public void mapAtoB(Appointments appointments, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
+                        super.mapAtoB(appointments, appointmentsForDateTimePickerInDocDTO, context);
+                        appointmentsForDateTimePickerInDocDTO.setUsers(appointments.getDoctors().getId());
+                    }
+                })
+                .register();
 
 
 //        factory.classMap(DoctorDTO.class,Doctors.class)

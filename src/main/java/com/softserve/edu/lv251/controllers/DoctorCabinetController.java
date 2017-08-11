@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,9 @@ public class DoctorCabinetController {
     Mapper mapper;
 
     @RequestMapping(value = "/doctor/сabinet",method = RequestMethod.GET)
-    public String home(ModelMap model){
+    public String home(ModelMap model,Principal principal){
+        Object o = appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime());
+        model.addAttribute("docApps",appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
         return "doctor_schedule";
     }
 

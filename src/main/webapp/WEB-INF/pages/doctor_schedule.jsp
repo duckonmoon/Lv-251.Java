@@ -82,14 +82,6 @@
                     }
                 }
             });
-        });
-
-
-    </script>
-
-    <script type="text/javascript" charset="UTF-8">
-
-        $(document).ready(function () {
             $("#date-div").datetimepicker({
                 language: '${pageContext.response.locale}',
                 format: "dd/mm/yyyy - hh:ii",
@@ -119,9 +111,58 @@
                     }
                 }
             });
+
+
+            $("#autocom").autocomplete({
+                serviceUrl: '/users/search',
+                paramName: "name",
+                transformResult: function (response) {
+                    return {
+                        suggestions: $.map($.parseJSON(response), function (item) {
+                            var i = item.firstname + " " + item.lastname;
+                            return {value: i, data: item.id};
+                        })
+                    };
+                },
+                onSelect: function (suggestion) {
+                    $("#temp1").html(suggestion.data);
+                }
+
+            });
+
+
+
+            $( "#control-button" ).click(function() {
+                if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
+                    $.ajax({
+                        url: '/users/addApp/',
+                        method: 'POST',
+                        data: {
+                            "datatime": $("#first-date").val(),
+                            "input": $("#temp1").html()
+                        },
+                        success: function (result) {
+                            $('#calendar').fullCalendar('rerenderEvents');
+                            $('#calendar').fullCalendar('refetchEvents');
+                            $('#calendar').fullCalendar('refresh');
+                            $("#first-date").val("");
+                            $("#temp1").html("");
+                            $("#autocom").val("");
+                            $(".alert").alert()
+                        }
+                    });
+                }
+                else
+                {
+                    alert("Wrong input");
+                }
+
+            });
         });
 
+
     </script>
+
     <style>
 
         .popover.confirmation {
@@ -359,43 +400,22 @@
         <div class="row row-content">
             <input type="text" class="form-control " id="autocom" style="width: 80%; margin: 2% 10% 2% 10%"
                    placeholder='<spring:message code="messages.UserFirstName"/>' aria-describedby="sizing-addon1">
-            <script>
-                $("#autocom").autocomplete({
-                    serviceUrl: '/users/search',
-                    paramName: "name",
-                    transformResult: function (response) {
-                        console.log("I hate my life");
-                        return {
-                            suggestions: $.map($.parseJSON(response), function (item) {
-                                var i = item.firstname + " " + item.lastname;
-                                console.log(i);
-                                return {value: i, date: item.id};
-                            })
-                        };
-                    },
-
-
-                });
-            </script>
             <div>
-                <form action="${pageContext.request.contextPath}/doctor/addAppointment" method="post">
-                    <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
-                        <div class="input-append date form_datetime" id="date-div">
-                            <label for="first-date" style="margin-left: 5pt">
-                                <spring:message code="messages.date"/>
-                            </label>
-                            <input type="text" value="" readonly id="first-date" name="datetime">
-                            <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
-                            <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
-                        </div>
+                <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
+                    <div class="input-append date form_datetime" id="date-div">
+                        <label for="first-date" style="margin-left: 5pt">
+                            <spring:message code="messages.date"/>
+                        </label>
+                        <input type="text" value="" readonly id="first-date" name="datetime">
+                        <span class="add-on"><i class="icon-remove fa fa-times"></i></span>
+                        <span class="add-on"><i class="icon-calendar fa fa-calendar"></i></span>
                     </div>
-                    <div style="text-align: center">
-                        <button class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
-                            <spring:message code="messages.approve"/>
-                        </button>
-                    </div>
-                    <h5 style="color: red; text-align: center" id="wrong-date"></h5>
-                </form>
+                </div>
+                <div style="text-align: center">
+                    <button id = "control-button" class="btn btn-primary" style="width: 50%; margin: 5pt auto;">
+                        <spring:message code="messages.approve"/>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -403,7 +423,13 @@
     <div class="container" style="width: 70%; float: right; margin-top: 1.5%" id='calendar'></div>
 </div>
 
+<div class="alert alert-success" data-dismiss="alert" role="alert">
+    <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+</div>
 
+<div class="alert alert-danger" data-dismiss="alert" role="alert">
+    <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+</div>
 <div class="container">
     <div class="row row-footer">
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
@@ -443,6 +469,8 @@
     </div>
 </div>
 
+
+<p style="display: none" id = "temp1" name="allInfo"></p>
 </body>
 </html>
 

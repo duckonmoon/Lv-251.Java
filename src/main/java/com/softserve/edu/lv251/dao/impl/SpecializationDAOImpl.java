@@ -16,8 +16,8 @@ import java.util.List;
 public class SpecializationDAOImpl extends BaseDAOImpl<Specialization> implements SpecializationDAO {
     @Override
     public List<Specialization> searchByLetters(String letters) {
-        String name=letters+"%".toLowerCase();
-        Query query=entityManager.createQuery("from Specialization s where lower(s.name) like :name").setParameter("name",name);
+        String name = letters + "%".toLowerCase();
+        Query query = entityManager.createQuery("from Specialization s where lower(s.name) like :name").setParameter("name", name);
         return query.getResultList();
     }
 }

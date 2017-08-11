@@ -20,10 +20,10 @@ public class MailComponent {
     final private String mes = "";
 
     @Autowired
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     public boolean sendMail (ContactDTO contactDTO) {
 

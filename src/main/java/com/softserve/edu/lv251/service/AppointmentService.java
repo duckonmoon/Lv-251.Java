@@ -2,8 +2,10 @@ package com.softserve.edu.lv251.service;
 
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +22,8 @@ public interface AppointmentService {
     List<AppointmentsForCreationDTO> getAllDoctorAppointmentsAfterNow(long doctorId);
 
     List<AppointmentsForCreationDTO> getAllDoctorsAppointmentsAfterNow();
+
+    List<AppointmentsForDateTimePickerInDocDTO> getAllDoctorsAppointmentsAfterNow(String email, Date date);
 
     List<Appointments> listAppointmensWithDoctor(Long id);
 

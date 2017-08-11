@@ -1,16 +1,14 @@
 package com.softserve.edu.lv251.controllers.rest;
 
 import com.softserve.edu.lv251.dto.pojos.PatientDTO;
-import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.security.Principal;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -21,22 +19,14 @@ import java.util.List;
 public class DoctorRestController {
 
     @Autowired
-    DoctorsService doctorsService;
+    private DoctorsService doctorsService;
 
     @Autowired
     private UserService userService;
 
     @RequestMapping("/doctor/patients")
-    public List<PatientDTO> getPatients(Principal principal){
+    public List<PatientDTO> getPatients(Principal principal) {
         Users users = userService.findByEmail(principal.getName());
         return doctorsService.getDoctorPatients(users.getId());
     }
-
-    @RequestMapping("/api/doctor/patients")
-    public String getPatientsApi(Principal principal){
-//        Users users = userService.findByEmail(principal.getName());
-//        return doctorsService.getDoctorPatients(users.getId());
-        return "erehdf";
-    }
-
 }

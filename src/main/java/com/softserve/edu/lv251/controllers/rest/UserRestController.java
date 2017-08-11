@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ public class UserRestController {
     private AppointmentService appointmentService;
 
     @RequestMapping(value = "/appointments")
-    List<AppointmentDTO> getAppointments(){
+    List<AppointmentDTO> getAppointments() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
         return appointmentService.getAppointmentByUserEmail(userDetails.getUsername());
     }

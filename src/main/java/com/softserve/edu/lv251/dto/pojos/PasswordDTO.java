@@ -5,7 +5,7 @@ import com.softserve.edu.lv251.customannotations.ValidPassword;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Created by Shmidt on 10.08.2017.
+ * Created by Kovalevskyy Vitaliy on 10.08.2017.
  */
 @PasswordMatches
 public class PasswordDTO extends UserDTO{

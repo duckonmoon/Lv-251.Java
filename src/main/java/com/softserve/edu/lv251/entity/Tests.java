@@ -5,7 +5,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
- * Created by kilopo on 11.07.2017.
+ * Created by Marian Brynetskyi on 11.07.2017.
  */
 @Entity
 public class Tests extends BaseEntity {

@@ -15,7 +15,7 @@ public class Appointments extends BaseEntity {
     private Boolean isApproved;
     private double duration;
 
-    @Column(columnDefinition="MEDIUMTEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
 
     @ManyToOne

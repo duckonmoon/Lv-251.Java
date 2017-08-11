@@ -3,7 +3,6 @@ package com.softserve.edu.lv251.config;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.idl.WebRoles;
 import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
@@ -20,12 +19,11 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 @Component
-public class Mapper extends ConfigurableMapper{
+public class Mapper extends ConfigurableMapper {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -69,8 +67,8 @@ public class Mapper extends ConfigurableMapper{
 
             @Override
             public void mapAtoB(PersonalInfoDTO personalInfoDTO, Users user, MappingContext context) {
-                if(personalInfoDTO.getPhoto().getSize() != 0){
-                    String photo= StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
+                if (personalInfoDTO.getPhoto().getSize() != 0) {
+                    String photo = StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
                     user.setPhoto(photo);
                 }
             }
@@ -106,7 +104,7 @@ public class Mapper extends ConfigurableMapper{
                 .customize(new CustomMapper<Clinics, ClinicLatLngDTO>() {
                     @Override
                     public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng, MappingContext context) {
-                        if(clinics.getContact()!=null){
+                        if (clinics.getContact() != null) {
                             double lat = clinics.getContact().getLatitude();
                             double lng = clinics.getContact().getLongitude();
                             latLng.setLat(lat);
@@ -227,85 +225,65 @@ public class Mapper extends ConfigurableMapper{
             }
         }).register();
 
-        factory.classMap(Clinics.class,ClinicSearchDTO.class)
-                .field("id","id")
-                .field("clinic_name","clinic_name")
-                .field("photo","photo")
-                .field("description","description")
+        factory.classMap(Clinics.class, ClinicSearchDTO.class)
+                .field("id", "id")
+                .field("clinic_name", "clinic_name")
+                .field("photo", "photo")
+                .field("description", "description")
                 .byDefault().register();
 
-        factory.classMap(Districts.class,DistrictsDTO.class)
-                .field("name","name")
+        factory.classMap(Districts.class, DistrictsDTO.class)
+                .field("name", "name")
                 .byDefault().register();
 
 
-        factory.classMap(Appointments.class,AppointmentsDTO.class)
+        factory.classMap(Appointments.class, AppointmentsDTO.class)
                 .customize(new CustomMapper<Appointments, AppointmentsDTO>() {
                     @Override
                     public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
                         super.mapAtoB(appointments, appointmentsDTO, context);
                         appointmentsDTO.setId(appointments.getId());
                         appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
-                        if (appointments.getIsApproved()!=null) {
+                        if (appointments.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
                             } else {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
                             }
                         }
+                        appointments.getAppointmentDate().setTime(
+                                appointments.getAppointmentDate().getTime()
+                                        - Calendar.getInstance().getTimeZone().getRawOffset());
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
                     }
                 }).register();
 
-          factory.classMap(Doctors.class,DoctorsSearchDTO.class)
-                  .field("id","id")
-                  .field("firstname", "firstname")
-                  .field("lastname", "lastname")
-                  .field("middlename","middlename")
-                  .field("description","description")
-                  .field("photo","photo")
-                  .customize(new CustomMapper<Doctors, DoctorsSearchDTO>() {
-                      @Override
-                      public void mapAtoB(Doctors doctors, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                          doctorsSearchDTO.setClinicName(doctors.getClinics().getClinic_name());
-                          doctorsSearchDTO.setSpecialisation(doctors.getSpecialization().getName());
-                      }
-                  }).register();
+        factory.classMap(Doctors.class, DoctorsSearchDTO.class)
+                .field("id", "id")
+                .field("firstname", "firstname")
+                .field("lastname", "lastname")
+                .field("middlename", "middlename")
+                .field("description", "description")
+                .field("photo", "photo")
+                .customize(new CustomMapper<Doctors, DoctorsSearchDTO>() {
+                    @Override
+                    public void mapAtoB(Doctors doctors, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
+                        doctorsSearchDTO.setClinicName(doctors.getClinics().getClinic_name());
+                        doctorsSearchDTO.setSpecialisation(doctors.getSpecialization().getName());
+                    }
+                }).register();
 
-
-
-
-//        factory.classMap(DoctorDTO.class,Doctors.class)
-//                .field("firstName", "firstname")
-//                .field("lastName", "lastname")
-//                .field("description","description")
-//                .field("email", "email").customize(new CustomMapper<DoctorDTO, Doctors>() {
-//            @Override
-//            public void mapAtoB(DoctorDTO doctorDTO, Doctors doctors, MappingContext context) {
-//                String password=bCryptPasswordEncoder.encode(doctorDTO.getPassword());
-//                doctors.setPassword(password);
-//                String photo= StoredImagesService.getBase64encodedMultipartFile(doctorDTO.getMultipartFile());
-//                doctors.setPhoto(photo);
-//                doctors.setRoles(Arrays.asList(
-//                        rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
-//                        rolesService.findByName(WebRoles.ROLE_USER.name())));
-//                Contacts contact = new Contacts();
-//                contact.setEmail(doctorDTO.getEmail());
-//                contactsDAO.addEntity(contact);
-//                doctors.setContact(contact);
-//                doctors.setDescription(doctorDTO.getDescription());
-//                if(specializationService.findByName(doctorDTO.getSpecialization())==null){
-//                    Specialization specialization= new Specialization();
-//                    specialization.setName(doctorDTO.getSpecialization());
-//                    specializationService.add(specialization);
-//                    doctors.setSpecialization(specialization);
-//                }else{ doctors.setSpecialization(specializationService.findByName(doctorDTO.getSpecialization()));
-//                }
-//                doctors.setClinics(clinicService.getByName(doctorDTO.getClinic()));
-//
-//            }
-//        }).register();
-
+        factory.classMap(Appointments.class, AppointmentsForDateTimePickerInDocDTO.class)
+                .field("appointmentDate", "appointmentDate")
+                .field("duration", "duration")
+                .customize(new CustomMapper<Appointments, AppointmentsForDateTimePickerInDocDTO>() {
+                    @Override
+                    public void mapAtoB(Appointments appointments, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
+                        super.mapAtoB(appointments, appointmentsForDateTimePickerInDocDTO, context);
+                        appointmentsForDateTimePickerInDocDTO.setUsers(appointments.getDoctors().getId());
+                    }
+                })
+                .register();
     }
 }

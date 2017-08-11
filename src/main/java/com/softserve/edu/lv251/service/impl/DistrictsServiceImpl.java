@@ -15,14 +15,15 @@ import java.util.List;
  * Created by Admin on 29.07.2017.
  */
 @Service
-public class DistrictsServiceImpl implements DistrictsService{
+public class DistrictsServiceImpl implements DistrictsService {
     @Autowired
     private DistrictsDAO districtsDAO;
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
+
     @Override
     public List<DistrictsDTO> findByName(String name) {
-        List<Districts> districts=districtsDAO.findByName(name);
+        List<Districts> districts = districtsDAO.findByName(name);
         List<DistrictsDTO> results = new ArrayList<>();
 
         for (Districts district : districts) {

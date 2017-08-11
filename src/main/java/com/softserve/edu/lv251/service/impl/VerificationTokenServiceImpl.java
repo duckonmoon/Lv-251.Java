@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Service
 public class VerificationTokenServiceImpl implements VerificationTokenService {

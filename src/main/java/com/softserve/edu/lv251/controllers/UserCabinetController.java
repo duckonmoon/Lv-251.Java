@@ -1,21 +1,17 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.config.Mapper;
-import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.Base64;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
-import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,8 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -55,7 +49,7 @@ public class UserCabinetController {
      * Updated: Kovalevskyy Vitaliy
      */
     @GetMapping("/user/cabinet")
-    public String userProfileGET(ModelMap model, Principal principal){
+    public String userProfileGET(ModelMap model, Principal principal) {
 
         Users user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
@@ -74,12 +68,11 @@ public class UserCabinetController {
      * Author: Kovalevskyy Vitaliy
      */
     @PostMapping("/user/cabinet")
-    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult,
-                                  Principal principal, ModelMap model){
 
+    public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
         Users user = userService.findByEmail(principal.getName());
 
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             model.addAttribute("photo", user.getPhoto());
             return "userCabinet";
@@ -122,7 +115,7 @@ public class UserCabinetController {
      * Added by Pavlo Kuchereshko
      */
     @GetMapping("/user/medicalcard")
-    public String medicalCardGET(ModelMap model, Principal principal){
+    public String medicalCardGET(ModelMap model, Principal principal) {
 
         Users user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
@@ -132,7 +125,7 @@ public class UserCabinetController {
     }
 
     @GetMapping("/user/appointments")
-    public String userAppointments(Model model, Principal principal){
+    public String userAppointments(Model model, Principal principal) {
         Users user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("date", new Date());

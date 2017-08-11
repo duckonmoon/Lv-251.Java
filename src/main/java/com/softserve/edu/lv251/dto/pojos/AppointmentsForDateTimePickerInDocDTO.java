@@ -3,14 +3,14 @@ package com.softserve.edu.lv251.dto.pojos;
 import java.util.Date;
 
 /**
- * Created by Marian Brynetskyi on 07.08.2017.
+ * Created by User on 11.08.2017.
  */
-public class AppointmentsForCreationDTO {
+public class AppointmentsForDateTimePickerInDocDTO {
     private Date appointmentDate;
     private double duration;
-    private long doctors;
+    private long users;
 
-    public AppointmentsForCreationDTO() {
+    public AppointmentsForDateTimePickerInDocDTO() {
     }
 
     public Date getAppointmentDate() {
@@ -29,11 +29,11 @@ public class AppointmentsForCreationDTO {
         this.duration = duration;
     }
 
-    public long getDoctors() {
-        return doctors;
+    public long getUsers() {
+        return users;
     }
 
-    public void setDoctors(long doctors) {
-        this.doctors = doctors;
+    public void setUsers(long users) {
+        this.users = users;
     }
 }

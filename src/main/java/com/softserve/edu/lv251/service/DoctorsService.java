@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service;
 import com.softserve.edu.lv251.dto.pojos.*;
 
 import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 
@@ -33,5 +34,6 @@ public interface DoctorsService {
 
     public List<SearchResultDoctorDTO> getDoctorByNameWithLimitAndOffset(String name, int offset, int limit);
     public  DoctorsSearchDTO findById(long id);
+    public void makeDoctorFromUser(UserToDoctor userToDoctor,String email);
 
 }

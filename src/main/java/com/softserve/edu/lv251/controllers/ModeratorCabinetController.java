@@ -4,6 +4,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
+import com.softserve.edu.lv251.dto.pojos.UserToDoctor;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.model.FileBucket;
 import com.softserve.edu.lv251.service.*;
@@ -43,6 +44,8 @@ public class ModeratorCabinetController {
     private ContactsService contactsService;
     @Autowired
     MessageSource messageSource;
+    @Autowired
+     private UserService userService;
 
 
     @GetMapping(value = "/cabinet")
@@ -139,7 +142,21 @@ if(!bindingResult.hasErrors()){
 
  @GetMapping(value = "/cabinet/make/doctor")
  public  String makeDoctor(Principal principal,Model model){
+     Moderator moderator=moderatorService.getByEmail(principal.getName());
+     List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
+     List<Users> users=userService.getAllUsers();
+     UserToDoctor userToDoctor=new UserToDoctor();
+     model.addAttribute("doctors",doctors);
+     model.addAttribute("moderator",moderator);
+     model.addAttribute("usersToDoctor",userToDoctor);
      return "moderatorMakeDoctor";
+ }
+
+
+ @PostMapping(value = "/cabinet/make/doctor")
+    public  String makeDoctor(@ModelAttribute("userToDoctor") UserToDoctor userToDoctor,Principal principal,Model model){
+     doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
+     return "redirect:/moderator/cabinet/make/doctor";
  }
 
 

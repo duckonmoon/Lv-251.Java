@@ -270,36 +270,6 @@ public class Mapper extends ConfigurableMapper{
 
 
 
-//        factory.classMap(DoctorDTO.class,Doctors.class)
-//                .field("firstName", "firstname")
-//                .field("lastName", "lastname")
-//                .field("description","description")
-//                .field("email", "email").customize(new CustomMapper<DoctorDTO, Doctors>() {
-//            @Override
-//            public void mapAtoB(DoctorDTO doctorDTO, Doctors doctors, MappingContext context) {
-//                String password=bCryptPasswordEncoder.encode(doctorDTO.getPassword());
-//                doctors.setPassword(password);
-//                String photo= StoredImagesService.getBase64encodedMultipartFile(doctorDTO.getMultipartFile());
-//                doctors.setPhoto(photo);
-//                doctors.setRoles(Arrays.asList(
-//                        rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
-//                        rolesService.findByName(WebRoles.ROLE_USER.name())));
-//                Contacts contact = new Contacts();
-//                contact.setEmail(doctorDTO.getEmail());
-//                contactsDAO.addEntity(contact);
-//                doctors.setContact(contact);
-//                doctors.setDescription(doctorDTO.getDescription());
-//                if(specializationService.findByName(doctorDTO.getSpecialization())==null){
-//                    Specialization specialization= new Specialization();
-//                    specialization.setName(doctorDTO.getSpecialization());
-//                    specializationService.add(specialization);
-//                    doctors.setSpecialization(specialization);
-//                }else{ doctors.setSpecialization(specializationService.findByName(doctorDTO.getSpecialization()));
-//                }
-//                doctors.setClinics(clinicService.getByName(doctorDTO.getClinic()));
-//
-//            }
-//        }).register();
 
     }
 }

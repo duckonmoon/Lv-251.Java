@@ -8,10 +8,7 @@ import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.ClinicService;
-import com.softserve.edu.lv251.service.DoctorsService;
-import com.softserve.edu.lv251.service.RolesService;
-import com.softserve.edu.lv251.service.SpecializationService;
+import com.softserve.edu.lv251.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,8 +32,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     RolesService rolesService;
-
-
+@Autowired
+   private UserService userService;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,6 +49,9 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Autowired
     private ClinicService clinicService;
+
+    @Autowired
+    ModeratorService moderatorService;
 
     @Autowired
     Mapper mapper;
@@ -249,5 +249,31 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         mapper.map(doctors,doctorsSearchDTO);
 
         return doctorsSearchDTO;
+    }
+    @Transactional
+    @Override
+    public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
+        Moderator moderator=moderatorService.getByEmail(email);
+        Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
+        Doctors doctor=new Doctors();
+        Users user=userService.findByEmail(userToDoctor.getEmail());
+        doctor.setFirstname(user.getFirstname());
+        doctor.setLastname(user.getLastname());
+        doctor.setPassword(user.getPassword());
+        doctor.setEmail(user.getEmail());
+        doctor.setPhoto(user.getPhoto());
+        doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
+        doctor.setClinics(clinics);
+    System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7");
+    System.out.println(clinics);
+        doctor.setContact(user.getContact());
+        doctor.setDescription(userToDoctor.getDescription());
+        doctor.setRoles(Arrays.asList(
+                rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
+                rolesService.findByName(WebRoles.ROLE_USER.name())));
+        addDoctor(doctor);
+        userService.deleteUser(user);
+
+
     }
 }

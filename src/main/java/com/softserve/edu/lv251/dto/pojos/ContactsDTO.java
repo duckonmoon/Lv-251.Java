@@ -18,7 +18,8 @@ public class ContactsDTO {
     private Double longitude;
     private Double latitude;
 
-    public ContactsDTO(){}
+    public ContactsDTO() {
+    }
 
 
     public String getAddress() {

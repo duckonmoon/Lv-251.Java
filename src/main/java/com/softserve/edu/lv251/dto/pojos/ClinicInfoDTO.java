@@ -9,7 +9,7 @@ public class ClinicInfoDTO {
 
     //data from clinic
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
-    private  String  clinic_name;
+    private String clinic_name;
     private String description;
 
     //data from Contacts

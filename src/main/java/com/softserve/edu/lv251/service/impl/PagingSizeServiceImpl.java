@@ -2,7 +2,6 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.service.PagingSizeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public abstract class PagingSizeServiceImpl<T> implements PagingSizeService<T> {
     @Override
     public int numberOfPaging(Integer size) {
         int n = getDao().getAllEntities().size();
-        return ((int) Math.ceil((double) n/size));
+        return ((int) Math.ceil((double) n / size));
     }
 
     @Override

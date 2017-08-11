@@ -9,21 +9,20 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Created by Admin on 04.08.2017.
  */
-public class FileValidator implements ConstraintValidator<ValidFile,Object> {
+public class FileValidator implements ConstraintValidator<ValidFile, Object> {
     @Override
     public void initialize(ValidFile validFile) {
-
     }
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-        FileBucket fileBucket= (FileBucket)o;
-        if ((fileBucket.getMultipartFile().getContentType().equals("image/jpeg")||
+        FileBucket fileBucket = (FileBucket) o;
+        if ((fileBucket.getMultipartFile().getContentType().equals("image/jpeg") ||
                 fileBucket.getMultipartFile().getContentType().equals("image/png")) &&
                 !fileBucket.getMultipartFile().isEmpty()
-                ){
+                ) {
             return true;
-        }else {
+        } else {
             return false;
         }
 

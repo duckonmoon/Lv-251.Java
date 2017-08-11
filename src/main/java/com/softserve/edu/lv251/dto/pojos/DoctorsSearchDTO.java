@@ -54,7 +54,6 @@ public class DoctorsSearchDTO {
     }
 
 
-
     public String getSpecialisation() {
         return specialisation;
     }

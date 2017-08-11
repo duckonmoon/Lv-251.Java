@@ -3,9 +3,7 @@ package com.softserve.edu.lv251.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 /**
@@ -13,11 +11,11 @@ import java.util.List;
  */
 @Entity
 public class Specialization extends BaseEntity {
-private  String name;
-private  String description;
-@JsonIgnore
-@OneToMany(mappedBy = "specialization")
-private List<Doctors> doctors;
+    private String name;
+    private String description;
+    @JsonIgnore
+    @OneToMany(mappedBy = "specialization")
+    private List<Doctors> doctors;
 
 
     public Specialization() {

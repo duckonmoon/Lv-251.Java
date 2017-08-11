@@ -12,19 +12,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class GetTokenServiceImpl implements GetTokenService {
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -53,12 +55,12 @@ public class GetTokenServiceImpl implements GetTokenService {
 
             authentication.setToken(token);
             authentication.setUsername(user.getUsername());
-            for(GrantedAuthority authority: user.getAuthorities()){
+            for (GrantedAuthority authority : user.getAuthorities()) {
                 logger.log(Priority.INFO, authority.getAuthority());
-                if(authority.getAuthority().equals(WebRoles.ROLE_USER.name())){
+                if (authority.getAuthority().equals(WebRoles.ROLE_USER.name())) {
                     authentication.setIsUser(true);
                 }
-                if(authority.getAuthority().equals(WebRoles.ROLE_DOCTOR.name())){
+                if (authority.getAuthority().equals(WebRoles.ROLE_DOCTOR.name())) {
                     authentication.setIsDoctor(true);
                 }
             }

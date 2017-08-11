@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
  * Created by Admin on 31.07.2017.
  */
 @Entity
-public class Moderator extends Users{
+public class Moderator extends Users {
     @OneToOne
     private Clinics clinic;
 

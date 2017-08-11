@@ -16,7 +16,7 @@ import java.util.List;
 public class MedicalCardServiceImpl implements MedicalCardService {
 
     @Autowired
-    MedicalCardDAO medicalCardDAO;
+    private MedicalCardDAO medicalCardDAO;
 
     @Override
     public void addMedicalCard(MedicalCard medicalCard) {

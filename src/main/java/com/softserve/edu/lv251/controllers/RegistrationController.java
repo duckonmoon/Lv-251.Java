@@ -17,7 +17,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,32 +26,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Calendar;
 import java.util.Locale;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
+ * Updated: Brynetskyi Marian
  */
 
 @Controller
 public class RegistrationController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    DoctorsService doctorsService;
+    private DoctorsService doctorsService;
 
     @Autowired
-    VerificationTokenService verificationTokenService;
+    private VerificationTokenService verificationTokenService;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     /**
      * The publisher constructs the event object and publishes it to anyone who’s listening.

@@ -33,10 +33,11 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 
     /**
      * Added by Pavlo Kuchereshko.
-     *
+     * <p>
      * Servlet Filter that allows one to specify a character encoding for requests.
      * This is useful because current browsers typically do not set a character encoding
      * even if specified in the HTML page or form.
+     *
      * @return Filter[] {characterEncodingFilter}.
      */
     @Override
@@ -44,6 +45,6 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
-        return new Filter[] {characterEncodingFilter};
+        return new Filter[]{characterEncodingFilter};
     }
 }

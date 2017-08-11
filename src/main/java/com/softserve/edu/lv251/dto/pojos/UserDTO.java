@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @PasswordMatches
 public class UserDTO {
-    
+
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String firstName;
 

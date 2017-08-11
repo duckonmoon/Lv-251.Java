@@ -31,7 +31,7 @@ public class DatabaseConfig {
     private String[] packages = {"com.softserve.edu.lv251"};
 
     @Autowired
-    Environment env;
+    private Environment env;
 
     @Bean
     public DataSource getDataSource() {

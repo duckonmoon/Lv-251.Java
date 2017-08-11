@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.controllers;
 
-import com.google.gson.Gson;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.entity.Appointments;
@@ -24,27 +23,26 @@ import java.util.List;
 public class DoctorCabinetController {
 
     @Autowired
-    AppointmentService appointmentService;
+    private AppointmentService appointmentService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
-    @RequestMapping(value = "/doctor/сabinet",method = RequestMethod.GET)
-    public String home(ModelMap model,Principal principal){
+    @RequestMapping(value = "/doctor/сabinet", method = RequestMethod.GET)
+    public String home(ModelMap model, Principal principal) {
         Object o = appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime());
-        model.addAttribute("docApps",appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
+        model.addAttribute("docApps", appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
         return "doctor_schedule";
     }
 
     @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
     @ResponseBody
-    public  List<AppointmentsDTO> getApp(Principal principal)
-    {
+    public List<AppointmentsDTO> getApp(Principal principal) {
         List<AppointmentsDTO> appointmentsDTOs = new LinkedList<>();
-        for(Appointments appo: appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())){
+        for (Appointments appo : appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())) {
             AppointmentsDTO appointmentsDTO = new AppointmentsDTO();
             mapper.map(appo, appointmentsDTO);
             appointmentsDTOs.add(appointmentsDTO);
@@ -53,10 +51,9 @@ public class DoctorCabinetController {
     }
 
 
-    @RequestMapping(value = "/doctor/cabinet/setApp/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/cabinet/setApp/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public void setApp(@PathVariable(value = "id") long id)
-    {
+    public void setApp(@PathVariable(value = "id") long id) {
         Appointments appointments = appointmentService.getAppointmentById(id);
         appointments.setIsApproved(true);
         appointmentService.updateAppointment(appointments);
@@ -64,17 +61,15 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/users/search")
     @ResponseBody
-    public List<Users> getUsers(@RequestParam String name)
-    {
+    public List<Users> getUsers(@RequestParam String name) {
         List<Users> userss = userService.searchByLetters(name);
         return userss;
     }
 
-    @RequestMapping(value = "doctor/patients",method = RequestMethod.GET)
-    public String patients(){
+    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
+    public String patients() {
         return "doctor_cabinet_patients";
     }
-
 
 
 }

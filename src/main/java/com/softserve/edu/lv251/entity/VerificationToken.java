@@ -10,7 +10,6 @@ import java.util.Date;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Entity
 public class VerificationToken extends BaseEntity {

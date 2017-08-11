@@ -29,14 +29,14 @@ public class SearchRestController {
     @RequestMapping("/doctors")
     public List<SearchResultDoctorDTO> searchForDoctors(@RequestParam(name = "value", required = false) String value,
                                                         @RequestParam(name = "offset") int offset,
-                                                        @RequestParam(name = "limit") int limit){
-         return doctorsService.getDoctorByNameWithLimitAndOffset(value, offset, limit);
+                                                        @RequestParam(name = "limit") int limit) {
+        return doctorsService.getDoctorByNameWithLimitAndOffset(value, offset, limit);
     }
 
     @RequestMapping("/clinics")
     public List<SearchResultClinicDTO> searchForClinics(@RequestParam(name = "value", required = false) String value,
                                                         @RequestParam(name = "offset") int offset,
-                                                        @RequestParam(name = "limit") int limit){
+                                                        @RequestParam(name = "limit") int limit) {
         return clinicService.getWithOffsetOrderedByName(value, offset, limit);
     }
 

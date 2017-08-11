@@ -1,8 +1,8 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.ContactsDAO;
-import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.MedicalCard;
@@ -26,37 +26,36 @@ import java.util.List;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UsersDAO usersDAO;
+    private UsersDAO usersDAO;
 
     @Autowired
-    RolesService rolesService;
+    private RolesService rolesService;
 
     @Autowired
-    ContactsService contactsService;
+    private ContactsService contactsService;
 
     @Autowired
-    MedicalCardService medicalCardService;
+    private MedicalCardService medicalCardService;
 
     @Autowired
-    VerificationTokenService verificationTokenService;
+    private VerificationTokenService verificationTokenService;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    Mapper mapper;
+    private Mapper mapper;
 
     @Autowired
-    MailService mailService;
+    private MailService mailService;
 
     @Override
     public void addUser(Users user) {
@@ -171,5 +170,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public VerificationToken getVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken);
+    }
+
+    @Transactional
+    @Override
+    public Users changePassword(Users user, PasswordDTO passwordDTO) {
+        user.setPassword(bCryptPasswordEncoder.encode(passwordDTO.getPassword()));
+        updateUser(user);
+
+        return user;
     }
 }

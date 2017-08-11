@@ -87,7 +87,7 @@
                                 <label class="col-lg-3 control-label"><spring:message
                                         code="messages.userAddress"/>:</label>
                                 <div class="col-lg-7">
-                                    <form:input type="text" class="form-control d" path="address"/>
+                                    <form:input type="text" class="form-control" path="address"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -135,34 +135,39 @@
                                            value="<spring:message code="messages.cancel"/>">
                                 </div>
                             </div>
-
+                    </div>
+                    </form:form>
+                    <form:form method="POST" modelAttribute="passwordDTO" action="/user/changePassword">
+                        <div class="col-md-7 col-md-offset-4">
                         <hr>
                         <h3>Change Password</h3>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><spring:message
-                                    code="messages.userPassword"/>:</label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" value="">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><spring:message
+                                        code="messages.userNewPassword"/>:</label>
+                                <div class="col-md-7">
+                                    <form:input type="password" class="form-control" path="password"/>
+                                    <form:errors path="password" cssClass="text-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"><spring:message
+                                        code="messages.userConfirmPassword"/>:</label>
+                                <div class="col-md-7">
+                                    <form:input type="password" class="form-control" path="matchingPassword"/>
+                                    <form:errors path="matchingPassword" cssClass="text-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-7">
+                                    <input type="submit" class="btn btn-primary"
+                                           value="<spring:message code="messages.saveChanges"/>">
+                                    <span></span>
+                                    <input type="reset" class="btn btn-default"
+                                           value="<spring:message code="messages.cancel"/>">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"><spring:message
-                                    code="messages.userConfirmPassword"/>:</label>
-                            <div class="col-md-7">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label"></label>
-                            <div class="col-md-7">
-                                <%--<input type="submit" class="btn btn-primary"--%>
-                                       <%--value="<spring:message code="messages.saveChanges"/>"/>--%>
-                                <span></span>
-                                <input type="reset" class="btn btn-default"
-                                       value="<spring:message code="messages.cancel"/>"/>
-                            </div>
-                        </div>
-                    </div>
                     </form:form>
                 </div>
             </div>

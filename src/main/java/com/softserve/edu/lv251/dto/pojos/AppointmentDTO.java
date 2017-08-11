@@ -1,7 +1,5 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import java.util.Date;
-
 /**
  * Created by Taras on 06.08.2017.
  */

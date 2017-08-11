@@ -15,6 +15,7 @@ import java.util.List;
 public class SpecializationServiceImpl implements SpecializationService {
     @Autowired
     private SpecializationDAO specializationDAO;
+
     @Override
     public List<Specialization> searchByLetters(String letters) {
         return specializationDAO.searchByLetters(letters);
@@ -23,9 +24,9 @@ public class SpecializationServiceImpl implements SpecializationService {
     @Override
     public Specialization findByName(String name) {
         System.out.println(name);
-        if (specializationDAO.getEntitiesByColumnNameAndValue("name",name).size()>0){
-        return specializationDAO.getEntitiesByColumnNameAndValue("name",name).get(0);}
-        else {
+        if (specializationDAO.getEntitiesByColumnNameAndValue("name", name).size() > 0) {
+            return specializationDAO.getEntitiesByColumnNameAndValue("name", name).get(0);
+        } else {
             return null;
         }
     }
@@ -34,7 +35,8 @@ public class SpecializationServiceImpl implements SpecializationService {
     public List<Specialization> findAll() {
         return specializationDAO.getAllEntities();
     }
-     public  void  add(Specialization specialization){
+
+    public void add(Specialization specialization) {
         specializationDAO.addEntity(specialization);
-     }
+    }
 }

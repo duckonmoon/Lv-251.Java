@@ -4,14 +4,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 public class StoredImagesService {
 

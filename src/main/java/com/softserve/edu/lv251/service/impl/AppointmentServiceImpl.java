@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.AppointmentsDAO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,9 +47,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p->p.getDoctors().getId() == doctorId)
-                .filter(p->p.getAppointmentDate().after(new Date()))
-                .forEach(p-> appointmentsForCreationDTOS.add(mapper.map(p,AppointmentsForCreationDTO.class)));
+                .filter(p -> p.getDoctors().getId() == doctorId)
+                .filter(p -> p.getAppointmentDate().after(new Date()))
+                .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;
 
     }
@@ -57,9 +59,21 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p->p.getAppointmentDate().after(new Date()))
-                .forEach(p-> appointmentsForCreationDTOS.add(mapper.map(p,AppointmentsForCreationDTO.class)));
+                .filter(p -> p.getAppointmentDate().after(new Date()))
+                .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;
+    }
+
+    @Override
+    public List<AppointmentsForDateTimePickerInDocDTO> getAllDoctorsAppointmentsAfterNow(String email, Date date) {
+        List<AppointmentsForDateTimePickerInDocDTO> appointmentsForDateTimePickerInDocDTOS = new LinkedList<>();
+        for (Appointments a :
+                appointmentsDAO.getAppointmentByDoctorsEmailAfterSomeDate(email, date)) {
+            AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO = new AppointmentsForDateTimePickerInDocDTO();
+            mapper.map(a, appointmentsForDateTimePickerInDocDTO);
+            appointmentsForDateTimePickerInDocDTOS.add(appointmentsForDateTimePickerInDocDTO);
+        }
+        return appointmentsForDateTimePickerInDocDTOS;
     }
 
     public List<Appointments> listAppointmensWithDoctor(Long id) {
@@ -74,7 +88,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDTO> getAppointmentByUserEmail(String email) {
         List<AppointmentDTO> results = new ArrayList<>();
 
-        for (Appointments appointment: appointmentsDAO.getAppointmentByUserEmail(email)){
+        for (Appointments appointment : appointmentsDAO.getAppointmentByUserEmail(email)) {
             AppointmentDTO res = new AppointmentDTO();
             mapper.map(appointment, res);
             results.add(res);

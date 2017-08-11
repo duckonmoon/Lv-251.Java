@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+            <a class="navbar-brand hidden-md hidden-sm" href="${pageContext.request.contextPath}/">
                 <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
             </a>
 
@@ -59,8 +59,12 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul  class="nav navbar-nav">
-                <li class="${current == 'home' ? 'active': ''}"><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span> <spring:message code="messages.home" />
-                </a></li>
+                <li class="${current == 'home' ? 'active': ''}">
+                    <a href="${pageContext.request.contextPath}/">
+                        <span class="glyphicon glyphicon-home"></span>
+                        <spring:message code="messages.home" />
+                    </a>
+                </li>
                 <li class="${current == 'clinics' ? 'active': ''}">
                     <a href="${pageContext.request.contextPath}/clinics/1">
                         <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics" />
@@ -97,7 +101,7 @@
                 </sec:authorize>
                 </li>
                 <li>
-                    <a class="navbar-brand pull-right hidden-xs" href="${pageContext.request.contextPath}">
+                    <a class="navbar-brand pull-right hidden-xs hidden-md hidden-sm" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
                     </a>
                 </li>

@@ -102,7 +102,7 @@ if(!bindingResult.hasErrors()){
 
 }       @GetMapping(value = "/cabinet/add/doctor")
         public String addDoctor(Model model,Principal principal){
-        model.addAttribute("doctorForm",new DoctorDTO());
+        model.addAttribute("doctorForm", new DoctorDTO());
         Moderator moderator=moderatorService.getByEmail(principal.getName());
         List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
         model.addAttribute("doctors",doctors);
@@ -112,17 +112,13 @@ if(!bindingResult.hasErrors()){
 
 @PostMapping(value = "/add/doctor")
  public String registerDoctor(@ModelAttribute("doctorForm")@Valid DoctorDTO doctorDTO, BindingResult bindingResult){
-            if(bindingResult.hasErrors()){
-     System.out.println("has errors");
-
-
-
-     return "moderatorAddDoctor";
-            }else {
-
-                doctorsService.addDoctorAccount(doctorDTO);
-                System.out.println(doctorDTO.toString());
-            return "redirect:/moderator/cabinet/doctors";}
+    if(bindingResult.hasErrors()){
+         System.out.println("has errors");
+         return "moderatorAddDoctor";
+    } else {
+        doctorsService.addDoctorAccount(doctorDTO);
+        System.out.println(doctorDTO.toString());
+    return "redirect:/moderator/cabinet/doctors";}
  }
 
     @PostMapping(value = "/upload/clinicPhoto")
@@ -141,22 +137,29 @@ if(!bindingResult.hasErrors()){
  }
 
  @GetMapping(value = "/cabinet/make/doctor")
- public  String makeDoctor(Principal principal,Model model){
+ public  String makeDoctor(Model model, Principal principal){
+     model.addAttribute("usersToDoctor", new UserToDoctor());
+
      Moderator moderator=moderatorService.getByEmail(principal.getName());
      List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
      List<Users> users=userService.getAllUsers();
-     UserToDoctor userToDoctor=new UserToDoctor();
+
      model.addAttribute("doctors",doctors);
      model.addAttribute("moderator",moderator);
-     model.addAttribute("usersToDoctor",userToDoctor);
+
      return "moderatorMakeDoctor";
  }
 
 
  @PostMapping(value = "/cabinet/make/doctor")
-    public  String makeDoctor(@ModelAttribute("userToDoctor") UserToDoctor userToDoctor,Principal principal,Model model){
+    public  String makeDoctor(@ModelAttribute("usersToDoctor")@Valid UserToDoctor userToDoctor,BindingResult bindingResult,Principal principal){
+     if(bindingResult.hasErrors()){
+         System.out.println("has error");
+         return "moderatorMakeDoctor";
+     }else{
      doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
      return "redirect:/moderator/cabinet/make/doctor";
+     }
  }
 
 

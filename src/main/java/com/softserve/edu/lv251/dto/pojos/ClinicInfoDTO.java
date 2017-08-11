@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.dto.pojos;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Created by Admin on 02.08.2017.
+ * Created by Yana Martynyak on 02.08.2017.
  */
 public class ClinicInfoDTO {
 

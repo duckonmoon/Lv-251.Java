@@ -1,12 +1,20 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import com.softserve.edu.lv251.customannotations.EmailNotExists;
+import com.softserve.edu.lv251.customannotations.ValidEmail;
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
- * Created by Admin on 10.08.2017.
+ * Created by  Yana Martynyak on 10.08.2017.
  */
 public class UserToDoctor {
+    @ValidEmail
+    @EmailNotExists
     private String email;
+    @NotBlank
     private String specialization;
     private String clinicName;
+    @NotBlank
     private String description;
 
     public String getEmail() {

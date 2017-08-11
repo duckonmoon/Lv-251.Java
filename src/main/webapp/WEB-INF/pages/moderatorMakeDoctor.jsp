@@ -16,7 +16,7 @@
                         <spring:message code="messages.addDoctors" />
                     </a>
                     <a href="/moderator/cabinet/make/doctor" class="list-group-item navbar-inverse">
-                        <spring:message code="messages.addDoctors" />
+                        <spring:message code="messages.makeDoctor" />
                     </a>
                 </div>
             </div>
@@ -29,13 +29,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-lg-10" style="margin-left: 10%">
-                        <form:form action="/moderator/cabinet/make/doctor" method="post" modelAttribute="usersToDoctor"
-                                   enctype="multipart/form-data">
+                        <form:form action="/moderator/cabinet/make/doctor" method="post" modelAttribute="usersToDoctor">
                             <div class="form-group">
                                 <label class="col-lg-3 control-label"><spring:message
                                         code="messages.contactEmail"/>:</label>
                                 <div class="col-lg-7">
-                                    <%--<form:errors path="email"/>--%>
+                                    <form:errors path="email" cssClass="text-danger"/>
                                     <form:input type="text" class="form-control" id="autocomplete-user" path="email"/>
                                 </div>
                             </div>
@@ -43,7 +42,7 @@
                                 <label class="col-lg-3 control-label"> <spring:message
                                         code="messages.specialization"/>:</label>
                                 <div class="col-lg-7">
-                                    <%--<form:errors path="specialization"/>--%>
+                                    <form:errors path="specialization" cssClass="text-danger"/>
                                     <form:input type="text" class="form-control" id="autocomplete-spec" path="specialization"/>
                                 </div>
                             </div>
@@ -51,7 +50,7 @@
                                 <label class="col-lg-3 control-label"> <spring:message
                                         code="messages.specialization"/>:</label>
                                 <div class="col-lg-7">
-                                        <%--<form:errors path="specialization"/>--%>
+                                        <form:errors path="description" cssClass="text-danger"/>
                                     <form:input type="text" class="form-control" id="autocomplete-spec" path="description"/>
                                 </div>
                             </div>

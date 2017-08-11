@@ -6,11 +6,12 @@
 <link href="<c:url value="/resources/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8" type="text/javascript"></script>
+<script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
+        type="text/javascript"></script>
 <div class="container">
-    <p id="clinic" style="display: none"><spring:message code="messages.searchClinics" /></p>
-    <p id="doctor"  style="display: none"><spring:message code="messages.searchDoctors" /></p>
-    <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec" /></p>
+    <p id="clinic" style="display: none"><spring:message code="messages.searchClinics"/></p>
+    <p id="doctor" style="display: none"><spring:message code="messages.searchDoctors"/></p>
+    <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec"/></p>
     <div class="container">
         <div class="row" style="margin-top: 50px">
             <nav class="navbar navbar-inverse">
@@ -47,9 +48,9 @@
 </div>
 <div id="content">
 
-<script>
+    <script>
 
-</script>
+    </script>
 
     <%--Pagination--%>
     <%------------------------------------------------%>
@@ -59,9 +60,12 @@
                 <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
             </c:if>
             <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-                <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
-                                                                                                       href="/allDoctors/${loop.index}">${loop.index}</a>
-                </li>
+                <c:if test="${numberChain>1}">
+                    <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
+                            class="page-link"
+                            href="/allDoctors/${loop.index}">${loop.index}</a>
+                    </li>
+                </c:if>
             </c:forEach>
             <c:if test="${current < numberChain}">
                 <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
@@ -88,10 +92,12 @@
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
 
-                                    <p><spring:message code="messages.specialization"/>:${doctor.specialization.name}</p>
+                                    <p><spring:message
+                                            code="messages.specialization"/>:${doctor.specialization.name}</p>
                                     <hr>
                                     <p><spring:message code="messages.clinicName"/>:${doctor.clinics.clinic_name}</p>
-                                    <button  class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%" data-toggle="modal" data-target="#modal_${doctor.id}">
+                                    <button class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"
+                                            data-toggle="modal" data-target="#modal_${doctor.id}">
 
                                         <spring:message code="messages.addAppointment"/>
                                     </button>
@@ -110,7 +116,8 @@
                                         <div class="col-xs-6 col-md-9 col-lg-9">
                                             <div class="row">
                                                 <div class="col-xs-6 col-md-3 col-lg-2">
-                                                    <img width="200" height="200" src="data:image/jpeg;base64,${doctor.photo}"
+                                                    <img width="200" height="200"
+                                                         src="data:image/jpeg;base64,${doctor.photo}"
                                                          alt="...">
                                                 </div>
                                             </div>
@@ -133,7 +140,8 @@
                             <div class="modal-content">
                                 <form action="${pageContext.request.contextPath}/user/addAppointment" method="post">
 
-                                    <div class="form-group" style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
+                                    <div class="form-group"
+                                         style="text-align: center;  margin-bottom: 10pt; margin-top: 10pt">
                                         <div class="input-append date form_datetime" id="date-div-${doctor.id}">
                                             <label for="first-date" style="margin-left: 5pt">
                                                 <spring:message code="messages.date"/>
@@ -148,7 +156,7 @@
                                         <script type="text/javascript" charset="UTF-8">
 
                                             $("#date-div-${doctor.id}").datetimepicker({
-                                                language:'${pageContext.response.locale}',
+                                                language: '${pageContext.response.locale}',
                                                 format: "dd/mm/yyyy - hh:ii",
                                                 autoclose: true,
                                                 minuteStep: 15,
@@ -160,15 +168,15 @@
                                                     var dates = [];
                                                     var dd;
                                                     <c:choose>
-                                                        <c:when test="${docApps.size()>0}">
-                                                            <c:forEach items="${docApps}" var="apointments">
-                                                                <c:if test="${apointments.doctors == doctor.id}">
-                                                                    dd = new Date("${apointments.appointmentDate}");
-                                                                    dd.setHours(dd.getHours());
-                                                                    dates.push(dd);
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:when>
+                                                    <c:when test="${docApps.size()>0}">
+                                                    <c:forEach items="${docApps}" var="apointments">
+                                                    <c:if test="${apointments.doctors == doctor.id}">
+                                                    dd = new Date("${apointments.appointmentDate}");
+                                                    dd.setHours(dd.getHours());
+                                                    dates.push(dd);
+                                                    </c:if>
+                                                    </c:forEach>
+                                                    </c:when>
                                                     </c:choose>
 
                                                     for (var i = 0; i < dates.length; i++) {
@@ -218,9 +226,12 @@
             <li id="previous" class="page-item"><a class="page-link" href="${current-1}">&laquo;</a></li>
         </c:if>
         <c:forEach begin="1" end="${numberChain}" varStatus="loop">
-            <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a class="page-link"
-                                                                                                   href="/allDoctors/${loop.index}">${loop.index}</a>
-            </li>
+            <c:if test="${numberChain>1}">
+                <li id="current" class="${current == loop.index ? 'page-item active': 'page-item'}"><a
+                        class="page-link"
+                        href="/allDoctors/${loop.index}">${loop.index}</a>
+                </li>
+            </c:if>
         </c:forEach>
         <c:if test="${current < numberChain}">
             <li id="next" class="page-item"><a class="page-link" href="${current+1}">&raquo;</a></li>
@@ -228,8 +239,6 @@
     </ul>
 </div>
 <%------------------------------------------------%>
-
-
 
 
 <c:if test="${flag}">

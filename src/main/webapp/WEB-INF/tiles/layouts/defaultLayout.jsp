@@ -236,7 +236,6 @@
     </script>
 </c:if>
 
-
     <section id="site-content">
         <tiles:insertAttribute name="body" />
     </section>
@@ -254,6 +253,7 @@
 <script src="<c:url value="/resources/js/mainSearch.js"/>"></script>
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 <script src="<c:url value="/resources/js/profile.js"/>"></script>
+<script src="<c:url value="/resources/js/matchPassword.js"/>"></script>
 
 </body>
 </html>

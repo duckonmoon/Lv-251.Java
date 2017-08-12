@@ -5,16 +5,12 @@ import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
-import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Specialization;
+import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.ClinicService;
-import com.softserve.edu.lv251.service.DoctorsService;
-import com.softserve.edu.lv251.service.RolesService;
-import com.softserve.edu.lv251.service.SpecializationService;
+
+import com.softserve.edu.lv251.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,8 +30,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     @Autowired
     private ContactsDAO contactsDAO;
 
+
+   @Autowired
+   private UserService userService;
+
     @Autowired
     private RolesService rolesService;
+
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -50,7 +51,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     private ClinicService clinicService;
 
     @Autowired
+    ModeratorService moderatorService;
+
+    @Autowired
     private Mapper mapper;
+
 
     @Override
     public void addDoctor(Doctors doctors) {
@@ -190,11 +195,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
+
         if (accountDto.getMultipartFile() != null) {
             doctor.setPhoto(StoredImagesService.getBase64encodedMultipartFile(accountDto.getMultipartFile()));
         } else {
             doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         }
+
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
@@ -242,5 +249,29 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         mapper.map(doctors, doctorsSearchDTO);
 
         return doctorsSearchDTO;
+    }
+    @Transactional
+    @Override
+    public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
+        Moderator moderator=moderatorService.getByEmail(email);
+        Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
+        Doctors doctor=new Doctors();
+        Users user=userService.findByEmail(userToDoctor.getEmail());
+        doctor.setFirstname(user.getFirstname());
+        doctor.setLastname(user.getLastname());
+        doctor.setPassword(user.getPassword());
+        doctor.setEmail(user.getEmail());
+        doctor.setPhoto(user.getPhoto());
+        doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
+        doctor.setClinics(clinics);
+        doctor.setContact(user.getContact());
+        doctor.setDescription(userToDoctor.getDescription());
+        doctor.setRoles(Arrays.asList(
+                rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
+                rolesService.findByName(WebRoles.ROLE_USER.name())));
+        addDoctor(doctor);
+        userService.deleteUser(user);
+
+
     }
 }

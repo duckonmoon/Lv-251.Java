@@ -2,7 +2,7 @@
  * Created by Admin on 02.08.2017.
  */
 
-    console.log($("#autocomplete-spec").val())
+
     $("#autocomplete-spec").autocomplete({
         serviceUrl: '/doc/by/spec',
         paramName: "name",
@@ -21,9 +21,17 @@
 
 
 
-    function err() {
+$("#autocomplete-user").autocomplete({
+    serviceUrl: '/moderator/users',
+    paramName: "name",
+    transformResult: function (response) {
+        console.log("before user " );
+        return {
 
-            console.log("err");
-
-
-    }
+            suggestions: $.map($.parseJSON(response), function (item) {
+                var i = item.name;
+                console.log(i);
+                return {value: i, data: item.name};
+            })
+        };
+    } });

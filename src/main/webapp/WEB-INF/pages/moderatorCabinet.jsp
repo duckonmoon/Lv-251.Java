@@ -18,6 +18,9 @@
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />
                     </a>
+                    <a href="/moderator/cabinet/make/doctor" class="list-group-item ">
+                        <spring:message code="messages.makeDoctor" />
+                    </a>
                 </div>
             </div>
         </div>

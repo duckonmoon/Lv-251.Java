@@ -14,9 +14,9 @@
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5><spring:message code="messages.links"/></h5>
             <ul class="list-unstyled">
-                <li><a href=<c:url value="/"/>><spring:message code="messages.home" /></a></li>
-                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics" /></a></li>
-                <li><a href=<c:url value="/allDoctors"/>><spring:message code="messages.doctors"/> </a></li>
+                <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
+                <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinics"/></a></li>
+                <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>
         </div>
@@ -47,4 +47,3 @@
         </div>
     </div>
 </footer>
-

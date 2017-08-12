@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.dto.pojos;
 
+import com.softserve.edu.lv251.customannotations.EmailAlreadyExists;
 import com.softserve.edu.lv251.customannotations.PasswordMatches;
 import com.softserve.edu.lv251.customannotations.ValidEmail;
 import com.softserve.edu.lv251.customannotations.ValidPassword;
@@ -25,6 +26,7 @@ public class UserDTO {
 
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     @ValidEmail
+    @EmailAlreadyExists
     private String email;
 
     public String getFirstName() {

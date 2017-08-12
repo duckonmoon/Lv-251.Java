@@ -145,16 +145,21 @@
                                 <label class="col-md-3 control-label"><spring:message
                                         code="messages.userNewPassword"/>:</label>
                                 <div class="col-md-7">
-                                    <form:input type="password" class="form-control" path="password"/>
+                                    <form:input id="pass" type="password" class="form-control" path="password"/>
                                     <form:errors path="password" cssClass="text-danger"/>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="wrapper">
                                 <label class="col-md-3 control-label"><spring:message
                                         code="messages.userConfirmPassword"/>:</label>
                                 <div class="col-md-7">
-                                    <form:input type="password" class="form-control" path="matchingPassword"/>
+                                    <form:input id="passMatch" type="password" class="form-control" path="matchingPassword"/>
                                     <form:errors path="matchingPassword" cssClass="text-danger"/>
+                                    <div id="signDiv">
+                                        <div style="z-index: 0;" id="sign">
+                                            <i id="signMatch"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

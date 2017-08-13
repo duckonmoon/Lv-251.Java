@@ -37,12 +37,10 @@
                                 code="messages.search"/></button>
                     </a>
                 </div>
-
-
             </div>
-
         </nav>
     </div>
+
     <div class="container col-lg-8">
         <%--Pagination--%>
         <%-----------------------------------------------------%>
@@ -114,16 +112,10 @@
     </div>
     <aside class="container col-lg-4 hidden-xs hidden-sm" style="overflow: inherit">
         <div style="width: 25em; height: 30em; position:fixed">
-            <div>
-                <div>
-                    <div id="map" style="width: 100%; height: 100%"/>
-                </div>
-            </div>
+            <div id="map" style="width: 100%; height: 100%"/>
         </div>
     </aside>
 </div>
-</div>
-
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/map.js"/>"></script>

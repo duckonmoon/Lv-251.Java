@@ -34,6 +34,8 @@ function initMap() {
                 //     infowindow.open(map, this.marker);
                 // });
 
+
+
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
 
@@ -44,6 +46,7 @@ function initMap() {
 
                 markers.push(marker);
                 bounds.extend(marker.position);
+
 
             }
             map = new google.maps.Map(document.getElementById('map'));
@@ -56,7 +59,6 @@ function initMap() {
             // alert('error');
         }
     });
-
 }
 
 function showInfo(id, map, marker, infowindow) {

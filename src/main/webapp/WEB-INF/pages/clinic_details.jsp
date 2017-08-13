@@ -12,16 +12,23 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div class="container">
-    <div class="card">
-        <div class="container-fluid"style="float: left">
-            <img src="<c:url value="/resources/img/clinic_logo.png"/>">
-        </div>
-        <div class="card-block" >
-            <h4 class="card-title">${clinic.clinic_name}</h4>
-            <p class="card-text">${clinic.description}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+
+    <div class="row row-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <a href="#" class="thumbnail">
+                        <img width="200" height="200" src="data:image/jpeg;base64,${clinic.photo}"
+                             alt="...">
+                    </a>
+                </div>
+                    <h4 class="card-title">${clinic.clinic_name}</h4>
+                    <p class="card-text">${clinic.description}</p>
+            </div>
         </div>
     </div>
+
     <div class="card">
         <div class="card-block">
             <h4><spring:message code="messages.contact"/></h4>
@@ -35,11 +42,11 @@
             <p class="card-text">${clinic.contact.email}</p>
         </div>
 
-        <iframe
-                height="450"
-                frameborder="0"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBp1Qv4qS0nsGmiiXY1Z60u8DLrBGgalQQ&q=${mappoint}" allowfullscreen>
-        </iframe>
+        <%--<iframe--%>
+                <%--height="450"--%>
+                <%--frameborder="0"--%>
+                <%--src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBp1Qv4qS0nsGmiiXY1Z60u8DLrBGgalQQ&q=${mappoint}" allowfullscreen>--%>
+        <%--</iframe>--%>
     </div>
 
 </div>

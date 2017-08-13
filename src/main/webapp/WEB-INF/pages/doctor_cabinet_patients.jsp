@@ -16,78 +16,62 @@
 <head>
     <title>Title</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
 </head>
 <body onLoad="init()">
 
 
-
-<%--<script src="<c:url value="/resources/js/doctorsPatients.js"/>"></script>--%>
-
-<%--&lt;%&ndash;<input type="text" id="search"/>&ndash;%&gt;--%>
-
-<%--<div class="form-group">--%>
-    <%--<div class="icon-addon addon-md">--%>
-        <%--<input type="text" placeholder="Search" class="form-control" id="search">--%>
-    <%--</div>--%>
-<%--</div>--%>
-
-
-
-<%--<div class="container">--%>
-
-    <%--<table class="table table-hover">--%>
-        <%--<tbody id="dynamic-list">--%>
-        <%--<tr>--%>
-        <%--</tr>--%>
-        <%--</tbody>--%>
-    <%--</table>--%>
-<%--</div>--%>
-
-
-
-
-
 <div class="container">
-
     <div class="container" style="width: 30%; float: left">
         <div class="row row-content">
             <div class="list-group doc-menu">
-                <a href="#" class= 'list-group-item active'>
-                    <spring:message code="messages.schedule" />
+                <a href="/user/cabinet" class="list-group-item">
+                    <spring:message code="messages.profile"/>
                 </a>
                 <a href="#" class="list-group-item">
-                    <spring:message code="messages.patients" />
+                    <spring:message code="messages.doctors"/>
+                </a>
+                <a href="#" class="list-group-item">
+                    <spring:message code="messages.medicalCard"/>
+                </a>
+                <a href="/user/appointments" class="list-group-item">
+                    <spring:message code="messages.appointments"/>
+                </a>
+                <a href="/doctor/patients" class="active list-group-item">
+                    <spring:message code="messages.patients"/>
                 </a>
             </div>
         </div>
     </div>
 
-    <div>
+        <div class="container" style="width: 70%">
+            <script src="<c:url value="/resources/js/doctorsPatients.js"/>"></script>
 
-        <script src="<c:url value="/resources/js/doctorsPatients.js"/>"></script>
+            <div class="form-group">
+                <div class="icon-addon addon-md">
+                    <input type="text" placeholder="Search" class="form-control" id="search">
+                </div>
 
-        <div class="form-group">
-            <div class="icon-addon addon-md">
-                <input type="text" placeholder="Search" class="form-control" id="search">
             </div>
-
+            <div class="container">
+                <table class="table table-hover">
+                    <tbody id="dynamic-list">
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="container">
-            <table class="table table-hover">
-                <tbody id="dynamic-list">
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
-    </div>
+
 </div>
+
+
+
 
 </body>
 </html>

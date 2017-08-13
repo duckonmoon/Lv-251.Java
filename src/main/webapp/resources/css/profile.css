@@ -24,3 +24,36 @@
 .control-group.success .fileupload .uneditable-input{color:#468847;border-color:#468847;}
 .control-group.success .fileupload .fileupload-preview{color:#468847;}
 .control-group.success .fileupload .thumbnail{border-color:#468847;}
+
+#wrapper {
+    position: relative;
+}
+#signDiv {
+    position:absolute;
+    width: inherit;
+    top:0;
+    right:0;
+    /*width:20px;*/
+    height:20px;
+}
+
+#sign {
+    /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";       !* IE 8 *!*/
+    /*filter: alpha(opacity=80);  !* IE 5-7 *!*/
+    /*-moz-opacity: 0.8;          !* Netscape *!*/
+    /*-khtml-opacity: 0.8;        !* Safari 1.x *!*/
+    /*opacity: 0.8;*/
+
+    z-index: 0;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+
+    transition: all .2s;
+}

@@ -129,11 +129,8 @@ public class Mapper extends ConfigurableMapper{
 
                 searchResultDoctorDTO.setClinicId(doctor.getClinics().getId());
                 searchResultDoctorDTO.setClinicName(doctor.getClinics().getClinic_name());
-
             }
-
-
-        });
+        }).register();
 
         factory.classMap(Clinics.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinics, SearchResultClinicDTO>() {
             @Override

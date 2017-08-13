@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.customannotations;
 
 import com.softserve.edu.lv251.validators.FileValidator;
-import com.softserve.edu.lv251.validators.PasswordConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -19,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Documented
 @Constraint(validatedBy = FileValidator.class)
-@Target({ TYPE,ANNOTATION_TYPE})
+@Target({ TYPE,ANNOTATION_TYPE,FIELD})
 @Retention(RUNTIME)
 public @interface ValidFile {
     String message() default "Wrong content type or image is empty";

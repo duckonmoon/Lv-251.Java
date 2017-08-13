@@ -9,12 +9,12 @@ import java.util.List;
  * Created by Admin on 29.07.2017.
  */
 @Entity
-public class Districts extends BaseEntity{
+public class Districts extends BaseEntity {
     private String name;
 
 
-    @OneToMany(mappedBy = "district",fetch = FetchType.EAGER)
-    private List<Contacts>contacts;
+    @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
+    private List<Contacts> contacts;
 
 
     public Districts() {

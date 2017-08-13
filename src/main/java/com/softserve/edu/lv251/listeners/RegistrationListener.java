@@ -18,7 +18,6 @@ import java.util.UUID;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
@@ -54,7 +53,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
         String confirmationUrl = event.getAppUrl() + "/registrationConfirm?token=" + token;
-        String message = messageSource.getMessage("message.regSucc", null,  LocaleContextHolder.getLocale());
+        String message = messageSource.getMessage("message.regSucc", null, LocaleContextHolder.getLocale());
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(recipientAddress);

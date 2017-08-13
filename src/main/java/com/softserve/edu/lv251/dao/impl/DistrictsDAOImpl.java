@@ -13,12 +13,12 @@ import java.util.List;
  */
 @Repository
 @PersistenceContext
-public class DistrictsDAOImpl extends BaseDAOImpl<Districts>implements DistrictsDAO {
+public class DistrictsDAOImpl extends BaseDAOImpl<Districts> implements DistrictsDAO {
 
     @Override
     public List<Districts> findByName(String name) {
-        String letters=name+"%".toLowerCase();
-        Query query=entityManager.createQuery("from Districts d where lower(d.name) like :letters").setParameter("letters",letters);
+        String letters = name + "%".toLowerCase();
+        Query query = entityManager.createQuery("from Districts d where lower(d.name) like :letters").setParameter("letters", letters);
         return query.getResultList();
     }
 }

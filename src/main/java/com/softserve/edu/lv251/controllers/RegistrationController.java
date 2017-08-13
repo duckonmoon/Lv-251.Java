@@ -17,7 +17,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,32 +26,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Calendar;
 import java.util.Locale;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
+ * Updated: Brynetskyi Marian
  */
 
 @Controller
 public class RegistrationController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    DoctorsService doctorsService;
+    private DoctorsService doctorsService;
 
     @Autowired
-    VerificationTokenService verificationTokenService;
+    private VerificationTokenService verificationTokenService;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     /**
      * The publisher constructs the event object and publishes it to anyone who’s listening.
@@ -97,20 +95,19 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute("doctorForm", new UserDTO());
-
+        model.addAttribute("doctorForm", new DoctorDTO());
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute("doctorForm") @Valid UserDTO accountDto,
+            @ModelAttribute("doctorForm") @Valid DoctorDTO accountDto,
             BindingResult result) {
 
         Doctors registered = new Doctors();
         if (!result.hasErrors()) {
-//            registered = createDoctorAccount(accountDto, result);
+            registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");
@@ -165,7 +162,8 @@ public class RegistrationController {
             model.addAttribute("message", "You have been logged out successfully.");
         }
 
-        return "login";
+        model.addAttribute("login", true);
+        return "home";
     }
 
 

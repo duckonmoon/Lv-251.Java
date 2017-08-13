@@ -1,18 +1,16 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.dao.ContactsDAO;
-import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
+import com.softserve.edu.lv251.entity.MedicalCard;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.MailService;
-import com.softserve.edu.lv251.service.RolesService;
-import com.softserve.edu.lv251.service.UserService;
-import com.softserve.edu.lv251.service.VerificationTokenService;
+import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,34 +26,36 @@ import java.util.List;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    ContactsDAO contactsDAO;
+    private UsersDAO usersDAO;
 
     @Autowired
-    UsersDAO usersDAO;
+    private RolesService rolesService;
 
     @Autowired
-    RolesService rolesService;
+    private ContactsService contactsService;
 
     @Autowired
-    VerificationTokenService verificationTokenService;
+    private MedicalCardService medicalCardService;
 
     @Autowired
-    EntityManager entityManager;
+    private VerificationTokenService verificationTokenService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private EntityManager entityManager;
 
     @Autowired
-    Mapper mapper;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    MailService mailService;
+    private Mapper mapper;
+
+    @Autowired
+    private MailService mailService;
 
     @Override
     public void addUser(Users user) {
@@ -118,21 +118,19 @@ public class UserServiceImpl implements UserService {
             throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
         }
         Users user = new Users();
-        user.setFirstname(accountDto.getFirstName());
-        user.setLastname(accountDto.getLastName());
+        mapper.map(accountDto, user);
         user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
-        user.setEmail(accountDto.getEmail());
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
-        //user.setAppointments(new ArrayList<>());
-        //user.setMedicalCards(new ArrayList<>());
-        //user.setTestsResults(new ArrayList<>());
         Contacts contact = new Contacts();
         contact.setUsers(user);
         contact.setEmail(accountDto.getEmail());
-        this.contactsDAO.addEntity(contact);
+        MedicalCard medicalCard = new MedicalCard();
+        medicalCard.setUser(user);
+        this.contactsService.addContacts(contact);
+        this.medicalCardService.addMedicalCard(medicalCard);
         user.setContact(contact);
         addUser(user);
 
@@ -152,6 +150,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Users> searchByLetters(String search) {
+        return usersDAO.searchByLetters(search);
+    }
+
+    @Override
     public Users getUserByVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken).getUser();
     }
@@ -167,5 +170,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public VerificationToken getVerificationToken(String verificationToken) {
         return this.verificationTokenService.findByVerificationToken(verificationToken);
+    }
+
+    @Transactional
+    @Override
+    public Users changePassword(Users user, PasswordDTO passwordDTO) {
+        user.setPassword(bCryptPasswordEncoder.encode(passwordDTO.getPassword()));
+        updateUser(user);
+
+        return user;
     }
 }

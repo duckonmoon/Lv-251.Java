@@ -28,7 +28,7 @@ public class ClinicController {
     private PagingSizeService<Clinics> pagingSizeService;
 
     @GetMapping("/{current}")
-    public ModelAndView tenClinics(@PathVariable("current") Integer chainIndex){
+    public ModelAndView tenClinics(@PathVariable("current") Integer chainIndex) {
         ModelAndView model = new ModelAndView("clinics");
         model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, 10));
         model.addObject("numberChain", pagingSizeService.numberOfPaging(10));
@@ -36,14 +36,15 @@ public class ClinicController {
     }
 
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
-    public String clinicDetails(@PathVariable(name = "id", required = true)long id, Model model){
+    public String clinicDetails(@PathVariable(name = "id", required = true) long id, Model model) {
         Clinics clinic = clinicService.getClinicByID(id);
         model.addAttribute("clinic", clinic);
         model.addAttribute("mappoint", clinic.getContact().getAddress() + " " + clinic.getContact().getCity());
         return "clinic_details";
     }
+
     @RequestMapping(value = "/map")
-    public String map(){
+    public String map() {
         return "map";
     }
 }

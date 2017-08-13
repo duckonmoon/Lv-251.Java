@@ -1,9 +1,5 @@
 package com.softserve.edu.lv251.service.impl;
 
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.MailService;
 import org.apache.log4j.Logger;
@@ -13,18 +9,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
+
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Service
 public class MailServiceImpl implements MailService {
 
     @Autowired
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @Override
     public void sendEmail(Object object) {
@@ -42,10 +40,11 @@ public class MailServiceImpl implements MailService {
 
     /**
      * MimeMessagePreparator interface: It is the callback interface for the preparation of JavaMail MIME messages.
-     *
+     * <p>
      * TO	People required to take action.
      * CC	Kept informed of the content, but no actions required from them.
      * BCC	Receive the message without any of the other recipients knowing. Also used for larger mailings (over 50).
+     *
      * @param user
      * @return MimeMessagePreparator.
      */

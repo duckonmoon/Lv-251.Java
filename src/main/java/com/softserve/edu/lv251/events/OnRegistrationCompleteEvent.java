@@ -7,7 +7,6 @@ import java.util.Locale;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 

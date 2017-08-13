@@ -1,7 +1,5 @@
 package com.softserve.edu.lv251.dto.pojos;
 
-import java.util.Date;
-
 /**
  * Created by Taras on 06.08.2017.
  */
@@ -10,6 +8,7 @@ public class AppointmentDTO {
     private long appointmentDate;
     private boolean status;
     private double duration;
+    private String description;
 
     private long patientId;
     private String patientFirstName;
@@ -136,5 +135,13 @@ public class AppointmentDTO {
 
     public void setClinicName(String clinicName) {
         this.clinicName = clinicName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

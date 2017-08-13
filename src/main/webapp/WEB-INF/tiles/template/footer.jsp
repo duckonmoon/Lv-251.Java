@@ -9,14 +9,14 @@
 <!-- FOOTER*****************************************************************************************************************************************-->
 
 
-<div class="container">
+<footer>
     <div class="row row-footer">
         <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
             <h5><spring:message code="messages.links"/></h5>
             <ul class="list-unstyled">
-                <li><a href=<c:url value="/"/>><spring:message code="messages.home" /></a></li>
-                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics" /></a></li>
-                <li><a href=<c:url value="/allDoctors"/>><spring:message code="messages.doctors"/> </a></li>
+                <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
+                <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinics"/></a></li>
+                <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
                 <li><a href="#"><spring:message code="messages.contact"/></a></li>
             </ul>
         </div>
@@ -28,7 +28,7 @@
                 <spring:message code="messages.Ukraine"/><br>
                 <i class="fa fa-phone"></i>: +382 1234 5678<br>
                 <i class="fa fa-fax"></i>: +382 8765 4321<br>
-                <i class="fa fa-envelope"></i>:<a href="mailto:confusion@food.net">heartbeat@clinic.net</a>
+                <i class="fa fa-envelope"></i>: <a href="mailto:lv251clinics@gmail.com">lv251clinics@gmail.com</a>
             </address>
         </div>
         <div class="col-xs-12 col-sm-4">
@@ -46,5 +46,4 @@
             <p align="center">© Copyright 2017 SoftServe Inc.</p>
         </div>
     </div>
-</div>
-
+</footer>

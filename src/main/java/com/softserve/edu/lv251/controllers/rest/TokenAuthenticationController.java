@@ -4,7 +4,6 @@ import com.softserve.edu.lv251.dto.pojos.TokenAuthenticationDTO;
 import com.softserve.edu.lv251.service.GetTokenService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,11 +18,11 @@ public class TokenAuthenticationController {
     public GetTokenService getTokenService;
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     @RequestMapping("rest/auth")
-    public TokenAuthenticationDTO auth(@RequestParam(name = "email")String email,
-                                       @RequestParam(name = "password")String password){
+    public TokenAuthenticationDTO auth(@RequestParam(name = "email") String email,
+                                       @RequestParam(name = "password") String password) {
         try {
             return getTokenService.getToken(email, password);
         } catch (Exception e) {

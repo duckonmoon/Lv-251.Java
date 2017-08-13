@@ -22,7 +22,7 @@ import java.io.IOException;
 public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     @Autowired
-    Logger logger;
+    private Logger logger;
 
     public TokenAuthenticationFilter() {
         super("/rest/api/**");

@@ -1,5 +1,4 @@
 package com.softserve.edu.lv251.controllers;
-
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
@@ -7,7 +6,7 @@ import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.Base64;
+import com.softserve.edu.lv251.config.Base64;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +67,6 @@ public class UserCabinetController {
      * Author: Kovalevskyy Vitaliy
      */
     @PostMapping("/user/cabinet")
-
     public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
         Users user = userService.findByEmail(principal.getName());
 
@@ -112,7 +110,7 @@ public class UserCabinetController {
     }
 
     /**
-     * Added by Pavlo Kuchereshko
+     * Author: Pavlo Kuchereshko
      */
     @GetMapping("/user/medicalcard")
     public String medicalCardGET(ModelMap model, Principal principal) {

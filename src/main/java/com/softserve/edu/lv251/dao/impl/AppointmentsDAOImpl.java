@@ -35,15 +35,14 @@ public class AppointmentsDAOImpl extends BaseDAOImpl<Appointments> implements Ap
 
     @Override
     public List<Appointments> getAppointmentByUserEmail(String email) {
-        /*return entityManager.createQuery("" +
-                "select a " +
-                "from Appointments a " +
-                "join Users s " +
-                "where s.email = :email")
-                .setParameter("email",email)
-                .getResultList();*/
 
-        return entityManager.createQuery("select a from Appointments a where a.users.email= ?1").setParameter(1,email).getResultList();
+        return entityManager.createQuery("select a " +
+                "from Appointments a " +
+                "where a.users.email= ?1")
+                .setParameter(1,email)
+                .getResultList();
+
+
     }
 }
 

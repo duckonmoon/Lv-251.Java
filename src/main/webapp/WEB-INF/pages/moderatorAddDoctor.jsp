@@ -14,6 +14,9 @@
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item navbar-inverse">
                         <spring:message code="messages.addDoctors"/>
                     </a>
+                    <a href="/moderator/cabinet/make/doctor" class="list-group-item ">
+                        <spring:message code="messages.makeDoctor" />
+                    </a>
 
                 </div>
             </div>
@@ -21,49 +24,47 @@
     </div>
     <div>
         <div class="container" style="width: 70%; float: right">
-            <div class="row row-content">
+            <div class="row row-content "style="border: #58d9b9 solid 1px ">
 
                 <div class="col-md-3 col-md-offset-1">
                     <div class="text-center">
                         <%--<img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle" alt="avatar" width="100"--%>
                         <%--height="100">--%>
 
-
-                        <%--<h6>${moderator.clinics.clinic_name}</h6>--%>
                     </div>
                 </div>
 
 
-                <div class="col-md-7 personal-info">
+                <div class="col-md-7 personal-info" >
                     <form:form action="/moderator/add/doctor" method="post" modelAttribute="doctorForm"
-                               enctype="multipart/form-data">
+                               enctype="multipart/form-data" id="registration">
                         <div class="form-group">
                             <label class="col-lg-3 control-label"><spring:message
                                     code="messages.userFirstname"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="firstName"/>
-                                <form:input type="text" class="form-control" path="firstName"/>
+                                <form:errors path="firstName"  cssClass="text-danger"/>
+                                <form:input type="text" class="form-control" path="firstName" id="firstName"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label"> <spring:message
                                     code="messages.userLastname"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="lastName"/>
+                                <form:errors path="lastName"  cssClass="text-danger"/>
                                 <form:input type="text" class="form-control" path="lastName"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="email"/>
+                                <form:errors path="email"  cssClass="text-danger"/>
                                 <form:input type="text" class="form-control" path="email" disabled="false"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label"><spring:message code="messages.password"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="password"/>
+                                <form:errors path="password"  cssClass="text-danger"/>
                                 <form:input type="text" class="form-control d" path="password"/>
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                             <label class="col-lg-3 control-label"><spring:message
                                     code="messages.confirmPassword"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="matchingPassword"/>
+                                <form:errors path="matchingPassword"  cssClass="text-danger"/>
                                 <form:input type="text" class="form-control" path="matchingPassword"/>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                             <label class="col-lg-3 control-label"><spring:message
                                     code="messages.specialization"/>:</label>
                             <div class="col-lg-7">
-                                <form:errors path="specialization"/>
+                                <form:errors path="specialization"  cssClass="text-danger"/>
                                 <form:input type="text" class="form-control" id="autocomplete-spec"
                                             path="specialization"/>
                             </div>

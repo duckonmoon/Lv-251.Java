@@ -75,7 +75,7 @@
                                             <c:set var="appointmentSatatus" value="${appointmentIsRejected}"/>
                                         </c:otherwise>
                                     </c:choose>
-                                    <div id="${showAppointmentClass}">
+                                    <div class="${showAppointmentClass}" style="cursor: pointer;">
                                         <div class="col-sm-6" id="appointmentWrapper">
                                             <div id="appointmentFloatContainer">
                                                 <div id="appointmentInner" class = "${cssClass}">
@@ -136,8 +136,8 @@
                                 var listPendingAppointmentsLength = "${listPendingAppointmentsLength}";
 
                                 var showAppointmentHistory = function () {
-                                    $("#appointmentsHistory").show();
-                                    $("#pendingAppointments").hide();
+                                    $(".appointmentsHistory").show();
+                                    $(".pendingAppointments").hide();
                                     $("#appointmentsHistoryLink").addClass("navbar-inverse");
                                     $("#pendingAppointmentsLink").removeClass("navbar-inverse");
                                     if (listPastAppointmentsLength == 0) {
@@ -152,8 +152,8 @@
                                 };
 
                                 var showPendingAppointments = function () {
-                                    $("#appointmentsHistory").hide();
-                                    $("#pendingAppointments").show();
+                                    $(".appointmentsHistory").hide();
+                                    $(".pendingAppointments").show();
                                     $("#pendingAppointmentsLink").addClass("navbar-inverse");
                                     $("#appointmentsHistoryLink").removeClass("navbar-inverse");
                                     if (listPendingAppointmentsLength == 0) {
@@ -169,6 +169,10 @@
 
                                 $("#appointmentsHistoryLink").click(showAppointmentHistory);
                                 $("#pendingAppointmentsLink").click(showPendingAppointments);
+
+                                $(".appointmentsHistory").click(function() {
+                                    $(this).modal();
+                                });
                             </script>
                         </div>
                     </div>

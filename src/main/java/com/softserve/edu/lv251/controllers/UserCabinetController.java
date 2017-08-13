@@ -121,12 +121,4 @@ public class UserCabinetController {
 
         return "userCabinetMedicalCard";
     }
-
-    @GetMapping("/user/appointments")
-    public String userAppointments(Model model, Principal principal) {
-        Users user = userService.findByEmail(principal.getName());
-        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
-        model.addAttribute("date", new Date());
-        return "userCabinetAppointments";
-    }
 }

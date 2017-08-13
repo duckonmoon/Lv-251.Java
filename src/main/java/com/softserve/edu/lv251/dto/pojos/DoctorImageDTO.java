@@ -33,7 +33,6 @@ public class DoctorImageDTO extends Doctors {
         setEnabled(doctors.isEnabled());
         setFirstname(doctors.getFirstname());
         setLastname(doctors.getLastname());
-        setMedicalCards(doctors.getMedicalCards());
         setMiddlename(doctors.getMiddlename());
         setPassword(doctors.getPassword());
         setPhoto(doctors.getPhoto());
@@ -42,9 +41,6 @@ public class DoctorImageDTO extends Doctors {
         setTestsResults(doctors.getTestsResults());
         setTokenExpired(doctors.isTokenExpired());
         setId(doctors.getId());
-        setMedicalCards(doctors.getMedicalCards());
-
-
     }
 
     public BufferedImage getImg() {

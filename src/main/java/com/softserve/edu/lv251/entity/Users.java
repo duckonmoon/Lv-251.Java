@@ -50,9 +50,7 @@ public class Users extends BaseEntity {
 
     @OneToOne
     private Contacts contact;
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<MedicalCard> medicalCards;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<TestsResults> testsResults;
@@ -67,14 +65,6 @@ public class Users extends BaseEntity {
 
     public void setTestsResults(List<TestsResults> testsResults) {
         this.testsResults = testsResults;
-    }
-
-    public List<MedicalCard> getMedicalCards() {
-        return medicalCards;
-    }
-
-    public void setMedicalCards(List<MedicalCard> medicalCards) {
-        this.medicalCards = medicalCards;
     }
 
     public Contacts getContact() {

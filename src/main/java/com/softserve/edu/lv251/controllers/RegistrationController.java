@@ -155,7 +155,6 @@ public class RegistrationController {
             model.addAttribute("flag", true);
 
             return "home";
-
         }
 
         if (logout != null) {

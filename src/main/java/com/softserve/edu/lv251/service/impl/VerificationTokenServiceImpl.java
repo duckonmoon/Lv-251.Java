@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Added by Pavlo Kuchereshko.
- *
  */
 @Service
 public class VerificationTokenServiceImpl implements VerificationTokenService {
@@ -62,7 +61,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     @Override
     public VerificationToken findByUser(Users user) {
-        List<VerificationToken> tokens = getVerificationTokensByColumnNameAndValue("token", user);
+        List<VerificationToken> tokens = getVerificationTokensByColumnNameAndValue("user", user);
         return tokens.isEmpty() ? null : tokens.get(0);
     }
 }

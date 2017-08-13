@@ -8,6 +8,9 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * Added by Pavlo Kuchereshko.
+ */
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
     @Override
     public void initialize(ValidPassword arg0) {

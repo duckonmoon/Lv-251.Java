@@ -1,8 +1,5 @@
 package com.softserve.edu.lv251.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,26 +12,26 @@ import java.util.List;
 public class Clinics extends BaseEntity {
     private String clinic_name;
 
-    @Column(name = "photo", nullable = false, columnDefinition="MEDIUMTEXT")
+    @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String photo;
 
     private String description;
 
 
-    @OneToMany(mappedBy = "clinics",cascade =
+    @OneToMany(mappedBy = "clinics", cascade =
             {
                     CascadeType.DETACH,
                     CascadeType.MERGE,
                     CascadeType.REFRESH,
                     CascadeType.PERSIST
             })
-    @JsonIgnore
+
     private List<Doctors> doctors;
 
-    @JsonIgnore
+
     @OneToOne(cascade = {CascadeType.ALL})
     private Contacts contact;
-    @JsonIgnore
+
     @OneToOne(mappedBy = "clinic")
     private Moderator moderator;
 

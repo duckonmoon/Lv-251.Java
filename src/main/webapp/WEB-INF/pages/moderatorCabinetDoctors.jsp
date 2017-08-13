@@ -17,6 +17,9 @@
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item">
                         <spring:message code="messages.addDoctors" />
                     </a>
+                    <a href="/moderator/cabinet/make/doctor" class="list-group-item ">
+                        <spring:message code="messages.makeDoctor" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -42,8 +45,26 @@
                                                 <div> ${doctor.firstname}  ${doctor.lastname}</div>
                                                 <p><spring:message code="messages.specialization"/>: ${doctor.specialization.name}</p>
                                             </div>
+                                            <!-- Large modal -->
+                                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="myModalLabel">Are you sure you want Delete?</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div> ${doctor.firstname}  ${doctor.lastname}</div>
+                                                            <p><spring:message code="messages.specialization"/>: ${doctor.specialization.name}</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="/moderator/cabinet/doctors"> <button type="button" class="btn btn-default" >No</button></a>
+                                                            <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-github" ><spring:message code="messages.delete"/></button ></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
-                                                <a href="/moderator/cabinet/doctors/delete/${doctor.id}"><button  class="btn btn-github" ><spring:message code="messages.delete"/></button ></a>
+                                                <button data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-github" ><spring:message code="messages.delete"/></button >
                                             </div>
                                             <hr>
                                         </div>
@@ -58,6 +79,7 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+
             </div>
 
         </div>

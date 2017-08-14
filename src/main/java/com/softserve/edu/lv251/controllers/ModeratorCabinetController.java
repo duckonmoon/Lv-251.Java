@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.controllers;
 
 
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 
@@ -56,7 +57,6 @@ public class ModeratorCabinetController {
     private MessageSource messageSource;
 
 
-
     @GetMapping(value = "/cabinet")
     public String moderatorCabinet(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
@@ -67,8 +67,8 @@ public class ModeratorCabinetController {
         mapper.map(clinics, clinicDTO);
         mapper.map(contacts, clinicDTO);
         model.addAttribute("photoForm", new FileBucket());
-        model.addAttribute("doctors", doctors);
-        model.addAttribute("moderator", moderator);
+        model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
+        model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         model.addAttribute("clinicDTO", clinicDTO);
         return "moderatorCabinet";
     }
@@ -89,8 +89,8 @@ public class ModeratorCabinetController {
             contactsService.updateContacts(contacts);
             return "redirect:/moderator/cabinet";
         } else {
-            model.addFlashAttribute("classCss", "alert alert-warning");
-            model.addFlashAttribute("message", messageError);
+            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(Constants.ControllersConstants.MODERATOR, messageError);
             return "redirect:/moderator/cabinet";
         }
     }
@@ -100,8 +100,8 @@ public class ModeratorCabinetController {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
 
-        model.addAttribute("doctors", doctors);
-        model.addAttribute("moderator", moderator);
+        model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
+        model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         return "moderatorCabinetDoctors";
     }
 
@@ -117,8 +117,8 @@ public class ModeratorCabinetController {
         model.addAttribute("doctorForm", new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
-        model.addAttribute("doctors", doctors);
-        model.addAttribute("moderator", moderator);
+        model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
+        model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         return "moderatorAddDoctor";
     }
 
@@ -126,7 +126,6 @@ public class ModeratorCabinetController {
     public String registerDoctor(@ModelAttribute("doctorForm") @Valid DoctorDTO doctorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.warn("registerDoctor has errors");
-
             return "moderatorAddDoctor";
         } else {
             doctorsService.addDoctorAccount(doctorDTO);
@@ -138,11 +137,9 @@ public class ModeratorCabinetController {
     public String uploadPhoto(@ModelAttribute("photoForm") @Valid FileBucket fileBucket, BindingResult bindingResult, Principal principal, RedirectAttributes model) {
         if (bindingResult.hasErrors()) {
             Locale currentLocale = LocaleContextHolder.getLocale();
-
-
             String messageError = messageSource.getMessage("messages.errorPhoto", null, currentLocale);
-            model.addFlashAttribute("classCss", "alert alert-danger");
-            model.addFlashAttribute("message", messageError);
+            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-danger");
+            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageError);
             return "redirect:/moderator/cabinet";
         } else {
             clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinics());
@@ -151,27 +148,27 @@ public class ModeratorCabinetController {
     }
 
     @GetMapping(value = "/cabinet/make/doctor")
-    public  String makeDoctor(Model model, Principal principal){
-        model.addAttribute("usersToDoctor", new UserToDoctor());
+    public String makeDoctor(Model model, Principal principal) {
+        model.addAttribute(Constants.ControllersConstants.USERS_TO_DOCTOR, new UserToDoctor());
 
-        Moderator moderator=moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
-        List<Users> users=userService.getAllUsers();
+        Moderator moderator = moderatorService.getByEmail(principal.getName());
+        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Users> users = userService.getAllUsers();
 
-        model.addAttribute("doctors",doctors);
-        model.addAttribute("moderator",moderator);
+        model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
+        model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
 
-        return "moderatorMakeDoctor";
-    }
-
-    @PostMapping(value = "/cabinet/make/doctor")
-    public  String makeDoctor(@ModelAttribute("usersToDoctor")@Valid UserToDoctor userToDoctor,BindingResult bindingResult,Principal principal){
-        if(bindingResult.hasErrors()){
-            System.out.println("has error");
             return "moderatorMakeDoctor";
-        } else {
-            doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
-            return "redirect:/moderator/cabinet/make/doctor";
         }
-    }
+
+        @PostMapping(value = "/cabinet/make/doctor")
+        public String makeDoctor (@ModelAttribute("usersToDoctor") @Valid UserToDoctor userToDoctor, BindingResult
+        bindingResult, Principal principal){
+            if (bindingResult.hasErrors()) {
+                return "moderatorMakeDoctor";
+            } else {
+                doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
+                return "redirect:/moderator/cabinet/make/doctor";
+            }
+        }
 }

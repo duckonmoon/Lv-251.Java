@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.config;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ContactDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class MailComponent {
 
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
-            messageHelper.setTo("lv251clinics@gmail.com");
+            messageHelper.setTo(Constants.MailConstants.MAIL);
             messageHelper.setSubject(contactDTO.getSubject());
             messageHelper.setText(mes, true);
             javaMailSender.send(mimeMessage);

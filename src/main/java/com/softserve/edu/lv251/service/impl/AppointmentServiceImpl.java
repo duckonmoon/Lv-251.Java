@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by kilopo on 31.07.2017.
@@ -48,8 +49,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentsDAO.getAllEntities()
                 .stream()
                 .filter(p -> p.getDoctors().getId() == doctorId)
+                .filter(p -> p.getIsApproved())
                 .filter(p -> p.getAppointmentDate().after(new Date()))
                 .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
+
         return appointmentsForCreationDTOS;
 
     }
@@ -59,6 +62,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
+                .filter(Appointments::getIsApproved)
                 .filter(p -> p.getAppointmentDate().after(new Date()))
                 .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
         return appointmentsForCreationDTOS;

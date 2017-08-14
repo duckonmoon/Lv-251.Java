@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -79,7 +80,7 @@ public class RegistrationController {
         Users registered = createUserAccount(accountDto, result);
 
         if (registered == null) {
-            result.rejectValue("email", "message.regError");
+            result.rejectValue(Constants.ControllersConstants.EMAIL, "message.regError");
         }
 
         try {
@@ -95,14 +96,14 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute("doctorForm", new DoctorDTO());
+        model.addAttribute(Constants.ControllersConstants.DOCTOR_FORM, new DoctorDTO());
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute("doctorForm") @Valid DoctorDTO accountDto,
+            @ModelAttribute(Constants.ControllersConstants.DOCTOR_FORM) @Valid DoctorDTO accountDto,
             BindingResult result) {
 
         Doctors registered = new Doctors();
@@ -110,7 +111,7 @@ public class RegistrationController {
             registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
-            result.rejectValue("email", "message.regError");
+            result.rejectValue(Constants.ControllersConstants.EMAIL, "message.regError");
         }
         if (result.hasErrors()) {
             return "registrationDoctor";
@@ -130,7 +131,7 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("message.invalidToken", null, locale);
-            model.addAttribute("message", message);
+            model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -138,7 +139,7 @@ public class RegistrationController {
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("message.invalidToken", null, locale);
-            model.addAttribute("message", message);
+            model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -152,7 +153,7 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            model.addAttribute("flag", true);
+            model.addAttribute(Constants.ControllersConstants.LOGIN_FLAG, true);
 
             return "home";
         }

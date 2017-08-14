@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.config;
 
+import com.softserve.edu.lv251.constants.Constants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.softserve.edu.lv251"})
+@ComponentScan(basePackages = {Constants.BASE_PACKAGE})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 
@@ -92,7 +93,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename(Constants.MESSAGES_SOURCE);
 
         return messageSource;
     }
@@ -110,10 +111,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         //Using gmail
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setPort(587);
-        javaMailSender.setUsername("lv251clinics@gmail.com");
-        javaMailSender.setPassword("clinics251lv");
+        javaMailSender.setHost(Constants.MailConstants.HOST);
+        javaMailSender.setPort(Constants.MailConstants.PORT);
+        javaMailSender.setUsername(Constants.MailConstants.MAIL);
+        javaMailSender.setPassword(Constants.MailConstants.PASSWORD);
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");

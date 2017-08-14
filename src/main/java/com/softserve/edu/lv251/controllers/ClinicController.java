@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.entity.Clinics;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.service.ClinicService;
@@ -32,7 +33,7 @@ public class ClinicController {
     public ModelAndView tenClinics(@PathVariable("current") Integer chainIndex) {
         ModelAndView model = new ModelAndView("clinics");
         model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, 10));
-        model.addObject("numberChain", pagingSizeService.numberOfPaging(10));
+        model.addObject(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         return model;
     }
 

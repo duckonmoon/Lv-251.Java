@@ -28,7 +28,6 @@ public class DoctorsDAOImplTest {
     Query query;
     @Spy
     List<Doctors> doctorsList = new ArrayList<>();
-    ;
 
 
     @Before
@@ -38,8 +37,6 @@ public class DoctorsDAOImplTest {
         doctor.setId(1);
         doctor.setFirstname("Petro");
         doctorsList.add(doctor);
-
-
     }
 
 
@@ -48,7 +45,7 @@ public class DoctorsDAOImplTest {
         Mockito.when(entityManager.createQuery("")).thenReturn(query);
         Mockito.when(query.getResultList()).thenReturn(doctorsList);
         assertEquals(1, query.getResultList().size());
-        assertEquals(true,  ((Doctors) query.getResultList().get(0)).getFirstname().contains("P"));
+        assertEquals(true, ((Doctors) query.getResultList().get(0)).getFirstname().contains("P"));
     }
 
     @Test

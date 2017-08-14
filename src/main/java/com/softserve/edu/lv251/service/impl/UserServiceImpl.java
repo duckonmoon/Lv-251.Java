@@ -115,7 +115,6 @@ public class UserServiceImpl implements UserService {
         }
         Users user = new Users();
         mapper.map(accountDto, user);
-        user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
@@ -127,9 +126,6 @@ public class UserServiceImpl implements UserService {
         user.setContact(contact);
         addUser(user);
 
-        //IT'S WORKS, DO NOT UNCOMMENT)))
-        //sendRegistrationEmail(user);
-
         return user;
     }
 
@@ -138,8 +134,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendRegistrationEmail(Users user) {
-        this.mailService.sendEmail(user);
+    public void sendEmail(Users user, String messageText) {
+        this.mailService.sendEmail(user, messageText);
     }
 
     @Override

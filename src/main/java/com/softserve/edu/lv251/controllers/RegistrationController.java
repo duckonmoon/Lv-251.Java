@@ -163,9 +163,9 @@ public class RegistrationController {
         }
 
         model.addAttribute("login", true);
+
         return "home";
     }
-
 
     private Users createUserAccount(UserDTO accountDto, BindingResult result) {
         Users registered;
@@ -175,6 +175,7 @@ public class RegistrationController {
             logger.warn(e);
             return null;
         }
+
         return registered;
     }
 
@@ -186,6 +187,7 @@ public class RegistrationController {
             logger.warn(e);
             return null;
         }
+
         return registered;
     }
 }

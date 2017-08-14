@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Moderator extends Users {
+
     @OneToOne
     private Clinics clinic;
 

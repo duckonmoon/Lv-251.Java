@@ -18,7 +18,7 @@
                 <h4 class="modal-title"><spring:message code="messages.createDoctorAccount"/></h4>
             </div>
             <div class="modal-body">
-                <form:form method="POST" modelAttribute="doctorForm">
+                <form:form method="POST" modelAttribute="doctorForm" enctype="multipart/form-data" id="regiastration">
                     <spring:bind path="firstName">
                         <div class="form-group">
                             <label class="sr-only" for="firstName"><spring:message code="messages.firstName" var="firstNameMess"/></label>
@@ -61,7 +61,7 @@
                     </spring:bind>
                     <spring:bind path="specialization">
                         <div class="form-group">
-                            <label class="sr-only" for="specialization"><spring:message code="messages.firstName" var="specializationMess"/></label>
+                            <label class="sr-only" for="specialization"><spring:message code="messages.specialization" var="specializationMess"/></label>
                             <form:input type="text" id="specialization" path="specialization"
                                         name="specialization" class="form-control" placeholder="${specializationMess}" autofocus="true"/>
                             <form:errors path="specialization"/>
@@ -69,7 +69,7 @@
                     </spring:bind>
                     <spring:bind path="description">
                         <div class="form-group">
-                            <label class="sr-only" for="description"><spring:message code="messages.firstName" var="descriptionMess"/></label>
+                            <label class="sr-only" for="description"><spring:message code="messages.Description" var="descriptionMess"/></label>
                             <form:input type="text" id="description" path="description"
                                         name="description" class="form-control" placeholder="${descriptionMess}" autofocus="true"/>
                             <form:errors path="description"/>
@@ -77,10 +77,18 @@
                     </spring:bind>
                     <spring:bind path="clinic">
                         <div class="form-group">
-                            <label class="sr-only" for="firstName"><spring:message code="messages.firstName" var="clinicMess"/></label>
+                            <label class="sr-only" for="firstName"><spring:message code="messages.clinic" var="clinicMess"/></label>
                             <form:input type="text" id="clinic" path="clinic"
                                         name="clinic" class="form-control" placeholder="${clinicMess}" autofocus="true"/>
                             <form:errors path="clinic"/>
+                        </div>
+                    </spring:bind>
+                    <spring:bind path="multipartFile">
+                        <div class="form-group">
+                            <label class="sr-only" for="firstName"><spring:message code="messages.photo" var="photoMess"/></label>
+                            <form:input type="file" id="photo" path="multipartFile"
+                                        name="multipartFile" class="form-control" placeholder="${photoMess}" autofocus="true"/>
+                            <form:errors path="multipartFile"/>
                         </div>
                     </spring:bind>
                     <div class="form-group">

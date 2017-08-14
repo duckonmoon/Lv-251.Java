@@ -9,6 +9,7 @@ import java.util.List;
  * Created by User on 11.07.2017.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Doctors extends Users {
     @Column(length = 10000)
     private String description;

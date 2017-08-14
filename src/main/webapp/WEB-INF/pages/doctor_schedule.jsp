@@ -14,8 +14,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <meta charset='utf-8'/>
+    <meta charset="UTF-8">
     <title>Schedule</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-theme.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
@@ -215,54 +217,75 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+            <a class="navbar-brand hidden-md hidden-sm" href="${pageContext.request.contextPath}/">
                 <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
             </a>
+
+            <div class="hidden-lg hidden-md hidden-sm col-xs-6 pull-right">
+                <li class="nav navbar-nav flags pull-right">
+                    <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
+                             alt="Great Britain"/>
+                    </a>
+                    <a class="" href="?lang=uk"  style="padding: 20px 3px ; float: left ">
+                        <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
+                             alt="Ukraine"/>
+                    </a>
+                    <span>&nbsp;&nbsp;</span>
+                </li>
+            </div>
         </div>
 
+
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/"><span class="glyphicon glyphicon-home"></span>
-                    <spring:message code="messages.home"/>
-                </a></li>
+            <ul  class="nav navbar-nav">
                 <li>
-                    <a href="${pageContext.request.contextPath}/clinics/1">
-                        <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics"/>
+                    <a href="${pageContext.request.contextPath}/">
+                        <span class="glyphicon glyphicon-home"></span>
+                        <spring:message code="messages.home" />
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/allDoctors">
-                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors"/>
+                    <a href="${pageContext.request.contextPath}/clinics/1">
+                        <span class="glyphicon glyphicon-plus-sign"></span><spring:message code="messages.clinics" />
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/allDoctors/1">
+                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
 
                 <li>
-                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i>
-                        <spring:message code="messages.contact"/>
+                    <a href="${pageContext.request.contextPath}/contact"><i class="fa fa-envelope-o"></i> <spring:message code="messages.contact" />
                     </a>
                 </li>
-                <li class="${current == 'user/cabinet' ? 'active': ''}">
+                <li>
                     <sec:authorize access="hasAuthority('ROLE_USER')">
                         <a href="${pageContext.request.contextPath}/user/cabinet">
                             <i class="fa fa-id-card"></i>
-                            <spring:message code="messages.userCabinet"/>
+                            <spring:message code="messages.userCabinet" />
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="active">
+                <li class='active'>
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
-                        <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i>
-                            <spring:message code="messages.doctorCabinet"/>
+                        <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
+                <li class="${current=='moderator/cabinet'? 'active':''}">
+                    <sec:authorize access="hasAuthority('ROLE_MODERATOR')">
+                        <a href="${pageContext.request.contextPath}/moderator/cabinet"><i class="fa fa-cogs"></i> <spring:message code="messages.moderatorCabinet" />
                         </a>
                     </sec:authorize>
                 </li>
                 <li>
-                    <a class="navbar-brand pull-right" href="${pageContext.request.contextPath}">
+                    <a class="navbar-brand pull-right hidden-xs hidden-md hidden-sm" href="${pageContext.request.contextPath}">
                         <img src="${pageContext.request.contextPath}/resources/img/heartbeat2.png" height=35 width=100>
                     </a>
                 </li>
             </ul>
-
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -272,28 +295,27 @@
                         </a>
                     </sec:authorize>
                 </li>
-                <li class="nav navbar-nav flags">
+                <li class="nav navbar-nav flags hidden-xs">
                     <a class="" href="?lang=en" style="padding: 20px 0 ; float: left">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-gb.png" class="flag flag-gb"
                              alt="Great Britain"/>
                     </a>
-                    <a class="" href="?lang=uk" style="padding: 20px 3px ; float: left ">
+                    <a class="" href="?lang=uk"  style="padding: 20px 3px ; float: left ">
                         <img src="${pageContext.request.contextPath}/resources/img/flag-ua.png" class="flag flag-ua"
                              alt="Ukraine"/>
                     </a>
+                    <span>&nbsp;&nbsp;</span>
                 </li>
 
                 <sec:authorize access="!isAuthenticated()">
-                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal"
-                           data-target="#loginModal" style="cursor:pointer;">
+                    <li><a type="button" onclick="hideText()" id="loginBtn" data-toggle="modal" data-target="#loginModal" style="cursor:pointer;">
                         <span class="glyphicon glyphicon-log-in"></span> <spring:message code="messages.login"/> </a>
                     </li>
                 </sec:authorize>
 
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a type="button" id="logoutBtn" style="cursor:pointer;"
-                           href="${pageContext.request.contextPath}/logout">
+                        <a type="button" id="logoutBtn" style="cursor:pointer;" href="${pageContext.request.contextPath}/logout">
                             <span class="glyphicon glyphicon-log-out"></span> <spring:message code="messages.logout"/>
                         </a>
                     </li>
@@ -302,7 +324,6 @@
         </div>
     </div>
 </nav>
-
 <sec:authorize access="!isAuthenticated()">
     <!--LOGIN MODAL________________________________________________________________________________________________________________________________________-->
     <div id="loginModal" class="modal fade" role="dialog">
@@ -439,42 +460,40 @@
     <div class="container" style="width: 70%; float: right; margin-top: 1.5%" id='calendar'></div>
 </div>
 
-<div class="container">
-    <div class="row row-footer">
-        <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
-            <h5><spring:message code="messages.links"/></h5>
-            <ul class="list-unstyled">
-                <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
-                <li><a href=<c:url value="/clinics/"/>><spring:message code="messages.clinics"/></a></li>
-                <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
-                <li><a href="#"><spring:message code="messages.contact"/></a></li>
-            </ul>
+<div class="row row-footer">
+    <div class="col-xs-5 col-offset-1 col-sm-2 col-sm-offset-1">
+        <h5><spring:message code="messages.links"/></h5>
+        <ul class="list-unstyled">
+            <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
+            <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinics"/></a></li>
+            <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
+            <li><a href="#"><spring:message code="messages.contact"/></a></li>
+        </ul>
+    </div>
+    <div class="col-xs-6 col-sm-5">
+        <h5><spring:message code="messages.ourAdress"/></h5>
+        <address>
+            <spring:message code="messages.Fedkovucha"/><br>
+            <spring:message code="messages.Lviv"/><br>
+            <spring:message code="messages.Ukraine"/><br>
+            <i class="fa fa-phone"></i>: +382 1234 5678<br>
+            <i class="fa fa-fax"></i>: +382 8765 4321<br>
+            <i class="fa fa-envelope"></i>: <a href="mailto:lv251clinics@gmail.com">lv251clinics@gmail.com</a>
+        </address>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="nav navbar-nav" style="padding: 40px 10px;">
+            <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i
+                    class="fa fa-facebook"></i></a>
+            <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i
+                    class="fa fa-linkedin"></i></a>
+            <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+            <a class="btn btn-social-icon btn-youtube" href="http://youtube.com/"><i class="fa fa-youtube"></i></a>
         </div>
-        <div class="col-xs-6 col-sm-5">
-            <h5><spring:message code="messages.ourAdress"/></h5>
-            <address>
-                <spring:message code="messages.Fedkovucha"/><br>
-                <spring:message code="messages.Lviv"/><br>
-                <spring:message code="messages.Ukraine"/><br>
-                <i class="fa fa-phone"></i>: +382 1234 5678<br>
-                <i class="fa fa-fax"></i>: +382 8765 4321<br>
-                <i class="fa fa-envelope"></i>:<a href="mailto:confusion@food.net">heartbeat@clinic.net</a>
-            </address>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <div class="nav navbar-nav" style="padding: 40px 10px;">
-                <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i
-                        class="fa fa-facebook"></i></a>
-                <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i
-                        class="fa fa-linkedin"></i></a>
-                <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
-                <a class="btn btn-social-icon btn-youtube" href="http://youtube.com/"><i class="fa fa-youtube"></i></a>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <p style="padding:10px;"></p>
-            <p align="center">© Copyright 2017 SoftServe Inc.</p>
-        </div>
+    </div>
+    <div class="col-xs-12">
+        <p style="padding:10px;"></p>
+        <p align="center">© Copyright 2017 SoftServe Inc.</p>
     </div>
 </div>
 

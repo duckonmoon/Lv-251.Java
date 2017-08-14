@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contacts;
@@ -57,9 +58,9 @@ public class UserCabinetController {
 
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
-        model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("personalInfoDTO", personalInfoDTO);
-        model.addAttribute("passwordDTO", passwordDTO);
+        model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+        model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
+        model.addAttribute(Constants.ControllersConstants.PASSWORD_DTO, passwordDTO);
         return "userCabinet";
     }
 
@@ -72,7 +73,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-            model.addAttribute("photo", user.getPhoto());
+            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
             return "userCabinet";
         }
 
@@ -100,8 +101,8 @@ public class UserCabinetController {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
             mapper.map(contacts, personalInfoDTO);
-            model.addAttribute("photo", user.getPhoto());
-            model.addAttribute("personalInfoDTO", personalInfoDTO);
+            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
             return "userCabinet";
         }
 

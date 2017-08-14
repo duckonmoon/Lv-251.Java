@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Specialization extends BaseEntity {
     private String name;
-    private String description;
+
     @JsonIgnore
     @OneToMany(mappedBy = "specialization")
     private List<Doctors> doctors;
@@ -29,13 +29,7 @@ public class Specialization extends BaseEntity {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public List<Doctors> getDoctors() {
         return doctors;
@@ -49,7 +43,7 @@ public class Specialization extends BaseEntity {
     public String toString() {
         return "Specialization{" +
                 "name='" + name + '\'' +
-                ", description='" + description + '\'' +
+
 
                 '}';
     }

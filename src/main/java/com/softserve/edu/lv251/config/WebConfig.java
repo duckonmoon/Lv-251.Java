@@ -1,9 +1,6 @@
 package com.softserve.edu.lv251.config;
 
-/**
- * Created by Taras on 16.07.2017.
- */
-
+import com.softserve.edu.lv251.constants.Constants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -22,15 +20,18 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import java.util.Locale;
 import java.util.Properties;
 
-
+/**
+ * Created by Taras on 16.07.2017.
+ */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.softserve.edu.lv251"})
+@ComponentScan(basePackages = {Constants.BASE_PACKAGE})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 
@@ -92,7 +93,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setBasename("classpath:messages");
+        messageSource.setBasename(Constants.MESSAGES_SOURCE);
 
         return messageSource;
     }
@@ -110,10 +111,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         //Using gmail
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setPort(587);
-        javaMailSender.setUsername("lv251clinics@gmail.com");
-        javaMailSender.setPassword("clinics251lv");
+        javaMailSender.setHost(Constants.MailConstants.HOST);
+        javaMailSender.setPort(Constants.MailConstants.PORT);
+        javaMailSender.setUsername(Constants.MailConstants.MAIL);
+        javaMailSender.setPassword(Constants.MailConstants.PASSWORD);
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
@@ -132,7 +133,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         localeResolver.setCookieName("my-locale-cookie");
         localeResolver.setCookieMaxAge(3600);
         return localeResolver;
-
     }
 
     @Bean

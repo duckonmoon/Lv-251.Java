@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Appointments;
@@ -47,8 +48,8 @@ public class AllDoctorsController {
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
-        model.addAttribute("numberChain", pagingSizeService.numberOfPaging(10));
-        model.addAttribute("docApps", appointmentService.getAllDoctorsAppointmentsAfterNow());
+        model.addAttribute(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
+        model.addAttribute(Constants.ControllersConstants.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
     }
 
@@ -64,8 +65,8 @@ public class AllDoctorsController {
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
     public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
-                                       @RequestParam("doctorId") long doctorId,
-                                       @RequestParam("current") Integer chainIndex, Principal principal) {
+                                       @RequestParam(Constants.ControllersConstants.DOCTOR_ID) long doctorId,
+                                       @RequestParam(Constants.ControllersConstants.CURRENT) Integer chainIndex, Principal principal) {
         Date date;
 
         ModelAndView modelAndView = new ModelAndView();
@@ -87,7 +88,7 @@ public class AllDoctorsController {
 
         } catch (Exception e) {
             logger.info("Wrong date.", e);
-            modelAndView.addObject("flag", true);
+            modelAndView.addObject(Constants.ControllersConstants.DATE_FLAG, true);
             modelAndView.addObject("doc", doctorId);
 
             modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);

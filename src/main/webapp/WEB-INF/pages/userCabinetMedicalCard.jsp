@@ -77,42 +77,8 @@
                                         </c:otherwise>
                                     </c:choose>
 
-
-
-
-                                    <%--<c:choose>--%>
-                                        <%--<c:when test="${appointment.appointmentDate.time >= date && !appointment.isApproved}">--%>
-                                            <%--<c:set var="showAppointmentClass" value="pendingAppointments"/>--%>
-                                            <%--<c:set var="listPendingAppointmentsLength" value="${listPendingAppointmentsLength + 1}"/>--%>
-                                            <%--<c:set var="cssClass" value="label label-danger"/>--%>
-                                            <%--<spring:message code="messages.appointmentIsNotApproved" var="appointmentIsNotApproved"/>--%>
-                                            <%--<c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:when test="${appointment.appointmentDate.time >= date && appointment.isApproved}">--%>
-                                            <%--<c:set var="showAppointmentClass" value="pendingAppointments"/>--%>
-                                            <%--<c:set var="listPendingAppointmentsLength" value="${listPendingAppointmentsLength + 1}"/>--%>
-                                            <%--<c:set var="cssClass" value="label label-success"/>--%>
-                                            <%--<spring:message code="messages.appointmentIsDone" var="appointmentIsDone"/>--%>
-                                            <%--<c:set var="appointmentSatatus" value="${appointmentIsDone}"/>--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:when test="${appointment.appointmentDate.time < date && appointment.isApproved}">--%>
-                                            <%--<c:set var="showAppointmentClass" value="appointmentsHistory"/>--%>
-                                            <%--<c:set var="listPastAppointmentsLength" value="${listPastAppointmentsLength + 1}"/>--%>
-                                            <%--<c:set var="cssClass" value="label label-info"/>--%>
-                                            <%--<spring:message code="messages.appointmentIsApproved" var="appointmentIsApproved"/>--%>
-                                            <%--<c:set var="appointmentSatatus" value="${appointmentIsApproved}"/>--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--<c:set var="showAppointmentClass" value="appointmentsHistory"/>--%>
-                                            <%--<c:set var="listPastAppointmentsLength" value="${listPastAppointmentsLength + 1}"/>--%>
-                                            <%--<c:set var="cssClass" value="label label-danger"/>--%>
-                                            <%--<spring:message code="messages.appointmentIsRejected" var="appointmentIsRejected"/>--%>
-                                            <%--<c:set var="appointmentSatatus" value="${appointmentIsRejected}"/>--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-
                                     <div class="${showAppointmentClass}">
-                                        <div class="col-sm-6 appointmentWrapper" <%--id="appointmentWrapper"--%>>
+                                        <div class="col-sm-6 appointmentWrapper">
                                             <div class="appointmentFloatContainer">
                                                 <div class="appointmentInner ${cssClass}">
                                                     <c:out value="${appointmentSatatus}"/>
@@ -209,6 +175,10 @@
 
                                 $("#appointmentsHistoryLink").click(showAppointmentHistory);
                                 $("#pendingAppointmentsLink").click(showPendingAppointments);
+
+                                $(".appointmentsHistory").click(function() {
+                                    $(this).modal();
+                                });
                             </script>
                         </div>
                     </div>

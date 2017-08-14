@@ -133,5 +133,5 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
         clinics.setPhoto(photo);
         clinicsDAO.updateEntity(clinics);
-    }
+        }
 }

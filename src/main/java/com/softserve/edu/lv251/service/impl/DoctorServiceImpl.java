@@ -31,12 +31,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     private ContactsDAO contactsDAO;
 
 
-   @Autowired
-   private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private RolesService rolesService;
-
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

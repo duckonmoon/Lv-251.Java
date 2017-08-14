@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.config.MailComponent;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ContactDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -47,11 +48,11 @@ public class ContactController {
         }
 
         if (mailComponent.sendMail(contactDTO)) {
-            model.addFlashAttribute("classCss", "alert alert-success");
-            model.addFlashAttribute("message", messageSuccess);
+            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-success");
+            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageSuccess);
         } else {
-            model.addFlashAttribute("classCss", "alert alert-warning");
-            model.addFlashAttribute("message", messageError);
+            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageError);
         }
         return "redirect:/contact";
     }

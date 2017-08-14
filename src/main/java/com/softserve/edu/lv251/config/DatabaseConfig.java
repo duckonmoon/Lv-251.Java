@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.config;
 
+import com.softserve.edu.lv251.constants.Constants;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +24,12 @@ import java.util.Properties;
  */
 
 @Configuration
-@PropertySource("classpath:db.properties")
-@ComponentScan(basePackages = {"com.softserve.edu.lv251"})
+@PropertySource(Constants.DatabaseConstants.DATABASE_PROPERTY_SOURCE)
+@ComponentScan(basePackages = {Constants.BASE_PACKAGE})
 @EnableTransactionManagement
 public class DatabaseConfig {
 
-    private String[] packages = {"com.softserve.edu.lv251"};
+    private String[] packages = {Constants.BASE_PACKAGE};
 
     @Autowired
     private Environment env;

@@ -21,6 +21,7 @@ public class DoctorDTO extends UserDTO {
 
     @NotBlank(message = "{org.hibernate.validator.constraints.NotEmpty.message}")
     private String clinic;
+
     @ValidPhoto
     private MultipartFile multipartFile;
 

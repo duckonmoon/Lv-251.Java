@@ -10,6 +10,7 @@ import com.softserve.edu.lv251.entity.*;
 
 import com.softserve.edu.lv251.model.FileBucket;
 import com.softserve.edu.lv251.service.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -32,20 +33,26 @@ import java.util.Locale;
 public class ModeratorCabinetController {
     @Autowired
     private ModeratorService moderatorService;
+
     @Autowired
     private DoctorsService doctorsService;
+
     @Autowired
-    private SpecializationService specializationService;
+    private Logger logger;
+
     @Autowired
     private ClinicService clinicService;
+
     @Autowired
     private Mapper mapper;
+
     @Autowired
     private ContactsService contactsService;
 
     @Autowired
-     private UserService userService;
+    private UserService userService;
 
+    @Autowired
     private MessageSource messageSource;
 
 
@@ -118,16 +125,11 @@ public class ModeratorCabinetController {
     @PostMapping(value = "/add/doctor")
     public String registerDoctor(@ModelAttribute("doctorForm") @Valid DoctorDTO doctorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println("has errors");
-
-            System.out.println(doctorDTO.toString());
-
+            logger.warn("registerDoctor has errors");
 
             return "moderatorAddDoctor";
         } else {
-
             doctorsService.addDoctorAccount(doctorDTO);
-            System.out.println(doctorDTO.toString());
             return "redirect:/moderator/cabinet/doctors";
         }
     }
@@ -148,31 +150,28 @@ public class ModeratorCabinetController {
         }
     }
 
- @GetMapping(value = "/cabinet/make/doctor")
- public  String makeDoctor(Model model, Principal principal){
-     model.addAttribute("usersToDoctor", new UserToDoctor());
+    @GetMapping(value = "/cabinet/make/doctor")
+    public  String makeDoctor(Model model, Principal principal){
+        model.addAttribute("usersToDoctor", new UserToDoctor());
 
-     Moderator moderator=moderatorService.getByEmail(principal.getName());
-     List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
-     List<Users> users=userService.getAllUsers();
+        Moderator moderator=moderatorService.getByEmail(principal.getName());
+        List<Doctors> doctors=doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Users> users=userService.getAllUsers();
 
-     model.addAttribute("doctors",doctors);
-     model.addAttribute("moderator",moderator);
+        model.addAttribute("doctors",doctors);
+        model.addAttribute("moderator",moderator);
 
-     return "moderatorMakeDoctor";
- }
+        return "moderatorMakeDoctor";
+    }
 
-
- @PostMapping(value = "/cabinet/make/doctor")
+    @PostMapping(value = "/cabinet/make/doctor")
     public  String makeDoctor(@ModelAttribute("usersToDoctor")@Valid UserToDoctor userToDoctor,BindingResult bindingResult,Principal principal){
-     if(bindingResult.hasErrors()){
-         System.out.println("has error");
-         return "moderatorMakeDoctor";
-     }else{
-     doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
-     return "redirect:/moderator/cabinet/make/doctor";
-     }
- }
-
-
+        if(bindingResult.hasErrors()){
+            System.out.println("has error");
+            return "moderatorMakeDoctor";
+        } else {
+            doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
+            return "redirect:/moderator/cabinet/make/doctor";
+        }
+    }
 }

@@ -14,22 +14,22 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
 
-                <div class="navbar-form ">
-                    <div class="form-group">
+                <div class="navbar-form " style="width: 95%">
+                    <div class="form-group"  style="width: 90%">
 
-                        <select class="selectpicker form-control" style="width:210px " id="selectDocOrClinic">
+                        <select class="selectpicker form-control" style="width:18% "  id="selectDocOrClinic">
                             <option id="option-clinic" value="0"><spring:message
                                     code="messages.clinicsSearch"/></option>
                         </select>
-                        <div class="input-group ">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change"
+                        <div class="input-group " style="width: 60%">
+                            <span class="input-group-addon" id="sizing-addon1"  style="width: 8%"><i class="fa fa-ambulance change"
                                                                                   aria-hidden="true"
                                                                                   style="color: #226ed9"></i></span>
-                            <input type="text" class="form-control " id="autocomplete" style="width: 530px"
+                            <input type="text" class="form-control " id="autocomplete"
                                    placeholder='<spring:message code="messages.searchClinics"/>'
                                    aria-describedby="sizing-addon1">
                         </div>
-                        <input id="autocomplete-districts" type="text" class="form-control " style="width: 210px"
+                        <input id="autocomplete-districts" type="text" class="form-control " style="width: 20%"
                                placeholder='<spring:message code="messages.district"/>'>
                     </div>
                     <a href="/">
@@ -37,12 +37,10 @@
                                 code="messages.search"/></button>
                     </a>
                 </div>
-
-
             </div>
-
         </nav>
     </div>
+
     <div class="container col-lg-8">
         <%--Pagination--%>
         <%-----------------------------------------------------%>
@@ -114,16 +112,10 @@
     </div>
     <aside class="container col-lg-4 hidden-xs hidden-sm" style="overflow: inherit">
         <div style="width: 25em; height: 30em; position:fixed">
-            <div>
-                <div>
-                    <div id="map" style="width: 100%; height: 100%"/>
-                </div>
-            </div>
+            <div id="map" style="width: 100%; height: 100%"/>
         </div>
     </aside>
 </div>
-</div>
-
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/map.js"/>"></script>

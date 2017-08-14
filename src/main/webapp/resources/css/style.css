@@ -29,7 +29,8 @@
 
 html, body {
     height: 100%;
-    overflow: auto;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -46,6 +47,9 @@ footer {
     bottom: 0;
     left: 0;
 }
+
+
+
 
 address{
     font-size:80%;

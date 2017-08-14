@@ -1,10 +1,15 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.dao.AppointmentsDAO;
+import com.softserve.edu.lv251.service.AppointmentService;
+import junit.framework.TestCase;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
-import static org.junit.Assert.*;
+public class AppointmentServiceImplTest extends TestCase{
 
-public class AppointmentServiceImplTest {
+    private AppointmentService appointmentService;
+
     @Test
     public void addAppointment() throws Exception {
     }
@@ -31,6 +36,7 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void listAppointmensWithDoctor() throws Exception {
+        mock(AppointmentsDAO.class);
     }
 
     @Test

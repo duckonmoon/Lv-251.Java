@@ -1,36 +1,35 @@
 package com.softserve.edu.lv251.dao.impl;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class BaseDAOImplTest {
+public class BaseDAOImplTest extends TestCase {
     @Test
-    public void addEntity() throws Exception {
+    public void testAddEntity() throws Exception {
     }
 
     @Test
-    public void updateEntity() throws Exception {
+    public void testUpdateEntity() throws Exception {
     }
 
     @Test
-    public void getEntityByID() throws Exception {
+    public void testGetEntityByID() throws Exception {
     }
 
     @Test
-    public void getEntitiesByColumnNameAndValue() throws Exception {
+    public void testGetEntitiesByColumnNameAndValue() throws Exception {
     }
 
     @Test
-    public void getAllEntities() throws Exception {
+    public void testGetAllEntities() throws Exception {
     }
 
     @Test
-    public void deleteEntity() throws Exception {
+    public void testDeleteEntity() throws Exception {
     }
 
     @Test
-    public void pagination() throws Exception {
+    public void testPagination() throws Exception {
     }
 
 }

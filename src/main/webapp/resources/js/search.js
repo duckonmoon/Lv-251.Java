@@ -28,6 +28,7 @@ console.log("before"+response.toString());
 
 
                         console.log(result.firstname);
+                        $("#myCarousel").empty();
                         $("#content").empty();
                         $("#content").append("<div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
                             " "+result.lastname +"</div></div></div>")
@@ -73,12 +74,13 @@ function allDocs() {
                     success:function (result) {
                         console.log(result.firstname);
                         var photo="data:image/jpeg;base64,"+result.photo;
+                        $("#myCarousel").empty();
                         $("#content").empty();
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
                             "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+result.specialisation+"</p> </div> </div>")
+                            "<p><spring:message code='messages.specialization'/>:"+result.specialisation+"<h</p> </div> </div>")
 
 
 

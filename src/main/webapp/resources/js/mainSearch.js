@@ -76,7 +76,7 @@ function clinicsAll() {
 
                 success: function (result) {
                     console.log(result.clinic_name);
-
+                   $("#myCarousel").empty();
                     $(".content").empty();
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
@@ -125,6 +125,7 @@ function clinicsByDistrict() {
 
 
                     console.log(res.length);
+                    $("#myCarousel").empty();
                     $(".content").empty();
                     for (var i = 0; i < res.length; i++) {
                         var photo="data:image/jpeg;base64,"+res[i].photo;
@@ -175,6 +176,7 @@ function doctorsByDistrict() {
                 contentType: 'application/json',
                 success: function (res) {
                     console.log(res.length);
+                    $("#myCarousel").empty();
                     $("#content").empty();
                     for (var i = 0; i < res.length; i++) {
                         console.log("Doctors search by districts");
@@ -225,6 +227,7 @@ function  doctorsBySpecialization() {
                 contentType: 'application/json',
                 success: function (res) {
                     console.log(res.length);
+                    $("#myCarousel").empty();
                     $("#content").empty();
                     for (var i = 0; i < res.length; i++) {
                         console.log("Doctors search by districts");

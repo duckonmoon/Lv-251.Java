@@ -51,7 +51,7 @@ public class ModeratorCabinetController {
     private ContactsService contactsService;
 
     @Autowired
-    private UserService userService;
+     private UserService userService;
 
     @Autowired
     private MessageSource messageSource;
@@ -64,14 +64,23 @@ public class ModeratorCabinetController {
         Clinics clinics = moderator.getClinics();
         Contacts contacts = clinics.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
-        mapper.map(clinics, clinicDTO);
-        mapper.map(contacts, clinicDTO);
+     if(clinics!=null){
+        mapper.map(clinics, clinicDTO);}
+     if(contacts!=null){
+        mapper.map(contacts, clinicDTO);}
         model.addAttribute("photoForm", new FileBucket());
         model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         model.addAttribute("clinicDTO", clinicDTO);
         return "moderatorCabinet";
-    }
+
+
+     }
+
+
+
+
+
 
     @PostMapping("/cabinet")
     public String edit(@ModelAttribute("clinicDTO") @Valid ClinicInfoDTO clinicInfoDTO, BindingResult bindingResult, Principal principal, RedirectAttributes model) {
@@ -110,7 +119,7 @@ public class ModeratorCabinetController {
         doctorsService.delete(doctorsService.find(id));
         return "redirect:/moderator/cabinet/doctors";
 
-    }
+}
 
     @GetMapping(value = "/cabinet/add/doctor")
     public String addDoctor(Model model, Principal principal) {
@@ -133,8 +142,9 @@ public class ModeratorCabinetController {
         }
     }
 
+
     @PostMapping(value = "/upload/clinicPhoto")
-    public String uploadPhoto(@ModelAttribute("photoForm") @Valid FileBucket fileBucket, BindingResult bindingResult, Principal principal, RedirectAttributes model) {
+    public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket, BindingResult bindingResult, Principal principal, RedirectAttributes model) {
         if (bindingResult.hasErrors()) {
             Locale currentLocale = LocaleContextHolder.getLocale();
             String messageError = messageSource.getMessage("messages.errorPhoto", null, currentLocale);

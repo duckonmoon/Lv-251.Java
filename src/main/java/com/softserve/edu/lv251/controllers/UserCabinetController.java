@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
@@ -114,11 +115,11 @@ public class UserCabinetController {
      * Author: Pavlo Kuchereshko
      */
     @GetMapping("/user/medicalcard")
-    public String medicalCardGET(ModelMap model, Principal principal) {
+    public String medicalCardGET(ModelMap model, Principal principal, HttpServletRequest request) {
 
         Users user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
-        model.addAttribute("date", new Date());
+        model.addAttribute("date", new Date().getTime());
 
         return "userCabinetMedicalCard";
     }

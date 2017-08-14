@@ -24,7 +24,7 @@
                                     code="messages.doctorsSearchBySpec"/></option>
                         </select>
                         <div class="input-group " style="width: 60%">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change"
+                            <span class="input-group-addon" id="sizing-addon1" style="width: 8%"><i class="fa fa-ambulance change"
                                                                                   aria-hidden="true"
                                                                                   style="color: #226ed9 " ></i></span>
                             <input type="text" class="form-control " id="autocomplete"

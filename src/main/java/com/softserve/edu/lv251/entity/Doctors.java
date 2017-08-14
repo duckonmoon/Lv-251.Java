@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Doctors extends Users {
+
     @Column(length = 10000)
     private String description;
     @JsonIgnore
@@ -22,6 +23,7 @@ public class Doctors extends Users {
                     CascadeType.PERSIST
             })
     private Clinics clinics;
+
     @JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointments> docAppointments;

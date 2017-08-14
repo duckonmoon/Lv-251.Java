@@ -26,10 +26,9 @@ public class MailServiceImpl implements MailService {
     private Logger logger;
 
     @Override
-    public void sendEmail(Object object) {
-        Users user = (Users) object;
+    public void sendEmail(Users user, String messageText) {
 
-        MimeMessagePreparator mimeMessagePreparator = getMessagePreparator(user);
+        MimeMessagePreparator mimeMessagePreparator = getMessagePreparator(user, messageText);
 
         try {
             javaMailSender.send(mimeMessagePreparator);
@@ -41,24 +40,24 @@ public class MailServiceImpl implements MailService {
 
     /**
      * MimeMessagePreparator interface: It is the callback interface for the preparation of JavaMail MIME messages.
-     * <p>
+     *
      * TO	People required to take action.
      * CC	Kept informed of the content, but no actions required from them.
      * BCC	Receive the message without any of the other recipients knowing. Also used for larger mailings (over 50).
      *
-     * @param user
+     * @param user          to mail for
+     * @param messageText   message for user
      * @return MimeMessagePreparator.
      */
-    private MimeMessagePreparator getMessagePreparator(Users user) {
+    private MimeMessagePreparator getMessagePreparator(Users user, String messageText) {
 
         return mimeMessage -> {
             mimeMessage.setFrom(Constants.MailConstants.MAIL);
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(user.getEmail()));
             String name = user.getFirstname() + " " + user.getLastname();
-            mimeMessage.setText("Dear " + (name.trim().isEmpty() ? "patient" : name)
-                    + ", please, confirm your registration by following the next link");
-            mimeMessage.setSubject("Registration on Clinics Lv251");
+            mimeMessage.setText("Dear " + (name.trim().isEmpty() ? "patient" : name) + ", " + messageText);
+            mimeMessage.setSubject("Clinics Lv251");
         };
     }
 }

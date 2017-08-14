@@ -40,6 +40,7 @@
     <script src="<c:url value="/resources/js/bootstrap-datetimepicker.js"/>" charset="UTF-8"
             type="text/javascript"></script>
     <script src="<c:url value="/resources/calendarResourses/bootstrap-dialog.js"/>" ></script>
+    <script src="<c:url value="/resources/calendarResourses/locale-all.js"/>" ></script>
 
     <script>
 
@@ -61,6 +62,7 @@
                 editable: false, // allow to add
                 eventLimit: true, // allow "more" link when too many events
                 draggable: false,
+                locale : '${locale}',
                 events: {
                     url: '/doctor/cabinet/getApp',
                     type: 'POST',

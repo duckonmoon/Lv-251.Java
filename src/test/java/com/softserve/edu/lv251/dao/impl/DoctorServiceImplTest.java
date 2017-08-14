@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.service.impl;
+package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctors;

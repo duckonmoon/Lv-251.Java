@@ -49,6 +49,14 @@
     padding: 10px 13px;
 }
 
+.appointmentsHistory {
+    display: none;
+}
+
+.pendingAppointments {
+    display: none;
+}
+
 #appointmentsHistoryListIsEmpty {
     display: none;
 }
@@ -57,7 +65,7 @@
     display: none;
 }
 
-#appointmentWrapper {
+.appointmentWrapper {
     width: 100%;
     background-color: rgb(248, 255, 255);
     border-radius: 5px;
@@ -67,12 +75,12 @@
     margin-top: 3px;
 }
 
-#appointmentFloatContainer {
+.appointmentFloatContainer {
     float: right;
     position: relative;
 }
 
-#appointmentInner {
+.appointmentInner {
     position: absolute;
     right: 5px; top: 10px;
 }

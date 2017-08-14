@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<div id="myCarousel" class="carousel slide hidden-sm hidden-xs" data-ride="carousel" style="position:fixed; width: 100%">
+<div id="myCarousel" class="carousel slide hidden-sm hidden-xs" data-ride="carousel" style="position:fixed; width: 100%;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -17,11 +17,11 @@
         </div>
 
         <div class="item" >
-            <img src="resources/img/1.jpg" style="width: 100% !important;"/>
+            <img src="resources/img/2.jpg" style="width: 100% !important;"/>
         </div>
 
         <div class="item" >
-            <img src="resources/img/1.jpg" style="width: 100% !important;"/>
+            <img src="resources/img/3.jpg" style="width: 100% !important;"/>
         </div>
     </div>
 
@@ -77,3 +77,4 @@
         <div class="content" id="content"></div>
     </div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br id="br"><br id="br"><br id="br"><br id="br"><br id="br"><br id="br"><br id="br"><br id="br"><br id="br">

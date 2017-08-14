@@ -28,6 +28,7 @@ console.log("before"+response.toString());
 
 
                         console.log(result.firstname);
+                        $("#myCarousel").empty();
                         $("#content").empty();
                         $("#content").append("<div class='container'><div class='row row-content'><div class='container-fluid'>"+result.firstname+"" +
                             " "+result.lastname +"</div></div></div>")
@@ -73,6 +74,7 @@ function allDocs() {
                     success:function (result) {
                         console.log(result.firstname);
                         var photo="data:image/jpeg;base64,"+result.photo;
+                        $("#myCarousel").empty();
                         $("#content").empty();
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+

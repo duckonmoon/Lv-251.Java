@@ -56,7 +56,7 @@
                                                 <span class='label label-info' id="upload-file-info"></span>
 
 
-                                                <button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</button>
+                                                <form:button class='btn btn-github' style="margin-top: 5px;margin-left: 20px">Change</form:button>
 
                                             </div>
 
@@ -128,8 +128,8 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-7">
-                            <input type="submit" class="btn btn-clinic"
-                                   value="<spring:message code="messages.saveChanges"/>">
+                            <form:button class="btn btn-clinic"><spring:message
+                                    code="messages.saveChanges"/></form:button>
                             <span></span>
                             <input type="reset" class="btn btn-github"
                                    value="<spring:message code="messages.cancel"/>">

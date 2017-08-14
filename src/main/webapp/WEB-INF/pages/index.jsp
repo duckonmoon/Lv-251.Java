@@ -35,7 +35,7 @@
                                placeholder='<spring:message code="messages.district"/>'>
                     </div>
                     <a href="/">
-                        <button id="main-search-btn" class="btn btn-facebook" style="width: 8%"><spring:message
+                        <button id="main-search-btn" class="btn btn-facebook" style="width: 8%" ><spring:message
                                 code="messages.search"/></button>
                     </a>
                 </div>

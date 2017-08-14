@@ -63,13 +63,5 @@ public class Doctors extends Users {
         this.specialization = specialization;
     }
 
-    @Override
-    public String toString() {
-        return "Doctors{" +
-                "description='" + description + '\'' +
-                ", clinics=" + clinics +
-                ", docAppointments=" + docAppointments +
-                ", specialization=" + specialization +
-                '}';
-    }
+
 }

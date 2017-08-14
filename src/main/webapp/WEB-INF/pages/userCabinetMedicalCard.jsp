@@ -42,7 +42,6 @@
                                 <c:set var="listPastAppointmentsLength" value="0"/>
                                 <c:set var="listPendingAppointmentsLength" value="0"/>
                                 <c:forEach items="${listAppointments}" var="appointment" varStatus="loop">
-                                    <%--<script>alert(${appointment.appointmentDate.time} + " " + ${date})</script>--%>
                                     <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>
                                     <c:choose>
                                         <c:when test="${appointment.appointmentDate < date}">

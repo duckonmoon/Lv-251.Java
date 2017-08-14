@@ -1,19 +1,18 @@
 package com.softserve.edu.lv251.controllers;
+
+import com.softserve.edu.lv251.config.Base64;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.config.Base64;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
-import java.util.List;
 
 
 /**

@@ -1,52 +1,71 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.entity.Doctors;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 
-public class DoctorsDAOImplTest extends BaseDAOImplTest {
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Created by Yana Martynyak on 13.08.2017.
+ */
+@RunWith(MockitoJUnitRunner.class)
+public class DoctorsDAOImplTest {
+    @Mock
+    private EntityManager entityManager;
+    @Mock
+    Query query;
+    @Spy
+    List<Doctors> doctorsList = new ArrayList<>();
+
+
+    @Before
+    public void beforeTest() {
+        MockitoAnnotations.initMocks(this);
+        Doctors doctor = new Doctors();
+        doctor.setId(1);
+        doctor.setFirstname("Petro");
+        doctorsList.add(doctor);
+    }
+
+
     @Test
-    public void testSearchByLetters() throws Exception {
+    public void searchByLetters() throws Exception {
+        Mockito.when(entityManager.createQuery("")).thenReturn(query);
+        Mockito.when(query.getResultList()).thenReturn(doctorsList);
+        assertEquals(1, query.getResultList().size());
+        assertEquals(true, ((Doctors) query.getResultList().get(0)).getFirstname().contains("P"));
     }
 
     @Test
-    public void testAppointmentsInThisMonth() throws Exception {
+    public void appointmentsInThisMonth() throws Exception {
     }
 
     @Test
-    public void testSearchBySpecialization() throws Exception {
+    public void searchBySpecialization() throws Exception {
     }
 
     @Test
-    public void testSearchByDistrict() throws Exception {
+    public void searchByDistrict() throws Exception {
     }
 
     @Test
-    public void testGetWithOffsetAndLimit() throws Exception {
+    public void getWithOffsetAndLimit() throws Exception {
     }
 
     @Test
-    public void testSearchByNameAndSpecialisationWithOffsetAndLimit() throws Exception {
+    public void searchByNameAndSpecialisationWithOffsetAndLimit() throws Exception {
     }
 
-    @Override
-    @Test
-    public void testGetAllEntities() {
-        Doctors doctor1 = new Doctors();
-        doctor1.setId(10);
-        doctor1.setFirstname("Антон");
-        doctor1.setLastname("Слабий");
-        doctor1.setEmail("slabiy@gmail.com");
-
-        Doctors doctor2 = new Doctors();
-        doctor2.setId(11);
-        doctor2.setFirstname("Паша");
-        doctor2.setLastname("Сильний");
-        doctor2.setEmail("silniy@gmail.com");
-
-        Doctors doctor3 = new Doctors();
-        doctor3.setId(12);
-        doctor3.setFirstname("Вася");
-        doctor3.setLastname("Довгий");
-        doctor3.setEmail("dovgiy@gmail.com");
-    }
 }

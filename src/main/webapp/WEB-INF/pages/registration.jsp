@@ -8,7 +8,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<!--REGISTER ________________________________________________________________________________________________________________________________________-->
 <div class="modal-dialog">
     <div class="row">
         <div class="modal-content">
@@ -52,7 +51,7 @@
                                     name="passwordReg" class="form-control" placeholder="${passwordRegMess}" cssStyle="background-color: inherit; z-index: -1"/>
                         <form:errors path="password" cssClass="text-danger"/>
                         <div id="eye_button">
-                            <button type="button" id="eye" style="z-index: 0;">
+                            <button type="button" tabindex="-1" id="eye" style="z-index: 0;">
                                 <i class="fa fa-eye" id="eyeSymbol"></i>
                             </button>
                         </div>

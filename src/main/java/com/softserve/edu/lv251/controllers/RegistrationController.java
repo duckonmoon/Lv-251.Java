@@ -57,7 +57,7 @@ public class RegistrationController {
      * The publisher constructs the event object and publishes it to anyone who’s listening.
      */
     @Autowired
-    ApplicationEventPublisher applicationEventPublisher;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {

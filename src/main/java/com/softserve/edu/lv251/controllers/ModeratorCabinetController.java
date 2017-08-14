@@ -73,15 +73,14 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         model.addAttribute("clinicDTO", clinicDTO);
         return "moderatorCabinet";
-<<<<<<< HEAD
+
 
      }
 
 
 
-=======
-    }
->>>>>>> develop
+
+
 
     @PostMapping("/cabinet")
     public String edit(@ModelAttribute("clinicDTO") @Valid ClinicInfoDTO clinicInfoDTO, BindingResult bindingResult, Principal principal, RedirectAttributes model) {
@@ -142,10 +141,7 @@ public class ModeratorCabinetController {
             return "redirect:/moderator/cabinet/doctors";
         }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> develop
 
     @PostMapping(value = "/upload/clinicPhoto")
     public String uploadPhoto(@ModelAttribute("photoForm")@Valid FileBucket fileBucket, BindingResult bindingResult, Principal principal, RedirectAttributes model) {

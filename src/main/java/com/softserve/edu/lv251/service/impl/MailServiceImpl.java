@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.service.MailService;
 import org.apache.log4j.Logger;
@@ -51,7 +52,7 @@ public class MailServiceImpl implements MailService {
     private MimeMessagePreparator getMessagePreparator(Users user) {
 
         return mimeMessage -> {
-            mimeMessage.setFrom("lv251clinics@gmail.com");
+            mimeMessage.setFrom(Constants.MailConstants.MAIL);
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(user.getEmail()));
             String name = user.getFirstname() + " " + user.getLastname();

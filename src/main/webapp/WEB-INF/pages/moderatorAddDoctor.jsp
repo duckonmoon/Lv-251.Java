@@ -1,20 +1,21 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <div>
         <div class="container" style="width: 30%; float: left">
             <div class="row row-content">
                 <div class="list-group doc-menu">
-                    <a href="/moderator/cabinet" class="list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet"/>" class="list-group-item ">
                         <spring:message code="messages.clinic"/>
                     </a>
-                    <a href="/moderator/cabinet/doctors" class=" list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet/doctors"/>" class=" list-group-item ">
                         <spring:message code="messages.doctors"/><span class="badge">${doctors.size()}</span>
                     </a>
-                    <a href="/moderator/cabinet/add/doctor" class="list-group-item navbar-inverse">
+                    <a href="<c:url value="/moderator/cabinet/add/doctor"/>" class="list-group-item navbar-inverse">
                         <spring:message code="messages.addDoctors"/>
                     </a>
-                    <a href="/moderator/cabinet/make/doctor" class="list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet/make/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.makeDoctor" />
                     </a>
 

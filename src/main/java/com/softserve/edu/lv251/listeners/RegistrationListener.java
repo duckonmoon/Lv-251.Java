@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.listeners;
 
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.service.UserService;
@@ -58,7 +59,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setTo(recipientAddress);
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(message + " http://localhost:8080" + confirmationUrl);
+        simpleMailMessage.setText(message + Constants.HOME + confirmationUrl);
 
         javaMailSender.send(simpleMailMessage);
         logger.info(simpleMailMessage);

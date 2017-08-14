@@ -9,16 +9,16 @@
         <div class="container" style="width: 30%; float: left">
             <div class="row row-content">
                 <div class="list-group doc-menu">
-                    <a href="/moderator/cabinet" class="list-group-item navbar-inverse">
+                    <a href="<c:url value="/moderator/cabinet"/>" class="list-group-item navbar-inverse">
                         <spring:message code="messages.clinic" />
                     </a>
-                    <a href="/moderator/cabinet/doctors" class=" list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet/doctors"/>" class=" list-group-item ">
                         <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
                     </a>
-                    <a href="/moderator/cabinet/add/doctor" class="list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet/add/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />
                     </a>
-                    <a href="/moderator/cabinet/make/doctor" class="list-group-item ">
+                    <a href="<c:url value="/moderator/cabinet/make/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.makeDoctor" />
                     </a>
                 </div>
@@ -42,9 +42,9 @@
                                         <div class="text">Change</div>
                                     </div>
                                 </div>
-
                                 <form:form action="/moderator/upload/clinicPhoto" method="post" enctype="multipart/form-data" modelAttribute="photoForm">
                                     <div class="col-lg-7">
+
                                             <div style="position:relative;">
                                                 <a class='btn btn-file' href='javascript:;'>
                                                     Choose File...
@@ -61,9 +61,7 @@
                                             </div>
 
                                     </div>
-
                                 </form:form>
-
                             </div>
                             <div></div>
                         </div>
@@ -73,7 +71,7 @@
                         <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                         <div class="col-lg-7">
 
-                            <form:errors path="clinic_name"></form:errors>
+                            <form:errors path="clinic_name"/>
                             <form:input type="text" class="form-control" path="clinic_name"/>
                         </div>
                     </div>

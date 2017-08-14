@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.service.impl.DoctorServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -30,7 +31,7 @@ public class DoctorServiceImplTest {
     @Mock
     private DoctorsDAO doctorsDAO;
     @InjectMocks
-   DoctorServiceImpl doctorService;
+    DoctorServiceImpl doctorService;
 
     @Before
     public void setUp() {

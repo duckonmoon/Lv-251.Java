@@ -111,7 +111,7 @@ public class Mapper extends ConfigurableMapper {
                             latLng.setId(clinics.getId());
                         }
                     }
-                });
+                }).register();
 
         factory.classMap(Appointments.class, AppointmentsForCreationDTO.class)
                 .field("appointmentDate", "appointmentDate")

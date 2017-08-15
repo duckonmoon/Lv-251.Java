@@ -89,6 +89,14 @@
                         </a>
                     </sec:authorize>
                 </li>
+                <li class="${current == 'adminCabinet' ? 'active': ''}">
+                    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+                        <a href="${pageContext.request.contextPath}/admin/cabinet">
+                            <i class="fa fa-id-card"></i>
+                            <spring:message code="messages.adminCabinet" />
+                        </a>
+                    </sec:authorize>
+                </li>
                 <li class="${current == 'doctor/сabinet' ? 'active': ''}">
                     <sec:authorize access="hasAuthority('ROLE_DOCTOR')">
                         <a href="${pageContext.request.contextPath}/doctor/сabinet"><i class="fa fa-tasks"></i> <spring:message code="messages.doctorCabinet" />

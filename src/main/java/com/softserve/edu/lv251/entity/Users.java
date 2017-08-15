@@ -11,7 +11,10 @@ public class Users extends BaseEntity {
 
     private String firstname;
     private String lastname;
+
+    @Column( columnDefinition = "varchar(255) default ''")
     private String middlename;
+
     private String email;
     private String password;
 
@@ -158,10 +161,9 @@ public class Users extends BaseEntity {
     @Override
     public String toString() {
         return "Users{" +
-                "firstname='" + firstname + '\'' +
+                " firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", middlename='" + middlename + '\'' +
-
+                ", email='" + email + '\'' +
                 '}';
     }
 }

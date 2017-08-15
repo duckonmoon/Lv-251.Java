@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-3 control-label"> <spring:message
-                                        code="messages.specialization"/>:</label>
+                                        code="messages.Description"/>:</label>
                                 <div class="col-lg-7">
                                         <form:errors path="description" cssClass="text-danger"/>
                                     <form:input type="text" class="form-control" id="autocomplete-spec" path="description"/>

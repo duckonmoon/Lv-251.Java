@@ -73,7 +73,7 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
         model.addAttribute(Constants.ControllersConstants.CLINIC_DTO, clinicDTO);
-        return Constants.ControllersReturn.MODERATOR_CABINET;
+        return "moderatorCabinet";
 
 
      }
@@ -92,11 +92,11 @@ public class ModeratorCabinetController {
 
             clinicService.updateClinic(clinics);
             contactsService.updateContacts(contacts);
-            return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_URL;
+            return "redirect:/moderator/cabinet";
         } else {
             model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-warning");
             model.addFlashAttribute(Constants.ControllersConstants.MODERATOR, messageError);
-            return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_URL;
+            return "redirect:/moderator/cabinet";
         }
     }
 
@@ -108,13 +108,13 @@ public class ModeratorCabinetController {
 
         model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
-        return Constants.ControllersReturn.MODERATOR_CABINET_DOCTORS;
+        return "moderatorCabinetDoctors";
     }
 
     @GetMapping(value = "/cabinet/doctors/delete/{id}")
     public String deleteDoctor(@PathVariable("id") Long id) {
         doctorsService.delete(doctorsService.find(id));
-        return "redirect"+Constants.ControllersReturn.MODERATOR_CABINET_DOCTORS_URL;
+        return "redirect:/moderator/cabinet/doctors";
 
 }
 
@@ -125,17 +125,17 @@ public class ModeratorCabinetController {
         List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
-        return Constants.ControllersReturn.MODERATOR_ADD_DOCTOR;
+        return "moderatorAddDoctor";
     }
 
     @PostMapping(value = "/add/doctor")
     public String registerDoctor(@ModelAttribute("doctorForm") @Valid DoctorDTO doctorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             logger.warn("registerDoctor has errors");
-            return Constants.ControllersReturn.MODERATOR_ADD_DOCTOR;
+            return "moderatorMakeDoctor";
         } else {
             doctorsService.addDoctorAccount(doctorDTO);
-            return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_DOCTORS_URL;
+            return "redirect:/moderator/cabinet/doctors";
         }
     }
 
@@ -147,11 +147,11 @@ public class ModeratorCabinetController {
             String messageError = messageSource.getMessage("messages.errorPhoto", null, currentLocale);
             model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-danger");
             model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageError);
-            return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_URL;
+            return "redirect:/moderator/cabinet";
         } else {
             clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinics());
 
-            return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_URL;
+            return "redirect:/moderator/cabinet";
         }
     }
 
@@ -166,17 +166,17 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.ControllersConstants.DOCTORS, doctors);
         model.addAttribute(Constants.ControllersConstants.MODERATOR, moderator);
 
-            return Constants.ControllersReturn.MODERATOR_MAKE_DOCTOR;
+            return "moderatorMakeDoctor";
         }
 
         @PostMapping(value = "/cabinet/make/doctor")
         public String makeDoctor (@ModelAttribute("usersToDoctor") @Valid UserToDoctor userToDoctor, BindingResult
         bindingResult, Principal principal){
             if (bindingResult.hasErrors()) {
-                return Constants.ControllersReturn.MODERATOR_MAKE_DOCTOR;
+                return "moderatorMakeDoctor";
             } else {
                 doctorsService.makeDoctorFromUser(userToDoctor, principal.getName());
-                return "redirect:"+Constants.ControllersReturn.MODERATOR_CABINET_DOCTORS_URL;
+                return "redirect:/moderator/cabinet/doctors";
             }
         }
 }

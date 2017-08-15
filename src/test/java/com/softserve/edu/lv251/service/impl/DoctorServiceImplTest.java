@@ -1,7 +1,8 @@
-package com.softserve.edu.lv251.service.impl;
+package java.com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.service.impl.DoctorServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,14 +24,15 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DoctorServiceImplTest {
+
     @Spy
-    List<Doctors> doctors= new LinkedList<>();
+    private List<Doctors> doctors = new LinkedList<>();
     @Captor
-    ArgumentCaptor<Doctors> captor;
+    private ArgumentCaptor<Doctors> captor;
     @Mock
     private DoctorsDAO doctorsDAO;
     @InjectMocks
-   DoctorServiceImpl doctorService;
+    private DoctorServiceImpl doctorService;
 
     @Before
     public void setUp() {
@@ -39,7 +41,6 @@ public class DoctorServiceImplTest {
         doctors.add(new Doctors());
 
     }
-
 
     @Test
     public void addDoctor() throws Exception {

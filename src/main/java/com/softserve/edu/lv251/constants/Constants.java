@@ -44,14 +44,14 @@ public interface Constants {
 
     }
 
-    interface ControllersReturn {
-        String ALL_DOCTORS = "allDoctors";
-        String DOCTOR_DETAILS = "doctor_details";
-        String MODERATOR_CABINET = "moderatorCabinet";
-        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
-        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
-        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
-        String MODERATOR_CABINET_URL= "/moderator/cabinet";
-        String MODERATOR_CABINET_DOCTORS_URL=":/moderator/cabinet/doctors";
-    }
+//    interface ControllersReturn {
+//        String ALL_DOCTORS = "allDoctors";
+//        String DOCTOR_DETAILS = "doctor_details";
+//        String MODERATOR_CABINET = "moderatorCabinet";
+//        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
+//        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
+//        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
+//        String MODERATOR_CABINET_URL= "/moderator/cabinet";
+//        String MODERATOR_CABINET_DOCTORS_URL=":/moderator/cabinet/doctors";
+//    }
 }

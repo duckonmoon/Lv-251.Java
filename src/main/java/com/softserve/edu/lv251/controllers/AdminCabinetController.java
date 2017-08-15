@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class AdminCabinetController {
     public String userProfileGET(ModelMap model, Principal principal) {
 
         Admin admin = adminService.findByEmail(principal.getName());
-        model.addAttribute("moderators", new List<Moderator>);
+        model.addAttribute("moderators", new ArrayList<Moderator>());
         return "adminCabinet";
     }
 }

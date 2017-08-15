@@ -20,7 +20,7 @@ public interface Constants {
         int PORT = 587;
     }
 
-    interface ControllersConstants {
+    interface Controllers {
         String DATE_FLAG = "flag";
         String LOGIN_FLAG = "flag";
         String DOCTOR_ID = "doctorId";
@@ -41,6 +41,11 @@ public interface Constants {
         String GET_DOCTORS = "getDoctors";
         String PHOTO_FORM = "photoForm";
         String CLINIC_DTO = "clinicDTO";
+        String ALL_DOCTORS = "allDoctors";
+        String MODERATOR_CABINET = "moderatorCabinet";
+        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
+        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
+        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
 
     }
 

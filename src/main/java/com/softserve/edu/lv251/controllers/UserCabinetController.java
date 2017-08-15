@@ -59,9 +59,9 @@ public class UserCabinetController {
 
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-        model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PASSWORD_DTO, passwordDTO);
+        model.addAttribute(Constants.Controllers.PHOTO, user.getPhoto());
+        model.addAttribute(Constants.Controllers.PERSONAL_INFO_DTO, personalInfoDTO);
+        model.addAttribute(Constants.Controllers.PASSWORD_DTO, passwordDTO);
         return "userCabinet";
     }
 
@@ -74,7 +74,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.Controllers.PHOTO, user.getPhoto());
             return "userCabinet";
         }
 
@@ -102,8 +102,8 @@ public class UserCabinetController {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
             mapper.map(contacts, personalInfoDTO);
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-            model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
+            model.addAttribute(Constants.Controllers.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.Controllers.PERSONAL_INFO_DTO, personalInfoDTO);
             return "userCabinet";
         }
 

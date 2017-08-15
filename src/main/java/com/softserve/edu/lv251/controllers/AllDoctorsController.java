@@ -1,7 +1,6 @@
 package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -45,10 +44,10 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
-        model.addAttribute(Constants.ControllersConstants.GET_DOCTORS, pagingSizeService.getEntity(chainIndex, 10));
-        model.addAttribute(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
-        model.addAttribute(Constants.ControllersConstants.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
-        return Constants.ControllersReturn.ALL_DOCTORS;
+        model.addAttribute(Constants.Controllers.GET_DOCTORS, pagingSizeService.getEntity(chainIndex, 10));
+        model.addAttribute(Constants.Controllers.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
+        model.addAttribute(Constants.Controllers.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
+        return Constants.Controllers.ALL_DOCTORS;
     }
 
     /**
@@ -63,8 +62,8 @@ public class AllDoctorsController {
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
     public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
-                                       @RequestParam(Constants.ControllersConstants.DOCTOR_ID) long doctorId,
-                                       @RequestParam(Constants.ControllersConstants.CURRENT) Integer chainIndex, Principal principal) {
+                                       @RequestParam(Constants.Controllers.DOCTOR_ID) long doctorId,
+                                       @RequestParam(Constants.Controllers.CURRENT) Integer chainIndex, Principal principal) {
         Date date;
 
         ModelAndView modelAndView = new ModelAndView();
@@ -86,7 +85,7 @@ public class AllDoctorsController {
 
         } catch (Exception e) {
             logger.info("Wrong date.", e);
-            modelAndView.addObject(Constants.ControllersConstants.DATE_FLAG, true);
+            modelAndView.addObject(Constants.Controllers.DATE_FLAG, true);
             modelAndView.addObject("doc", doctorId);
 
             modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
@@ -115,8 +114,8 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
-        model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
-        return Constants.ControllersReturn.DOCTOR_DETAILS;
+        model.addAttribute("doctor", doctorsService.find(id));
+        return "doctor_details";
     }
 
 }

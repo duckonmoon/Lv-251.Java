@@ -33,7 +33,7 @@ public class Clinics extends BaseEntity {
     @OneToOne(cascade = {CascadeType.ALL})
     private Contacts contact;
 
-    @OneToOne(mappedBy = "clinic")
+    @OneToOne(mappedBy = "clinics")
     private Moderator moderator;
 
     public Clinics() {

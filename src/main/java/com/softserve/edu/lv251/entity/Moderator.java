@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 public class Moderator extends Users {
 
     @OneToOne
-    private Clinics clinic;
+    private Clinics clinics;
 
     @ManyToOne
     Admin admin;
@@ -20,11 +20,11 @@ public class Moderator extends Users {
     }
 
     public Clinics getClinics() {
-        return clinic;
+        return clinics;
     }
 
     public void setClinics(Clinics clinics) {
-        this.clinic = clinics;
+        this.clinics = clinics;
     }
 
     public Admin getAdmin() {

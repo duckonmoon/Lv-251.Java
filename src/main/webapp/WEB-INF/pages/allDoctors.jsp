@@ -87,7 +87,7 @@
                                                  alt="...">
                                         </a>
                                     </div>
-                                    <a href="/doctors/${flag}/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>
 

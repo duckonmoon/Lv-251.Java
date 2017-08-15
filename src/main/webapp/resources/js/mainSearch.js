@@ -81,7 +81,7 @@ function clinicsAll() {
                     $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                         "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                         "<img width=200' height='200' src='data:image/jpeg;base64,"+result.photo+"' alt='...'></a></div>"+
-                        "<a href='"+"clinics/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
+                        "<a href='"+"clinics/details/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.clinic_name+"</span></a><p>"+result.description+"</p>"+
                         " </div> </div>");
 
                 }
@@ -133,7 +133,7 @@ function clinicsByDistrict() {
                         $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinics/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a>"+
+                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a>"+
                             " </div> </div>");
                     }
 
@@ -183,8 +183,8 @@ function doctorsByDistrict() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinic/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
+                            "<a href='"+"clinic/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>"+res[i].specialisation+"<hr></p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 
@@ -199,7 +199,7 @@ function doctorsByDistrict() {
 
 }
 function  doctorsBySpecialization() {
-    console.log("doc by cpec");
+    console.log("doc by spec");
     $("#autocomplete").autocomplete({
         serviceUrl: '/doc/by/spec',
         noSuggestionNotice:'No results',
@@ -234,8 +234,8 @@ function  doctorsBySpecialization() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"doctors//"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
+                            "<a href='"+"/doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+" "+res[i].lastname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>"+res[i].specialization+"</p><hr> <p>"+res[i].clinics+"</p></div> </div>");
                     }
 
 

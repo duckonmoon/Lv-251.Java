@@ -7,7 +7,7 @@ $(document).ready(function() {
         paramName: "name",
         delimiter: ",",
         transformResult: function (response) {
-console.log("before"+response.toString());
+             console.log("before"+response.toString());
             return {
                 suggestions: $.map($.parseJSON(response), function (item) {
                     var i=item.firstname+" "+item.lastname+" "+item.specialization;
@@ -72,15 +72,16 @@ function allDocs() {
                     contentType:'application/json',
 
                     success:function (result) {
-                        console.log(result.firstname);
+                        console.log(result.firstname+""+result.clinicName);
                         var photo="data:image/jpeg;base64,"+result.photo;
                         $("#myCarousel").empty();
                         $("#content").empty();
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
-                            "<a href='"+"doctors//"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>"+result.specialisation+"<h</p> </div> </div>")
+                            "<a href='"+"/doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                            "<p><spring:message code='messages.specialization'/>"+result.specialisation+"<h</p><hr> <p>"+result.clinicName+"</p></div> </div>");
+
 
 
 

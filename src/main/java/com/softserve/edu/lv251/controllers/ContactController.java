@@ -48,11 +48,11 @@ public class ContactController {
         }
 
         if (mailComponent.sendMail(contactDTO)) {
-            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-success");
-            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageSuccess);
+            model.addFlashAttribute(Constants.Controllers.CLASS_CSS, "alert alert-success");
+            model.addFlashAttribute(Constants.Controllers.MESSAGE, messageSuccess);
         } else {
-            model.addFlashAttribute(Constants.ControllersConstants.CLASS_CSS, "alert alert-warning");
-            model.addFlashAttribute(Constants.ControllersConstants.MESSAGE, messageError);
+            model.addFlashAttribute(Constants.Controllers.CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(Constants.Controllers.MESSAGE, messageError);
         }
         return "redirect:/contact";
     }

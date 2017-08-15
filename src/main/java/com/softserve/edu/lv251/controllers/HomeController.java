@@ -41,19 +41,19 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "/all/clinics")
-    @ResponseBody
-    public List<ClinicSearchDTO> autocompleteClinics(@RequestParam("name") String name) {
-        System.out.println(name);
-        System.out.println(clinicService.searchByLetters(name));
-        return clinicService.searchByLetters(name);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/search/clinics/{id}")
-    public ClinicSearchDTO searchClinics(@PathVariable("id") Long id) {
-        return clinicService.clinicSearchById(id);
-    }
+//    @RequestMapping(value = "/all/clinics")
+//    @ResponseBody
+//    public List<ClinicSearchDTO> autocompleteClinics(@RequestParam("name") String name) {
+//        System.out.println(name);
+//        System.out.println(clinicService.searchByLetters(name));
+//        return clinicService.searchByLetters(name);
+//    }
+//
+//    @ResponseBody
+//    @RequestMapping(value = "/search/clinics/{id}")
+//    public ClinicSearchDTO searchClinics(@PathVariable("id") Long id) {
+//        return clinicService.clinicSearchById(id);
+//    }
 
 
     @ResponseBody
@@ -68,11 +68,11 @@ public class HomeController {
         return clinicService.findByDistrict(name);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/search/doctors/by/district/{name}")
-    public List<Doctors> doctorsByDistrict(@PathVariable("name") String name) {
-        return doctorsService.searchByDistrict(name);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/search/doctors/by/district/{name}")
+//    public List<Doctors> doctorsByDistrict(@PathVariable("name") String name) {
+//        return doctorsService.searchByDistrict(name);
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/doc/by/spec")

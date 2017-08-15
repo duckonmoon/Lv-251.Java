@@ -46,7 +46,7 @@ clinicsByDistrict();
 
 function clinicsAll() {
     $("#autocomplete").autocomplete({
-        serviceUrl: '/all/clinics',
+        serviceUrl: '/rest/autocomplete/clinics/byName',
         paramName: "name",
         delimiter: ",",
            transformResult: function (response) {
@@ -56,7 +56,7 @@ function clinicsAll() {
                     var i = item.clinic_name;
                     console.log(i);
                     var html="<a href='"+"/clinics/"+item.id+"'>"+i+"</a>";
-                    return {value: i, data: item.id,url:'/clinics/'+item.id};
+                    return {value: i, data: item.id};
 
                 })
 
@@ -70,7 +70,7 @@ function clinicsAll() {
             var id = suggestion.data;
 
             $.ajax({
-                url: '/search/clinics/'+id,
+                url: '/rest/search/clinic/'+id,
                 method: 'GET',
                 contentType: 'application/json',
 
@@ -98,7 +98,7 @@ function clinicsAll() {
 
 function clinicsByDistrict() {
     $("#autocomplete-districts").autocomplete({
-        serviceUrl: '/districts/byName',
+        serviceUrl: '/rest/autocomplete/districts/ByName',
         paramName: "name",
         delimiter: ",",
         transformResult: function (response) {
@@ -117,7 +117,7 @@ function clinicsByDistrict() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/clinics/by/district/'+name,
+                url: '/rest/search/clinics/byDistrict/'+name,
                 method: 'GET',
                 contentType: 'application/json',
 
@@ -152,8 +152,6 @@ function doctorsByDistrict() {
     $("#autocomplete-districts").autocomplete({
         serviceUrl: '/districts/byName',
         paramName: "name",
-        noSuggestionNotice:'No results',
-        showNoSuggestionNotice:true,
         delimiter: ",",
         transformResult: function (response) {
             console.log("before doc by districts");
@@ -171,7 +169,7 @@ function doctorsByDistrict() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/doctors/by/district/'+name,
+                url: '/rest/search/doctors/byDistrict/'+name,
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (res) {
@@ -184,7 +182,7 @@ function doctorsByDistrict() {
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
                             "<a href='"+"clinic/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>"+res[i].specialisation+"<hr></p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
+                            "<p><spring:message code='messages.specialization'/>"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 

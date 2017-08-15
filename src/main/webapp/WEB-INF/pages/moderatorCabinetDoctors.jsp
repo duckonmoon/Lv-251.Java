@@ -28,7 +28,7 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
-                <h3 class="text-center">${moderator.clinics.clinic_name}</h3>
+                <h3 class="text-center">${moderator.clinic.clinic_name}</h3>
                 <hr>
                 <div class="row">
                     <c:choose>

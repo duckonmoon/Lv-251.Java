@@ -90,7 +90,7 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="clinic"/>
-                                <form:input type="text" value="${moderator.clinics.clinic_name}" class="form-control"
+                                <form:input type="text" value="${moderator.clinic.clinic_name}" class="form-control"
                                             path="clinic"/>
                             </div>
                         </div>

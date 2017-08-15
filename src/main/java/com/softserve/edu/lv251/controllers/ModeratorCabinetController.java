@@ -60,8 +60,8 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet")
     public String moderatorCabinet(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
-        Clinics clinics = moderator.getClinics();
+        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
+        Clinics clinics = moderator.getClinic();
         System.out.println(doctors);
         Contacts contacts = clinics.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
@@ -84,7 +84,7 @@ public class ModeratorCabinetController {
 
         String messageError = messageSource.getMessage("messages.errorClinicName", null, currentLocale);
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        Clinics clinics = moderator.getClinics();
+        Clinics clinics = moderator.getClinic();
         Contacts contacts = clinics.getContact();
         if (!bindingResult.hasErrors()) {
             mapper.map(clinicInfoDTO, clinics);
@@ -103,7 +103,7 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet/doctors")
     public String moderatorAllDoctors(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
 
 
         model.addAttribute(Constants.Controllers.DOCTORS, doctors);
@@ -122,7 +122,7 @@ public class ModeratorCabinetController {
     public String addDoctor(Model model, Principal principal) {
         model.addAttribute("doctorForm", new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
         model.addAttribute(Constants.Controllers.DOCTORS, doctors);
         model.addAttribute(Constants.Controllers.MODERATOR, moderator);
         return Constants.Controllers.MODERATOR_ADD_DOCTOR;
@@ -149,7 +149,7 @@ public class ModeratorCabinetController {
             model.addFlashAttribute(Constants.Controllers.MESSAGE, messageError);
             return "redirect:/moderator/cabinet";
         } else {
-            clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinics());
+            clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
 
             return "redirect:/moderator/cabinet";
         }
@@ -160,7 +160,7 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.Controllers.USERS_TO_DOCTOR, new UserToDoctor());
 
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinic().getId());
         List<Users> users = userService.getAllUsers();
 
         model.addAttribute(Constants.Controllers.DOCTORS, doctors);

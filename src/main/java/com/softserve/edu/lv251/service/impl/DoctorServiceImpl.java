@@ -139,8 +139,18 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public List<Doctors> searchByDistrict(String name) {
-        return doctorsDAO.searchByDistrict(name);
+    public List<DoctorsSearchDTO> searchByDistrict(String name) {
+
+        List<Doctors> doctors = doctorsDAO.searchByDistrict(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctors doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
     }
 
     private boolean emailExist(String email) {
@@ -249,7 +259,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
         Moderator moderator=moderatorService.getByEmail(email);
-        Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
+        Clinics clinics=clinicService.getClinicByID(moderator.getClinic().getId());
         Doctors doctor=new Doctors();
         Users user=userService.findByEmail(userToDoctor.getEmail());
         doctor.setFirstname(user.getFirstname());

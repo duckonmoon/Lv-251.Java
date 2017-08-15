@@ -140,7 +140,7 @@
                     <form:form method="POST" modelAttribute="passwordDTO" action="/user/changePassword">
                         <div class="col-md-7 col-md-offset-4">
                         <hr>
-                        <h3>Change Password</h3>
+                        <h3><spring:message code="messages.changePassword"/></h3>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><spring:message
                                         code="messages.userNewPassword"/>:</label>

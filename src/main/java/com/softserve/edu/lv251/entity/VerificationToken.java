@@ -13,7 +13,9 @@ import java.util.Date;
  */
 @Entity
 public class VerificationToken extends BaseEntity {
-    //minutes in one day
+    /**
+     * Minutes in one day.
+     */
     private static final int EXPIRATION = 60 * 24;
 
     public VerificationToken() {

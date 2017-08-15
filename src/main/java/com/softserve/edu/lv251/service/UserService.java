@@ -40,10 +40,9 @@ public interface UserService {
 
     Users registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 
-    void sendRegistrationEmail(Users user);
+    void sendEmail(Users user, String messageText);
 
     List<Users> searchByLetters(String search);
 
     Users changePassword(Users user, PasswordDTO passwordDTO);
-
 }

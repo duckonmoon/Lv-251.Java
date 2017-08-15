@@ -20,10 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
@@ -74,6 +71,7 @@ public class RegistrationController {
             Errors errors) {
 
         if (result.hasErrors()) {
+            logger.warn(result.getAllErrors());
             return "registration";
         }
 
@@ -91,7 +89,15 @@ public class RegistrationController {
             return "registration";
         }
 
-        return "redirect:/";
+        return "redirect:/afterRegistration";
+    }
+
+    /**
+     * Author: Pavlo Kuchereshko
+     */
+    @GetMapping("/afterRegistration")
+    public String afterRegistrationGET() {
+        return "afterRegistration";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
@@ -130,7 +136,7 @@ public class RegistrationController {
 
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
-            String message = messageSource.getMessage("message.invalidToken", null, locale);
+            String message = messageSource.getMessage("messages.invalidToken", null, locale);
             model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
@@ -138,7 +144,7 @@ public class RegistrationController {
         Users user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
-            String message = messageSource.getMessage("message.invalidToken", null, locale);
+            String message = messageSource.getMessage("messages.invalidToken", null, locale);
             model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
@@ -163,9 +169,9 @@ public class RegistrationController {
         }
 
         model.addAttribute("login", true);
+
         return "home";
     }
-
 
     private Users createUserAccount(UserDTO accountDto, BindingResult result) {
         Users registered;
@@ -175,6 +181,7 @@ public class RegistrationController {
             logger.warn(e);
             return null;
         }
+
         return registered;
     }
 
@@ -186,6 +193,7 @@ public class RegistrationController {
             logger.warn(e);
             return null;
         }
+
         return registered;
     }
 }

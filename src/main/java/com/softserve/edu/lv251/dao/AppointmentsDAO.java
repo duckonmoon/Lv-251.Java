@@ -13,7 +13,6 @@ public interface AppointmentsDAO extends BaseDAO<Appointments>{
 
     List<Appointments> appointmentsWithDoctor (Long id);
 
-
     List getAppiontmentbyDoctorsEmail(String email);
 
     List<Appointments> getAppointmentByUserEmail(String email);

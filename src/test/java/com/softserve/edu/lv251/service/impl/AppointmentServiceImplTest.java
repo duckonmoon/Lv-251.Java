@@ -87,6 +87,7 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void getAllDoctorsAppointmentsAfterNow() throws Exception {
+
     }
 
     @Test

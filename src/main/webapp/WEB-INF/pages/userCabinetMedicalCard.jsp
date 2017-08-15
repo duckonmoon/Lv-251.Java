@@ -5,8 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
-
 <div class="container">
     <div>
         <div class="container" style="width: 30%; float: left">
@@ -187,4 +185,3 @@
         </div>
     </div>
 </div>
-

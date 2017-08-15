@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -8,8 +9,12 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Moderator extends Users {
+
     @OneToOne
     private Clinics clinic;
+
+    @ManyToOne
+    Admin admin;
 
     public Moderator() {
     }
@@ -20,5 +25,13 @@ public class Moderator extends Users {
 
     public void setClinics(Clinics clinics) {
         this.clinic = clinics;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }

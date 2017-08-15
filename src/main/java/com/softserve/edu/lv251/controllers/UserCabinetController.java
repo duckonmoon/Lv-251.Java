@@ -13,7 +13,6 @@ import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,7 @@ import java.util.Date;
  * Author: Brynetskyi Marian
  * Updated: Kovalevskyy Vitaliy
  */
-@Controller
+@org.springframework.stereotype.Controller
 public class UserCabinetController {
 
     @Autowired
@@ -59,9 +58,9 @@ public class UserCabinetController {
 
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-        model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
-        model.addAttribute(Constants.ControllersConstants.PASSWORD_DTO, passwordDTO);
+        model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+        model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
+        model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
         return "userCabinet";
     }
 
@@ -74,7 +73,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
             return "userCabinet";
         }
 
@@ -102,8 +101,8 @@ public class UserCabinetController {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
             mapper.map(contacts, personalInfoDTO);
-            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
-            model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
+            model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
             return "userCabinet";
         }
 

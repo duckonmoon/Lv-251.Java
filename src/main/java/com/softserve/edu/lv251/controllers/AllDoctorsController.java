@@ -12,7 +12,6 @@ import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,7 +26,7 @@ import java.util.TimeZone;
  * Created by Yana on 23.07.2017.
  * Updated: Brynetskyi Marian
  */
-@Controller
+@org.springframework.stereotype.Controller
 public class AllDoctorsController {
 
     @Autowired
@@ -48,8 +47,8 @@ public class AllDoctorsController {
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
-        model.addAttribute(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
-        model.addAttribute(Constants.ControllersConstants.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
+        model.addAttribute(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
+        model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
         return "allDoctors";
     }
 
@@ -65,30 +64,12 @@ public class AllDoctorsController {
      */
     @RequestMapping(value = "/user/addAppointment", method = RequestMethod.POST)
     public ModelAndView addAppointment(Model modelMap, @RequestParam("datetime") String localdate,
-                                       @RequestParam(Constants.ControllersConstants.DOCTOR_ID) long doctorId,
-                                       @RequestParam(Constants.ControllersConstants.CURRENT) Integer chainIndex, Principal principal) {
-        Date date;
+                                       @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
+                                       @RequestParam(Constants.Controller.CURRENT) Integer chainIndex, Principal principal) {
 
         ModelAndView modelAndView = new ModelAndView();
-        try {
-
-            SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            date = isoFormat.parse(localdate);
-
-            if (date.before(new Date())) {
-                throw new Exception();
-            }
-            Appointments appointments = new Appointments();
-            appointments.setAppointmentDate(date);
-            appointments.setIsApproved(false);
-            appointments.setUsers(userService.findByEmail(principal.getName()));
-            appointments.setDoctors(doctorsService.find(doctorId));
-            appointmentService.addAppointment(appointments);
-
-        } catch (Exception e) {
-            logger.info("Wrong date.", e);
-            modelAndView.addObject(Constants.ControllersConstants.DATE_FLAG, true);
+        if (!appointmentService.createAppointment(localdate, principal.getName(), doctorId)) {
+            modelAndView.addObject(Constants.Controller.DATE_FLAG, true);
             modelAndView.addObject("doc", doctorId);
 
             modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);

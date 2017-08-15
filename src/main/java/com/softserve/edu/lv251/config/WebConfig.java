@@ -12,7 +12,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import java.util.Locale;
@@ -111,10 +109,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
         //Using gmail
-        javaMailSender.setHost(Constants.MailConstants.HOST);
-        javaMailSender.setPort(Constants.MailConstants.PORT);
-        javaMailSender.setUsername(Constants.MailConstants.MAIL);
-        javaMailSender.setPassword(Constants.MailConstants.PASSWORD);
+        javaMailSender.setHost(Constants.Mail.HOST);
+        javaMailSender.setPort(Constants.Mail.PORT);
+        javaMailSender.setUsername(Constants.Mail.MAIL);
+        javaMailSender.setPassword(Constants.Mail.PASSWORD);
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");

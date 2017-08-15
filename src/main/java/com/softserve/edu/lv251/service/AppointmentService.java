@@ -30,4 +30,6 @@ public interface AppointmentService {
     List<Appointments> getAppiontmentbyDoctorsEmail(String email);
 
     List<AppointmentDTO> getAppointmentByUserEmail(String email);
+
+    boolean createAppointment (String date, String userEmail, long doctorId);
 }

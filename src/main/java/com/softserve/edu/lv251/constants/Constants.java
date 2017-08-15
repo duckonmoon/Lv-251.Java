@@ -9,18 +9,18 @@ public interface Constants {
     String MESSAGES_SOURCE = "classpath:messages";
     String HOME = "http://localhost:8080";
 
-    interface DatabaseConstants {
-        String DATABASE_PROPERTY_SOURCE = "classpath:db.properties";
+    interface Database {
+        String PROPERTY_SOURCE = "classpath:db.properties";
     }
 
-    interface MailConstants {
+    interface Mail {
         String MAIL = "lv251clinics@gmail.com";
         String PASSWORD = "clinics251lv";
         String HOST = "smtp.gmail.com";
         int PORT = 587;
     }
 
-    interface ControllersConstants {
+    interface Controller {
         String DATE_FLAG = "flag";
         String LOGIN_FLAG = "flag";
         String DOCTOR_ID = "doctorId";

@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**

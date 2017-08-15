@@ -17,3 +17,89 @@
 2017-08-15 10:13:17 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
 2017-08-15 10:13:22 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
 2017-08-15 10:13:38 WARN  AdminCabinetController:30 - Entered the admin controller
+2017-08-15 10:18:49 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:18:49 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:18:49 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:18:49 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:18:50 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:18:51 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:18:53 INFO  SchemaCreatorImpl:489 - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@31fc2b59'
+2017-08-15 10:18:57 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:20:04 ERROR RegistrationController:90 - org.springframework.mail.MailSendException: Mail server connection failed; nested exception is javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 587, response: 421. Failed messages: javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 587, response: 421; message exceptions (1) are:
+Failed message 1: javax.mail.MessagingException: Could not connect to SMTP host: smtp.gmail.com, port: 587, response: 421
+2017-08-15 10:26:12 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:26:12 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:26:12 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:26:12 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:26:13 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:26:14 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:26:21 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:27:43 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:27:43 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:27:43 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:27:44 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:27:44 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:27:45 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:27:51 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:28:09 WARN  AdminCabinetController:30 - Entered the admin controller
+2017-08-15 10:31:23 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:31:23 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:31:23 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:31:23 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:31:24 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:31:25 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:31:31 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:31:46 WARN  AdminCabinetController:30 - Entered the admin controller
+2017-08-15 10:33:02 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:33:02 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:33:02 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:33:03 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:33:04 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:33:05 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:34:06 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:34:26 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:34:26 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:34:26 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:34:26 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:34:27 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:34:28 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:34:33 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:35:33 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:35:34 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:35:34 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:35:34 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:35:35 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:35:36 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:35:45 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:39:54 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:39:54 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:39:54 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:39:54 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:39:55 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:39:56 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:40:02 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2017-08-15 10:41:09 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-08-15 10:41:10 INFO  Version:45 - HHH000412: Hibernate Core {5.2.10.Final}
+2017-08-15 10:41:10 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2017-08-15 10:41:10 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2017-08-15 10:41:11 INFO  Dialect:157 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-08-15 10:41:12 INFO  Version:30 - HV000001: Hibernate Validator 5.4.1.Final
+2017-08-15 10:41:21 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory

@@ -29,7 +29,7 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <p>No clinics in the database</p>
+                        <p>No moderators in the database</p>
                     </c:otherwise>
                 </c:choose>
             </div>

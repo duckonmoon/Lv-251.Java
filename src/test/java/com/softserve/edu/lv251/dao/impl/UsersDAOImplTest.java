@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.dao.impl;
+package java.com.softserve.edu.lv251.dao.impl;
 
 import org.junit.Test;
 

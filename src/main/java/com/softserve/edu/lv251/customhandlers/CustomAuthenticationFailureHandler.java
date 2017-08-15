@@ -31,12 +31,12 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
         Locale locale = request.getLocale();
 
-        String errorMessage = messageSource.getMessage("message.badCredentials", null, locale);
+        String errorMessage = messageSource.getMessage("messages.badCredentials", null, locale);
 
         if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
-            errorMessage = messageSource.getMessage("message.disabled", null, locale);
+            errorMessage = messageSource.getMessage("messages.disabled", null, locale);
         } else if (exception.getMessage().equalsIgnoreCase("User account has expired")) {
-            errorMessage = messageSource.getMessage("message.expired", null, locale);
+            errorMessage = messageSource.getMessage("messages.expired", null, locale);
         }
 
         request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, errorMessage);

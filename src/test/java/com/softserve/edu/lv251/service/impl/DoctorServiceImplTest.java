@@ -1,4 +1,4 @@
-package com.softserve.edu.lv251.dao.impl;
+package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -58,7 +58,7 @@ public class DoctorServiceImplTest {
 
 
         when(doctorsDAO.getAllEntities()).thenReturn(doctors);
-        assertEquals(2,doctorsDAO.getAllEntities().size());
+        assertEquals(2,doctorService.getAll().size());
     }
 
     @Test

@@ -28,7 +28,7 @@ public class DoctorsDAOImplTest {
     Query query;
     @Spy
     List<Doctors> doctorsList = new ArrayList<>();
-    ;
+
 
 
     @Before

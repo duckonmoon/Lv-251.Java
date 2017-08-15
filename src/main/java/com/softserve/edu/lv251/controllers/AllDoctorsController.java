@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 /**
- * Created by Yana on 23.07.2017.
+ * Created by Yana Martynyak on 23.07.2017.
  * Updated: Brynetskyi Marian
  */
 @Controller
@@ -32,11 +32,9 @@ public class AllDoctorsController {
 
     @Autowired
     private DoctorsService doctorsService;
-
     @Autowired
     @Qualifier("doctorService")
     private PagingSizeService<Doctors> pagingSizeService;
-
     @Autowired
     private UserService userService;
     @Autowired
@@ -47,10 +45,10 @@ public class AllDoctorsController {
 
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)
     public String allDoctors(@PathVariable("current") Integer chainIndex, Model model) {
-        model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
+        model.addAttribute(Constants.ControllersConstants.GET_DOCTORS, pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         model.addAttribute(Constants.ControllersConstants.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
-        return "allDoctors";
+        return Constants.ControllersReturn.ALL_DOCTORS;
     }
 
     /**
@@ -118,7 +116,7 @@ public class AllDoctorsController {
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
         model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
-        return "doctor_details";
+        return Constants.ControllersReturn.DOCTOR_DETAILS;
     }
 
 }

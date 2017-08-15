@@ -27,7 +27,7 @@ public class AdminCabinetController {
     @GetMapping("/admin/cabinet")
     public String userProfileGET(ModelMap model, Principal principal) {
 
-        logger.warn("Entered the controller");
+        logger.warn("Entered the admin controller");
         Admin admin = adminService.findByEmail(principal.getName());
         model.addAttribute("moderators", new ArrayList<Moderator>());
         return "adminCabinet";

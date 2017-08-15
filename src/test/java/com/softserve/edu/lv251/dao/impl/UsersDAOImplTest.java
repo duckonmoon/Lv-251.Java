@@ -1,4 +1,4 @@
-package java.com.softserve.edu.lv251.dao.impl;
+package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.entity.Doctors;
@@ -14,8 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
@@ -34,6 +33,7 @@ public class UsersDAOImplTest {
     public void beforeTest() {
         MockitoAnnotations.initMocks(this);
         Users users = new Users();
+        users.setId(2);
         users.setFirstname("Pasha");
         users.setLastname("Pashenko");
         usersList.add(users);
@@ -56,6 +56,9 @@ public class UsersDAOImplTest {
 
     @Test
     public void getEntityByID() throws Exception {
+        when(entityManager.createQuery("")).thenReturn(query);
+        when(query.getResultList()).thenReturn(usersList);
+        assertEquals(2, ((Users) query.getResultList().get(0)).getId());
     }
 
     @Test

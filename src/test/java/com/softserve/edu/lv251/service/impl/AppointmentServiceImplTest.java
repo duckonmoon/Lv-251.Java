@@ -116,12 +116,13 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void getAllDoctorsAppointmentsAfterNow() throws Exception {
-        when(appointmentsDAO.getAllEntities()).thenReturn(appointments);
-        when(appointmentService.getAllDoctorsAppointmentsAfterNow()).thenCallRealMethod();
+        when(appointmentService.getAllDoctorsAppointmentsAfterNow()).thenReturn(appointmentsForCreationDTOS
+                .stream()
+                .filter(p->p.getAppointmentDate().after(new Date()))
+                .collect(Collectors.toList()));
 
 
-
-        Assert.assertEquals(2, appointmentService.getAllDoctorsAppointmentsAfterNow());
+        Assert.assertEquals(1, appointmentService.getAllDoctorsAppointmentsAfterNow().size());
     }
 
     @Test

@@ -15,6 +15,7 @@ public class Clinics extends BaseEntity {
     @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String photo;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
 

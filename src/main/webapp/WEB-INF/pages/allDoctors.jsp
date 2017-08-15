@@ -16,24 +16,23 @@
         <div class="row" style="margin-top: 50px">
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
-                    <p id="p-doctor" style="display: none"><spring:message code="messages.searchDoctors"/></p>
-                    <p id="p-doc-by-spec" style="display: none"><spring:message
-                            code="messages.doctorsSearchBySpec"/></p>
-                    <div class="navbar-form ">
-                        <div class="form-group">
-                            <select class="selectpicker form-control" style="width:210px " id="selectDocOrClinic">
+
+                    <div class="navbar-form " style="width: 95%">
+                        <div class="form-group" style="width: 90%">
+                            <select class="selectpicker form-control" style="width:10% " id="selectDocOrClinic">
                                 <option value="3"><spring:message code="messages.chooseSearch"/></option>
                                 <option value="1"><spring:message code="messages.doctorsSearch"/></option>
                                 <option value="2"><spring:message code="messages.doctorsSearchBySpec"/></option>
                             </select>
-                            <div class="input-group ">
-                                <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change"
+
+                            <div class="input-group "  style="width: 60%">
+                                <span class="input-group-addon" id="sizing-addon1"  style="width: 8%"><i class="fa fa-ambulance change"
                                                                                       aria-hidden="true"
                                                                                       style="color: #226ed9"></i></span>
-                                <input type="text" class="form-control " id="autocomplete" style="width: 530px"
+                                <input type="text" class="form-control " id="autocomplete"
                                        placeholder='' aria-describedby="sizing-addon1">
                             </div>
-                            <input id="autocomplete-districts" type="text" class="form-control " style="width: 210px"
+                            <input id="autocomplete-districts" type="text" class="form-control " style="width: 20%"
                                    placeholder='<spring:message code="messages.district"/>'>
                         </div>
                         <a href="${current}">

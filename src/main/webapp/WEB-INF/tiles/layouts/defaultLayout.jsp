@@ -21,6 +21,7 @@
     <link href="<c:url value="/resources/css/bootstrap-social.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
 
 </head>
 
@@ -188,9 +189,6 @@
                                     <input id="password" name="j_password" type="password" class="form-control"
                                            placeholder="<spring:message code="messages.password"/>"/>
                                 </div>
-                                <%--<span>${error}</span>--%>
-                                <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-
                                 <div class="form-group">
                                     <input id="remember" type="checkbox" name="remember-me" value="true">
                                     <label class="control-label" for="remember">
@@ -219,14 +217,14 @@
 
 <script>
     function hideText() {
-        document.getElementById('wrong').innerHTML= '';
+        document.getElementById('wrong').innerHTML = '';
     }
 </script>
 
 
 <c:if test="${flag}">
     <script>
-        document.getElementById('wrong').innerHTML= '<spring:message code="messages.invalidLoginOrPassword"/>';
+        document.getElementById('wrong').innerHTML = '<spring:message code="messages.invalidLoginOrPassword"/>';
         jQuery(window).load(function(){
             jQuery('#loginModal').modal('show')
         });
@@ -236,7 +234,7 @@
 
 <c:if test="${login}">
     <script>
-        document.getElementById('wrong').innerHTML= '';
+        document.getElementById('wrong').innerHTML = '';
         jQuery(window).load(function(){
             jQuery('#loginModal').modal('show')
         });

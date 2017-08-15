@@ -5,8 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
-<link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
-
 <div class="container">
     <div>
         <div class="container" style="width: 30%; float: left">
@@ -44,27 +42,28 @@
                                 <c:forEach items="${listAppointments}" var="appointment" varStatus="loop">
                                     <fmt:formatDate var="aDate" pattern = 'dd-MM-yyyy HH:mm' value='${appointment.appointmentDate}'/>
                                     <c:choose>
-                                        <c:when test="${appointment.appointmentDate < date}">
+                                        <c:when test="${appointment.appointmentDate.time lt date}">
                                             <c:set var="showAppointmentClass" value="appointmentsHistory"/>
                                             <c:set var="listPastAppointmentsLength" value="${listPastAppointmentsLength + 1}"/>
                                         </c:when>
-                                        <c:when test="${appointment.appointmentDate >= date}">
+                                        <c:when test="${appointment.appointmentDate.time ge date}">
                                             <c:set var="showAppointmentClass" value="pendingAppointments"/>
                                             <c:set var="listPendingAppointmentsLength" value="${listPendingAppointmentsLength + 1}"/>
                                         </c:when>
                                     </c:choose>
+
                                     <c:choose>
-                                        <c:when test="${appointment.appointmentDate > date && !appointment.isApproved}">
+                                        <c:when test="${appointment.appointmentDate.time ge date && !appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-warning"/>
                                             <spring:message code="messages.appointmentIsNotApproved" var="appointmentIsNotApproved"/>
                                             <c:set var="appointmentSatatus" value="${appointmentIsNotApproved}"/>
                                         </c:when>
-                                        <c:when test="${appointment.appointmentDate > date && appointment.isApproved}">
+                                        <c:when test="${appointment.appointmentDate.time ge date && appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-success"/>
                                             <spring:message code="messages.appointmentIsDone" var="appointmentIsDone"/>
                                             <c:set var="appointmentSatatus" value="${appointmentIsDone}"/>
                                         </c:when>
-                                        <c:when test="${appointment.appointmentDate < date && appointment.isApproved}">
+                                        <c:when test="${appointment.appointmentDate.time lt date && appointment.isApproved}">
                                             <c:set var="cssClass" value="label label-info"/>
                                             <spring:message code="messages.appointmentIsApproved" var="appointmentIsApproved"/>
                                             <c:set var="appointmentSatatus" value="${appointmentIsApproved}"/>
@@ -75,10 +74,11 @@
                                             <c:set var="appointmentSatatus" value="${appointmentIsRejected}"/>
                                         </c:otherwise>
                                     </c:choose>
-                                    <div id="${showAppointmentClass}">
-                                        <div class="col-sm-6" id="appointmentWrapper">
-                                            <div id="appointmentFloatContainer">
-                                                <div id="appointmentInner" class = "${cssClass}">
+
+                                    <div class="${showAppointmentClass}">
+                                        <div class="col-sm-6 appointmentWrapper">
+                                            <div class="appointmentFloatContainer">
+                                                <div class="appointmentInner ${cssClass}">
                                                     <c:out value="${appointmentSatatus}"/>
                                                 </div>
                                             </div>
@@ -132,12 +132,16 @@
                                     </div>
                                 </div>
                             <script>
+                                $(function () {
+                                   showAppointmentHistory();
+                                });
+
                                 var listPastAppointmentsLength = "${listPastAppointmentsLength}";
                                 var listPendingAppointmentsLength = "${listPendingAppointmentsLength}";
 
                                 var showAppointmentHistory = function () {
-                                    $("#appointmentsHistory").show();
-                                    $("#pendingAppointments").hide();
+                                    $(".appointmentsHistory").show();
+                                    $(".pendingAppointments").hide();
                                     $("#appointmentsHistoryLink").addClass("navbar-inverse");
                                     $("#pendingAppointmentsLink").removeClass("navbar-inverse");
                                     if (listPastAppointmentsLength == 0) {
@@ -152,8 +156,8 @@
                                 };
 
                                 var showPendingAppointments = function () {
-                                    $("#appointmentsHistory").hide();
-                                    $("#pendingAppointments").show();
+                                    $(".appointmentsHistory").hide();
+                                    $(".pendingAppointments").show();
                                     $("#pendingAppointmentsLink").addClass("navbar-inverse");
                                     $("#appointmentsHistoryLink").removeClass("navbar-inverse");
                                     if (listPendingAppointmentsLength == 0) {
@@ -169,6 +173,10 @@
 
                                 $("#appointmentsHistoryLink").click(showAppointmentHistory);
                                 $("#pendingAppointmentsLink").click(showPendingAppointments);
+
+                                $(".appointmentsHistory").click(function() {
+                                    $(this).modal();
+                                });
                             </script>
                         </div>
                     </div>
@@ -177,4 +185,3 @@
         </div>
     </div>
 </div>
-

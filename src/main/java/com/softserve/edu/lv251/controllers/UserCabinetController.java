@@ -1,24 +1,26 @@
 package com.softserve.edu.lv251.controllers;
+
+import com.softserve.edu.lv251.config.Base64;
 import com.softserve.edu.lv251.config.Mapper;
+import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contacts;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.config.Base64;
 import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
@@ -57,9 +59,9 @@ public class UserCabinetController {
 
         mapper.map(user, personalInfoDTO);
         mapper.map(contacts, personalInfoDTO);
-        model.addAttribute("photo", user.getPhoto());
-        model.addAttribute("personalInfoDTO", personalInfoDTO);
-        model.addAttribute("passwordDTO", passwordDTO);
+        model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+        model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
+        model.addAttribute(Constants.ControllersConstants.PASSWORD_DTO, passwordDTO);
         return "userCabinet";
     }
 
@@ -72,7 +74,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-            model.addAttribute("photo", user.getPhoto());
+            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
             return "userCabinet";
         }
 
@@ -100,8 +102,8 @@ public class UserCabinetController {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
             mapper.map(contacts, personalInfoDTO);
-            model.addAttribute("photo", user.getPhoto());
-            model.addAttribute("personalInfoDTO", personalInfoDTO);
+            model.addAttribute(Constants.ControllersConstants.PHOTO, user.getPhoto());
+            model.addAttribute(Constants.ControllersConstants.PERSONAL_INFO_DTO, personalInfoDTO);
             return "userCabinet";
         }
 
@@ -113,20 +115,12 @@ public class UserCabinetController {
      * Author: Pavlo Kuchereshko
      */
     @GetMapping("/user/medicalcard")
-    public String medicalCardGET(ModelMap model, Principal principal) {
+    public String medicalCardGET(ModelMap model, Principal principal, HttpServletRequest request) {
 
         Users user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
-        model.addAttribute("date", new Date());
+        model.addAttribute("date", new Date().getTime());
 
         return "userCabinetMedicalCard";
-    }
-
-    @GetMapping("/user/appointments")
-    public String userAppointments(Model model, Principal principal) {
-        Users user = userService.findByEmail(principal.getName());
-        model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
-        model.addAttribute("date", new Date());
-        return "userCabinetAppointments";
     }
 }

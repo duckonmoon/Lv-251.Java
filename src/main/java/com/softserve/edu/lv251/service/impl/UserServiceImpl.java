@@ -5,7 +5,6 @@ import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.MedicalCard;
 import com.softserve.edu.lv251.entity.Users;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
@@ -38,9 +37,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ContactsService contactsService;
-
-    @Autowired
-    private MedicalCardService medicalCardService;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
@@ -119,7 +115,6 @@ public class UserServiceImpl implements UserService {
         }
         Users user = new Users();
         mapper.map(accountDto, user);
-        user.setMiddlename("");
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
@@ -127,15 +122,9 @@ public class UserServiceImpl implements UserService {
         Contacts contact = new Contacts();
         contact.setUsers(user);
         contact.setEmail(accountDto.getEmail());
-        MedicalCard medicalCard = new MedicalCard();
-        medicalCard.setUser(user);
         this.contactsService.addContacts(contact);
-        this.medicalCardService.addMedicalCard(medicalCard);
         user.setContact(contact);
         addUser(user);
-
-        //IT'S WORKS, DO NOT UNCOMMENT)))
-        //sendRegistrationEmail(user);
 
         return user;
     }
@@ -145,8 +134,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendRegistrationEmail(Users user) {
-        this.mailService.sendEmail(user);
+    public void sendEmail(Users user, String messageText) {
+        this.mailService.sendEmail(user, messageText);
     }
 
     @Override

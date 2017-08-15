@@ -11,7 +11,10 @@ public class Users extends BaseEntity {
 
     private String firstname;
     private String lastname;
+
+    @Column( columnDefinition = "varchar(255) default ''")
     private String middlename;
+
     private String email;
     private String password;
 
@@ -50,9 +53,7 @@ public class Users extends BaseEntity {
 
     @OneToOne
     private Contacts contact;
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<MedicalCard> medicalCards;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<TestsResults> testsResults;
@@ -67,14 +68,6 @@ public class Users extends BaseEntity {
 
     public void setTestsResults(List<TestsResults> testsResults) {
         this.testsResults = testsResults;
-    }
-
-    public List<MedicalCard> getMedicalCards() {
-        return medicalCards;
-    }
-
-    public void setMedicalCards(List<MedicalCard> medicalCards) {
-        this.medicalCards = medicalCards;
     }
 
     public Contacts getContact() {
@@ -168,10 +161,9 @@ public class Users extends BaseEntity {
     @Override
     public String toString() {
         return "Users{" +
-                "firstname='" + firstname + '\'' +
+                " firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", middlename='" + middlename + '\'' +
-
+                ", email='" + email + '\'' +
                 '}';
     }
 }

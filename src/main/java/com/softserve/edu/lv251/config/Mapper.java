@@ -111,7 +111,7 @@ public class Mapper extends ConfigurableMapper {
                             latLng.setId(clinics.getId());
                         }
                     }
-                });
+                }).register();
 
         factory.classMap(Appointments.class, AppointmentsForCreationDTO.class)
                 .field("appointmentDate", "appointmentDate")
@@ -248,7 +248,7 @@ public class Mapper extends ConfigurableMapper {
                         appointments.getAppointmentDate().setTime(
                                 appointments.getAppointmentDate().getTime()
                                         - Calendar.getInstance().getTimeZone().getRawOffset());
-                        appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + appointments.getUsers().getLastname());
+                        appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + " " + appointments.getUsers().getLastname());
                         if (appointments.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");

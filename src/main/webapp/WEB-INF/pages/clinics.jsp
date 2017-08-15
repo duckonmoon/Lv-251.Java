@@ -6,30 +6,29 @@
 
 
 <div class="container">
+    <%--Search--%>
     <div class="row" style="margin-top: 50px">
         <p id="clinic" style="display: none"><spring:message code="messages.searchClinics"/></p>
         <p id="doctor" style="display: none"><spring:message code="messages.searchDoctors"/></p>
         <p id="docByspec" style="display: none"><spring:message code="messages.doctorsSearchBySpec"/></p>
-
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
-
-                <div class="navbar-form ">
-                    <div class="form-group">
-
-                        <select class="selectpicker form-control" style="width:210px " id="selectDocOrClinic">
+                <div class="navbar-form " style="width: 95%">
+                    <div class="form-group" style="width: 90%">
+                        <select class="selectpicker form-control" style="width:18% " id="selectDocOrClinic">
                             <option id="option-clinic" value="0"><spring:message
                                     code="messages.clinicsSearch"/></option>
                         </select>
-                        <div class="input-group ">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-ambulance change"
-                                                                                  aria-hidden="true"
-                                                                                  style="color: #226ed9"></i></span>
-                            <input type="text" class="form-control " id="autocomplete" style="width: 530px"
+                        <div class="input-group " style="width: 60%">
+                            <span class="input-group-addon" id="sizing-addon1" style="width: 8%"><i
+                                    class="fa fa-ambulance change"
+                                    aria-hidden="true"
+                                    style="color: #226ed9"></i></span>
+                            <input type="text" class="form-control " id="autocomplete"
                                    placeholder='<spring:message code="messages.searchClinics"/>'
                                    aria-describedby="sizing-addon1">
                         </div>
-                        <input id="autocomplete-districts" type="text" class="form-control " style="width: 210px"
+                        <input id="autocomplete-districts" type="text" class="form-control " style="width: 20%"
                                placeholder='<spring:message code="messages.district"/>'>
                     </div>
                     <a href="/">
@@ -37,12 +36,10 @@
                                 code="messages.search"/></button>
                     </a>
                 </div>
-
-
             </div>
-
         </nav>
     </div>
+    <%-----------------------------------------------------%>
     <div class="container col-lg-8">
         <%--Pagination--%>
         <%-----------------------------------------------------%>
@@ -66,8 +63,7 @@
                 </ul>
             </div>
             <%-----------------------------------------------------%>
-
-
+            <%--list of clinics--%>
             <c:forEach items="${getClinics}" var="clinic">
                 <a href="clinic/${clinic.id}">
                     <div class="row row-content">
@@ -80,15 +76,20 @@
                                     </a>
                                 </div>
                                 <a href="details/${clinic.id}" class="btn-link">
-                                    <span class="doc-name">${clinic.clinic_name}</span>
+                                    <span class="doc-name"> ${clinic.clinic_name}</span>
                                 </a>
+                                <p><spring:message code="messages.clinicPhone"/>: ${clinic.contact.firstPhone}</p>
+                                <hr>
+                                <p><spring:message
+                                        code="messages.clinicAddress"/>: ${clinic.contact.city}, ${clinic.contact.address}</p>
+                                <p><spring:message
+                                        code="messages.clinicDistrict"/>: ${clinic.contact.district.name}</p>
                             </div>
                         </div>
                     </div>
                 </a>
             </c:forEach>
-
-
+            <%-----------------------------------------------------%>
             <%--Pagination--%>
             <%-----------------------------------------------------%>
             <div class="text-center">
@@ -112,18 +113,14 @@
             <%-----------------------------------------------------%>
         </div>
     </div>
+    <%--google map--%>
     <aside class="container col-lg-4 hidden-xs hidden-sm" style="overflow: inherit">
         <div style="width: 25em; height: 30em; position:fixed">
-            <div>
-                <div>
-                    <div id="map" style="width: 100%; height: 100%"/>
-                </div>
-            </div>
+            <div id="map" style="width: 100%; height: 100%"/>
         </div>
     </aside>
+    <%-----------------------------------------------------%>
 </div>
-</div>
-
 
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/js/map.js"/>"></script>

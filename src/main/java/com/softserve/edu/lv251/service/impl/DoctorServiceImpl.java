@@ -31,12 +31,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     private ContactsDAO contactsDAO;
 
 
-   @Autowired
-   private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private RolesService rolesService;
-
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -119,15 +118,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         Doctors doctor = new Doctors();
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
-        doctor.setMiddlename("");
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
-
         doctor.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name()),
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
-
-
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         Contacts contact = new Contacts();
         contact.setUsers(doctor);

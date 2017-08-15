@@ -9,7 +9,9 @@ import java.util.List;
  * Created by User on 11.07.2017.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Doctors extends Users {
+
     @Column(length = 10000)
     private String description;
     @JsonIgnore
@@ -21,6 +23,7 @@ public class Doctors extends Users {
                     CascadeType.PERSIST
             })
     private Clinics clinics;
+
     @JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointments> docAppointments;
@@ -63,13 +66,5 @@ public class Doctors extends Users {
         this.specialization = specialization;
     }
 
-    @Override
-    public String toString() {
-        return "Doctors{" +
-                "description='" + description + '\'' +
-                ", clinics=" + clinics +
-                ", docAppointments=" + docAppointments +
-                ", specialization=" + specialization +
-                '}';
-    }
+
 }

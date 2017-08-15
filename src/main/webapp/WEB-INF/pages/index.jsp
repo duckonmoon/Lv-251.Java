@@ -13,15 +13,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active" >
-            <img src="resources/img/1.jpg" style="width: 100% !important;"/>
-        </div>
-
-        <div class="item" >
             <img src="resources/img/2.jpg" style="width: 100% !important;"/>
         </div>
 
         <div class="item" >
             <img src="resources/img/3.jpg" style="width: 100% !important;"/>
+        </div>
+
+        <div class="item" >
+            <img src="resources/img/1.jpg" style="width: 100% !important;"/>
         </div>
     </div>
 

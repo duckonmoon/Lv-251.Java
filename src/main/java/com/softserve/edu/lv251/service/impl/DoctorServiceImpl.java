@@ -158,8 +158,17 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public List<Doctors> searchBySpecialization(String name) {
-        return doctorsDAO.searchBySpecialization(name);
+    public List<DoctorsSearchDTO> searchBySpecialization(String name) {
+
+        List<Doctors> doctors = doctorsDAO.searchBySpecialization(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctors doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
     }
 
     @Override

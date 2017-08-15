@@ -80,11 +80,11 @@ public class HomeController {
         return specializationService.searchByLetters(name);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/search/doctors/by/spec/{name}")
-    public List<Doctors> doctorsBySpec(@PathVariable("name") String name) {
-        return doctorsService.searchBySpecialization(name);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/search/doctors/by/spec/{name}")
+//    public List<Doctors> doctorsBySpec(@PathVariable("name") String name) {
+//        return doctorsService.searchBySpecialization(name);
+//    }
 
 
 }

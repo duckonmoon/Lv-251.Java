@@ -8,6 +8,7 @@ $(document).ready(function() {
             $(".fa-user-md").removeClass("fa-user-md");
             $(".change").addClass("fa-ambulance");
             $("#autocomplete").attr('placeholder',$("#clinic").html());
+
             clinicsByDistrict();
             console.log("You select 0");
             clinicsAll();
@@ -75,6 +76,8 @@ function clinicsAll() {
                 contentType: 'application/json',
 
                 success: function (result) {
+                    var v=$("#spec").html();
+                    console.log(v);
                     console.log(result.clinic_name);
                    $("#myCarousel").empty();
                     $(".content").empty();
@@ -133,7 +136,7 @@ function clinicsByDistrict() {
                         $(".content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a>"+
+                            "<a href='"+"clinics/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].clinic_name+"</span></a><p>"+res[i].description+"</p>"+
                             " </div> </div>");
                     }
 
@@ -173,6 +176,7 @@ function doctorsByDistrict() {
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (res) {
+                    var specialization=$("#spec").html();
                     console.log(res.length);
                     $("#myCarousel").empty();
                     $("#content").empty();
@@ -182,7 +186,7 @@ function doctorsByDistrict() {
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
                             "<a href='"+"clinic/details/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
+                            "<p>"+specialization+":"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 
@@ -199,7 +203,7 @@ function doctorsByDistrict() {
 function  doctorsBySpecialization() {
     console.log("doc by spec");
     $("#autocomplete").autocomplete({
-        serviceUrl: '/doc/by/spec',
+        serviceUrl: '/rest/autocomplete/specializations/byName',
         noSuggestionNotice:'No results',
         showNoSuggestionNotice:true,
         paramName: "name",
@@ -220,10 +224,11 @@ function  doctorsBySpecialization() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data );
             var name = suggestion.data;
             $.ajax({
-                url: '/search/doctors/by/spec/'+name,
+                url: '/rest/search/doctors/bySpec/'+name,
                 method: 'GET',
                 contentType: 'application/json',
                 success: function (res) {
+                    var specialization=$("#spec").html();
                     console.log(res.length);
                     $("#myCarousel").empty();
                     $("#content").empty();
@@ -233,7 +238,7 @@ function  doctorsBySpecialization() {
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
                             "<a href='"+"/doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+" "+res[i].lastname+"</span></a>"+
-                            "<p><spring:message code='messages.specialization'/>"+res[i].specialization+"</p><hr> <p>"+res[i].clinics+"</p></div> </div>");
+                            "<p>"+specialization+":"+res[i].specialisation+"</p><hr> <p>"+res[i].clinicName+"</p></div> </div>");
                     }
 
 
@@ -242,6 +247,56 @@ function  doctorsBySpecialization() {
             })
 
         }
+
+
+    });
+}
+function allDocs() {
+    $("#autocomplete").autocomplete({
+        serviceUrl: '/all/doc',
+        paramName: "name",
+        delimiter: ",",
+        transformResult: function (response) {
+            console.log("before"+response.toString());
+            return {
+                suggestions: $.map($.parseJSON(response), function (item) {
+                    var i=item.firstname+" "+item.lastname +" "+item.specialisation;
+                    console.log(i);
+                    return {value:i, data:item.id};
+
+                })
+            };
+        },
+        onSelect: function (suggestion) {
+            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            var id=suggestion.data;
+            $.ajax({
+                url:'/searchResult/'+id,
+                method:'GET',
+                contentType:'application/json',
+
+                success:function (result) {
+                    var specialization=$("#spec").html();
+                    console.log(result.firstname+""+result.clinicName);
+                    var photo="data:image/jpeg;base64,"+result.photo;
+                    $("#myCarousel").empty();
+                    $("#content").empty();
+                    $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
+                        "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
+                        "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
+                        "<a href='"+"/doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                        "<p>"+specialization+":"+result.specialisation+"<h</p><hr> <p>"+result.clinicName+"</p></div> </div>");
+
+
+
+
+                }
+
+            })
+
+        }
+
+
 
 
     });

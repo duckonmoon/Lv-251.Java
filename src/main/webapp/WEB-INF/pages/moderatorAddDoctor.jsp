@@ -118,7 +118,6 @@
                                        value="<spring:message code="messages.cancel"/>"/>
                             </div>
                         </div>
-
                     </form:form>
                 </div>
             </div>

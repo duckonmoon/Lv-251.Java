@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -32,7 +31,7 @@ import java.util.Locale;
  * Updated: Brynetskyi Marian
  */
 
-@Controller
+@org.springframework.stereotype.Controller
 public class RegistrationController {
 
     @Autowired
@@ -78,7 +77,7 @@ public class RegistrationController {
         Users registered = createUserAccount(accountDto, result);
 
         if (registered == null) {
-            result.rejectValue(Constants.ControllersConstants.EMAIL, "message.regError");
+            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
         }
 
         try {
@@ -102,14 +101,14 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute(Constants.ControllersConstants.DOCTOR_FORM, new DoctorDTO());
+        model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute(Constants.ControllersConstants.DOCTOR_FORM) @Valid DoctorDTO accountDto,
+            @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
             BindingResult result) {
 
         Doctors registered = new Doctors();
@@ -117,7 +116,7 @@ public class RegistrationController {
             registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
-            result.rejectValue(Constants.ControllersConstants.EMAIL, "message.regError");
+            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
         }
         if (result.hasErrors()) {
             return "registrationDoctor";
@@ -137,7 +136,7 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
+            model.addAttribute(Constants.Controller.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -145,7 +144,7 @@ public class RegistrationController {
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.ControllersConstants.MESSAGE, message);
+            model.addAttribute(Constants.Controller.MESSAGE, message);
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -159,7 +158,7 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            model.addAttribute(Constants.ControllersConstants.LOGIN_FLAG, true);
+            model.addAttribute(Constants.Controller.LOGIN_FLAG, true);
 
             return "home";
         }

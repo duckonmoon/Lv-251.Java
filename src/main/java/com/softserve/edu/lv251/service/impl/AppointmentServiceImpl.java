@@ -7,13 +7,15 @@ import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
 import com.softserve.edu.lv251.entity.Appointments;
 import com.softserve.edu.lv251.service.AppointmentService;
+import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +28,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentsDAO appointmentsDAO;
 
     @Autowired
+    private DoctorsService doctorsService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private Mapper mapper;
+
+    @Autowired
+    Logger logger;
 
     @Override
     public void addAppointment(Appointments appointments) {
@@ -100,4 +111,36 @@ public class AppointmentServiceImpl implements AppointmentService {
         return results;
     }
 
+    public boolean createAppointment (String localdate, String userEmail, long doctorId){
+        Date date;
+
+        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            date = isoFormat.parse(localdate);
+            if (date.before(new Date())) {
+                return false;
+            }
+
+            boolean appointments1 = listAppointmensWithDoctor(doctorId)
+                    .stream()
+                    .anyMatch(p -> p.getIsApproved() && p.getAppointmentDate().getTime() == date.getTime());
+
+            if(appointments1){
+                return false;
+            }
+
+            Appointments appointments = new Appointments();
+            appointments.setAppointmentDate(date);
+            appointments.setIsApproved(false);
+            appointments.setUsers(userService.findByEmail(userEmail));
+            appointments.setDoctors(doctorsService.find(doctorId));
+            addAppointment(appointments);
+        } catch (ParseException e) {
+            logger.info(e);
+            return false;
+        }
+        return true;
+
+    }
 }

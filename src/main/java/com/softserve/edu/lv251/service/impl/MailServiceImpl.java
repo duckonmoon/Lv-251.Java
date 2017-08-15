@@ -52,7 +52,7 @@ public class MailServiceImpl implements MailService {
     private MimeMessagePreparator getMessagePreparator(Users user, String messageText) {
 
         return mimeMessage -> {
-            mimeMessage.setFrom(Constants.MailConstants.MAIL);
+            mimeMessage.setFrom(Constants.Mail.MAIL);
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(user.getEmail()));
             String name = user.getFirstname() + " " + user.getLastname();

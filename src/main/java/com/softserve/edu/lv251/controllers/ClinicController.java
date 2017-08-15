@@ -7,7 +7,6 @@ import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.PagingSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  *
  */
-@Controller
+@org.springframework.stereotype.Controller
 @RequestMapping("/clinics")
 public class ClinicController {
 
@@ -33,7 +32,7 @@ public class ClinicController {
     public ModelAndView tenClinics(@PathVariable("current") Integer chainIndex) {
         ModelAndView model = new ModelAndView("clinics");
         model.addObject("getClinics", pagingSizeService.getEntity(chainIndex, 10));
-        model.addObject(Constants.ControllersConstants.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
+        model.addObject(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         return model;
     }
 

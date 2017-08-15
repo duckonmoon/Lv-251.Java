@@ -79,7 +79,7 @@ function allDocs() {
                         $("#content").append("<div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='"+photo+"'alt='...'></a></div>"+
-                            "<a href='"+"doctors/"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
+                            "<a href='"+"doctors//"+result.id+"'class='btn-link'><span class='doc-name'>"+result.firstname+" "+result.lastname+"</span></a>"+
                             "<p><spring:message code='messages.specialization'/>"+result.specialisation+"<h</p> </div> </div>")
 
 

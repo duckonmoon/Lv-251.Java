@@ -234,7 +234,7 @@ function  doctorsBySpecialization() {
                         $("#content").append(" <div class='row row-content'> <div class='container-fluid'> <div class='row'>"+
                             "<div class='col-xs-6 col-md-3'> <a href='#' class='thumbnail'>"+
                             "<img width=200' height='200' src='data:image/jpeg;base64,"+res[i].photo+"' alt='...'></a></div>"+
-                            "<a href='"+"doctors/"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
+                            "<a href='"+"doctors//"+res[i].id+"'class='btn-link'><span class='doc-name'>"+res[i].firstname+"</span></a>"+
                             "<p><spring:message code='messages.specialization'/>:"+res[i].specialization.name+"</p> </div> </div>")
                     }
 

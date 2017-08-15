@@ -66,7 +66,7 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.password"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="password"  cssClass="text-danger"/>
-                                <form:input type="text" class="form-control d" path="password"/>
+                                <form:input type="password" class="form-control d" path="password"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -74,7 +74,7 @@
                                     code="messages.confirmPassword"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="matchingPassword"  cssClass="text-danger"/>
-                                <form:input type="text" class="form-control" path="matchingPassword"/>
+                                <form:input type="password"  class="form-control" path="matchingPassword"/>
                             </div>
                         </div>
                         <div class="form-group">

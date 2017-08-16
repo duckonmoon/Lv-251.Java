@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by Taras on 11.07.2017.
  */
 @Entity
-public class TestsResults extends BaseEntity {
+public class TestsResult extends BaseEntity {
 
     private Date date;
     private String description;
@@ -19,7 +19,7 @@ public class TestsResults extends BaseEntity {
     @ManyToOne
     private Users user;
 
-    public TestsResults() {
+    public TestsResult() {
     }
 
     public Users getUser() {

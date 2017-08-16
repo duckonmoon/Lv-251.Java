@@ -56,17 +56,17 @@ public class Users extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<TestsResults> testsResults;
+    private List<TestsResult> testsResults;
 
 
     public Users() {
     }
 
-    public List<TestsResults> getTestsResults() {
+    public List<TestsResult> getTestsResults() {
         return testsResults;
     }
 
-    public void setTestsResults(List<TestsResults> testsResults) {
+    public void setTestsResults(List<TestsResult> testsResults) {
         this.testsResults = testsResults;
     }
 

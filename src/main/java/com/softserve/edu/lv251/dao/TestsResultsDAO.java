@@ -1,9 +1,9 @@
 package com.softserve.edu.lv251.dao;
 
-import com.softserve.edu.lv251.entity.TestsResults;
+import com.softserve.edu.lv251.entity.TestsResult;
 
 /**
  * Created by Taras on 16.07.2017.
  */
-public interface TestsResultsDAO extends BaseDAO<TestsResults> {
+public interface TestsResultsDAO extends BaseDAO<TestsResult> {
 }

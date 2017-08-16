@@ -13,7 +13,7 @@ public class Test extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "test")
-    private List<TestsResults> testsResults;
+    private List<TestsResult> testsResults;
 
     public Test() {
     }
@@ -26,11 +26,11 @@ public class Test extends BaseEntity {
         this.name = name;
     }
 
-    public List<TestsResults> getTestsResults() {
+    public List<TestsResult> getTestsResults() {
         return testsResults;
     }
 
-    public void setTestsResults(List<TestsResults> testsResults) {
+    public void setTestsResults(List<TestsResult> testsResults) {
         this.testsResults = testsResults;
     }
 

@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
-import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.Doctors;
 import org.springframework.stereotype.Repository;
 
@@ -24,7 +24,7 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctors> implements DoctorsDAO {
         return query.getResultList();
     }
 
-    public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
+    public List<Appointment> appointmentsInThisMonth(Long id, Date date) {
         return entityManager
                 .createQuery("from Appointments a where month(date) = month(a.appointmentDate) and a.doctors.id = id" +
                         " and year(date) = year(a.appointmentDate)")

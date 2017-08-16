@@ -134,7 +134,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         return doctor;
     }
 
-    public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
+    public List<Appointment> appointmentsInThisMonth(Long id, Date date) {
         return doctorsDAO.appointmentsInThisMonth(id, date);
     }
 
@@ -156,8 +156,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     public List<PatientDTO> getDoctorPatients(long doctorId) {
         List<PatientDTO> patients = new ArrayList<>();
         Doctors doctor = doctorsDAO.getEntityByID(doctorId);
-        List<Appointments> appointments = doctor.getDocAppointments();
-        for (Appointments a : appointments) {
+        List<Appointment> appointments = doctor.getDocAppointments();
+        for (Appointment a : appointments) {
             PatientDTO patient = new PatientDTO();
             mapper.map(a.getUser(), patient);
             patients.add(patient);

@@ -113,12 +113,12 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
-        factory.classMap(Appointments.class, AppointmentsForCreationDTO.class)
+        factory.classMap(Appointment.class, AppointmentsForCreationDTO.class)
                 .field("appointmentDate", "appointmentDate")
                 .field("duration", "duration")
-                .customize(new CustomMapper<Appointments, AppointmentsForCreationDTO>() {
+                .customize(new CustomMapper<Appointment, AppointmentsForCreationDTO>() {
                     @Override
-                    public void mapAtoB(Appointments a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
+                    public void mapAtoB(Appointment a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
                         b.setDoctors(a.getDoctors().getId());
                     }
                 })
@@ -196,34 +196,34 @@ public class Mapper extends ConfigurableMapper {
             }
         }).register();
 
-        factory.classMap(Appointments.class, AppointmentDTO.class).customize(new CustomMapper<Appointments, AppointmentDTO>() {
+        factory.classMap(Appointment.class, AppointmentDTO.class).customize(new CustomMapper<Appointment, AppointmentDTO>() {
             @Override
-            public void mapAtoB(Appointments appointments, AppointmentDTO appointmentDTO, MappingContext context) {
-                appointmentDTO.setAppointmentDate(appointments.getAppointmentDate().getTime());
-                appointmentDTO.setDuration(appointments.getDuration());
-                appointmentDTO.setDescription(appointments.getDescription());
-                appointmentDTO.setStatus(appointments.getIsApproved());
+            public void mapAtoB(Appointment appointment, AppointmentDTO appointmentDTO, MappingContext context) {
+                appointmentDTO.setAppointmentDate(appointment.getAppointmentDate().getTime());
+                appointmentDTO.setDuration(appointment.getDuration());
+                appointmentDTO.setDescription(appointment.getDescription());
+                appointmentDTO.setStatus(appointment.getIsApproved());
 
-                appointmentDTO.setPatientId(appointments.getUser().getId());
-                appointmentDTO.setPatientFirstName(appointments.getUser().getFirstname());
-                appointmentDTO.setPatientLastName(appointments.getUser().getLastname());
-                appointmentDTO.setPatientMiddleName(appointments.getUser().getMiddlename());
+                appointmentDTO.setPatientId(appointment.getUser().getId());
+                appointmentDTO.setPatientFirstName(appointment.getUser().getFirstname());
+                appointmentDTO.setPatientLastName(appointment.getUser().getLastname());
+                appointmentDTO.setPatientMiddleName(appointment.getUser().getMiddlename());
 
                 appointmentDTO.setDoctorId(
-                        appointments.getDoctors().getId());
+                        appointment.getDoctors().getId());
                 appointmentDTO.setDoctorFirstName(
-                        appointments.getDoctors().getFirstname());
+                        appointment.getDoctors().getFirstname());
                 appointmentDTO.setDoctorLastName(
-                        appointments.getDoctors().getLastname());
+                        appointment.getDoctors().getLastname());
                 appointmentDTO.setDoctorMiddleName(
-                        appointments.getDoctors().getMiddlename());
+                        appointment.getDoctors().getMiddlename());
                 appointmentDTO.setDoctorSpecialisation(
-                        appointments.getDoctors().getSpecialization().getName());
+                        appointment.getDoctors().getSpecialization().getName());
 
                 appointmentDTO.setClinicId(
-                        appointments.getDoctors().getClinics().getId());
+                        appointment.getDoctors().getClinics().getId());
                 appointmentDTO.setClinicName(
-                        appointments.getDoctors().getClinics().getClinic_name());
+                        appointment.getDoctors().getClinics().getClinic_name());
             }
         }).register();
 
@@ -239,25 +239,25 @@ public class Mapper extends ConfigurableMapper {
                 .byDefault().register();
 
 
-        factory.classMap(Appointments.class, AppointmentsDTO.class)
-                .customize(new CustomMapper<Appointments, AppointmentsDTO>() {
+        factory.classMap(Appointment.class, AppointmentsDTO.class)
+                .customize(new CustomMapper<Appointment, AppointmentsDTO>() {
                     @Override
-                    public void mapAtoB(Appointments appointments, AppointmentsDTO appointmentsDTO, MappingContext context) {
-                        super.mapAtoB(appointments, appointmentsDTO, context);
-                        appointmentsDTO.setId(appointments.getId());
-                        appointments.getAppointmentDate().setTime(
-                                appointments.getAppointmentDate().getTime()
+                    public void mapAtoB(Appointment appointment, AppointmentsDTO appointmentsDTO, MappingContext context) {
+                        super.mapAtoB(appointment, appointmentsDTO, context);
+                        appointmentsDTO.setId(appointment.getId());
+                        appointment.getAppointmentDate().setTime(
+                                appointment.getAppointmentDate().getTime()
                                         - Calendar.getInstance().getTimeZone().getRawOffset());
-                        appointmentsDTO.setTitle(appointments.getUser().getFirstname() + " " + appointments.getUser().getLastname());
-                        if (appointments.getIsApproved() != null) {
-                            if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
-                                appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");
+                        appointmentsDTO.setTitle(appointment.getUser().getFirstname() + " " + appointment.getUser().getLastname());
+                        if (appointment.getIsApproved() != null) {
+                            if (Calendar.getInstance().getTime().compareTo(appointment.getAppointmentDate()) < 0) {
+                                appointmentsDTO.setColor(appointment.getIsApproved() ? "#4CAF50" : "#E53935");
                             } else {
-                                appointmentsDTO.setColor(appointments.getIsApproved() ? "#424242" : "#546E7A");
+                                appointmentsDTO.setColor(appointment.getIsApproved() ? "#424242" : "#546E7A");
                             }
                         }
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                        appointmentsDTO.setStart(df.format(appointments.getAppointmentDate()));
+                        appointmentsDTO.setStart(df.format(appointment.getAppointmentDate()));
                     }
                 }).register();
 
@@ -276,14 +276,14 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
-        factory.classMap(Appointments.class, AppointmentsForDateTimePickerInDocDTO.class)
+        factory.classMap(Appointment.class, AppointmentsForDateTimePickerInDocDTO.class)
                 .field("appointmentDate", "appointmentDate")
                 .field("duration", "duration")
-                .customize(new CustomMapper<Appointments, AppointmentsForDateTimePickerInDocDTO>() {
+                .customize(new CustomMapper<Appointment, AppointmentsForDateTimePickerInDocDTO>() {
                     @Override
-                    public void mapAtoB(Appointments appointments, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
-                        super.mapAtoB(appointments, appointmentsForDateTimePickerInDocDTO, context);
-                        appointmentsForDateTimePickerInDocDTO.setUsers(appointments.getDoctors().getId());
+                    public void mapAtoB(Appointment appointment, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
+                        super.mapAtoB(appointment, appointmentsForDateTimePickerInDocDTO, context);
+                        appointmentsForDateTimePickerInDocDTO.setUsers(appointment.getDoctors().getId());
                     }
                 })
                 .register();

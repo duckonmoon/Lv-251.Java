@@ -29,7 +29,7 @@ public class User extends BaseEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<Appointments> appointments;
+    private List<Appointment> appointments;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
@@ -78,11 +78,11 @@ public class User extends BaseEntity {
         this.contact = contact;
     }
 
-    public List<Appointments> getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(List<Appointments> appointments) {
+    public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 

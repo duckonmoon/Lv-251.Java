@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.entity.Appointments;
+import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.Doctors;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,13 +24,13 @@ import static org.mockito.Mockito.when;
  * Created by Marian Brynetskyi on 14.08.2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AppointmentsDAOImplTest {
+public class AppointmentDAOImplTest {
     @Mock
     private EntityManager entityManager;
     @Mock
     Query query;
     @Spy
-    List<Appointments> appointmentsList = new ArrayList<>();
+    List<Appointment> appointmentList = new ArrayList<>();
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
 
@@ -43,26 +43,26 @@ public class AppointmentsDAOImplTest {
         doctor.setFirstname("Petro");
         doctor.setEmail("somemail@mail.com");
 
-        Appointments appointments = new Appointments();
-        appointments.setId(1);
-        appointments.setAppointmentDate(sdf.parse("12/08/2017 - 15:00"));
+        Appointment appointment = new Appointment();
+        appointment.setId(1);
+        appointment.setAppointmentDate(sdf.parse("12/08/2017 - 15:00"));
 
-        Appointments appointments1 = new Appointments();
-        appointments1.setId(2);
-        appointments1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
+        Appointment appointment1 = new Appointment();
+        appointment1.setId(2);
+        appointment1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
 
-        appointments1.setDoctors(doctor);
-        appointments.setDoctors(doctor);
-        appointmentsList.add(appointments);
-        appointmentsList.add(appointments1);
+        appointment1.setDoctors(doctor);
+        appointment.setDoctors(doctor);
+        appointmentList.add(appointment);
+        appointmentList.add(appointment1);
     }
 
     @Test
     public void getAppointmentByDoctorsEmailAfterSomeDate() throws Exception {
         when(entityManager.createQuery("")).thenReturn(query);
-        when(query.getResultList()).thenReturn(appointmentsList);
-        Assert.assertEquals(sdf.parse("12/08/2017 - 15:00"), ((Appointments) query.getResultList().get(0)).getAppointmentDate());
-        Assert.assertEquals(sdf.parse("12/09/2017 - 15:00"), ((Appointments) query.getResultList().get(1)).getAppointmentDate());
+        when(query.getResultList()).thenReturn(appointmentList);
+        Assert.assertEquals(sdf.parse("12/08/2017 - 15:00"), ((Appointment) query.getResultList().get(0)).getAppointmentDate());
+        Assert.assertEquals(sdf.parse("12/09/2017 - 15:00"), ((Appointment) query.getResultList().get(1)).getAppointmentDate());
     }
 
     @Test
@@ -72,10 +72,10 @@ public class AppointmentsDAOImplTest {
     @Test
     public void getAppiontmentbyDoctorsEmail() throws Exception {
         when(entityManager.createQuery("")).thenReturn(query);
-        when(query.getResultList()).thenReturn(appointmentsList);
+        when(query.getResultList()).thenReturn(appointmentList);
         Assert.assertEquals(2, entityManager.createQuery("").getResultList().size());
-        Assert.assertEquals("somemail@mail.com", ((Appointments) query.getResultList().get(0)).getDoctors().getEmail());
-        Assert.assertEquals("somemail@mail.com", ((Appointments) query.getResultList().get(1)).getDoctors().getEmail());
+        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(0)).getDoctors().getEmail());
+        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(1)).getDoctors().getEmail());
     }
 
     @Test

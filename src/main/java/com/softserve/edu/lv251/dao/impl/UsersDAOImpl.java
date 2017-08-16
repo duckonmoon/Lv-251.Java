@@ -17,7 +17,7 @@ public class UsersDAOImpl extends BaseDAOImpl<User> implements UsersDAO {
     @Override
     public List<User> searchByLetters(String letters) {
         String search = "%" + letters + "%".toLowerCase();
-        return entityManager.createQuery("from Users d where lower(d.firstname) like" +
+        return entityManager.createQuery("from User d where lower(d.firstname) like" +
                 " :letters or lower(d.lastname) like :letters").setParameter("letters", search).getResultList();
     }
 }

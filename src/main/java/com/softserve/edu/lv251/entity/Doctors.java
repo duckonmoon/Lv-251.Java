@@ -26,7 +26,7 @@ public class Doctors extends User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private List<Appointments> docAppointments;
+    private List<Appointment> docAppointments;
 
     @ManyToOne
     private Specialization specialization;
@@ -34,11 +34,11 @@ public class Doctors extends User {
     public Doctors() {
     }
 
-    public List<Appointments> getDocAppointments() {
+    public List<Appointment> getDocAppointments() {
         return docAppointments;
     }
 
-    public void setDocAppointments(List<Appointments> docAppointments) {
+    public void setDocAppointments(List<Appointment> docAppointments) {
         this.docAppointments = docAppointments;
     }
 

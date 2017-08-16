@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by kilopo on 31.07.2017.
@@ -133,7 +132,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
             appointments.setIsApproved(false);
-            appointments.setUsers(userService.findByEmail(userEmail));
+            appointments.setUser(userService.findByEmail(userEmail));
             appointments.setDoctors(doctorsService.find(doctorId));
             addAppointment(appointments);
         } catch (ParseException e) {

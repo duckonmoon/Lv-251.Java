@@ -42,7 +42,7 @@ public class Mapper extends ConfigurableMapper {
     @Override
     protected void configure(MapperFactory factory) {
 
-        factory.classMap(UserDTO.class, Users.class)
+        factory.classMap(UserDTO.class, User.class)
                 .field("firstName", "firstname")
                 .field("lastName", "lastname")
                 .field("password", "password")
@@ -50,22 +50,22 @@ public class Mapper extends ConfigurableMapper {
                 .exclude("matchingPassword")
                 .byDefault().register();
 
-        factory.classMap(PasswordDTO.class, Users.class)
+        factory.classMap(PasswordDTO.class, User.class)
                 .field("password", "password")
                 .byDefault().register();
 
-        factory.classMap(PersonalInfoDTO.class, Users.class)
+        factory.classMap(PersonalInfoDTO.class, User.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
-                .field("email", "email").customize(new CustomMapper<PersonalInfoDTO, Users>() {
+                .field("email", "email").customize(new CustomMapper<PersonalInfoDTO, User>() {
 
             @Override
-            public void mapBtoA(Users user, PersonalInfoDTO personalInfoDTO, MappingContext context) {
+            public void mapBtoA(User user, PersonalInfoDTO personalInfoDTO, MappingContext context) {
                 personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             }
 
             @Override
-            public void mapAtoB(PersonalInfoDTO personalInfoDTO, Users user, MappingContext context) {
+            public void mapAtoB(PersonalInfoDTO personalInfoDTO, User user, MappingContext context) {
                 if (personalInfoDTO.getPhoto().getSize() != 0) {
                     String photo = StoredImagesService.getBase64encodedMultipartFile(personalInfoDTO.getPhoto());
                     user.setPhoto(photo);
@@ -124,14 +124,14 @@ public class Mapper extends ConfigurableMapper {
                 })
                 .register();
 
-        factory.classMap(Users.class, PatientDTO.class)
-                .customize(new CustomMapper<Users, PatientDTO>() {
+        factory.classMap(User.class, PatientDTO.class)
+                .customize(new CustomMapper<User, PatientDTO>() {
                     @Override
-                    public void mapAtoB(Users users, PatientDTO patientDTO, MappingContext context) {
-                        patientDTO.setId(users.getId());
-                        String fullName = users.getLastname() + " "
-                                + users.getFirstname() + " "
-                                + users.getLastname();
+                    public void mapAtoB(User user, PatientDTO patientDTO, MappingContext context) {
+                        patientDTO.setId(user.getId());
+                        String fullName = user.getLastname() + " "
+                                + user.getFirstname() + " "
+                                + user.getLastname();
                         patientDTO.setFullName(fullName);
                     }
                 }).register();
@@ -204,10 +204,10 @@ public class Mapper extends ConfigurableMapper {
                 appointmentDTO.setDescription(appointments.getDescription());
                 appointmentDTO.setStatus(appointments.getIsApproved());
 
-                appointmentDTO.setPatientId(appointments.getUsers().getId());
-                appointmentDTO.setPatientFirstName(appointments.getUsers().getFirstname());
-                appointmentDTO.setPatientLastName(appointments.getUsers().getLastname());
-                appointmentDTO.setPatientMiddleName(appointments.getUsers().getMiddlename());
+                appointmentDTO.setPatientId(appointments.getUser().getId());
+                appointmentDTO.setPatientFirstName(appointments.getUser().getFirstname());
+                appointmentDTO.setPatientLastName(appointments.getUser().getLastname());
+                appointmentDTO.setPatientMiddleName(appointments.getUser().getMiddlename());
 
                 appointmentDTO.setDoctorId(
                         appointments.getDoctors().getId());
@@ -248,7 +248,7 @@ public class Mapper extends ConfigurableMapper {
                         appointments.getAppointmentDate().setTime(
                                 appointments.getAppointmentDate().getTime()
                                         - Calendar.getInstance().getTimeZone().getRawOffset());
-                        appointmentsDTO.setTitle(appointments.getUsers().getFirstname() + " " + appointments.getUsers().getLastname());
+                        appointmentsDTO.setTitle(appointments.getUser().getFirstname() + " " + appointments.getUser().getLastname());
                         if (appointments.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointments.getAppointmentDate()) < 0) {
                                 appointmentsDTO.setColor(appointments.getIsApproved() ? "#4CAF50" : "#E53935");

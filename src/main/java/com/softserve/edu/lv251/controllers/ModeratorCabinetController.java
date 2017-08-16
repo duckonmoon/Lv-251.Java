@@ -162,7 +162,7 @@ public class ModeratorCabinetController {
 
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
-        List<Users> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);

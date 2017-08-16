@@ -17,16 +17,16 @@ public class TestsResult extends BaseEntity {
     private Test test;
 
     @ManyToOne
-    private Users user;
+    private User user;
 
     public TestsResult() {
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

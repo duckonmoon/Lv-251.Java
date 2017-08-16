@@ -22,7 +22,7 @@ public class Appointments extends BaseEntity {
     private Doctors doctors;
 
     @ManyToOne
-    private Users users;
+    private User user;
 
     public Appointments() {
     }
@@ -51,12 +51,12 @@ public class Appointments extends BaseEntity {
         this.doctors = doctors;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getDuration() {

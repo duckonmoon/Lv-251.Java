@@ -132,7 +132,7 @@
 
 
             $("#autocom").autocomplete({
-                serviceUrl: '/users/search',
+                serviceUrl: '/user/search',
                 paramName: "name",
                 transformResult: function (response) {
                     return {
@@ -153,7 +153,7 @@
             $( "#control-button" ).click(function() {
                 if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
                     $.ajax({
-                        url: '/users/addApp/',
+                        url: '/user/addApp/',
                         method: 'POST',
                         data: {
                             "datatime": $("#first-date").val(),

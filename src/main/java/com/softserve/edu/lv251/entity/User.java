@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Users extends BaseEntity {
+public class User extends BaseEntity {
 
     private String firstname;
     private String lastname;
@@ -28,7 +28,7 @@ public class Users extends BaseEntity {
     private String photo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<Appointments> appointments;
 
     @JsonIgnore
@@ -59,7 +59,7 @@ public class Users extends BaseEntity {
     private List<TestsResult> testsResults;
 
 
-    public Users() {
+    public User() {
     }
 
     public List<TestsResult> getTestsResults() {
@@ -160,7 +160,7 @@ public class Users extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 " firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +

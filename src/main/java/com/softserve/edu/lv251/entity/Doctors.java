@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Doctors extends Users {
+public class Doctors extends User {
 
     @Column(length = 10000)
     private String description;

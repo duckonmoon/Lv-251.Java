@@ -6,7 +6,7 @@ import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contacts;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.ContactsService;
@@ -51,7 +51,7 @@ public class UserCabinetController {
     @GetMapping("/user/cabinet")
     public String userProfileGET(ModelMap model, Principal principal) {
 
-        Users user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
         PasswordDTO passwordDTO = new PasswordDTO();
@@ -69,7 +69,7 @@ public class UserCabinetController {
      */
     @PostMapping("/user/cabinet")
     public String userProfilePOST(@Valid @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingResult, Principal principal, ModelMap model) {
-        Users user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
@@ -94,7 +94,7 @@ public class UserCabinetController {
     public String savePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult bindingPasswordDTO,
                                @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingInfoDTO,
                                Principal principal,  ModelMap model) {
-        Users user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         Contacts contacts = user.getContact();
 
         if (bindingPasswordDTO.hasErrors()){
@@ -116,7 +116,7 @@ public class UserCabinetController {
     @GetMapping("/user/medicalcard")
     public String medicalCardGET(ModelMap model, Principal principal, HttpServletRequest request) {
 
-        Users user = userService.findByEmail(principal.getName());
+        User user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("date", new Date().getTime());
 

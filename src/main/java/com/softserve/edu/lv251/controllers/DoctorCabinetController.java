@@ -4,7 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
@@ -70,9 +70,9 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/users/search")
     @ResponseBody
-    public List<Users> getUsers(@RequestParam String name) {
-        List<Users> userss = userService.searchByLetters(name);
-        return userss;
+    public List<User> getUsers(@RequestParam String name) {
+        List<User> usersses = userService.searchByLetters(name);
+        return usersses;
     }
 
     @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
@@ -99,7 +99,7 @@ public class DoctorCabinetController {
             Appointments appointments = new Appointments();
             appointments.setAppointmentDate(date);
             appointments.setIsApproved(true);
-            appointments.setUsers(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
+            appointments.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
             appointments.setDoctors(doctorsService.findByEmail(principal.getName()));
             appointmentService.addAppointment(appointments);
         } catch (Exception e) {

@@ -4,7 +4,7 @@ import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
@@ -74,7 +74,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        Users registered = createUserAccount(accountDto, result);
+        User registered = createUserAccount(accountDto, result);
 
         if (registered == null) {
             result.rejectValue(Constants.Controller.EMAIL, "message.regError");
@@ -140,7 +140,7 @@ public class RegistrationController {
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
-        Users user = verificationToken.getUser();
+        User user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
@@ -172,8 +172,8 @@ public class RegistrationController {
         return "home";
     }
 
-    private Users createUserAccount(UserDTO accountDto, BindingResult result) {
-        Users registered;
+    private User createUserAccount(UserDTO accountDto, BindingResult result) {
+        User registered;
         try {
             registered = userService.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {

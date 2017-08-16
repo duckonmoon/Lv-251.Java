@@ -32,7 +32,7 @@ public class Contacts extends BaseEntity {
     private District district;
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
-    private Users users;
+    private User user;
 
     public Contacts() {
     }
@@ -126,11 +126,11 @@ public class Contacts extends BaseEntity {
         this.clinics = clinics;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

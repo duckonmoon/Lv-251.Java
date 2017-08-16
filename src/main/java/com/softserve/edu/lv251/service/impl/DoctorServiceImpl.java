@@ -125,7 +125,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         Contacts contact = new Contacts();
-        contact.setUsers(doctor);
+        contact.setUser(doctor);
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);
@@ -159,7 +159,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         List<Appointments> appointments = doctor.getDocAppointments();
         for (Appointments a : appointments) {
             PatientDTO patient = new PatientDTO();
-            mapper.map(a.getUsers(), patient);
+            mapper.map(a.getUser(), patient);
             patients.add(patient);
         }
 
@@ -251,7 +251,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         Moderator moderator=moderatorService.getByEmail(email);
         Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
         Doctors doctor=new Doctors();
-        Users user=userService.findByEmail(userToDoctor.getEmail());
+        User user=userService.findByEmail(userToDoctor.getEmail());
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());

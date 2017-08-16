@@ -52,7 +52,7 @@ public class User extends BaseEntity {
     private List<Roles> roles;
 
     @OneToOne
-    private Contacts contact;
+    private Contact contact;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -70,11 +70,11 @@ public class User extends BaseEntity {
         this.testsResults = testsResults;
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 

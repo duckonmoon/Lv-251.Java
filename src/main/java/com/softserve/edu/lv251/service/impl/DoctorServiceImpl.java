@@ -124,7 +124,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name()),
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        Contacts contact = new Contacts();
+        Contact contact = new Contact();
         contact.setUser(doctor);
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
@@ -200,7 +200,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
-        Contacts contact = new Contacts();
+        Contact contact = new Contact();
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);

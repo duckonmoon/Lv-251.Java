@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
-public class Contacts extends BaseEntity {
+public class Contact extends BaseEntity {
 
     private String address;
 
@@ -34,7 +34,7 @@ public class Contacts extends BaseEntity {
     @OneToOne(mappedBy = "contact")
     private User user;
 
-    public Contacts() {
+    public Contact() {
     }
 
 

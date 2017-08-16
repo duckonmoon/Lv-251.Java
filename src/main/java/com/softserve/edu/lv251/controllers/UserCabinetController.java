@@ -5,7 +5,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
-import com.softserve.edu.lv251.entity.Contacts;
+import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.AppointmentService;
@@ -52,12 +52,12 @@ public class UserCabinetController {
     public String userProfileGET(ModelMap model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        Contact contact = user.getContact();
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
         PasswordDTO passwordDTO = new PasswordDTO();
 
         mapper.map(user, personalInfoDTO);
-        mapper.map(contacts, personalInfoDTO);
+        mapper.map(contact, personalInfoDTO);
         model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
         model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
         model.addAttribute(Constants.Controller.PASSWORD_DTO, passwordDTO);
@@ -77,11 +77,11 @@ public class UserCabinetController {
             return "userCabinet";
         }
 
-        Contacts contacts = user.getContact();
+        Contact contact = user.getContact();
         mapper.map(personalInfoDTO, user);
-        mapper.map(personalInfoDTO, contacts);
+        mapper.map(personalInfoDTO, contact);
         userService.updateUser(user);
-        contactsService.updateContacts(contacts);
+        contactsService.updateContacts(contact);
         ((UpdatableUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .setUsername(personalInfoDTO.getEmail());
         return "redirect:/user/cabinet";
@@ -95,12 +95,12 @@ public class UserCabinetController {
                                @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingInfoDTO,
                                Principal principal,  ModelMap model) {
         User user = userService.findByEmail(principal.getName());
-        Contacts contacts = user.getContact();
+        Contact contact = user.getContact();
 
         if (bindingPasswordDTO.hasErrors()){
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
-            mapper.map(contacts, personalInfoDTO);
+            mapper.map(contact, personalInfoDTO);
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
             model.addAttribute(Constants.Controller.PERSONAL_INFO_DTO, personalInfoDTO);
             return "userCabinet";

@@ -14,7 +14,7 @@ public class District extends BaseEntity {
 
 
     @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
-    private List<Contacts> contacts;
+    private List<Contact> contacts;
 
 
     public District() {
@@ -28,11 +28,11 @@ public class District extends BaseEntity {
         this.name = name;
     }
 
-    public List<Contacts> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<Contacts> contacts) {
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 

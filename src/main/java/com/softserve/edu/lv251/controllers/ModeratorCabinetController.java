@@ -61,12 +61,12 @@ public class ModeratorCabinetController {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         Clinics clinics = moderator.getClinics();
-        Contacts contacts = clinics.getContact();
+        Contact contact = clinics.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
      if(clinics!=null){
         mapper.map(clinics, clinicDTO);}
-     if(contacts!=null){
-        mapper.map(contacts, clinicDTO);}
+     if(contact !=null){
+        mapper.map(contact, clinicDTO);}
         model.addAttribute("photoForm", new FileBucket());
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
@@ -88,13 +88,13 @@ public class ModeratorCabinetController {
         String messageError = messageSource.getMessage("messages.errorClinicName", null, currentLocale);
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         Clinics clinics = moderator.getClinics();
-        Contacts contacts = clinics.getContact();
+        Contact contact = clinics.getContact();
         if (!bindingResult.hasErrors()) {
             mapper.map(clinicInfoDTO, clinics);
-            mapper.map(clinicInfoDTO, contacts);
+            mapper.map(clinicInfoDTO, contact);
 
             clinicService.updateClinic(clinics);
-            contactsService.updateContacts(contacts);
+            contactsService.updateContacts(contact);
             return "redirect:/moderator/cabinet";
         } else {
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");

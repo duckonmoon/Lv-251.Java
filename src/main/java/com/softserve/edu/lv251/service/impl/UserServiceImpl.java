@@ -4,7 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.UsersDAO;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Contacts;
+import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         user.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
         user.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name())));
-        Contacts contact = new Contacts();
+        Contact contact = new Contact();
         contact.setUser(user);
         contact.setEmail(accountDto.getEmail());
         this.contactsService.addContacts(contact);

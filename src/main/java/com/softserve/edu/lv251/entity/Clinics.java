@@ -31,7 +31,7 @@ public class Clinics extends BaseEntity {
 
 
     @OneToOne(cascade = {CascadeType.ALL})
-    private Contacts contact;
+    private Contact contact;
 
     @OneToOne(mappedBy = "clinic")
     private Moderator moderator;
@@ -39,12 +39,12 @@ public class Clinics extends BaseEntity {
     public Clinics() {
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contacts) {
-        this.contact = contacts;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public String getClinic_name() {

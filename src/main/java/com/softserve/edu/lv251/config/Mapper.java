@@ -74,7 +74,7 @@ public class Mapper extends ConfigurableMapper {
         })
                 .register();
 
-        factory.classMap(PersonalInfoDTO.class, Contacts.class)
+        factory.classMap(PersonalInfoDTO.class, Contact.class)
                 .field("address", "address")
                 .field("city", "city")
                 .field("zipCode", "zipCode")
@@ -90,7 +90,7 @@ public class Mapper extends ConfigurableMapper {
 
                 .byDefault().register();
 
-        factory.classMap(ClinicInfoDTO.class, Contacts.class)
+        factory.classMap(ClinicInfoDTO.class, Contact.class)
                 .field("address", "address")
                 .field("city", "city")
                 .field("zipCode", "zipCode")

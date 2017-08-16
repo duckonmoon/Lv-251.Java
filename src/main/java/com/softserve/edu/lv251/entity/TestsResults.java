@@ -14,7 +14,7 @@ public class TestsResults extends BaseEntity {
     private String description;
 
     @ManyToOne
-    private Tests tests;
+    private Test test;
 
     @ManyToOne
     private Users user;
@@ -30,12 +30,12 @@ public class TestsResults extends BaseEntity {
         this.user = user;
     }
 
-    public Tests getTests() {
-        return tests;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTests(Tests tests) {
-        this.tests = tests;
+    public void setTest(Test test) {
+        this.test = test;
     }
 
     public Date getDate() {

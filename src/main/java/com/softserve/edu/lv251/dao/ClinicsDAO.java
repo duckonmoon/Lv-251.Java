@@ -1,21 +1,21 @@
 package com.softserve.edu.lv251.dao;
 
 
-import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Clinic;
 
 import java.util.List;
 
 /**
  *
  */
-public interface ClinicsDAO extends BaseDAO<Clinics>{
+public interface ClinicsDAO extends BaseDAO<Clinic>{
 
- List<Clinics>findByDistrict(String name);
+ List<Clinic>findByDistrict(String name);
 
- List<Clinics>searchByLetters(String letters);
+ List<Clinic>searchByLetters(String letters);
 
- List<Clinics>getWithOffsetAndLimit(int offset, int limit);
+ List<Clinic>getWithOffsetAndLimit(int offset, int limit);
 
- List<Clinics>getByNameWithOffsetAndLimit(String value, int offset, int limit);
+ List<Clinic>getByNameWithOffsetAndLimit(String value, int offset, int limit);
 
 }

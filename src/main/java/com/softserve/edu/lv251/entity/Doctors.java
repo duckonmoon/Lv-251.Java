@@ -22,7 +22,7 @@ public class Doctors extends User {
                     CascadeType.REFRESH,
                     CascadeType.PERSIST
             })
-    private Clinics clinics;
+    private Clinic clinic;
 
     @JsonIgnore
     @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
@@ -42,12 +42,12 @@ public class Doctors extends User {
         this.docAppointments = docAppointments;
     }
 
-    public Clinics getClinics() {
-        return clinics;
+    public Clinic getClinic() {
+        return clinic;
     }
 
-    public void setClinics(Clinics clinics) {
-        this.clinics = clinics;
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
     public String getDescription() {

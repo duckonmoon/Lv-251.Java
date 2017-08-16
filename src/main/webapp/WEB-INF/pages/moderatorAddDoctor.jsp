@@ -29,7 +29,7 @@
 
                 <div class="col-md-3 col-md-offset-1">
                     <div class="text-center">
-                        <%--<img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle" alt="avatar" width="100"--%>
+                        <%--<img src="data:image/jpeg;base64,${moderator.clinic.photo}" class="avatar img-circle" alt="avatar" width="100"--%>
                         <%--height="100">--%>
 
                     </div>
@@ -90,7 +90,7 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="clinic"/>
-                                <form:input type="text" value="${moderator.clinics.clinic_name}" class="form-control"
+                                <form:input type="text" value="${moderator.clinic.clinic_name}" class="form-control"
                                             path="clinic"/>
                             </div>
                         </div>

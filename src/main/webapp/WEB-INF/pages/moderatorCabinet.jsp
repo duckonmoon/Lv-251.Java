@@ -28,7 +28,7 @@
     <div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
-                <h3 class="text-center na">${moderator.clinics.clinic_name}</h3>
+                <h3 class="text-center na">${moderator.clinic.clinic_name}</h3>
                 <c:if test="${message != null}"><div role="alert" class=" ${classCss} text-center">${message}</div></c:if>
                 <hr>
                 <div class="row">
@@ -37,7 +37,7 @@
                         <div class="col-md-3 col-md-offset-1">
                             <div class="text-center">
                                 <div class="image-container ">
-                                <img src="data:image/jpeg;base64,${moderator.clinics.photo}" class="avatar img-circle image img-responsive "  alt="avatar" width="100%"height="100%">
+                                <img src="data:image/jpeg;base64,${moderator.clinic.photo}" class="avatar img-circle image img-responsive "  alt="avatar" width="100%"height="100%">
                                     <div class="middle">
                                         <div class="text">Change</div>
                                     </div>

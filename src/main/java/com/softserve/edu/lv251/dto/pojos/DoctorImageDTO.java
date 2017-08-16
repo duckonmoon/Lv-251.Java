@@ -25,7 +25,7 @@ public class DoctorImageDTO extends Doctors {
         }
         setLastname(doctors.getLastname());
         setAppointments(doctors.getAppointments());
-        setClinics(doctors.getClinics());
+        setClinic(doctors.getClinic());
         setContact(doctors.getContact());
         setDescription(doctors.getDescription());
         setDocAppointments(doctors.getDocAppointments());

@@ -94,7 +94,7 @@
                                     <p><spring:message
                                             code="messages.specialization"/>:${doctor.specialization.name}</p>
                                     <hr>
-                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinics.clinic_name}</p>
+                                    <p><spring:message code="messages.clinicName"/>:${doctor.clinic.clinic_name}</p>
                                     <button class="btn btn-facebook" style="margin-top: 10%;margin-left: 55%"
                                             data-toggle="modal" data-target="#modal_${doctor.id}">
 

@@ -57,7 +57,7 @@ public class MailServiceImpl implements MailService {
                     new InternetAddress(user.getEmail()));
             String name = user.getFirstname() + " " + user.getLastname();
             mimeMessage.setText("Dear " + (name.trim().isEmpty() ? "patient" : name) + ", " + messageText);
-            mimeMessage.setSubject("Clinics Lv251");
+            mimeMessage.setSubject("Clinic Lv251");
         };
     }
 }

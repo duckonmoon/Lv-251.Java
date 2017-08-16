@@ -26,7 +26,7 @@ public class Contact extends BaseEntity {
 
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
-    private Clinics clinics;
+    private Clinic clinic;
     @ManyToOne
     @JsonIgnore
     private District district;
@@ -118,12 +118,12 @@ public class Contact extends BaseEntity {
         this.latitude = latitude;
     }
 
-    public Clinics getClinics() {
-        return clinics;
+    public Clinic getClinic() {
+        return clinic;
     }
 
-    public void setClinics(Clinics clinics) {
-        this.clinics = clinics;
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
     public User getUser() {

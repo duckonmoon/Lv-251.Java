@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class Clinics extends BaseEntity {
+public class Clinic extends BaseEntity {
     private String clinic_name;
 
     @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
@@ -19,7 +19,7 @@ public class Clinics extends BaseEntity {
     private String description;
 
 
-    @OneToMany(mappedBy = "clinics", cascade =
+    @OneToMany(mappedBy = "clinic", cascade =
             {
                     CascadeType.DETACH,
                     CascadeType.MERGE,
@@ -36,7 +36,7 @@ public class Clinics extends BaseEntity {
     @OneToOne(mappedBy = "clinic")
     private Moderator moderator;
 
-    public Clinics() {
+    public Clinic() {
     }
 
     public Contact getContact() {
@@ -89,7 +89,7 @@ public class Clinics extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Clinics{" +
+        return "Clinic{" +
                 "clinic_name='" + clinic_name + '\'' +
                 ", photo='" + photo + '\'' +
                 ", description='" + description + '\'' +

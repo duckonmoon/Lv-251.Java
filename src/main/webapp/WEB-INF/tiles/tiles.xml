@@ -60,7 +60,7 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="allDoctors"/>
     </definition>
 
-    <!--Clinics page-->
+    <!--Clinic page-->
     <definition name="clinics" extends="base-definition">
         <put-attribute name="title" value="Clinics"/>
         <put-attribute name="body" value="/WEB-INF/pages/clinics.jsp"/>

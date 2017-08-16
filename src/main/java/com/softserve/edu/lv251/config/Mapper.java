@@ -84,7 +84,7 @@ public class Mapper extends ConfigurableMapper {
                 .field("email", "email")
                 .byDefault().register();
 
-        factory.classMap(ClinicInfoDTO.class, Clinics.class)
+        factory.classMap(ClinicInfoDTO.class, Clinic.class)
                 .field("clinic_name", "clinic_name")
                 .field("description", "description")
 
@@ -99,16 +99,16 @@ public class Mapper extends ConfigurableMapper {
                 .field("thirdPhone", "thirdPhone")
                 .byDefault().register();
 
-        factory.classMap(Clinics.class, ClinicLatLngDTO.class)
-                .customize(new CustomMapper<Clinics, ClinicLatLngDTO>() {
+        factory.classMap(Clinic.class, ClinicLatLngDTO.class)
+                .customize(new CustomMapper<Clinic, ClinicLatLngDTO>() {
                     @Override
-                    public void mapAtoB(Clinics clinics, ClinicLatLngDTO latLng, MappingContext context) {
-                        if (clinics.getContact() != null) {
-                            double lat = clinics.getContact().getLatitude();
-                            double lng = clinics.getContact().getLongitude();
+                    public void mapAtoB(Clinic clinic, ClinicLatLngDTO latLng, MappingContext context) {
+                        if (clinic.getContact() != null) {
+                            double lat = clinic.getContact().getLatitude();
+                            double lng = clinic.getContact().getLongitude();
                             latLng.setLat(lat);
                             latLng.setLng(lng);
-                            latLng.setId(clinics.getId());
+                            latLng.setId(clinic.getId());
                         }
                     }
                 }).register();
@@ -161,17 +161,17 @@ public class Mapper extends ConfigurableMapper {
                 contacts.setPhones(phones);
                 searchResultDoctorDTO.setContacts(contacts);
 
-                searchResultDoctorDTO.setClinicId(doctor.getClinics().getId());
-                searchResultDoctorDTO.setClinicName(doctor.getClinics().getClinic_name());
+                searchResultDoctorDTO.setClinicId(doctor.getClinic().getId());
+                searchResultDoctorDTO.setClinicName(doctor.getClinic().getClinic_name());
             }
 
         }).register();
 
 
 
-        factory.classMap(Clinics.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinics, SearchResultClinicDTO>() {
+        factory.classMap(Clinic.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinic, SearchResultClinicDTO>() {
             @Override
-            public void mapAtoB(Clinics clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {
+            public void mapAtoB(Clinic clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {
 
 
                 searchResultClinicDTO.setId(clinic.getId());
@@ -221,13 +221,13 @@ public class Mapper extends ConfigurableMapper {
                         appointment.getDoctors().getSpecialization().getName());
 
                 appointmentDTO.setClinicId(
-                        appointment.getDoctors().getClinics().getId());
+                        appointment.getDoctors().getClinic().getId());
                 appointmentDTO.setClinicName(
-                        appointment.getDoctors().getClinics().getClinic_name());
+                        appointment.getDoctors().getClinic().getClinic_name());
             }
         }).register();
 
-        factory.classMap(Clinics.class, ClinicSearchDTO.class)
+        factory.classMap(Clinic.class, ClinicSearchDTO.class)
                 .field("id", "id")
                 .field("clinic_name", "clinic_name")
                 .field("photo", "photo")
@@ -271,7 +271,7 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Doctors, DoctorsSearchDTO>() {
                     @Override
                     public void mapAtoB(Doctors doctors, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        doctorsSearchDTO.setClinicName(doctors.getClinics().getClinic_name());
+                        doctorsSearchDTO.setClinicName(doctors.getClinic().getClinic_name());
                         doctorsSearchDTO.setSpecialisation(doctors.getSpecialization().getName());
                     }
                 }).register();

@@ -213,7 +213,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
         }
-        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
+        doctor.setClinic(clinicService.getByName(accountDto.getClinic()));
         addDoctor(doctor);
 
         return doctor;
@@ -249,7 +249,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
         Moderator moderator=moderatorService.getByEmail(email);
-        Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
+        Clinic clinic =clinicService.getClinicByID(moderator.getClinics().getId());
         Doctors doctor=new Doctors();
         User user=userService.findByEmail(userToDoctor.getEmail());
         doctor.setFirstname(user.getFirstname());
@@ -258,7 +258,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setEmail(user.getEmail());
         doctor.setPhoto(user.getPhoto());
         doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
-        doctor.setClinics(clinics);
+        doctor.setClinic(clinic);
         doctor.setContact(user.getContact());
         doctor.setDescription(userToDoctor.getDescription());
         doctor.setRoles(Arrays.asList(

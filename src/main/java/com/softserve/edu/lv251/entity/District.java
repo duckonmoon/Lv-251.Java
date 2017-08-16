@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Admin on 29.07.2017.
  */
 @Entity
-public class Districts extends BaseEntity {
+public class District extends BaseEntity {
     private String name;
 
 
@@ -17,7 +17,7 @@ public class Districts extends BaseEntity {
     private List<Contacts> contacts;
 
 
-    public Districts() {
+    public District() {
     }
 
     public String getName() {
@@ -38,7 +38,7 @@ public class Districts extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Districts{" +
+        return "District{" +
                 "name='" + name + '\'' +
 
                 '}';

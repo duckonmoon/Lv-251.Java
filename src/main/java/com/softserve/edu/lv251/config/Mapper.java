@@ -234,7 +234,7 @@ public class Mapper extends ConfigurableMapper {
                 .field("description", "description")
                 .byDefault().register();
 
-        factory.classMap(Districts.class, DistrictsDTO.class)
+        factory.classMap(District.class, DistrictsDTO.class)
                 .field("name", "name")
                 .byDefault().register();
 

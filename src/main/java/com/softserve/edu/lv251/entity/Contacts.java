@@ -29,7 +29,7 @@ public class Contacts extends BaseEntity {
     private Clinics clinics;
     @ManyToOne
     @JsonIgnore
-    private Districts district;
+    private District district;
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
     private Users users;
@@ -70,11 +70,11 @@ public class Contacts extends BaseEntity {
         this.address = address;
     }
 
-    public Districts getDistrict() {
+    public District getDistrict() {
         return district;
     }
 
-    public void setDistrict(Districts district) {
+    public void setDistrict(District district) {
         this.district = district;
     }
 

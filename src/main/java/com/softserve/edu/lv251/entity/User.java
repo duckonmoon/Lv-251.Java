@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Users extends BaseEntity {
+public class User extends BaseEntity {
 
     private String firstname;
     private String lastname;
@@ -28,8 +28,8 @@ public class Users extends BaseEntity {
     private String photo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "users")
-    private List<Appointments> appointments;
+    @OneToMany(mappedBy = "user")
+    private List<Appointment> appointments;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
@@ -40,7 +40,7 @@ public class Users extends BaseEntity {
                             CascadeType.REFRESH,
                             CascadeType.PERSIST
                     },
-            targetEntity = Roles.class)
+            targetEntity = Role.class)
     @JoinTable(
             name = "roles_users",
             joinColumns = @JoinColumn(
@@ -49,48 +49,48 @@ public class Users extends BaseEntity {
                     name = "role_id", referencedColumnName = "id"),
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
-    private List<Roles> roles;
+    private List<Role> roles;
 
     @OneToOne
-    private Contacts contact;
+    private Contact contact;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    private List<TestsResults> testsResults;
+    private List<TestsResult> testsResults;
 
 
-    public Users() {
+    public User() {
     }
 
-    public List<TestsResults> getTestsResults() {
+    public List<TestsResult> getTestsResults() {
         return testsResults;
     }
 
-    public void setTestsResults(List<TestsResults> testsResults) {
+    public void setTestsResults(List<TestsResult> testsResults) {
         this.testsResults = testsResults;
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contact) {
+    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
-    public List<Appointments> getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
     }
 
-    public void setAppointments(List<Appointments> appointments) {
+    public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 
-    public List<Roles> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Roles> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
@@ -160,7 +160,7 @@ public class Users extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 " firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +

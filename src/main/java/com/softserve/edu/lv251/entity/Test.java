@@ -8,14 +8,14 @@ import java.util.List;
  * Created by Marian Brynetskyi on 11.07.2017.
  */
 @Entity
-public class Tests extends BaseEntity {
+public class Test extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "tests")
-    private List<TestsResults> testsResults;
+    @OneToMany(mappedBy = "test")
+    private List<TestsResult> testsResults;
 
-    public Tests() {
+    public Test() {
     }
 
     public String getName() {
@@ -26,11 +26,11 @@ public class Tests extends BaseEntity {
         this.name = name;
     }
 
-    public List<TestsResults> getTestsResults() {
+    public List<TestsResult> getTestsResults() {
         return testsResults;
     }
 
-    public void setTestsResults(List<TestsResults> testsResults) {
+    public void setTestsResults(List<TestsResult> testsResults) {
         this.testsResults = testsResults;
     }
 

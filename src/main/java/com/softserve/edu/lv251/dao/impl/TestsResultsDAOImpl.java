@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.TestsResultsDAO;
-import com.softserve.edu.lv251.entity.TestsResults;
+import com.softserve.edu.lv251.entity.TestsResult;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -11,5 +11,5 @@ import javax.transaction.Transactional;
  */
 @Transactional
 @Repository
-public class TestsResultsDAOImpl extends BaseDAOImpl<TestsResults> implements TestsResultsDAO {
+public class TestsResultsDAOImpl extends BaseDAOImpl<TestsResult> implements TestsResultsDAO {
 }

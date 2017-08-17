@@ -59,14 +59,14 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet")
     public String moderatorCabinet(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
-        Clinics clinics = moderator.getClinics();
-        Contacts contacts = clinics.getContact();
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        Clinic clinic = moderator.getClinics();
+        Contact contact = clinic.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
-     if(clinics!=null){
-        mapper.map(clinics, clinicDTO);}
-     if(contacts!=null){
-        mapper.map(contacts, clinicDTO);}
+     if(clinic !=null){
+        mapper.map(clinic, clinicDTO);}
+     if(contact !=null){
+        mapper.map(contact, clinicDTO);}
         model.addAttribute("photoForm", new FileBucket());
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
@@ -87,14 +87,14 @@ public class ModeratorCabinetController {
 
         String messageError = messageSource.getMessage("messages.errorClinicName", null, currentLocale);
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        Clinics clinics = moderator.getClinics();
-        Contacts contacts = clinics.getContact();
+        Clinic clinic = moderator.getClinics();
+        Contact contact = clinic.getContact();
         if (!bindingResult.hasErrors()) {
-            mapper.map(clinicInfoDTO, clinics);
-            mapper.map(clinicInfoDTO, contacts);
+            mapper.map(clinicInfoDTO, clinic);
+            mapper.map(clinicInfoDTO, contact);
 
-            clinicService.updateClinic(clinics);
-            contactsService.updateContacts(contacts);
+            clinicService.updateClinic(clinic);
+            contactsService.updateContacts(contact);
             return "redirect:/moderator/cabinet";
         } else {
             model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
@@ -106,7 +106,7 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet/doctors")
     public String moderatorAllDoctors(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
@@ -124,7 +124,7 @@ public class ModeratorCabinetController {
     public String addDoctor(Model model, Principal principal) {
         model.addAttribute("doctorForm", new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
         return "moderatorAddDoctor";
@@ -161,8 +161,8 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.Controller.USERS_TO_DOCTOR, new UserToDoctor());
 
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
-        List<Users> users = userService.getAllUsers();
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<User> users = userService.getAllUsers();
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);

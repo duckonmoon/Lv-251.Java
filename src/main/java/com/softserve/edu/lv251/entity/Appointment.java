@@ -9,7 +9,7 @@ import java.util.Date;
  *
  */
 @Entity
-public class Appointments extends BaseEntity {
+public class Appointment extends BaseEntity {
 
     private Date appointmentDate;
     private Boolean isApproved;
@@ -19,12 +19,12 @@ public class Appointments extends BaseEntity {
     private String description;
 
     @ManyToOne
-    private Doctors doctors;
+    private Doctor doctor;
 
     @ManyToOne
-    private Users users;
+    private User user;
 
-    public Appointments() {
+    public Appointment() {
     }
 
     public Date getAppointmentDate() {
@@ -43,20 +43,20 @@ public class Appointments extends BaseEntity {
         isApproved = approved;
     }
 
-    public Doctors getDoctors() {
-        return doctors;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctors(Doctors doctors) {
-        this.doctors = doctors;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getDuration() {

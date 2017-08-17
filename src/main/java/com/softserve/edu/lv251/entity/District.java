@@ -9,15 +9,15 @@ import java.util.List;
  * Created by Admin on 29.07.2017.
  */
 @Entity
-public class Districts extends BaseEntity {
+public class District extends BaseEntity {
     private String name;
 
 
     @OneToMany(mappedBy = "district", fetch = FetchType.EAGER)
-    private List<Contacts> contacts;
+    private List<Contact> contacts;
 
 
-    public Districts() {
+    public District() {
     }
 
     public String getName() {
@@ -28,17 +28,17 @@ public class Districts extends BaseEntity {
         this.name = name;
     }
 
-    public List<Contacts> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(List<Contacts> contacts) {
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
     @Override
     public String toString() {
-        return "Districts{" +
+        return "District{" +
                 "name='" + name + '\'' +
 
                 '}';

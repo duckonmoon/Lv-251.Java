@@ -1,9 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.entity.Appointments;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Users;
-import org.junit.Assert;
+import com.softserve.edu.lv251.entity.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -21,29 +18,29 @@ import static org.mockito.Mockito.when;
  * Created by Kovalevskyy Vitaliy on 14.08.2017.
  */
 
-public class UsersDAOImplTest {
+public class UserDAOImplTest {
     @Mock
     private EntityManager entityManager;
     @Mock
     Query query;
     @Spy
-    List<Users> usersList = new ArrayList<>();
+    List<User> userList = new ArrayList<>();
 
     @Before
     public void beforeTest() {
         MockitoAnnotations.initMocks(this);
-        Users users = new Users();
-        users.setId(2);
-        users.setFirstname("Pasha");
-        users.setLastname("Pashenko");
-        usersList.add(users);
+        User user = new User();
+        user.setId(2);
+        user.setFirstname("Pasha");
+        user.setLastname("Pashenko");
+        userList.add(user);
     }
 
     @Test
     public void searchByLetters() throws Exception {
         when(entityManager.createQuery("")).thenReturn(query);
-        when(query.getResultList()).thenReturn(usersList);
-        assertEquals(true, ((Users) query.getResultList().get(0)).getFirstname().contains("P"));
+        when(query.getResultList()).thenReturn(userList);
+        assertEquals(true, ((User) query.getResultList().get(0)).getFirstname().contains("P"));
     }
 
     @Test
@@ -57,8 +54,8 @@ public class UsersDAOImplTest {
     @Test
     public void getEntityByID() throws Exception {
         when(entityManager.createQuery("")).thenReturn(query);
-        when(query.getResultList()).thenReturn(usersList);
-        assertEquals(2, ((Users) query.getResultList().get(0)).getId());
+        when(query.getResultList()).thenReturn(userList);
+        assertEquals(2, ((User) query.getResultList().get(0)).getId());
     }
 
     @Test

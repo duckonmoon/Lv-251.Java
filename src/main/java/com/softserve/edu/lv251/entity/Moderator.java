@@ -8,10 +8,10 @@ import javax.persistence.OneToOne;
  * Created by Admin on 31.07.2017.
  */
 @Entity
-public class Moderator extends Users {
+public class Moderator extends User {
 
     @OneToOne
-    private Clinics clinic;
+    private Clinic clinic;
 
     @ManyToOne
     Admin admin;
@@ -19,12 +19,12 @@ public class Moderator extends Users {
     public Moderator() {
     }
 
-    public Clinics getClinics() {
+    public Clinic getClinics() {
         return clinic;
     }
 
-    public void setClinics(Clinics clinics) {
-        this.clinic = clinics;
+    public void setClinics(Clinic clinic) {
+        this.clinic = clinic;
     }
 
     public Admin getAdmin() {

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-public class Clinics extends BaseEntity {
+public class Clinic extends BaseEntity {
     private String clinic_name;
 
     @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
@@ -19,7 +19,7 @@ public class Clinics extends BaseEntity {
     private String description;
 
 
-    @OneToMany(mappedBy = "clinics", cascade =
+    @OneToMany(mappedBy = "clinic", cascade =
             {
                     CascadeType.DETACH,
                     CascadeType.MERGE,
@@ -27,24 +27,24 @@ public class Clinics extends BaseEntity {
                     CascadeType.PERSIST
             })
 
-    private List<Doctors> doctors;
+    private List<Doctor> doctors;
 
 
     @OneToOne(cascade = {CascadeType.ALL})
-    private Contacts contact;
+    private Contact contact;
 
     @OneToOne(mappedBy = "clinic")
     private Moderator moderator;
 
-    public Clinics() {
+    public Clinic() {
     }
 
-    public Contacts getContact() {
+    public Contact getContact() {
         return contact;
     }
 
-    public void setContact(Contacts contacts) {
-        this.contact = contacts;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public String getClinic_name() {
@@ -63,11 +63,11 @@ public class Clinics extends BaseEntity {
         this.description = description;
     }
 
-    public List<Doctors> getDoctors() {
+    public List<Doctor> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctors> doctors) {
+    public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
 
@@ -89,7 +89,7 @@ public class Clinics extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Clinics{" +
+        return "Clinic{" +
                 "clinic_name='" + clinic_name + '\'' +
                 ", photo='" + photo + '\'' +
                 ", description='" + description + '\'' +

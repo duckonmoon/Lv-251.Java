@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Admin on 21.07.2017.
  */
 @Service("doctorService")
-public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements DoctorsService {
+public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorsService {
 
     @Autowired
     private ContactsDAO contactsDAO;
@@ -57,36 +57,36 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
 
     @Override
-    public void addDoctor(Doctors doctors) {
-        doctorsDAO.addEntity(doctors);
+    public void addDoctor(Doctor doctor) {
+        doctorsDAO.addEntity(doctor);
     }
 
     @Override
-    public List<Doctors> getAll() {
+    public List<Doctor> getAll() {
         return doctorsDAO.getAllEntities();
     }
 
     @Override
-    public void update(Doctors doctors) {
-        doctorsDAO.updateEntity(doctors);
+    public void update(Doctor doctor) {
+        doctorsDAO.updateEntity(doctor);
     }
 
     @Override
-    public Doctors find(long id) {
+    public Doctor find(long id) {
         return doctorsDAO.getEntityByID(id);
     }
 
     @Override
-    public void delete(Doctors doctors) {
-        doctorsDAO.deleteEntity(doctors);
+    public void delete(Doctor doctor) {
+        doctorsDAO.deleteEntity(doctor);
     }
 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
-        List<Doctors> doctors = doctorsDAO.searchByLetters(letters);
+        List<Doctor> doctors = doctorsDAO.searchByLetters(letters);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
-        for (Doctors doctor : doctors) {
+        for (Doctor doctor : doctors) {
             DoctorsSearchDTO result = new DoctorsSearchDTO();
             mapper.map(doctor, result);
             results.add(result);
@@ -97,25 +97,25 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public List<Doctors> getDoctorsByColumnNameAndValue(String columnName, Object value) {
+    public List<Doctor> getDoctorsByColumnNameAndValue(String columnName, Object value) {
         return this.doctorsDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
-    public Doctors findByEmail(String email) {
-        List<Doctors> doctors = getDoctorsByColumnNameAndValue("email", email);
+    public Doctor findByEmail(String email) {
+        List<Doctor> doctors = getDoctorsByColumnNameAndValue("email", email);
         return doctors.isEmpty() ? null : doctors.get(0);
     }
 
     @Transactional
     @Override
-    public Doctors registerNewDoctorAccount(UserDTO accountDto)
+    public Doctor registerNewDoctorAccount(UserDTO accountDto)
             throws EmailExistsException {
 
         if (emailExist(accountDto.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
         }
-        Doctors doctor = new Doctors();
+        Doctor doctor = new Doctor();
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
@@ -124,8 +124,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setRoles(Arrays.asList(rolesService.findByName(WebRoles.ROLE_USER.name()),
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name())));
         doctor.setPhoto(StoredImagesService.getDefaultPictureBase64encoded("User_Default.png"));
-        Contacts contact = new Contacts();
-        contact.setUsers(doctor);
+        Contact contact = new Contact();
+        contact.setUser(doctor);
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);
@@ -134,12 +134,12 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         return doctor;
     }
 
-    public List<Appointments> appointmentsInThisMonth(Long id, Date date) {
+    public List<Appointment> appointmentsInThisMonth(Long id, Date date) {
         return doctorsDAO.appointmentsInThisMonth(id, date);
     }
 
     @Override
-    public List<Doctors> searchByDistrict(String name) {
+    public List<Doctor> searchByDistrict(String name) {
         return doctorsDAO.searchByDistrict(name);
     }
 
@@ -148,18 +148,18 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public List<Doctors> searchBySpecialization(String name) {
+    public List<Doctor> searchBySpecialization(String name) {
         return doctorsDAO.searchBySpecialization(name);
     }
 
     @Override
     public List<PatientDTO> getDoctorPatients(long doctorId) {
         List<PatientDTO> patients = new ArrayList<>();
-        Doctors doctor = doctorsDAO.getEntityByID(doctorId);
-        List<Appointments> appointments = doctor.getDocAppointments();
-        for (Appointments a : appointments) {
+        Doctor doctor = doctorsDAO.getEntityByID(doctorId);
+        List<Appointment> appointments = doctor.getDocAppointments();
+        for (Appointment a : appointments) {
             PatientDTO patient = new PatientDTO();
-            mapper.map(a.getUsers(), patient);
+            mapper.map(a.getUser(), patient);
             patients.add(patient);
         }
 
@@ -167,21 +167,21 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     }
 
     @Override
-    public BaseDAO<Doctors> getDao() {
+    public BaseDAO<Doctor> getDao() {
         return doctorsDAO;
     }
 
 
     @Override
-    public List<Doctors> getByClinic(Long clinicId) {
-        List<Doctors> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
+    public List<Doctor> getByClinic(Long clinicId) {
+        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
         return doctors.isEmpty() ? null : doctors;
     }
 
     @Override
     @Transactional
-    public Doctors addDoctorAccount(DoctorDTO accountDto) {
-        Doctors doctor = new Doctors();
+    public Doctor addDoctorAccount(DoctorDTO accountDto) {
+        Doctor doctor = new Doctor();
 
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
@@ -200,7 +200,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         doctor.setRoles(Arrays.asList(
                 rolesService.findByName(WebRoles.ROLE_DOCTOR.name()),
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
-        Contacts contact = new Contacts();
+        Contact contact = new Contact();
         contact.setEmail(accountDto.getEmail());
         this.contactsDAO.addEntity(contact);
         doctor.setContact(contact);
@@ -213,21 +213,21 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
         }
-        doctor.setClinics(clinicService.getByName(accountDto.getClinic()));
+        doctor.setClinic(clinicService.getByName(accountDto.getClinic()));
         addDoctor(doctor);
 
         return doctor;
     }
 
     public List<SearchResultDoctorDTO> getDoctorByNameWithLimitAndOffset(String name, int offset, int limit) {
-        List<Doctors> doctors;
+        List<Doctor> doctors;
         if (name == null) {
             doctors = doctorsDAO.getWithOffsetAndLimit(offset, limit);
         } else {
             doctors = doctorsDAO.searchByNameAndSpecialisationWithOffsetAndLimit(name, offset, limit);
         }
         List<SearchResultDoctorDTO> results = new ArrayList<>();
-        for (Doctors doctor : doctors) {
+        for (Doctor doctor : doctors) {
             SearchResultDoctorDTO result = new SearchResultDoctorDTO();
             mapper.map(doctor, result);
             results.add(result);
@@ -239,9 +239,9 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
 
     @Override
     public DoctorsSearchDTO findById(long id) {
-        Doctors doctors = doctorsDAO.getEntityByID(id);
+        Doctor doctor = doctorsDAO.getEntityByID(id);
         DoctorsSearchDTO doctorsSearchDTO = new DoctorsSearchDTO();
-        mapper.map(doctors, doctorsSearchDTO);
+        mapper.map(doctor, doctorsSearchDTO);
 
         return doctorsSearchDTO;
     }
@@ -249,16 +249,16 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctors> implements
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
         Moderator moderator=moderatorService.getByEmail(email);
-        Clinics clinics=clinicService.getClinicByID(moderator.getClinics().getId());
-        Doctors doctor=new Doctors();
-        Users user=userService.findByEmail(userToDoctor.getEmail());
+        Clinic clinic =clinicService.getClinicByID(moderator.getClinics().getId());
+        Doctor doctor=new Doctor();
+        User user=userService.findByEmail(userToDoctor.getEmail());
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());
         doctor.setEmail(user.getEmail());
         doctor.setPhoto(user.getPhoto());
         doctor.setSpecialization(specializationService.findByName(userToDoctor.getSpecialization()));
-        doctor.setClinics(clinics);
+        doctor.setClinic(clinic);
         doctor.setContact(user.getContact());
         doctor.setDescription(userToDoctor.getDescription());
         doctor.setRoles(Arrays.asList(

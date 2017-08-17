@@ -73,4 +73,16 @@ public class MainSearchController {
         return doctorsService.searchBySpecialization(name);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/rest/autocomplete/doctors/byName")
+    public List<DoctorsSearchDTO> searchDoctors(@RequestParam String name) {
+        return doctorsService.searchByLetters(name);
+
+    }
+    @ResponseBody
+    @RequestMapping(value = "/rest/search/doctor/{id}")
+    public DoctorsSearchDTO doctorById(@PathVariable Long id) {
+        return doctorsService.findById(id);
+    }
+
 }

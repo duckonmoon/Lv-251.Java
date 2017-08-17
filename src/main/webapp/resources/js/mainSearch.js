@@ -253,7 +253,7 @@ function  doctorsBySpecialization() {
 }
 function allDocs() {
     $("#autocomplete").autocomplete({
-        serviceUrl: '/all/doc',
+        serviceUrl: '/rest/autocomplete/doctors/byName',
         paramName: "name",
         delimiter: ",",
         transformResult: function (response) {
@@ -271,7 +271,7 @@ function allDocs() {
             console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
             var id=suggestion.data;
             $.ajax({
-                url:'/searchResult/'+id,
+                url:'/rest/search/doctor/'+id,
                 method:'GET',
                 contentType:'application/json',
 

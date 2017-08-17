@@ -68,7 +68,7 @@ public class DoctorCabinetController {
         appointmentService.updateAppointment(appointment);
     }
 
-    @RequestMapping(value = "/users/search")
+    @RequestMapping(value = "/user/search")
     @ResponseBody
     public List<User> getUsers(@RequestParam String name) {
         List<User> usersses = userService.searchByLetters(name);
@@ -81,7 +81,7 @@ public class DoctorCabinetController {
     }
 
 
-    @RequestMapping(value = "/users/addApp", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/addApp", method = RequestMethod.POST)
     @ResponseBody
     public void addAppointment(HttpServletRequest request, Principal principal)
     {

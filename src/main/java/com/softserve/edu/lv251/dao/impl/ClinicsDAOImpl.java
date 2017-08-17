@@ -19,7 +19,7 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinic> implements ClinicsDAO {
 
     @Override
     public List<Clinic> findByDistrict(String name) {
-        Query query = entityManager.createQuery("select c from Clinics c join c.contact cont join cont.district d where d.name like :name")
+        Query query = entityManager.createQuery("select c from Clinic c join c.contact cont join cont.district d where d.name like :name")
                 .setParameter("name", name);
 
         return query.getResultList();
@@ -28,7 +28,7 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinic> implements ClinicsDAO {
     @Override
     public List<Clinic> searchByLetters(String letters) {
         String name = letters + "%".toLowerCase();
-        Query query = entityManager.createQuery("select c from Clinics c where lower(c.clinic_name) like :name").setParameter("name", name);
+        Query query = entityManager.createQuery("select c from Clinic c where lower(c.clinic_name) like :name").setParameter("name", name);
 
         return query.getResultList();
     }
@@ -37,7 +37,7 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinic> implements ClinicsDAO {
     public List<Clinic> getWithOffsetAndLimit(int offset, int limit) {
         Query query = entityManager.createQuery(
                 "select c " +
-                        "from Clinics c")
+                        "from Clinic c")
                 .setFirstResult(offset)
                 .setMaxResults(limit);
 
@@ -50,7 +50,7 @@ public class ClinicsDAOImpl extends BaseDAOImpl<Clinic> implements ClinicsDAO {
 
         Query query = entityManager.createQuery(
                 "select c " +
-                        "from Clinics c " +
+                        "from Clinic c " +
                         "where c.clinic_name like :name ")
                 .setParameter("name", name)
                 .setFirstResult(offset)

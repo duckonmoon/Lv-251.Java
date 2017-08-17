@@ -252,7 +252,7 @@
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/allDoctors/1">
-                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctor" />
+                        <span class="glyphicon glyphicon-user"></span><spring:message code="messages.doctors" />
                     </a>
                 </li>
 
@@ -466,7 +466,7 @@
         <ul class="list-unstyled">
             <li><a href=<c:url value="/"/>><spring:message code="messages.home"/></a></li>
             <li><a href=<c:url value="/clinics/1"/>><spring:message code="messages.clinic"/></a></li>
-            <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctor"/> </a></li>
+            <li><a href=<c:url value="/allDoctors/1"/>><spring:message code="messages.doctors"/> </a></li>
             <li><a href="#"><spring:message code="messages.contact"/></a></li>
         </ul>
     </div>

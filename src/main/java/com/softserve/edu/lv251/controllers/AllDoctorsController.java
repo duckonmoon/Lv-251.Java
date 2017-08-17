@@ -95,7 +95,7 @@ public class AllDoctorsController {
         modelAndView.setViewName("redirect:/" + allDoctors(chainIndex, modelMap) + "/" + chainIndex);
         return modelAndView;
     }
-    
+
 
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {

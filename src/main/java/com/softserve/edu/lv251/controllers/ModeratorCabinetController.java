@@ -59,7 +59,7 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet")
     public String moderatorCabinet(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         Clinic clinic = moderator.getClinics();
         Contact contact = clinic.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
@@ -106,7 +106,7 @@ public class ModeratorCabinetController {
     @GetMapping(value = "/cabinet/doctors")
     public String moderatorAllDoctors(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
@@ -124,7 +124,7 @@ public class ModeratorCabinetController {
     public String addDoctor(Model model, Principal principal) {
         model.addAttribute("doctorForm", new DoctorDTO());
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         model.addAttribute(Constants.Controller.DOCTORS, doctors);
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
         return "moderatorAddDoctor";
@@ -161,7 +161,7 @@ public class ModeratorCabinetController {
         model.addAttribute(Constants.Controller.USERS_TO_DOCTOR, new UserToDoctor());
 
         Moderator moderator = moderatorService.getByEmail(principal.getName());
-        List<Doctors> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
+        List<Doctor> doctors = doctorsService.getByClinic(moderator.getClinics().getId());
         List<User> users = userService.getAllUsers();
 
         model.addAttribute(Constants.Controller.DOCTORS, doctors);

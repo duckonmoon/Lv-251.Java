@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorImageDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.PagingSizeService;
@@ -30,7 +30,7 @@ public class AllDoctorsController {
 
     @Autowired
     @Qualifier("doctorService")
-    private PagingSizeService<Doctors> pagingSizeService;
+    private PagingSizeService<Doctor> pagingSizeService;
 
     @Autowired
     private UserService userService;
@@ -92,7 +92,7 @@ public class AllDoctorsController {
         return doctorsService.findById(id);
     }
 
-    @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/doctor/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
         model.addAttribute("doctor", DoctorImageDTO.convert(doctorsService.find(id)));
         return "doctor_details";

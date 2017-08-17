@@ -27,7 +27,7 @@ public class Clinic extends BaseEntity {
                     CascadeType.PERSIST
             })
 
-    private List<Doctors> doctors;
+    private List<Doctor> doctors;
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -63,11 +63,11 @@ public class Clinic extends BaseEntity {
         this.description = description;
     }
 
-    public List<Doctors> getDoctors() {
+    public List<Doctor> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctors> doctors) {
+    public void setDoctors(List<Doctor> doctors) {
         this.doctors = doctors;
     }
 

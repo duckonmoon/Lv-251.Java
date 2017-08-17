@@ -9,8 +9,8 @@
                     <a href="/moderator/cabinet" class="list-group-item ">
                         <spring:message code="messages.clinic" />
                     </a>
-                    <a href="/moderator/cabinet/doctors" class=" list-group-item ">
-                        <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
+                    <a href="/moderator/cabinet/doctor" class=" list-group-item ">
+                        <spring:message code="messages.doctors" /><span class="badge">${doctor.size()}</span>
                     </a>
                     <a href="/moderator/cabinet/add/doctor" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />

@@ -2,7 +2,7 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.dao.AppointmentsDAO;
 import com.softserve.edu.lv251.entity.Appointment;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,14 +60,14 @@ public class AppointmentServiceImplTest {
         Appointment appointment = new Appointment();
         appointment.setId(1);
 
-        Doctors doc = new Doctors();
+        Doctor doc = new Doctor();
         doc.setFirstname("Petro");
-        appointment.setDoctors(doc);
+        appointment.setDoctor(doc);
         appointmentService.addAppointment(appointment);
 
         verify(appointmentsDAO, times(1)).addEntity(captor.capture());
         Assert.assertEquals(1, captor.getValue().getId());
-        Assert.assertEquals("Petro", captor.getValue().getDoctors().getFirstname());
+        Assert.assertEquals("Petro", captor.getValue().getDoctor().getFirstname());
 
 
     }

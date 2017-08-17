@@ -53,7 +53,7 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="body" value="/WEB-INF/pages/403.jsp"/>
     </definition>
 
-    <!-- Doctors Page -->
+    <!--Doctors Page -->
     <definition name="allDoctors" extends="base-definition">
         <put-attribute name="title" value="Doctors"/>
         <put-attribute name="body" value="/WEB-INF/pages/allDoctors.jsp"/>
@@ -121,7 +121,7 @@ http://websystique.com/springmvc/spring-4-mvc-apache-tiles-3-annotation-based-ex
         <put-attribute name="current" value="moderator/cabinet"/>
     </definition>
 
-    <!-- Moderator cabinet doctors Page -->
+    <!-- Moderator cabinetDoctors Page -->
     <definition name="moderatorCabinetDoctors" extends="moderatorCabinet">
         <put-attribute name="title" value="Moderator Cabinet"/>
         <put-attribute name="body" value="/WEB-INF/pages/moderatorCabinetDoctors.jsp"/>

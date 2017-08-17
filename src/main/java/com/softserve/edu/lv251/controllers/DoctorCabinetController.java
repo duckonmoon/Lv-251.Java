@@ -100,7 +100,7 @@ public class DoctorCabinetController {
             appointment.setAppointmentDate(date);
             appointment.setIsApproved(true);
             appointment.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
-            appointment.setDoctors(doctorsService.findByEmail(principal.getName()));
+            appointment.setDoctor(doctorsService.findByEmail(principal.getName()));
             appointmentService.addAppointment(appointment);
         } catch (Exception e) {
             logger.error("Some Errors");

@@ -119,7 +119,7 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Appointment, AppointmentsForCreationDTO>() {
                     @Override
                     public void mapAtoB(Appointment a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
-                        b.setDoctors(a.getDoctors().getId());
+                        b.setDoctors(a.getDoctor().getId());
                     }
                 })
                 .register();
@@ -136,9 +136,9 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
-        factory.classMap(Doctors.class, SearchResultDoctorDTO.class).customize(new CustomMapper<Doctors, SearchResultDoctorDTO>() {
+        factory.classMap(Doctor.class, SearchResultDoctorDTO.class).customize(new CustomMapper<Doctor, SearchResultDoctorDTO>() {
             @Override
-            public void mapAtoB(Doctors doctor, SearchResultDoctorDTO searchResultDoctorDTO, MappingContext context) {
+            public void mapAtoB(Doctor doctor, SearchResultDoctorDTO searchResultDoctorDTO, MappingContext context) {
                 searchResultDoctorDTO.setId(doctor.getId());
                 searchResultDoctorDTO.setDescription(doctor.getDescription());
                 searchResultDoctorDTO.setFirstName(doctor.getFirstname());
@@ -210,20 +210,20 @@ public class Mapper extends ConfigurableMapper {
                 appointmentDTO.setPatientMiddleName(appointment.getUser().getMiddlename());
 
                 appointmentDTO.setDoctorId(
-                        appointment.getDoctors().getId());
+                        appointment.getDoctor().getId());
                 appointmentDTO.setDoctorFirstName(
-                        appointment.getDoctors().getFirstname());
+                        appointment.getDoctor().getFirstname());
                 appointmentDTO.setDoctorLastName(
-                        appointment.getDoctors().getLastname());
+                        appointment.getDoctor().getLastname());
                 appointmentDTO.setDoctorMiddleName(
-                        appointment.getDoctors().getMiddlename());
+                        appointment.getDoctor().getMiddlename());
                 appointmentDTO.setDoctorSpecialisation(
-                        appointment.getDoctors().getSpecialization().getName());
+                        appointment.getDoctor().getSpecialization().getName());
 
                 appointmentDTO.setClinicId(
-                        appointment.getDoctors().getClinic().getId());
+                        appointment.getDoctor().getClinic().getId());
                 appointmentDTO.setClinicName(
-                        appointment.getDoctors().getClinic().getClinic_name());
+                        appointment.getDoctor().getClinic().getClinic_name());
             }
         }).register();
 
@@ -261,18 +261,18 @@ public class Mapper extends ConfigurableMapper {
                     }
                 }).register();
 
-        factory.classMap(Doctors.class, DoctorsSearchDTO.class)
+        factory.classMap(Doctor.class, DoctorsSearchDTO.class)
                 .field("id", "id")
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")
                 .field("middlename", "middlename")
                 .field("description", "description")
                 .field("photo", "photo")
-                .customize(new CustomMapper<Doctors, DoctorsSearchDTO>() {
+                .customize(new CustomMapper<Doctor, DoctorsSearchDTO>() {
                     @Override
-                    public void mapAtoB(Doctors doctors, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        doctorsSearchDTO.setClinicName(doctors.getClinic().getClinic_name());
-                        doctorsSearchDTO.setSpecialisation(doctors.getSpecialization().getName());
+                    public void mapAtoB(Doctor doctor, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
+                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());
+                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());
                     }
                 }).register();
 
@@ -283,7 +283,7 @@ public class Mapper extends ConfigurableMapper {
                     @Override
                     public void mapAtoB(Appointment appointment, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
                         super.mapAtoB(appointment, appointmentsForDateTimePickerInDocDTO, context);
-                        appointmentsForDateTimePickerInDocDTO.setUsers(appointment.getDoctors().getId());
+                        appointmentsForDateTimePickerInDocDTO.setUsers(appointment.getDoctor().getId());
                     }
                 })
                 .register();

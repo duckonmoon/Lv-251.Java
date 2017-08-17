@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.entity.Appointment;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class AppointmentDAOImplTest {
     public void beforeTest() throws ParseException {
 
         MockitoAnnotations.initMocks(this);
-        Doctors doctor = new Doctors();
+        Doctor doctor = new Doctor();
         doctor.setId(1);
         doctor.setFirstname("Petro");
         doctor.setEmail("somemail@mail.com");
@@ -51,8 +51,8 @@ public class AppointmentDAOImplTest {
         appointment1.setId(2);
         appointment1.setAppointmentDate(sdf.parse("12/09/2017 - 15:00"));
 
-        appointment1.setDoctors(doctor);
-        appointment.setDoctors(doctor);
+        appointment1.setDoctor(doctor);
+        appointment.setDoctor(doctor);
         appointmentList.add(appointment);
         appointmentList.add(appointment1);
     }
@@ -74,8 +74,8 @@ public class AppointmentDAOImplTest {
         when(entityManager.createQuery("")).thenReturn(query);
         when(query.getResultList()).thenReturn(appointmentList);
         Assert.assertEquals(2, entityManager.createQuery("").getResultList().size());
-        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(0)).getDoctors().getEmail());
-        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(1)).getDoctors().getEmail());
+        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(0)).getDoctor().getEmail());
+        Assert.assertEquals("somemail@mail.com", ((Appointment) query.getResultList().get(1)).getDoctor().getEmail());
     }
 
     @Test

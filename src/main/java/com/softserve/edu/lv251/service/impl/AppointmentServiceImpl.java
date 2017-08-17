@@ -58,7 +58,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentsForCreationDTO> appointmentsForCreationDTOS = new ArrayList<>();
         appointmentsDAO.getAllEntities()
                 .stream()
-                .filter(p -> p.getDoctors().getId() == doctorId)
+                .filter(p -> p.getDoctor().getId() == doctorId)
                 .filter(p -> p.getIsApproved())
                 .filter(p -> p.getAppointmentDate().after(new Date()))
                 .forEach(p -> appointmentsForCreationDTOS.add(mapper.map(p, AppointmentsForCreationDTO.class)));
@@ -133,7 +133,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setAppointmentDate(date);
             appointment.setIsApproved(false);
             appointment.setUser(userService.findByEmail(userEmail));
-            appointment.setDoctors(doctorsService.find(doctorId));
+            appointment.setDoctor(doctorsService.find(doctorId));
             addAppointment(appointment);
         } catch (ParseException e) {
             logger.info(e);

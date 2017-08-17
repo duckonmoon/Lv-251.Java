@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.dao;
 
 import com.softserve.edu.lv251.entity.Appointment;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 
 import java.util.Date;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * Created by Taras on 16.07.2017.
  */
-public interface DoctorsDAO extends BaseDAO<Doctors>{
-    List<Doctors> searchByLetters(String letters);
+public interface DoctorsDAO extends BaseDAO<Doctor>{
+    List<Doctor> searchByLetters(String letters);
     List<Appointment> appointmentsInThisMonth(Long id, Date date);
-    List<Doctors>searchByDistrict(String name);
-    List<Doctors>searchBySpecialization(String name);
-    List<Doctors>getWithOffsetAndLimit(int offset, int limit);
-    List<Doctors>searchByNameAndSpecialisationWithOffsetAndLimit(String value, int offset, int limit);
+    List<Doctor>searchByDistrict(String name);
+    List<Doctor>searchBySpecialization(String name);
+    List<Doctor>getWithOffsetAndLimit(int offset, int limit);
+    List<Doctor>searchByNameAndSpecialisationWithOffsetAndLimit(String value, int offset, int limit);
 
 }

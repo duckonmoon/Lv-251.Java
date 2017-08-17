@@ -19,7 +19,7 @@ public class Appointment extends BaseEntity {
     private String description;
 
     @ManyToOne
-    private Doctors doctors;
+    private Doctor doctor;
 
     @ManyToOne
     private User user;
@@ -43,12 +43,12 @@ public class Appointment extends BaseEntity {
         isApproved = approved;
     }
 
-    public Doctors getDoctors() {
-        return doctors;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctors(Doctors doctors) {
-        this.doctors = doctors;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public User getUser() {

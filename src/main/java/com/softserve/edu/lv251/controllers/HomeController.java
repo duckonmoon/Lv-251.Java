@@ -2,7 +2,7 @@ package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +70,7 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/search/doctors/by/district/{name}")
-    public List<Doctors> doctorsByDistrict(@PathVariable("name") String name) {
+    public List<Doctor> doctorsByDistrict(@PathVariable("name") String name) {
         return doctorsService.searchByDistrict(name);
     }
 
@@ -82,7 +82,7 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/search/doctors/by/spec/{name}")
-    public List<Doctors> doctorsBySpec(@PathVariable("name") String name) {
+    public List<Doctor> doctorsBySpec(@PathVariable("name") String name) {
         return doctorsService.searchBySpecialization(name);
     }
 

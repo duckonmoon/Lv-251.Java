@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Doctors extends User {
+public class Doctor extends User {
 
     @Column(length = 10000)
     private String description;
@@ -25,13 +25,13 @@ public class Doctors extends User {
     private Clinic clinic;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "doctors", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "doctor", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<Appointment> docAppointments;
 
     @ManyToOne
     private Specialization specialization;
 
-    public Doctors() {
+    public Doctor() {
     }
 
     public List<Appointment> getDocAppointments() {

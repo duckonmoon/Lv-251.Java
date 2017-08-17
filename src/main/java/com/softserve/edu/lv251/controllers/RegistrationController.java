@@ -3,7 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
@@ -111,7 +111,7 @@ public class RegistrationController {
             @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
             BindingResult result) {
 
-        Doctors registered = new Doctors();
+        Doctor registered = new Doctor();
         if (!result.hasErrors()) {
             registered = createDoctorAccount(accountDto, result);
         }
@@ -184,8 +184,8 @@ public class RegistrationController {
         return registered;
     }
 
-    private Doctors createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
-        Doctors registered;
+    private Doctor createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
+        Doctor registered;
         try {
             registered = doctorsService.registerNewDoctorAccount(accountDto);
         } catch (EmailExistsException e) {

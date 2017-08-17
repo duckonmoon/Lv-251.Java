@@ -1,8 +1,11 @@
-<<<<<<< HEAD:src/test/java/com/softserve/edu/lv251/service/impl/DoctorServiceImplTest.java
-package java.com.softserve.edu.lv251.service.impl;
-=======
 package com.softserve.edu.lv251.service.impl;
->>>>>>> develop:src/test/java/com/softserve/edu/lv251/service/impl/DoctorServiceImplTest.java
+
+import com.softserve.edu.lv251.service.impl.DoctorServiceImpl;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+
+
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctor;

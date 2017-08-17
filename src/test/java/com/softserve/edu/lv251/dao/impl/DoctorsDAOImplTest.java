@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.entity.Doctors;
+import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,14 +27,14 @@ public class DoctorsDAOImplTest {
     @Mock
     Query query;
     @Spy
-    List<Doctors> doctorsList = new ArrayList<>();
+    List<Doctor> doctorsList = new ArrayList<>();
 
 
 
     @Before
     public void beforeTest() {
         MockitoAnnotations.initMocks(this);
-        Doctors doctor = new Doctors();
+        Doctor doctor = new Doctor();
         doctor.setId(1);
         doctor.setFirstname("Petro");
         doctorsList.add(doctor);
@@ -48,7 +48,7 @@ public class DoctorsDAOImplTest {
         Mockito.when(entityManager.createQuery("")).thenReturn(query);
         Mockito.when(query.getResultList()).thenReturn(doctorsList);
         assertEquals(1, query.getResultList().size());
-        assertEquals(true,  ((Doctors) query.getResultList().get(0)).getFirstname().contains("P"));
+        assertEquals(true,  ((Doctor) query.getResultList().get(0)).getFirstname().contains("P"));
     }
 
     @Test

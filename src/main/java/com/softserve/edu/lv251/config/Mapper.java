@@ -119,7 +119,7 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Appointment, AppointmentsForCreationDTO>() {
                     @Override
                     public void mapAtoB(Appointment a, AppointmentsForCreationDTO b, MappingContext mappingContext) {
-                        b.setDoctors(a.getDoctor().getId());
+                        b.setDoctor(a.getDoctor().getId());
                     }
                 })
                 .register();

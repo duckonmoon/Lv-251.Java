@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.service.impl;
 
-import com.softserve.edu.lv251.entity.Roles;
+import com.softserve.edu.lv251.entity.Role;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.UserService;
@@ -52,7 +52,7 @@ public class UpdatableUserDetailsService implements UserDetailsService {
         );
     }
 
-    private static List<GrantedAuthority> getAuthorities(List<Roles> roles) {
+    private static List<GrantedAuthority> getAuthorities(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
 

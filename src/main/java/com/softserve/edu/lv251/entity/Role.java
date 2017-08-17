@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Marian Brynetskyi on 11.07.2017.
  */
 @Entity
-public class Roles extends BaseEntity {
+public class Role extends BaseEntity {
 
     @Column
     private String name;
@@ -31,7 +31,7 @@ public class Roles extends BaseEntity {
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private List<User> users;
 
-    public Roles() {
+    public Role() {
     }
 
     public String getName() {

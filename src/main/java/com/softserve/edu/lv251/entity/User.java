@@ -40,7 +40,7 @@ public class User extends BaseEntity {
                             CascadeType.REFRESH,
                             CascadeType.PERSIST
                     },
-            targetEntity = Roles.class)
+            targetEntity = Role.class)
     @JoinTable(
             name = "roles_users",
             joinColumns = @JoinColumn(
@@ -49,7 +49,7 @@ public class User extends BaseEntity {
                     name = "role_id", referencedColumnName = "id"),
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
             inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
-    private List<Roles> roles;
+    private List<Role> roles;
 
     @OneToOne
     private Contact contact;
@@ -86,11 +86,11 @@ public class User extends BaseEntity {
         this.appointments = appointments;
     }
 
-    public List<Roles> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Roles> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

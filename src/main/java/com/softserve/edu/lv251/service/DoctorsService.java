@@ -21,7 +21,7 @@ public interface DoctorsService {
     List<DoctorsSearchDTO> searchByLetters(String search);
     List<Doctor> getDoctorsByColumnNameAndValue(String columnName, Object value);
     public Doctor findByEmail(String email);
-    public Doctor registerNewDoctorAccount(UserDTO accountDto) throws EmailExistsException;
+    public Doctor registerNewDoctorAccount(UserDTO accountDto);
     List<Appointment> appointmentsInThisMonth(Long id, Date date);
     List<Doctor>searchByDistrict(String name);
     List<Doctor>searchBySpecialization(String name);

@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
  */
 
 @Entity
-public class Contacts extends BaseEntity {
+public class Contact extends BaseEntity {
 
     private String address;
 
@@ -26,15 +26,15 @@ public class Contacts extends BaseEntity {
 
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
-    private Clinics clinics;
+    private Clinic clinic;
     @ManyToOne
     @JsonIgnore
-    private Districts district;
+    private District district;
     @JsonIgnore
     @OneToOne(mappedBy = "contact")
-    private Users users;
+    private User user;
 
-    public Contacts() {
+    public Contact() {
     }
 
 
@@ -70,11 +70,11 @@ public class Contacts extends BaseEntity {
         this.address = address;
     }
 
-    public Districts getDistrict() {
+    public District getDistrict() {
         return district;
     }
 
-    public void setDistrict(Districts district) {
+    public void setDistrict(District district) {
         this.district = district;
     }
 
@@ -118,19 +118,19 @@ public class Contacts extends BaseEntity {
         this.latitude = latitude;
     }
 
-    public Clinics getClinics() {
-        return clinics;
+    public Clinic getClinic() {
+        return clinic;
     }
 
-    public void setClinics(Clinics clinics) {
-        this.clinics = clinics;
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

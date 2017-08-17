@@ -9,18 +9,20 @@ public interface Constants {
     String MESSAGES_SOURCE = "classpath:messages";
     String HOME = "http://localhost:8080";
 
-    interface DatabaseConstants {
-        String DATABASE_PROPERTY_SOURCE = "classpath:db.properties";
+    interface Database {
+        String PROPERTY_SOURCE = "classpath:db.properties";
     }
 
-    interface MailConstants {
+    interface Mail {
         String MAIL = "lv251clinics@gmail.com";
         String PASSWORD = "clinics251lv";
         String HOST = "smtp.gmail.com";
         int PORT = 587;
     }
 
-    interface Controllers {
+
+    interface Controller {
+
         String DATE_FLAG = "flag";
         String LOGIN_FLAG = "flag";
         String DOCTOR_ID = "doctorId";
@@ -49,14 +51,5 @@ public interface Constants {
 
     }
 
-//    interface ControllersReturn {
-//        String ALL_DOCTORS = "allDoctors";
-//        String DOCTOR_DETAILS = "doctor_details";
-//        String MODERATOR_CABINET = "moderatorCabinet";
-//        String MODERATOR_CABINET_DOCTORS = "moderatorCabinetDoctors";
-//        String MODERATOR_ADD_DOCTOR = "moderatorAddDoctor";
-//        String MODERATOR_MAKE_DOCTOR= "moderatorMakeDoctor";
-//        String MODERATOR_CABINET_URL= "/moderator/cabinet";
-//        String MODERATOR_CABINET_DOCTORS_URL=":/moderator/cabinet/doctors";
-//    }
+
 }

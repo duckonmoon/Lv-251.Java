@@ -8,34 +8,34 @@ import java.util.Date;
  * Created by Taras on 11.07.2017.
  */
 @Entity
-public class TestsResults extends BaseEntity {
+public class TestsResult extends BaseEntity {
 
     private Date date;
     private String description;
 
     @ManyToOne
-    private Tests tests;
+    private Test test;
 
     @ManyToOne
-    private Users user;
+    private User user;
 
-    public TestsResults() {
+    public TestsResult() {
     }
 
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Tests getTests() {
-        return tests;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTests(Tests tests) {
-        this.tests = tests;
+    public void setTest(Test test) {
+        this.test = test;
     }
 
     public Date getDate() {

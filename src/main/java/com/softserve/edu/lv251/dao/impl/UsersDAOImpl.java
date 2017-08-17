@@ -1,7 +1,7 @@
 package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.UsersDAO;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -13,11 +13,11 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class UsersDAOImpl extends BaseDAOImpl<Users> implements UsersDAO {
+public class UsersDAOImpl extends BaseDAOImpl<User> implements UsersDAO {
     @Override
-    public List<Users> searchByLetters(String letters) {
+    public List<User> searchByLetters(String letters) {
         String search = "%" + letters + "%".toLowerCase();
-        return entityManager.createQuery("from Users d where lower(d.firstname) like" +
+        return entityManager.createQuery("from User d where lower(d.firstname) like" +
                 " :letters or lower(d.lastname) like :letters").setParameter("letters", search).getResultList();
     }
 }

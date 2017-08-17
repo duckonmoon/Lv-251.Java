@@ -5,7 +5,7 @@ import com.softserve.edu.lv251.dao.BaseDAO;
 import com.softserve.edu.lv251.dao.ClinicsDAO;
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.SearchResultClinicDTO;
-import com.softserve.edu.lv251.entity.Clinics;
+import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.service.ClinicService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Taras on 14.07.2017.
  */
 @Service("clinicService")
-public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements ClinicService {
+public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements ClinicService {
 
     @Autowired
     private Mapper mapper;
@@ -32,7 +32,7 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public List<SearchResultClinicDTO> getWithOffsetOrderedByName(String name, int offset, int limit) {
-        List<Clinics> clinics;
+        List<Clinic> clinics;
         if (name == null || name.isEmpty()) {
             clinics = clinicsDAO.getWithOffsetAndLimit(offset, limit);
         } else {
@@ -40,7 +40,7 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
         }
         List<SearchResultClinicDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             SearchResultClinicDTO result = new SearchResultClinicDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -50,59 +50,59 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     }
 
     @Override
-    public void addClinic(Clinics clinic) {
+    public void addClinic(Clinic clinic) {
         this.clinicsDAO.addEntity(clinic);
     }
 
     @Override
-    public void updateClinic(Clinics clinic) {
+    public void updateClinic(Clinic clinic) {
         this.clinicsDAO.updateEntity(clinic);
     }
 
     @Override
-    public Clinics getClinicByID(Long clinicId) {
+    public Clinic getClinicByID(Long clinicId) {
         return clinicsDAO.getEntityByID(clinicId);
     }
 
     @Override
     public ClinicSearchDTO clinicSearchById(Long clinicId) {
-        Clinics clinics = clinicsDAO.getEntityByID(clinicId);
+        Clinic clinic = clinicsDAO.getEntityByID(clinicId);
         ClinicSearchDTO clinicSearchDTO = new ClinicSearchDTO();
-        mapper.map(clinics, clinicSearchDTO);
+        mapper.map(clinic, clinicSearchDTO);
         return clinicSearchDTO;
     }
 
     @Override
-    public List<Clinics> getClinicsByColumnNameAndValue(String columnName, Object value) {
+    public List<Clinic> getClinicsByColumnNameAndValue(String columnName, Object value) {
         return this.clinicsDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
-    public List<Clinics> getAllClinics() {
+    public List<Clinic> getAllClinics() {
         return this.clinicsDAO.getAllEntities();
     }
 
     @Override
-    public void deleteClinic(Clinics clinic) {
+    public void deleteClinic(Clinic clinic) {
         this.clinicsDAO.deleteEntity(clinic);
     }
 
-    public Clinics getFirst() {
+    public Clinic getFirst() {
         return clinicsDAO.getEntityByID(1L);
     }
 
     @Override
-    public BaseDAO<Clinics> getDao() {
+    public BaseDAO<Clinic> getDao() {
         return clinicsDAO;
     }
 
     public List<ClinicSearchDTO> findByDistrict(String name)
 
     {
-        List<Clinics> clinics = clinicsDAO.findByDistrict(name);
+        List<Clinic> clinics = clinicsDAO.findByDistrict(name);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             ClinicSearchDTO result = new ClinicSearchDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -112,10 +112,10 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
 
     @Override
     public List<ClinicSearchDTO> searchByLetters(String letters) {
-        List<Clinics> clinics = clinicsDAO.searchByLetters(letters);
+        List<Clinic> clinics = clinicsDAO.searchByLetters(letters);
         List<ClinicSearchDTO> results = new ArrayList<>();
 
-        for (Clinics clinic : clinics) {
+        for (Clinic clinic : clinics) {
             ClinicSearchDTO result = new ClinicSearchDTO();
             mapper.map(clinic, result);
             results.add(result);
@@ -124,14 +124,14 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinics> implements
     }
 
     @Override
-    public Clinics getByName(String name) {
+    public Clinic getByName(String name) {
         return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name).get(0);
     }
 
     @Override
-    public void updatePhoto(MultipartFile file, Clinics clinics) {
+    public void updatePhoto(MultipartFile file, Clinic clinic) {
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
-        clinics.setPhoto(photo);
-        clinicsDAO.updateEntity(clinics);
+        clinic.setPhoto(photo);
+        clinicsDAO.updateEntity(clinic);
         }
 }

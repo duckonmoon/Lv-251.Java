@@ -1,17 +1,18 @@
+<<<<<<< HEAD:src/test/java/com/softserve/edu/lv251/service/impl/DoctorServiceImplTest.java
 package java.com.softserve.edu.lv251.service.impl;
+=======
+package com.softserve.edu.lv251.service.impl;
+>>>>>>> develop:src/test/java/com/softserve/edu/lv251/service/impl/DoctorServiceImplTest.java
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.service.impl.DoctorServiceImpl;
+import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,9 +27,9 @@ import static org.mockito.Mockito.*;
 public class DoctorServiceImplTest {
 
     @Spy
-    private List<Doctors> doctors = new LinkedList<>();
+    private List<Doctor> doctors = new LinkedList<>();
     @Captor
-    private ArgumentCaptor<Doctors> captor;
+    private ArgumentCaptor<Doctor> captor;
     @Mock
     private DoctorsDAO doctorsDAO;
     @InjectMocks
@@ -37,15 +38,15 @@ public class DoctorServiceImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        doctors.add(new Doctors());
-        doctors.add(new Doctors());
+        doctors.add(new Doctor());
+        doctors.add(new Doctor());
 
     }
 
     @Test
     public void addDoctor() throws Exception {
-        doNothing().when(doctorsDAO).addEntity(any(Doctors.class));
-        Doctors doc=new Doctors();
+        doNothing().when(doctorsDAO).addEntity(any(Doctor.class));
+        Doctor doc=new Doctor();
         doc.setFirstname("Petro");
         doctorService.addDoctor(doc);
         verify(doctorsDAO, times(1)).addEntity(captor.capture());
@@ -58,7 +59,7 @@ public class DoctorServiceImplTest {
 
 
         when(doctorsDAO.getAllEntities()).thenReturn(doctors);
-        assertEquals(2,doctorsDAO.getAllEntities().size());
+        assertEquals(2,doctorService.getAll().size());
     }
 
     @Test

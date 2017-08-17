@@ -3,8 +3,8 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
-import com.softserve.edu.lv251.entity.Doctors;
-import com.softserve.edu.lv251.entity.Users;
+import com.softserve.edu.lv251.entity.Doctor;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
 import com.softserve.edu.lv251.exceptions.EmailExistsException;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -32,7 +31,7 @@ import java.util.Locale;
  * Updated: Brynetskyi Marian
  */
 
-@Controller
+@org.springframework.stereotype.Controller
 public class RegistrationController {
 
     @Autowired
@@ -75,10 +74,12 @@ public class RegistrationController {
             return "registration";
         }
 
-        Users registered = createUserAccount(accountDto, result);
+        User registered = createUserAccount(accountDto, result);
 
         if (registered == null) {
-            result.rejectValue(Constants.Controllers.EMAIL, "message.regError");
+
+            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
+
         }
 
         try {
@@ -102,22 +103,28 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-        model.addAttribute(Constants.Controllers.DOCTOR_FORM, new DoctorDTO());
+
+        model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
+
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-            @ModelAttribute(Constants.Controllers.DOCTOR_FORM) @Valid DoctorDTO accountDto,
+
+            @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
+
             BindingResult result) {
 
-        Doctors registered = new Doctors();
+        Doctor registered = new Doctor();
         if (!result.hasErrors()) {
             registered = createDoctorAccount(accountDto, result);
         }
         if (registered == null) {
-            result.rejectValue(Constants.Controllers.EMAIL, "message.regError");
+
+            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
+
         }
         if (result.hasErrors()) {
             return "registrationDoctor";
@@ -137,15 +144,19 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.Controllers.MESSAGE, message);
+
+            model.addAttribute(Constants.Controller.MESSAGE, message);
+
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
-        Users user = verificationToken.getUser();
+        User user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-            model.addAttribute(Constants.Controllers.MESSAGE, message);
+
+            model.addAttribute(Constants.Controller.MESSAGE, message);
+
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -159,7 +170,9 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-            model.addAttribute(Constants.Controllers.LOGIN_FLAG, true);
+
+            model.addAttribute(Constants.Controller.LOGIN_FLAG, true);
+
 
             return "home";
         }
@@ -173,8 +186,8 @@ public class RegistrationController {
         return "home";
     }
 
-    private Users createUserAccount(UserDTO accountDto, BindingResult result) {
-        Users registered;
+    private User createUserAccount(UserDTO accountDto, BindingResult result) {
+        User registered;
         try {
             registered = userService.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {
@@ -185,8 +198,8 @@ public class RegistrationController {
         return registered;
     }
 
-    private Doctors createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
-        Doctors registered;
+    private Doctor createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
+        Doctor registered;
         try {
             registered = doctorsService.registerNewDoctorAccount(accountDto);
         } catch (EmailExistsException e) {

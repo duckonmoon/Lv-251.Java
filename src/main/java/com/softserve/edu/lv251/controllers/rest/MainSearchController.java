@@ -3,7 +3,6 @@ package com.softserve.edu.lv251.controllers.rest;
 import com.softserve.edu.lv251.dto.pojos.ClinicSearchDTO;
 import com.softserve.edu.lv251.dto.pojos.DistrictsDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
-import com.softserve.edu.lv251.entity.Doctors;
 import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DistrictsService;

@@ -19,14 +19,14 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
     @Override
     public List<Doctor> searchByLetters(String letters) {
         String search = letters + "%".toLowerCase();
-        Query query = entityManager.createQuery("from Doctors d where lower(d.firstname) like" +
+        Query query = entityManager.createQuery("from Doctor d where lower(d.firstname) like" +
                 " :letters or lower(d.lastname) like :letters or lower(d.specialization.name) like :letters").setParameter("letters", search);
         return query.getResultList();
     }
 
     public List<Appointment> appointmentsInThisMonth(Long id, Date date) {
         return entityManager
-                .createQuery("from Appointments a where month(date) = month(a.appointmentDate) and a.doctors.id = id" +
+                .createQuery("from Appointment a where month(date) = month(a.appointmentDate) and a.doctor.id = id" +
                         " and year(date) = year(a.appointmentDate)")
                 .getResultList();
     }
@@ -34,14 +34,14 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
 
     @Override
     public List<Doctor> searchBySpecialization(String name) {
-        Query query = entityManager.createQuery("select d from Doctors d join d.specialization s where s.name like :name ").setParameter("name", name);
+        Query query = entityManager.createQuery("select d from Doctor d join d.specialization s where s.name like :name ").setParameter("name", name);
         return query.getResultList();
     }
 
 
     @Override
     public List<Doctor> searchByDistrict(String name) {
-        Query query = entityManager.createQuery("select d from Doctors d join d.clinics c join c.contact cont join cont.district dist where" +
+        Query query = entityManager.createQuery("select d from Doctor d join d.clinic c join c.contact cont join cont.district dist where" +
                 " dist.name like :name").setParameter("name", name);
         return query.getResultList();
     }
@@ -51,7 +51,7 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
     public List<Doctor> getWithOffsetAndLimit(int offset, int limit) {
         Query query = entityManager.createQuery(
                 "select d " +
-                        "from Doctors d")
+                        "from Doctor d")
                 .setFirstResult(offset)
                 .setMaxResults(limit);
 
@@ -65,7 +65,7 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
 
         Query query = entityManager.createQuery(
                 "select d " +
-                        "from Doctors d " +
+                        "from Doctor d " +
                         "join d.specialization s " +
                         "where s.name + d.firstname + d.lastname + d.middlename like :name ")
                 .setParameter("name", name)

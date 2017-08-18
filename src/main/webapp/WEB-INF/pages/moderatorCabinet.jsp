@@ -12,8 +12,8 @@
                     <a href="<c:url value="/moderator/cabinet"/>" class="list-group-item navbar-inverse">
                         <spring:message code="messages.clinic" />
                     </a>
-                    <a href="<c:url value="/moderator/cabinet/doctor"/>" class=" list-group-item ">
-                        <spring:message code="messages.doctor" /><span class="badge">${doctor.size()}</span>
+                    <a href="<c:url value="/moderator/cabinet/doctors"/>" class=" list-group-item ">
+                        <spring:message code="messages.doctors" /><span class="badge">${doctors.size()}</span>
                     </a>
                     <a href="<c:url value="/moderator/cabinet/add/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.addDoctors" />
@@ -86,43 +86,43 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="email" value="${clinic.contact.email}" disabled="false" cssStyle="background-color: #72d9b9;"/>
+                            <form:input type="text" class="form-control" path="email" value="${clinicDTO.email}" disabled="false" cssStyle="background-color: #72d9b9;"/>
                         </div>
                     </div>
                         <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userAddress"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control d" path="address" />
+                            <form:input type="text" class="form-control d" value="${clinicDTO.address}" path="address" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userCity"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="city"/>
+                            <form:input type="text" class="form-control" path="city" value="${clinicDTO.city}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userZipcode"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="zipCode"/>
+                            <form:input type="text" class="form-control" path="zipCode" value="${clinicDTO.zipCode}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userFirstPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="firstPhone"/>
+                            <form:input type="text" class="form-control" path="firstPhone" value="${clinicDTO.firstPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userSecondPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="secondPhone"/>
+                            <form:input type="text" class="form-control" path="secondPhone" value="${clinicDTO.secondPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-3 control-label"><spring:message code="messages.userThirdPhone"/>:</label>
                         <div class="col-lg-7">
-                            <form:input type="text" class="form-control" path="thirdPhone"/>
+                            <form:input type="text" class="form-control" path="thirdPhone" value="${clinicDTO.thirdPhone}"/>
                         </div>
                     </div>
                     <div class="form-group">

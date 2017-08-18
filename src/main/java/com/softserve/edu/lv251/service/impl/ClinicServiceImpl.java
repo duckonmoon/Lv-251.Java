@@ -130,8 +130,9 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements 
 
     @Override
     public void updatePhoto(MultipartFile file, Clinic clinic) {
+        if(!file.isEmpty()){
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
         clinic.setPhoto(photo);
-        clinicsDAO.updateEntity(clinic);
+        clinicsDAO.updateEntity(clinic);}
         }
 }

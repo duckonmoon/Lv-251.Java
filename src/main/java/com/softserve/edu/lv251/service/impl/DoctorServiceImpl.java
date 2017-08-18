@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.management.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -197,8 +198,23 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
-        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
-        return doctors.isEmpty() ? null : doctors;
+        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
+        return  doctors;
+    }
+
+    public List<DoctorsSearchDTO>getByClinic(Clinic clinic){
+        if(clinic==null){
+            return null;
+        }else{
+        List<Doctor> doctors = doctorsDAO.getByClinic(clinic);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results; }
     }
 
     @Override
@@ -294,4 +310,5 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
 
     }
+
 }

@@ -1,6 +1,5 @@
 package com.softserve.edu.lv251.validators;
 
-import com.softserve.edu.lv251.customannotations.ValidFile;
 import com.softserve.edu.lv251.customannotations.ValidPhoto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +19,8 @@ public class PhotoValidator implements ConstraintValidator<ValidPhoto,Object> {
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         MultipartFile multipartFile = (MultipartFile) o;
-        return (multipartFile.getContentType().equals("image/jpeg") ||
-                multipartFile.getContentType().equals("image/png")) || multipartFile.isEmpty();
+        return ((multipartFile.getContentType().equals("image/jpeg") || multipartFile.isEmpty()||
+                multipartFile.getContentType().equals("image/png"))) && multipartFile.getSize()<=100000;
+
     }
 }

@@ -145,12 +145,12 @@ public class ModeratorCabinetController {
     }
 
     @PostMapping(value = "/add/doctor")
-    public String registerDoctor(@ModelAttribute("doctorForm") @Valid DoctorDTO doctorDTO, BindingResult bindingResult) {
+    public String registerDoctor(@ModelAttribute("doctorForm") @Valid DoctorDTO doctorDTO, BindingResult bindingResult,Principal principal) {
         if (bindingResult.hasErrors()) {
             logger.warn("registerDoctor has errors");
             return Constants.Controller.MODERATOR_ADD_DOCTOR;
         } else {
-            doctorsService.addDoctorAccount(doctorDTO);
+            doctorsService.addDoctorAccount(doctorDTO,principal.getName());
             return "redirect:/moderator/cabinet/doctors";
         }
     }

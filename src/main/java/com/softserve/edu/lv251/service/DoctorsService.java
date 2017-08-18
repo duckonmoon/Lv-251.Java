@@ -32,7 +32,7 @@ public interface DoctorsService {
     List<PatientDTO> getDoctorPatients(long doctorId);
 
     public List<Doctor> getByClinic(Long clinicId);
-    public Doctor addDoctorAccount(DoctorDTO accountDto);
+    public Doctor addDoctorAccount(DoctorDTO accountDto,String email);
 
     public List<SearchResultDoctorDTO> getDoctorByNameWithLimitAndOffset(String name, int offset, int limit);
     public  DoctorsSearchDTO findById(long id);

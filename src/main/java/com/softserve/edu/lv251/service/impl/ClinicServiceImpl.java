@@ -125,7 +125,8 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements 
 
     @Override
     public Clinic getByName(String name) {
-        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name).get(0);
+       List< Clinic> clinic=clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name);
+        return clinic.isEmpty()?null:clinic.get(0);
     }
 
     @Override

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.management.Query;
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -219,9 +220,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     @Transactional
-    public Doctor addDoctorAccount(DoctorDTO accountDto) {
+    public Doctor addDoctorAccount(DoctorDTO accountDto,String email) {
         Doctor doctor = new Doctor();
-
+        Moderator moderator=moderatorService.getByEmail(email);
+        Clinic clinic =clinicService.getClinicByID(moderator.getClinic().getId());
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
 
@@ -251,8 +253,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             doctor.setSpecialization(specialization);
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        }if(clinicService.getByName(accountDto.getClinic())==null){
+
         }
-        doctor.setClinic(clinicService.getByName(accountDto.getClinic()));
+        doctor.setClinic(clinic);
         addDoctor(doctor);
 
         return doctor;

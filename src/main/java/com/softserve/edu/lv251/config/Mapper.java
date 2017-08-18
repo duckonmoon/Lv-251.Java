@@ -168,7 +168,6 @@ public class Mapper extends ConfigurableMapper {
         }).register();
 
 
-
         factory.classMap(Clinic.class, SearchResultClinicDTO.class).customize(new CustomMapper<Clinic, SearchResultClinicDTO>() {
             @Override
             public void mapAtoB(Clinic clinic, SearchResultClinicDTO searchResultClinicDTO, MappingContext context) {

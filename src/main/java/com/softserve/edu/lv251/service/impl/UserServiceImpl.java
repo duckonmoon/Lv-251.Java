@@ -107,12 +107,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User registerNewUserAccount(UserDTO accountDto)
-            throws EmailExistsException {
+    public User registerNewUserAccount(UserDTO accountDto) {
 
-        if (emailExist(accountDto.getEmail())) {
-            throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
-        }
         User user = new User();
         mapper.map(accountDto, user);
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
@@ -127,10 +123,6 @@ public class UserServiceImpl implements UserService {
         addUser(user);
 
         return user;
-    }
-
-    private boolean emailExist(String email) {
-        return findByEmail(email) != null;
     }
 
     @Override

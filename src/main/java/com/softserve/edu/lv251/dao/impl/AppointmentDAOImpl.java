@@ -26,7 +26,7 @@ public class AppointmentDAOImpl extends BaseDAOImpl<Appointment> implements Appo
 
     @Override
     public List<Appointment> appointmentsWithDoctor(Long id) {
-        return entityManager.createQuery("select a from Appointment a join a.doctor d join d.specialization s where a.user.id like:id order by a.appointmentDate").setParameter("id", id).getResultList();
+        return entityManager.createQuery("select a from Appointment a join a.doctor d join d.specialization s where a.user.id = :id order by a.appointmentDate").setParameter("id", id).getResultList();
     }
 
     public List<Appointment> getAppiontmentbyDoctorsEmail(String email) {

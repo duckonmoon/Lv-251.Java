@@ -29,7 +29,9 @@ public interface AppointmentService {
 
     List<Appointment> getAppiontmentbyDoctorsEmail(String email);
 
-    List<AppointmentDTO> getAppointmentByUserEmail(String email);
+    List<AppointmentDTO> getAppointmentDtoByUserEmail(String email);
+
+    List<Appointment> getAppointmentByUserEmail(String email);
 
     boolean createAppointment (String date, String userEmail, long doctorId);
 }

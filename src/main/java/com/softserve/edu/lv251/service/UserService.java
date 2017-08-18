@@ -38,7 +38,7 @@ public interface UserService {
 
     VerificationToken getVerificationToken(String verificationToken);
 
-    User registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
+    User registerNewUserAccount(UserDTO accountDto);
 
     void sendEmail(User user, String messageText);
 

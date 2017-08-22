@@ -2,18 +2,9 @@
  * Created by Admin on 18.08.2017.
  */
 
-// function validPhoto() {
-//     console.log("heeelllo")
-//     maxSize=100000;
-//     var sizeinbytes = document.getElementById('file').files[0].size;
-//     console.log(sizeinbytes)
-//     if(sizeinbytes>maxSize){
-//         $("#errorFile").show();
-//     }
-// }
-
 
 function Validate(oForm) {
+    console.log("in")
  hideErrors();
     var sizeinbytes=0;
      var maxSize=100000;
@@ -53,6 +44,14 @@ if($("#file").val()!=''){
         $("#errorSpec").show();
         return false;
     }
+    if($("#description").val()==''){
+        $("#errorDescription").show();
+        return false;
+    }
+    if($("#clinicName").val()==''){
+        $("#errorClinicName").show();
+        return false;
+    }
     return true;
 }
  function  hideErrors() {
@@ -62,3 +61,38 @@ if($("#file").val()!=''){
      $("#errorName").hide();
      $("#errorLastName").hide();
  }
+
+ function  validName(form) {
+    if($("#clinicName").val()== ""){
+        $("#errorClinicName").show();
+ return false
+    }else{
+        $("#errorClinicName").hide();
+        return true;
+    }
+ }
+function  validPhoto(form) {
+    console.log("hello")
+    var maxSize=100000;
+    var size=0;
+    if($("#photo").val()!=''){
+       var size = document.getElementById('photo').files[0].size;}
+
+    var photoName=$("#photo").val()
+    console.log(photoName)
+    var ext = $('#photo').val().split('.').pop().toLowerCase();
+
+
+    if(size>maxSize ||$.inArray(ext, ['gif','png','jpg','jpeg','']) == -1 ){
+        console.log("if block");
+        $("#errorPhoto").show();
+        return false;
+    }
+
+    else {
+        $("#errorPhoto").hide();
+        return true
+    }
+}
+
+

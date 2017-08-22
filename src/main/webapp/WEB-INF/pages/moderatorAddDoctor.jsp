@@ -41,7 +41,7 @@
                                     code="messages.userFirstname"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="firstName"  cssClass="text-danger"/>
-                                <div style="color: #bb1219 ;display: none" id="errorName">FirstName cant be empty</div>
+                                <div style="color: #bb1219 ;display: none" id="errorName">Cant be empty</div>
                                 <form:input id="firstname" name="firstName" type="text" class="form-control" path="firstName" />
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                     code="messages.userLastname"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="lastName"  cssClass="text-danger"/>
-                                <div style="color: #bb1219 ;display: none" id="errorLastName">LastName can"t be empty</div>
+                                <div style="color: #bb1219 ;display: none" id="errorLastName">Can"t be empty</div>
                                 <form:input id="lastname" type="text" class="form-control" path="lastName"/>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.userEmail"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="email"  cssClass="text-danger"/>
-                                <div style="color: #bb1219 ;display: none" id="errorEmail">email cant be empty And must have rigth format</div>
+                                <div style="color: #bb1219 ;display: none" id="errorEmail">Invalid email</div>
                                 <form:input id="docEmail" type="text" class="form-control" path="email" disabled="false"/>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.password"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="password"  cssClass="text-danger"/>
-                                <div style="color: #bb1219 ;display: none" id="errorPassword">Password cant be empty and be less then 8 symbols</div>
+                                <div style="color: #bb1219 ;display: none" id="errorPassword">Cant be empty and be less then 8 symbols</div>
                                 <form:input type="password" id="pass" class="form-control d" path="password"/>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                     code="messages.specialization"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="specialization"  cssClass="text-danger"/>
-                                <div style="color: #bb1219 ;display: none" id="errorSpec">Specialization cant be empty</div>
+                                <div style="color: #bb1219 ;display: none" id="errorSpec">Cant be empty</div>
                                 <form:input  type="text" class="form-control" id="autocomplete-spec"
                                             path="specialization"/>
                             </div>
@@ -100,7 +100,8 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.clinicName"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="clinic"/>
-                                <form:input type="text" value="${moderator.clinic.clinic_name}" class="form-control"
+                                <div style="color: #bb1219 ;display: none" id="errorClinicName">Can"t be empty</div>
+                                <form:input id="clinicName" type="text" value="${moderator.clinic.clinic_name}" class="form-control"
                                             path="clinic"/>
                             </div>
                         </div>
@@ -108,14 +109,15 @@
                             <label class="col-lg-3 control-label"><spring:message code="messages.Description"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="description"/>
-                                <form:input type="text" class="form-control" path="description"/>
+                                <div style="color: #bb1219 ;display: none" id="errorDescription">Can"t be empty</div>
+                                <form:input type="text" class="form-control" id="description" path="description"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label"><spring:message code="messages.photo"/>:</label>
                             <div class="col-lg-7">
                                 <form:errors path="multipartFile"/>
-                                <div style="color: #bb1219 ;display: none" id="errorFile">Size is more then 100Kb or Invalid Format</div>
+                                <div style="color: #bb1219 ;display: none" id="errorFile"> More then 100Kb or Invalid Format</div>
                                 <form:input type="file" class="form-control" id="file" onchange="validPhoto()" path="multipartFile"/>
                             </div>
                         </div>

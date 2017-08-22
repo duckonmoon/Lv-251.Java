@@ -61,9 +61,7 @@ public class ModeratorCabinetController {
     public String moderatorCabinet(Principal principal, Model model) {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
         Clinic clinic = moderator.getClinic();
-        System.out.println(clinic);
         Contact contact = clinic.getContact();
-        System.out.println(contact);
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
         if (clinic != null) {
             System.out.println("before");
@@ -93,9 +91,7 @@ public class ModeratorCabinetController {
         Moderator moderator = moderatorService.getByEmail(principal.getName());
 
         Clinic clinic = moderator.getClinic();
-        System.out.println(clinic);
         Contact contact = clinic.getContact();
-        System.out.println(contact);
 
         if (!bindingResult.hasErrors()) {
             mapper.map(clinicInfoDTO, clinic);
@@ -169,8 +165,6 @@ public class ModeratorCabinetController {
             return "redirect:/moderator/cabinet";
         } else {
             clinicService.updatePhoto(fileBucket.getMultipartFile(), moderatorService.getByEmail(principal.getName()).getClinic());
-
-            System.out.println(fileBucket.getMultipartFile().getSize());
             return "redirect:/moderator/cabinet";
         }
     }

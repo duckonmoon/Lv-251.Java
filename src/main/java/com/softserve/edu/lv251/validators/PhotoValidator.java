@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Created by Admin on 09.08.2017.
+ * Created by Yana Martynyak on 09.08.2017.
  */
 public class PhotoValidator implements ConstraintValidator<ValidPhoto,Object> {
 

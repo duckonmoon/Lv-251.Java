@@ -23,7 +23,7 @@ public interface DoctorsService {
 
     List<Doctor> getDoctorsByColumnNameAndValue(String columnName, Object value);
     public Doctor findByEmail(String email);
-    public Doctor registerNewDoctorAccount(UserDTO accountDto) throws EmailExistsException;
+    public Doctor registerNewDoctorAccount(UserDTO accountDto);
     List<Appointment> appointmentsInThisMonth(Long id, Date date);
     List<DoctorsSearchDTO>searchByDistrict(String name);
     List<DoctorsSearchDTO>searchBySpecialization(String name);

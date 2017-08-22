@@ -74,7 +74,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        User registered = createUserAccount(accountDto, result);
+        User registered = userService.registerNewUserAccount(accountDto);
 
         if (registered == null) {
 
@@ -119,7 +119,7 @@ public class RegistrationController {
 
         Doctor registered = new Doctor();
         if (!result.hasErrors()) {
-            registered = createDoctorAccount(accountDto, result);
+            registered = doctorsService.registerNewDoctorAccount(accountDto);
         }
         if (registered == null) {
 
@@ -184,29 +184,5 @@ public class RegistrationController {
         model.addAttribute("login", true);
 
         return "home";
-    }
-
-    private User createUserAccount(UserDTO accountDto, BindingResult result) {
-        User registered;
-        try {
-            registered = userService.registerNewUserAccount(accountDto);
-        } catch (EmailExistsException e) {
-            logger.warn(e);
-            return null;
-        }
-
-        return registered;
-    }
-
-    private Doctor createDoctorAccount(DoctorDTO accountDto, BindingResult result) {
-        Doctor registered;
-        try {
-            registered = doctorsService.registerNewDoctorAccount(accountDto);
-        } catch (EmailExistsException e) {
-            logger.warn(e);
-            return null;
-        }
-
-        return registered;
     }
 }

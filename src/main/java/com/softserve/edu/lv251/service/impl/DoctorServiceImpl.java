@@ -111,12 +111,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Transactional
     @Override
-    public Doctor registerNewDoctorAccount(UserDTO accountDto)
-            throws EmailExistsException {
-
-        if (emailExist(accountDto.getEmail())) {
-            throw new EmailExistsException("There is an account with that email address: " + accountDto.getEmail());
-        }
+    public Doctor registerNewDoctorAccount(UserDTO accountDto) {
         Doctor doctor = new Doctor();
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
@@ -155,10 +150,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         return results;
 
 
-    }
-
-    private boolean emailExist(String email) {
-        return findByEmail(email) != null;
     }
 
     @Override

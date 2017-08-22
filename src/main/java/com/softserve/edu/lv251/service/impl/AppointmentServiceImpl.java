@@ -99,7 +99,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDTO> getAppointmentByUserEmail(String email) {
+    public List<AppointmentDTO> getAppointmentDtoByUserEmail(String email) {
         List<AppointmentDTO> results = new ArrayList<>();
 
         for (Appointment appointment : appointmentsDAO.getAppointmentByUserEmail(email)) {
@@ -108,6 +108,11 @@ public class AppointmentServiceImpl implements AppointmentService {
             results.add(res);
         }
         return results;
+    }
+
+    @Override
+    public List<Appointment> getAppointmentByUserEmail(String email) {
+        return appointmentsDAO.getAppointmentByUserEmail(email);
     }
 
     public boolean createAppointment (String localdate, String userEmail, long doctorId){

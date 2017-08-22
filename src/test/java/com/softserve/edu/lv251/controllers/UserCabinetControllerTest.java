@@ -68,7 +68,7 @@ public class UserCabinetControllerTest {
         user.setId(1);
 
         when(userService.findByEmail("")).thenReturn(user);
-        when(appointmentService.getAppointmentByUserEmail("")).thenReturn(appointments);
+        when(appointmentService.getAppointmentDtoByUserEmail("")).thenReturn(appointments);
 
 
         mockMvc.perform(get("/user/medicalcard"))

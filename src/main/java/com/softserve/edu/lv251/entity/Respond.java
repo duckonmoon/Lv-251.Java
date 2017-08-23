@@ -46,4 +46,12 @@ public class Respond extends BaseEntity{
     public void setRaiting(short raiting) {
         this.raiting = raiting;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

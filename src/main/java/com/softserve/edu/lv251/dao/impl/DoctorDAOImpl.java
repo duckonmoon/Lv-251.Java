@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.dao.DoctorsDAO;
+import com.softserve.edu.lv251.dao.DoctorDAO;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.entity.Doctor;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
+public class DoctorDAOImpl extends BaseDAOImpl<Doctor> implements DoctorDAO {
     @Override
     public List<Doctor> searchByLetters(String letters) {
         String search = letters + "%".toLowerCase();

@@ -2,11 +2,10 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.BaseDAO;
-import com.softserve.edu.lv251.dao.ContactsDAO;
-import com.softserve.edu.lv251.dao.DoctorsDAO;
+import com.softserve.edu.lv251.dao.ContactDAO;
+import com.softserve.edu.lv251.dao.DoctorDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
 
 import com.softserve.edu.lv251.service.*;
@@ -15,9 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.management.Query;
 import javax.transaction.Transactional;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -30,7 +27,7 @@ import java.util.List;
 public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorsService {
 
     @Autowired
-    private ContactsDAO contactsDAO;
+    private ContactDAO contactDAO;
 
 
     @Autowired
@@ -43,7 +40,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private DoctorsDAO doctorsDAO;
+    private DoctorDAO doctorDAO;
 
     @Autowired
     private SpecializationService specializationService;
@@ -60,32 +57,32 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public void addDoctor(Doctor doctor) {
-        doctorsDAO.addEntity(doctor);
+        doctorDAO.addEntity(doctor);
     }
 
     @Override
     public List<Doctor> getAll() {
-        return doctorsDAO.getAllEntities();
+        return doctorDAO.getAllEntities();
     }
 
     @Override
     public void update(Doctor doctor) {
-        doctorsDAO.updateEntity(doctor);
+        doctorDAO.updateEntity(doctor);
     }
 
     @Override
     public Doctor find(long id) {
-        return doctorsDAO.getEntityByID(id);
+        return doctorDAO.getEntityByID(id);
     }
 
     @Override
     public void delete(Doctor doctor) {
-        doctorsDAO.deleteEntity(doctor);
+        doctorDAO.deleteEntity(doctor);
     }
 
     @Override
     public List<DoctorsSearchDTO> searchByLetters(String letters) {
-        List<Doctor> doctors = doctorsDAO.searchByLetters(letters);
+        List<Doctor> doctors = doctorDAO.searchByLetters(letters);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -100,7 +97,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public List<Doctor> getDoctorsByColumnNameAndValue(String columnName, Object value) {
-        return this.doctorsDAO.getEntitiesByColumnNameAndValue(columnName, value);
+        return this.doctorDAO.getEntitiesByColumnNameAndValue(columnName, value);
     }
 
     @Override
@@ -124,7 +121,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         Contact contact = new Contact();
         contact.setUser(doctor);
         contact.setEmail(accountDto.getEmail());
-        this.contactsDAO.addEntity(contact);
+        this.contactDAO.addEntity(contact);
         doctor.setContact(contact);
         addDoctor(doctor);
 
@@ -132,14 +129,14 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     public List<Appointment> appointmentsInThisMonth(Long id, Date date) {
-        return doctorsDAO.appointmentsInThisMonth(id, date);
+        return doctorDAO.appointmentsInThisMonth(id, date);
     }
 
     @Override
 
     public List<DoctorsSearchDTO> searchByDistrict(String name) {
 
-        List<Doctor> doctors = doctorsDAO.searchByDistrict(name);
+        List<Doctor> doctors = doctorDAO.searchByDistrict(name);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -156,7 +153,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     public List<DoctorsSearchDTO> searchBySpecialization(String name) {
 
-        List<Doctor> doctors = doctorsDAO.searchBySpecialization(name);
+        List<Doctor> doctors = doctorDAO.searchBySpecialization(name);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -171,7 +168,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<PatientDTO> getDoctorPatients(long doctorId) {
         List<PatientDTO> patients = new ArrayList<>();
-        Doctor doctor = doctorsDAO.getEntityByID(doctorId);
+        Doctor doctor = doctorDAO.getEntityByID(doctorId);
         List<Appointment> appointments = doctor.getDocAppointments();
         for (Appointment a : appointments) {
             PatientDTO patient = new PatientDTO();
@@ -184,13 +181,13 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public BaseDAO<Doctor> getDao() {
-        return doctorsDAO;
+        return doctorDAO;
     }
 
 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
-        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
+        List<Doctor> doctors = doctorDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
         return  doctors;
     }
 
@@ -198,7 +195,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         if(clinic==null){
             return null;
         }else{
-        List<Doctor> doctors = doctorsDAO.getByClinic(clinic);
+        List<Doctor> doctors = doctorDAO.getByClinic(clinic);
         List<DoctorsSearchDTO> results = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -234,7 +231,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         Contact contact = new Contact();
         contact.setEmail(accountDto.getEmail());
-        this.contactsDAO.addEntity(contact);
+        this.contactDAO.addEntity(contact);
         doctor.setContact(contact);
         doctor.setDescription(accountDto.getDescription());
         if (specializationService.findByName(accountDto.getSpecialization()) == null) {
@@ -256,9 +253,9 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     public List<SearchResultDoctorDTO> getDoctorByNameWithLimitAndOffset(String name, int offset, int limit) {
         List<Doctor> doctors;
         if (name == null) {
-            doctors = doctorsDAO.getWithOffsetAndLimit(offset, limit);
+            doctors = doctorDAO.getWithOffsetAndLimit(offset, limit);
         } else {
-            doctors = doctorsDAO.searchByNameAndSpecialisationWithOffsetAndLimit(name, offset, limit);
+            doctors = doctorDAO.searchByNameAndSpecialisationWithOffsetAndLimit(name, offset, limit);
         }
         List<SearchResultDoctorDTO> results = new ArrayList<>();
         for (Doctor doctor : doctors) {
@@ -273,7 +270,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public DoctorsSearchDTO findById(long id) {
-        Doctor doctor = doctorsDAO.getEntityByID(id);
+        Doctor doctor = doctorDAO.getEntityByID(id);
         DoctorsSearchDTO doctorsSearchDTO = new DoctorsSearchDTO();
         mapper.map(doctor, doctorsSearchDTO);
 

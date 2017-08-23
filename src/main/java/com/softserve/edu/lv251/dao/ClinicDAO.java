@@ -9,7 +9,7 @@ import java.util.List;
 /**
  *
  */
-public interface ClinicsDAO extends BaseDAO<Clinic>{
+public interface ClinicDAO extends BaseDAO<Clinic>{
 
  List<Clinic>findByDistrict(String name);
 

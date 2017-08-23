@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.dao.RolesDAO;
+import com.softserve.edu.lv251.dao.RoleDAO;
 import com.softserve.edu.lv251.entity.Role;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import javax.transaction.Transactional;
  */
 @Transactional
 @Repository
-public class RolesDAOImpl extends BaseDAOImpl<Role> implements RolesDAO {
+public class RoleDAOImpl extends BaseDAOImpl<Role> implements RoleDAO {
 }

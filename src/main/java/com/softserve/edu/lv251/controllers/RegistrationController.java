@@ -77,7 +77,9 @@ public class RegistrationController {
         User registered = userService.registerNewUserAccount(accountDto);
 
         if (registered == null) {
+
             result.rejectValue(Constants.Controller.EMAIL, "message.regError");
+
         }
 
         try {
@@ -101,14 +103,18 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
+
         model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
+
 
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
+
             @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
+
             BindingResult result) {
 
         Doctor registered = new Doctor();
@@ -116,7 +122,9 @@ public class RegistrationController {
             registered = doctorsService.registerNewDoctorAccount(accountDto);
         }
         if (registered == null) {
+
             result.rejectValue(Constants.Controller.EMAIL, "message.regError");
+
         }
         if (result.hasErrors()) {
             return "registrationDoctor";
@@ -136,7 +144,9 @@ public class RegistrationController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
+
             model.addAttribute(Constants.Controller.MESSAGE, message);
+
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -144,7 +154,9 @@ public class RegistrationController {
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
+
             model.addAttribute(Constants.Controller.MESSAGE, message);
+
             return "redirect:/403?lang=" + locale.getLanguage();
         }
 
@@ -158,7 +170,9 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
+
             model.addAttribute(Constants.Controller.LOGIN_FLAG, true);
+
 
             return "home";
         }

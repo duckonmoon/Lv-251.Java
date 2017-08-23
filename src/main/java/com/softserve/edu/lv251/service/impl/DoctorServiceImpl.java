@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.management.Query;
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -134,13 +136,36 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
-    public List<Doctor> searchByDistrict(String name) {
-        return doctorsDAO.searchByDistrict(name);
+
+    public List<DoctorsSearchDTO> searchByDistrict(String name) {
+
+        List<Doctor> doctors = doctorsDAO.searchByDistrict(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
+
     }
 
     @Override
-    public List<Doctor> searchBySpecialization(String name) {
-        return doctorsDAO.searchBySpecialization(name);
+
+    public List<DoctorsSearchDTO> searchBySpecialization(String name) {
+
+        List<Doctor> doctors = doctorsDAO.searchBySpecialization(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
     }
 
     @Override
@@ -165,15 +190,31 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
-        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
-        return doctors.isEmpty() ? null : doctors;
+        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
+        return  doctors;
+    }
+
+    public List<DoctorsSearchDTO>getByClinic(Clinic clinic){
+        if(clinic==null){
+            return null;
+        }else{
+        List<Doctor> doctors = doctorsDAO.getByClinic(clinic);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results; }
     }
 
     @Override
     @Transactional
-    public Doctor addDoctorAccount(DoctorDTO accountDto) {
+    public Doctor addDoctorAccount(DoctorDTO accountDto,String email) {
         Doctor doctor = new Doctor();
-
+        Moderator moderator=moderatorService.getByEmail(email);
+        Clinic clinic =clinicService.getClinicByID(moderator.getClinic().getId());
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
 
@@ -203,8 +244,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             doctor.setSpecialization(specialization);
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
+        }if(clinicService.getByName(accountDto.getClinic())==null){
+
         }
-        doctor.setClinic(clinicService.getByName(accountDto.getClinic()));
+        doctor.setClinic(clinic);
         addDoctor(doctor);
 
         return doctor;
@@ -240,9 +283,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
         Moderator moderator=moderatorService.getByEmail(email);
-        Clinic clinic =clinicService.getClinicByID(moderator.getClinics().getId());
+
+        Clinic clinic =clinicService.getClinicByID(moderator.getClinic().getId());
         Doctor doctor=new Doctor();
         User user=userService.findByEmail(userToDoctor.getEmail());
+
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());
@@ -260,4 +305,5 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
 
     }
+
 }

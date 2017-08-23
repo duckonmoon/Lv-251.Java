@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.dao;
 
 
 import com.softserve.edu.lv251.entity.Clinic;
+import com.softserve.edu.lv251.entity.Moderator;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface ClinicsDAO extends BaseDAO<Clinic>{
  List<Clinic>getWithOffsetAndLimit(int offset, int limit);
 
  List<Clinic>getByNameWithOffsetAndLimit(String value, int offset, int limit);
+
 
 }

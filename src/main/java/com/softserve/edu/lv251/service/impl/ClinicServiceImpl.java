@@ -125,13 +125,15 @@ public class ClinicServiceImpl extends PagingSizeServiceImpl<Clinic> implements 
 
     @Override
     public Clinic getByName(String name) {
-        return clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name).get(0);
+       List< Clinic> clinic=clinicsDAO.getEntitiesByColumnNameAndValue("clinic_name", name);
+        return clinic.isEmpty()?null:clinic.get(0);
     }
 
     @Override
     public void updatePhoto(MultipartFile file, Clinic clinic) {
+        if(!file.isEmpty()){
         String photo = StoredImagesService.getBase64encodedMultipartFile(file);
         clinic.setPhoto(photo);
-        clinicsDAO.updateEntity(clinic);
+        clinicsDAO.updateEntity(clinic);}
         }
 }

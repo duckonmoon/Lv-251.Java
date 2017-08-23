@@ -13,7 +13,7 @@ import java.lang.annotation.Annotation;
 /**
  * Created by Yana Martynyak on 11.08.2017.
  */
-public class EmailNotExistsValidator implements ConstraintValidator<EmailNotExists, String>{
+public class EmailNotExistsValidator implements ConstraintValidator<EmailNotExists, String> {
     @Autowired
     private UserService userService;
 
@@ -24,9 +24,8 @@ public class EmailNotExistsValidator implements ConstraintValidator<EmailNotExis
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        if(userService.findByEmail(email)!=null){
-            return  true;
-        }else {
-        return false;}
+        return userService.findByEmail(email) != null;
+
+
     }
 }

@@ -18,6 +18,13 @@ public class User extends BaseEntity {
     private String email;
     private String password;
 
+
+
+    @OneToMany(mappedBy = "from")
+    private List<Message> messagesfrom;
+    @OneToMany(mappedBy = "to")
+    private List<Message> messagesTo;
+
     @Column(name = "enabled", nullable = false, columnDefinition = "bit(1) default 1")
     private boolean enabled;
 

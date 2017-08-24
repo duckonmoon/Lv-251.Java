@@ -21,11 +21,57 @@
                     <a href="<c:url value="/moderator/cabinet/make/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.makeDoctor" />
                     </a>
+                    <a id="open" class="list-group-item ">
+                        <spring:message code="messages.makeDoctor" />
+                    </a>
+
                 </div>
+                <div></div>
             </div>
         </div>
     </div>
     <div>
+        <div class="chatbox chatbox--tray chatbox--empty g ">
+            <div class="chatbox__title">
+                <h5><a href="#">Customer Service</a></h5>
+                <button class="chatbox__title__tray" >
+                    <span></span>
+                </button>
+                <%--<button  class="chatbox__title__close">--%>
+            <%--<span>--%>
+                <%--<svg viewBox="0 0 12 12" width="12px" height="12px">--%>
+                    <%--<line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>--%>
+                    <%--<line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>--%>
+                <%--</svg>--%>
+            <%--</span>--%>
+                <%--</button>--%>
+            </div>
+            <div class="chatbox__body">
+                <div class="chatbox__body__message chatbox__body__message--right">
+                    <div class="messageChat" style="background-color: #b2dba1 ;border-radius: 3px">
+
+                    </div>
+                    <p id="response"></p>
+
+                </div>
+            </div>
+            <%--<form class="chatbox__credentials">--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="inputName">Name:</label>--%>
+                    <%--<input type="text" class="form-control" id="inputName" required>--%>
+                <%--</div>--%>
+                <%--<div class="form-group">--%>
+                    <%--<label for="inputEmail">Email:</label>--%>
+                    <%--<input type="email" class="form-control" id="inputEmail" required>--%>
+                <%--</div>--%>
+                <%--<button type="submit" class="btn btn-clinic btn-block">Enter Chat</button>--%>
+            <%--</form>--%>
+            <div id="conversationDiv">
+                <textarea class="chatbox__message" id="text" placeholder="Write something interesting"></textarea>
+            </div>
+            <button class=" btn btn-clinic " onclick="sendMessage()" >Send</button>
+
+        </div>
         <div class="container" style="width: 70%; float: right">
             <div class="row row-content">
                 <h3 class="text-center na">${moderator.clinic.clinic_name}</h3>

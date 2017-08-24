@@ -3,6 +3,8 @@ package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.dto.pojos.Message;
 import com.softserve.edu.lv251.entity.OutputMessage;
+import com.softserve.edu.lv251.service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -17,16 +19,15 @@ import java.util.Date;
  */
 @Controller
 public class ChatController {
-    @RequestMapping("/chat/1")
-    public String chat(){
-        return "chat";
-    }
+    @Autowired
+    public MessageService messageService;
+
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public OutputMessage send(Message message, Principal principal) throws Exception {
-        System.out.println("Here"+ message);
         message.setFrom(principal.getName());
+        messageService.add(message);
         String time = new SimpleDateFormat("HH:mm").format(new Date());
         return new OutputMessage(message.getFrom(), message.getText(), time);
     }

@@ -1,5 +1,12 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.service.impl.DoctorServiceImpl;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+
+
+
+
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Doctor;
 import org.junit.Assert;

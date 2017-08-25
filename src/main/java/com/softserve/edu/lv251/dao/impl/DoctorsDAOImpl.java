@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.dao.impl;
 
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.entity.Appointment;
+import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.entity.Doctor;
 import org.springframework.stereotype.Repository;
 
@@ -72,6 +73,10 @@ public class DoctorsDAOImpl extends BaseDAOImpl<Doctor> implements DoctorsDAO {
                 .setFirstResult(offset)
                 .setMaxResults(limit);
 
+        return query.getResultList();
+    }
+    public List<Doctor>getByClinic(Clinic clinic){
+        Query query=entityManager.createQuery("from Doctor d where d.clinic :name").setParameter("name",clinic);
         return query.getResultList();
     }
 

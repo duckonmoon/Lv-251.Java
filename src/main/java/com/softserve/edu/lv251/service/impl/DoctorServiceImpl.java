@@ -6,11 +6,8 @@ import com.softserve.edu.lv251.dao.ContactsDAO;
 import com.softserve.edu.lv251.dao.DoctorsDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.idl.WebRoles;
-
 import com.softserve.edu.lv251.service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,7 +26,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Autowired
     private ContactsDAO contactsDAO;
-
 
     @Autowired
     private UserService userService;
@@ -54,7 +50,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Autowired
     private Mapper mapper;
-
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -92,8 +87,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             results.add(result);
         }
         return results;
-
-
     }
 
     @Override
@@ -134,13 +127,35 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     }
 
     @Override
-    public List<Doctor> searchByDistrict(String name) {
-        return doctorsDAO.searchByDistrict(name);
+
+    public List<DoctorsSearchDTO> searchByDistrict(String name) {
+
+        List<Doctor> doctors = doctorsDAO.searchByDistrict(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
     }
 
     @Override
-    public List<Doctor> searchBySpecialization(String name) {
-        return doctorsDAO.searchBySpecialization(name);
+
+    public List<DoctorsSearchDTO> searchBySpecialization(String name) {
+
+        List<Doctor> doctors = doctorsDAO.searchBySpecialization(name);
+        List<DoctorsSearchDTO> results = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            DoctorsSearchDTO result = new DoctorsSearchDTO();
+            mapper.map(doctor, result);
+            results.add(result);
+        }
+        return results;
+
     }
 
     @Override
@@ -165,16 +180,38 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
-        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinics", clinicId);
-        return doctors.isEmpty() ? null : doctors;
+        List<Doctor> doctors = doctorsDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
+        return doctors;
+    }
+
+    public List<DoctorsSearchDTO> getByClinic(Clinic clinic) {
+        if (clinic == null) {
+            return null;
+        } else {
+            List<Doctor> doctors = doctorsDAO.getByClinic(clinic);
+            List<DoctorsSearchDTO> results = new ArrayList<>();
+
+            for (Doctor doctor : doctors) {
+                DoctorsSearchDTO result = new DoctorsSearchDTO();
+                mapper.map(doctor, result);
+                results.add(result);
+            }
+            return results;
+        }
     }
 
     @Override
     @Transactional
-    public Doctor addDoctorAccount(DoctorDTO accountDto) {
+    public Doctor addDoctorAccount(DoctorDTO accountDto, String email) {
         Doctor doctor = new Doctor();
-        mapper.map(accountDto, doctor);
+        Moderator moderator = moderatorService.getByEmail(email);
+        Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
+        doctor.setFirstname(accountDto.getFirstName());
+        doctor.setLastname(accountDto.getLastName());
+
+        doctor.setMiddlename("");
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
+        doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
 
         if (accountDto.getMultipartFile() != null) {
@@ -199,7 +236,10 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
         }
-        doctor.setClinic(clinicService.getByName(accountDto.getClinic()));
+        if (clinicService.getByName(accountDto.getClinic()) == null) {
+
+        }
+        doctor.setClinic(clinic);
         addDoctor(doctor);
 
         return doctor;
@@ -236,9 +276,11 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
         Moderator moderator = moderatorService.getByEmail(email);
-        Clinic clinic = clinicService.getClinicByID(moderator.getClinics().getId());
+
+        Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
         Doctor doctor = new Doctor();
         User user = userService.findByEmail(userToDoctor.getEmail());
+
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());
@@ -253,7 +295,5 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         addDoctor(doctor);
         userService.deleteUser(user);
-
-
     }
 }

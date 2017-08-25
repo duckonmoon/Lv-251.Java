@@ -260,6 +260,6 @@
 <script src="<c:url value="/resources/js/autoSpecDocs.js"/>"></script>
 <script src="<c:url value="/resources/js/profile.js"/>"></script>
 <script src="<c:url value="/resources/js/matchPassword.js"/>"></script>
-
+<script src="<c:url value="/resources/js/addDoctorValidate.js"/>"></script>
 </body>
 </html>

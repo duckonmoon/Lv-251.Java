@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.dao;
 
 import com.softserve.edu.lv251.entity.Appointment;
+import com.softserve.edu.lv251.entity.Clinic;
 import com.softserve.edu.lv251.entity.Doctor;
 
 import java.util.Date;
@@ -16,5 +17,5 @@ public interface DoctorsDAO extends BaseDAO<Doctor>{
     List<Doctor>searchBySpecialization(String name);
     List<Doctor>getWithOffsetAndLimit(int offset, int limit);
     List<Doctor>searchByNameAndSpecialisationWithOffsetAndLimit(String value, int offset, int limit);
-
+    public List<Doctor>getByClinic(Clinic clinic);
 }

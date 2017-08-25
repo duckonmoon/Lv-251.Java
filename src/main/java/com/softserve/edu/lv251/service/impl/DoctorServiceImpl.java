@@ -173,13 +173,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Transactional
     public Doctor addDoctorAccount(DoctorDTO accountDto) {
         Doctor doctor = new Doctor();
-
-        doctor.setFirstname(accountDto.getFirstName());
-        doctor.setLastname(accountDto.getLastName());
-
-        doctor.setMiddlename("");
+        mapper.map(accountDto, doctor);
         doctor.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
-        doctor.setEmail(accountDto.getEmail());
         doctor.setEnabled(true);
 
         if (accountDto.getMultipartFile() != null) {
@@ -236,13 +231,14 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
         return doctorsSearchDTO;
     }
+
     @Transactional
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
-        Moderator moderator=moderatorService.getByEmail(email);
-        Clinic clinic =clinicService.getClinicByID(moderator.getClinics().getId());
-        Doctor doctor=new Doctor();
-        User user=userService.findByEmail(userToDoctor.getEmail());
+        Moderator moderator = moderatorService.getByEmail(email);
+        Clinic clinic = clinicService.getClinicByID(moderator.getClinics().getId());
+        Doctor doctor = new Doctor();
+        User user = userService.findByEmail(userToDoctor.getEmail());
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
         doctor.setPassword(user.getPassword());

@@ -21,9 +21,7 @@
                     <a href="<c:url value="/moderator/cabinet/make/doctor"/>" class="list-group-item ">
                         <spring:message code="messages.makeDoctor" />
                     </a>
-                    <a id="open" class="list-group-item ">
-                        <spring:message code="messages.makeDoctor" />
-                    </a>
+
 
                 </div>
                 <div></div>

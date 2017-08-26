@@ -1,22 +1,20 @@
-package com.softserve.edu.lv251.entity;
-
-import java.util.Date;
+package com.softserve.edu.lv251.dto.pojos;
 
 /**
- * Created by Yana Martynyak on 23.08.2017.
+ * Created by Yana Martynyak on 26.08.2017.
  */
-public class OutputMessage {
+public class MessageDTO {
     private String from;
     private String text;
     private String date;
 
-    public OutputMessage(String from, String text, String date) {
+    public MessageDTO(String from, String text, String date) {
         this.from = from;
         this.text = text;
         this.date = date;
     }
 
-    public OutputMessage() {
+    public MessageDTO() {
     }
 
     public String getFrom() {

@@ -28,7 +28,7 @@ public class ChatController {
     public OutputMessage send(Message message, Principal principal) throws Exception {
         message.setFrom(principal.getName());
         messageService.add(message);
-        String time = new SimpleDateFormat("HH:mm").format(new Date());
+        String time = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm").format(new Date());
         return new OutputMessage(message.getFrom(), message.getText(), time);
     }
 }

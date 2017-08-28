@@ -21,10 +21,10 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap-theme.min.css",
+        "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap-social.css",
         "../node_modules/bootstrap/dist/css/font-awesome.min.css",
         "../node_modules/bootstrap/dist/css/bootstrap-datetimepicker.min.css",
-        "styles.css",
         "../node_modules/bootstrap/dist/css/search.css",
         "../node_modules/bootstrap/dist/css/cabinet_search.css",
         "../node_modules/bootstrap/dist/css/medicalCard.css",
@@ -33,6 +33,8 @@
         "../node_modules/bootstrap/dist/css/profile.css"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap-datetimepicker.min.js",
         "assets/js/activeClass.js",
         "assets/js/addDoctorValidate.js",

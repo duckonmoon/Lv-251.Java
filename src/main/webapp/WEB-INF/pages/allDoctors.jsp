@@ -77,7 +77,7 @@
         <c:when test="${getDoctors.size()>0}">
             <div class="container">
                 <c:forEach items="${getDoctors}" var="doctor">
-                    <a href="doctor/${doctor.id}">
+                    <a href="doctors/${doctor.id}">
                         <div class="row row-content">
                             <div class="container-fluid">
                                 <div class="row">
@@ -88,7 +88,7 @@
                                         </a>
                                     </div>
 
-                                    <a href="/doctor/${flag}/${doctor.id}" class="btn-link">
+                                    <a href="/doctors/${doctor.id}" class="btn-link">
 
                                         <span class="doc-name">${doctor.firstname} ${doctor.lastname} ${doctor.middlename}</span>
                                     </a>

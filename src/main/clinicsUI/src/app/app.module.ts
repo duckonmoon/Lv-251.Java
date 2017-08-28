@@ -11,6 +11,10 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 import { DoctorCabinetComponent } from './doctor-cabinet/doctor-cabinet.component';
 import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet.component';
+import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
+import {AppRoutingModule} from './app-routing-module';
+
+;
 
 
 @NgModule({
@@ -25,11 +29,15 @@ import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet
     ContactsComponent,
     UserCabinetComponent,
     DoctorCabinetComponent,
-    ModeratorCabinetComponent
+    ModeratorCabinetComponent,
+    UserCabinetProfileComponent
 
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,7 +15,6 @@
             $chatbox.removeClass('chatbox--empty');
         });
         $chatboxTitleClose.on('click', function(e) {
-            console.log("ddddddddddddddddddddddddddddddddddddddddddddddddddddd")
 
             $chatbox.addClass('chatbox--closed');
         });
@@ -33,10 +32,6 @@
 var stompClient = null;
 
 function setConnected(connected) {
-//            document.getElementById('connect').disabled = connected;
-//            document.getElementById('disconnect').disabled = !connected;
-//            document.getElementById('conversationDiv').style.visibility
-//                = connected ? 'visible' : 'hidden';
     document.getElementById('response').innerHTML = '';
 }
 
@@ -50,7 +45,6 @@ function connect() {
         console.log('Connected: ' + frame);
         console.log("hell")
         stompClient.subscribe('/topic/messages', function (messageOutput) {
-            console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhssssssssssssssss")
             showMessageOutput(JSON.parse(messageOutput.body));
         });
 
@@ -66,7 +60,6 @@ function disconnect() {
 }
 
 function sendMessage() {
-//            var from = document.getElementById('from').value;
     console.log("hereerererer")
     var text = document.getElementById('text').value;
     stompClient.send("/app/chat", {},
@@ -76,7 +69,6 @@ function sendMessage() {
 }
 
 function showMessageOutput(messageOutput) {
-    console.log("rrrrfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
     var response = document.getElementById('response');
     var p = document.createElement('p');
     p.style.wordWrap = 'break-word';

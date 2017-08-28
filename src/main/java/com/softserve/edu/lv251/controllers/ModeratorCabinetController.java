@@ -6,10 +6,7 @@ import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.ClinicInfoDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorDTO;
 import com.softserve.edu.lv251.dto.pojos.UserToDoctor;
-import com.softserve.edu.lv251.entity.Clinic;
-import com.softserve.edu.lv251.entity.Contact;
-import com.softserve.edu.lv251.entity.Doctor;
-import com.softserve.edu.lv251.entity.Moderator;
+import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.model.FileBucket;
 import com.softserve.edu.lv251.service.*;
 import org.apache.log4j.Logger;
@@ -55,6 +52,8 @@ public class ModeratorCabinetController {
 
     @Autowired
     private MessageSource messageSource;
+    @Autowired
+    private  MessageService messageService;
 
 
     @GetMapping(value = "/cabinet")
@@ -63,10 +62,10 @@ public class ModeratorCabinetController {
         Clinic clinic = moderator.getClinic();
         Contact contact = clinic.getContact();
         ClinicInfoDTO clinicDTO = new ClinicInfoDTO();
+        List<Message> messages= messageService.getAll();
         if (clinic != null) {
-            System.out.println("before");
+
             List<Doctor> doctors = doctorsService.getByClinic(clinic.getId());
-            System.out.println(doctors.size());
             model.addAttribute(Constants.Controller.DOCTORS, doctors);
             mapper.map(clinic, clinicDTO);
         }
@@ -77,6 +76,7 @@ public class ModeratorCabinetController {
         model.addAttribute("photoForm", new FileBucket());
         model.addAttribute(Constants.Controller.MODERATOR, moderator);
         model.addAttribute("clinicDTO", clinicDTO);
+        model.addAttribute("messages",messages);
         return Constants.Controller.MODERATOR_CABINET;
 
 

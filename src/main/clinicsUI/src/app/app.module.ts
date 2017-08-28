@@ -14,13 +14,9 @@ import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
 
-;
-
-
 @NgModule({
   declarations: [
     AppComponent,
-
     HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -31,13 +27,10 @@ import {AppRoutingModule} from './app-routing-module';
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
     UserCabinetProfileComponent
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

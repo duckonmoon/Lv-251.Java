@@ -15,6 +15,10 @@
   background-color: #35bfae !important;
   border-color:  #35bfae !important;
 }
+.active{
+  background-color: #35bfae !important;
+  border-color:  #35bfae !important;
+}
 
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,

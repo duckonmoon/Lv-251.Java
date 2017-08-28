@@ -13,6 +13,10 @@ import { DoctorCabinetComponent } from './doctor-cabinet/doctor-cabinet.componen
 import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet.component';
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
+import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
 
 ;
 
@@ -30,12 +34,15 @@ import {AppRoutingModule} from './app-routing-module';
     UserCabinetComponent,
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
-    UserCabinetProfileComponent
+    UserCabinetProfileComponent,
+    UserCabinetMedicalComponent
 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
 
 
   ],

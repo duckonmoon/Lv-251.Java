@@ -1,16 +1,15 @@
-
-    <form >
+<form (ngSubmit)="onSubmit(f)"#f="ngForm" >
       <div class="row">
         <div class="col-sm-3">
           <img class="img-responsive" src="http://www.pngall.com/wp-content/uploads/2016/03/Food-PNG.png" alt="Photo" style="max-height:100px ">
         </div>
         <div class="col-sm-9 form-group">
           <label for="name">First Name</label>
-          <input type="text" id="name" class="form-control"#nameInput>
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" class="form-control"#nameInput>
+          <input required [(ngModel)]="name" type="text" name="name" id="name" class="form-control">
+          <label  for="lastName">Last Name</label>
+          <input required ngModel type="text" name="lastName" id="lastName" class="form-control"#nameInput>
           <label for="email">Email</label>
-          <input type="text" id="email" class="form-control"#nameInput>
+          <input  email ngModel type="text" name="email" id="email" class="form-control"#nameInput>
           <button class="btn btn-success" type="submit" >Add</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>

@@ -7,9 +7,7 @@ import com.softserve.edu.lv251.dao.DoctorDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
 import com.softserve.edu.lv251.idl.WebRoles;
-
 import com.softserve.edu.lv251.service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +26,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Autowired
     private ContactDAO contactDAO;
-
 
     @Autowired
     private UserService userService;
@@ -53,7 +50,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
     @Autowired
     private Mapper mapper;
-
 
     @Override
     public void addDoctor(Doctor doctor) {
@@ -91,8 +87,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             results.add(result);
         }
         return results;
-
-
     }
 
     @Override
@@ -146,7 +140,6 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         }
         return results;
 
-
     }
 
     @Override
@@ -191,27 +184,28 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         return  doctors;
     }
 
-    public List<DoctorsSearchDTO>getByClinic(Clinic clinic){
-        if(clinic==null){
+    public List<DoctorsSearchDTO> getByClinic(Clinic clinic) {
+        if (clinic == null) {
             return null;
-        }else{
-        List<Doctor> doctors = doctorDAO.getByClinic(clinic);
-        List<DoctorsSearchDTO> results = new ArrayList<>();
+        } else {
+            List<Doctor> doctors = doctorDAO.getByClinic(clinic);
+            List<DoctorsSearchDTO> results = new ArrayList<>();
 
-        for (Doctor doctor : doctors) {
-            DoctorsSearchDTO result = new DoctorsSearchDTO();
-            mapper.map(doctor, result);
-            results.add(result);
+            for (Doctor doctor : doctors) {
+                DoctorsSearchDTO result = new DoctorsSearchDTO();
+                mapper.map(doctor, result);
+                results.add(result);
+            }
+            return results;
         }
-        return results; }
     }
 
     @Override
     @Transactional
-    public Doctor addDoctorAccount(DoctorDTO accountDto,String email) {
+    public Doctor addDoctorAccount(DoctorDTO accountDto, String email) {
         Doctor doctor = new Doctor();
-        Moderator moderator=moderatorService.getByEmail(email);
-        Clinic clinic =clinicService.getClinicByID(moderator.getClinic().getId());
+        Moderator moderator = moderatorService.getByEmail(email);
+        Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
         doctor.setFirstname(accountDto.getFirstName());
         doctor.setLastname(accountDto.getLastName());
 
@@ -241,7 +235,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
             doctor.setSpecialization(specialization);
         } else {
             doctor.setSpecialization(specializationService.findByName(accountDto.getSpecialization()));
-        }if(clinicService.getByName(accountDto.getClinic())==null){
+        }
+        if (clinicService.getByName(accountDto.getClinic()) == null) {
 
         }
         doctor.setClinic(clinic);
@@ -276,14 +271,15 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
 
         return doctorsSearchDTO;
     }
+
     @Transactional
     @Override
     public void makeDoctorFromUser(UserToDoctor userToDoctor, String email) {
-        Moderator moderator=moderatorService.getByEmail(email);
+        Moderator moderator = moderatorService.getByEmail(email);
 
-        Clinic clinic =clinicService.getClinicByID(moderator.getClinic().getId());
-        Doctor doctor=new Doctor();
-        User user=userService.findByEmail(userToDoctor.getEmail());
+        Clinic clinic = clinicService.getClinicByID(moderator.getClinic().getId());
+        Doctor doctor = new Doctor();
+        User user = userService.findByEmail(userToDoctor.getEmail());
 
         doctor.setFirstname(user.getFirstname());
         doctor.setLastname(user.getLastname());
@@ -299,8 +295,5 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         addDoctor(doctor);
         userService.deleteUser(user);
-
-
     }
-
 }

@@ -1,9 +1,8 @@
 package com.softserve.edu.lv251.dao.impl;
 
 
-import com.softserve.edu.lv251.dao.ClinicsDAO;
+import com.softserve.edu.lv251.dao.ClinicDAO;
 import com.softserve.edu.lv251.entity.Clinic;
-import com.softserve.edu.lv251.entity.Moderator;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -15,7 +14,7 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class ClinicsDAOImpl extends BaseDAOImpl<Clinic> implements ClinicsDAO {
+public class ClinicDAOImpl extends BaseDAOImpl<Clinic> implements ClinicDAO {
 
 
     @Override

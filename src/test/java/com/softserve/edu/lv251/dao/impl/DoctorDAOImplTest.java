@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  * Created by Yana Martynyak on 13.08.2017.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class DoctorsDAOImplTest {
+public class DoctorDAOImplTest {
     @Mock
     private EntityManager entityManager;
     @Mock

@@ -34,6 +34,9 @@ public class User extends BaseEntity {
     @Column(name = "photo", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String photo;
 
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    private List<Respond> responds;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Appointment> appointments;
@@ -67,6 +70,14 @@ public class User extends BaseEntity {
 
 
     public User() {
+    }
+
+    public List<Respond> getResponds() {
+        return responds;
+    }
+
+    public void setResponds(List<Respond> responds) {
+        this.responds = responds;
     }
 
     public List<TestsResult> getTestsResults() {

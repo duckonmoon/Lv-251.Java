@@ -7,6 +7,6 @@ import java.util.List;
 /**
  * Created by Taras on 16.07.2017.
  */
-public interface UsersDAO extends BaseDAO<User>{
+public interface UserDAO extends BaseDAO<User>{
     List<User> searchByLetters(String letters);
 }

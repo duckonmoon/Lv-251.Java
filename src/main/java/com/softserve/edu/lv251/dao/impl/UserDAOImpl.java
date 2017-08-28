@@ -1,6 +1,6 @@
 package com.softserve.edu.lv251.dao.impl;
 
-import com.softserve.edu.lv251.dao.UsersDAO;
+import com.softserve.edu.lv251.dao.UserDAO;
 import com.softserve.edu.lv251.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Transactional
 @Repository
-public class UsersDAOImpl extends BaseDAOImpl<User> implements UsersDAO {
+public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
     @Override
     public List<User> searchByLetters(String letters) {
         String search = "%" + letters + "%".toLowerCase();

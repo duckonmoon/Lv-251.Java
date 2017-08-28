@@ -22,8 +22,8 @@
     <link href="<c:url value="/resources/css/search.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/passwordStrength.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/medicalCard.css"/>" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="/resources/css/chatbox.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/chatbox.css"/>" rel="stylesheet" >
 
 
 </head>

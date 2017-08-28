@@ -220,3 +220,4 @@ address{
 .btn-clinic:active,.btn-dropbox.active,.open .dropdown-toggle.btn-dropbox{background-image:none}
 .btn-clinic.disabled,.btn-dropbox[disabled],fieldset[disabled] .btn-dropbox,.btn-dropbox.disabled:hover,.btn-dropbox[disabled]:hover,fieldset[disabled] .btn-dropbox:hover,.btn-dropbox.disabled:focus,.btn-dropbox[disabled]:focus,fieldset[disabled] .btn-dropbox:focus,.btn-dropbox.disabled:active,.btn-dropbox[disabled]:active,fieldset[disabled] .btn-dropbox:active,.btn-dropbox.disabled.active,.btn-dropbox[disabled].active,fieldset[disabled] .btn-dropbox.active{background-color: #72d9b9;border-color:rgba(0,0,0,0.2)}
 .btn-clinic .badge{color: #72d9b9;background-color:#fff}
+

@@ -13,10 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Admin on 21.07.2017.
@@ -295,5 +293,26 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
                 rolesService.findByName(WebRoles.ROLE_USER.name())));
         addDoctor(doctor);
         userService.deleteUser(user);
+    }
+
+    @Override
+    public List<DoctorRespondDTO> getDoctorsByUser(long userId) {
+        List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
+        Date date = new Date();
+
+        for (Doctor doctor: doctorDAO.getAllEntities()) {
+            for (Appointment appointment: doctor.getDocAppointments()) {
+                if(appointment.getUser().getId() == userId
+                        ){
+                    doctorRespondDTOS.add(mapper.map(doctor,DoctorRespondDTO.class));
+                }
+            }
+        }
+        return doctorRespondDTOS;
+    }
+
+    @Override
+    public Doctor getById(long doctorId) {
+        return doctorDAO.getEntityByID(doctorId);
     }
 }

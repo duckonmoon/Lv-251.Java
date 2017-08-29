@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.config;
 import com.softserve.edu.lv251.dao.ContactDAO;
 import com.softserve.edu.lv251.dto.pojos.*;
 import com.softserve.edu.lv251.entity.*;
+import com.softserve.edu.lv251.idl.StatusEnum;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.RolesService;
 import com.softserve.edu.lv251.service.SpecializationService;
@@ -251,8 +252,10 @@ public class Mapper extends ConfigurableMapper {
                         if (appointment.getIsApproved() != null) {
                             if (Calendar.getInstance().getTime().compareTo(appointment.getAppointmentDate()) < 0) {
                                 appointmentsDTO.setColor(appointment.getIsApproved() ? "#4CAF50" : "#E53935");
+                                appointmentsDTO.setStatus(appointment.getIsApproved() ? StatusEnum.ACTIVE : StatusEnum.PASSIVE);
                             } else {
                                 appointmentsDTO.setColor(appointment.getIsApproved() ? "#424242" : "#546E7A");
+                                appointmentsDTO.setStatus(appointment.getIsApproved() ? StatusEnum.PAST_ACTIVE : StatusEnum.PAST_PASSIVE);
                             }
                         }
                         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -298,7 +301,12 @@ public class Mapper extends ConfigurableMapper {
                         respondDTO.setUserFullName(respond.getUser().getFirstname() + respond.getUser().getLastname());
                         respondDTO.setDoctorId(respond.getDoctor().getId());
                     }
-                })
+                }).register();
+
+        factory.classMap(User.class, DoctorCabinetUser.class)
+                .field("firstname", "firstname")
+                .field("lastname", "lastname")
+                .field("id","id")
                 .register();
 
     }

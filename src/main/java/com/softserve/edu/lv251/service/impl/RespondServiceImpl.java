@@ -4,10 +4,13 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.RespondDAO;
 import com.softserve.edu.lv251.dto.pojos.RespondDTO;
 import com.softserve.edu.lv251.entity.Respond;
+import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.RespondService;
+import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +23,10 @@ public class RespondServiceImpl implements RespondService {
 
     @Autowired
     private Mapper mapper;
+    @Autowired
+    private DoctorsService doctorsService;
+    @Autowired
+    private UserService usersService;
     @Autowired
     private RespondDAO respondDAO;
 
@@ -39,5 +46,17 @@ public class RespondServiceImpl implements RespondService {
                 .stream()
                 .filter(p->p.getUser().getId()==userId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean AddRespond(short raiting, String description, long userId, long doctorId) {
+        Respond respond = new Respond();
+        respond.setDate(new Date());
+        respond.setDescription(description);
+        respond.setDoctor(doctorsService.getById(doctorId));
+        respond.setUser(usersService.getUserByID(userId));
+        respond.setRaiting(raiting);
+        respondDAO.addEntity(respond);
+        return true;
     }
 }

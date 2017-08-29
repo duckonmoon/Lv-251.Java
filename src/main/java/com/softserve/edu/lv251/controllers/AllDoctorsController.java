@@ -26,18 +26,13 @@ public class AllDoctorsController {
 
     @Autowired
     private DoctorsService doctorsService;
+
     @Autowired
     @Qualifier("doctorService")
-
     private PagingSizeService<Doctor> pagingSizeService;
 
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private AppointmentService appointmentService;
-    @Autowired
-    private Logger logger;
 
 
     @RequestMapping(value = "/allDoctors/{current}", method = RequestMethod.GET)

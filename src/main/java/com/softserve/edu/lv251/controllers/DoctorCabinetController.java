@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 
+import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.User;
 
@@ -74,9 +75,8 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/user/search")
     @ResponseBody
-    public List<User> getUsers(@RequestParam String name) {
-        List<User> usersses = userService.searchByLetters(name);
-        return usersses;
+    public List<DoctorCabinetUser> getUsers(@RequestParam String name) {
+        return userService.searchByLetters(name);
     }
 
     @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)

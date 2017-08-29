@@ -287,5 +287,11 @@ public class Mapper extends ConfigurableMapper {
                 })
                 .register();
 
+        factory.classMap(User.class, DoctorCabinetUser.class)
+                .field("firstname", "firstname")
+                .field("lastname", "lastname")
+                .field("id","id")
+                .register();
+
     }
 }

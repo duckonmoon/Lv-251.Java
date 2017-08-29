@@ -101,12 +101,7 @@ public class AppointmentServiceImplTest {
     @Test
     public void getAppiontmentbyDoctorsEmail() throws Exception {
 
-        when(appointmentsDAO.getAppointmentByUserEmail("kilopo@ex.ua")).thenReturn(appointments);
 
-        when(appointmentService.getAppiontmentbyDoctorsEmail("kilopo@ex.ua")).thenReturn(appointments);
-
-        List<Appointment> forTest = appointmentService.getAppiontmentbyDoctorsEmail("kilopo@ex.ua");
-        Assert.assertEquals(2,forTest.size());
     }
 
     @Test

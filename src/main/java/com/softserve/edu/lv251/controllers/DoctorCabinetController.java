@@ -55,13 +55,8 @@ public class DoctorCabinetController {
     @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
     @ResponseBody
     public List<AppointmentsDTO> getApp(Principal principal) {
-        List<AppointmentsDTO> appointmentsDTOs = new LinkedList<>();
-        for (Appointment appointment : appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())) {
-            AppointmentsDTO appointmentsDTO = new AppointmentsDTO();
-            mapper.map(appointment, appointmentsDTO);
-            appointmentsDTOs.add(appointmentsDTO);
-        }
-        return appointmentsDTOs;
+
+        return appointmentService.getAppiontmentbyDoctorsEmail(principal.getName());
     }
 
 

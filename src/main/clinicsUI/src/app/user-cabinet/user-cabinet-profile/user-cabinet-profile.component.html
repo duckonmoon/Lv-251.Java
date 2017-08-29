@@ -1,21 +1,24 @@
-<form (ngSubmit)="onSubmit(f)"#f="ngForm" >
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-sm-3">
           <img class="img-responsive" src="http://www.pngall.com/wp-content/uploads/2016/03/Food-PNG.png" alt="Photo" style="max-height:100px ">
         </div>
         <div class="col-sm-9 form-group">
           <label for="name">First Name</label>
-          <input required [(ngModel)]="name" type="text" name="name" id="name" class="form-control">
+          <input formControlName="name" type="text" name="name" id="name" class="form-control">
+          <span *ngIf="!editUserForm.get('name').valid && editUserForm.get('name').touched" class="help-block">Enter valid name!</span>
           <label  for="lastName">Last Name</label>
-          <input required ngModel type="text" name="lastName" id="lastName" class="form-control"#nameInput>
+          <input formControlName="lastName" name="lastName" id="lastName" class="form-control">
+          <span *ngIf="!editUserForm.get('lastName').valid && editUserForm.get('lastName').touched" class="help-block">Enter valid Last name!</span>
           <label for="email">Email</label>
-          <input  email ngModel type="text" name="email" id="email" class="form-control"#nameInput>
-          <button class="btn btn-success" type="submit" >Add</button>
+          <input  formControlName="email" type="text" name="email" id="email" class="form-control">
+          <span *ngIf="!editUserForm.get('email').valid && editUserForm.get('email').touched" class="help-block">Enter valid email!</span>
+          <button class="btn btn-success" type="submit" *ngIf="!editUserForm.invalid" (click)="onSave()" >Add</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>
 
       </div>
 
-    </form>
+</form>
 
 

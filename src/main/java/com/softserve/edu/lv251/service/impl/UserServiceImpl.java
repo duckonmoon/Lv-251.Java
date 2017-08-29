@@ -2,6 +2,7 @@ package com.softserve.edu.lv251.service.impl;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.UserDAO;
+import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.dto.pojos.PasswordDTO;
 import com.softserve.edu.lv251.dto.pojos.UserDTO;
 import com.softserve.edu.lv251.entity.Contact;
@@ -20,6 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -130,8 +132,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> searchByLetters(String search) {
-        return userDAO.searchByLetters(search);
+    public List<DoctorCabinetUser> searchByLetters(String search) {
+        List<DoctorCabinetUser> userList = new LinkedList<>();
+        userDAO.searchByLetters(search).forEach((i)-> userList.add(mapper.map(i,DoctorCabinetUser.class)));
+        return  userList;
     }
 
     @Override

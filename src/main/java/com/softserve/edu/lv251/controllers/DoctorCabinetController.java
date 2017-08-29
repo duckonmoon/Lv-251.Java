@@ -4,6 +4,7 @@ import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 
+import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.entity.User;
 
@@ -42,10 +43,10 @@ public class DoctorCabinetController {
     @Autowired
     private DoctorsService doctorsService;
 
-    @RequestMapping(value = "/doctor/сabinet",method = RequestMethod.GET)
-    public String home(ModelMap model,Principal principal,HttpServletRequest httpServletRequest){
+    @RequestMapping(value = "/doctor/сabinet", method = RequestMethod.GET)
+    public String home(ModelMap model, Principal principal, HttpServletRequest httpServletRequest) {
 
-        model.addAttribute(Constants.Controller.DOC_APPS,appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
+        model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow(principal.getName(), Calendar.getInstance().getTime()));
 
         model.addAttribute("locale", LocaleContextHolder.getLocale().getLanguage());
         return "doctor_schedule";
@@ -54,13 +55,8 @@ public class DoctorCabinetController {
     @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
     @ResponseBody
     public List<AppointmentsDTO> getApp(Principal principal) {
-        List<AppointmentsDTO> appointmentsDTOs = new LinkedList<>();
-        for (Appointment appo : appointmentService.getAppiontmentbyDoctorsEmail(principal.getName())) {
-            AppointmentsDTO appointmentsDTO = new AppointmentsDTO();
-            mapper.map(appo, appointmentsDTO);
-            appointmentsDTOs.add(appointmentsDTO);
-        }
-        return appointmentsDTOs;
+
+        return appointmentService.getAppiontmentbyDoctorsEmail(principal.getName());
     }
 
 
@@ -74,9 +70,8 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/user/search")
     @ResponseBody
-    public List<User> getUsers(@RequestParam String name) {
-        List<User> usersses = userService.searchByLetters(name);
-        return usersses;
+    public List<DoctorCabinetUser> getUsers(@RequestParam String name) {
+        return userService.searchByLetters(name);
     }
 
     @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
@@ -87,28 +82,20 @@ public class DoctorCabinetController {
 
     @RequestMapping(value = "/user/addApp", method = RequestMethod.POST)
     @ResponseBody
-    public void addAppointment(HttpServletRequest request, Principal principal)
-    {
+    public void addAppointment(HttpServletRequest request, Principal principal) throws java.text.ParseException {
         Date date;
-        try {
 
-            SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            date = isoFormat.parse(request.getParameter("datatime"));
+        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        date = isoFormat.parse(request.getParameter("datatime"));
 
-            if(date.before(new Date())){
-                throw new Exception();
-            }
 
-            Appointment appointment = new Appointment();
-            appointment.setAppointmentDate(date);
-            appointment.setIsApproved(true);
-            appointment.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
-            appointment.setDoctor(doctorsService.findByEmail(principal.getName()));
-            appointmentService.addAppointment(appointment);
-        } catch (Exception e) {
-            logger.error("Some Errors");
-        }
+        Appointment appointment = new Appointment();
+        appointment.setAppointmentDate(date);
+        appointment.setIsApproved(true);
+        appointment.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
+        appointment.setDoctor(doctorsService.findByEmail(principal.getName()));
+        appointmentService.addAppointment(appointment);
     }
 
 

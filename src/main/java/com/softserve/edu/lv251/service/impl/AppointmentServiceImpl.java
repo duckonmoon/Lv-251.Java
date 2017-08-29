@@ -3,6 +3,7 @@ package com.softserve.edu.lv251.service.impl;
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.AppointmentsDAO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentDTO;
+import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
 import com.softserve.edu.lv251.entity.Appointment;
@@ -94,8 +95,14 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentsDAO.appointmentsWithDoctor(id);
     }
 
-    public List<Appointment> getAppiontmentbyDoctorsEmail(String email) {
-        return appointmentsDAO.getAppiontmentbyDoctorsEmail(email);
+    public List<AppointmentsDTO> getAppiontmentbyDoctorsEmail(String email) {
+        List<AppointmentsDTO> appointmentsDTOs = new LinkedList<>();
+        for (Appointment appointment : appointmentsDAO.getAppiontmentbyDoctorsEmail(email)) {
+            AppointmentsDTO appointmentsDTO = new AppointmentsDTO();
+            mapper.map(appointment, appointmentsDTO);
+            appointmentsDTOs.add(appointmentsDTO);
+        }
+        return appointmentsDTOs;
     }
 
     @Override

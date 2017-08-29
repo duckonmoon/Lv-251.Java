@@ -48,13 +48,13 @@
 
         $(document).ready(function () {
 
-            var dialogInstance2 = new BootstrapDialog();
-            dialogInstance2.setTitle('Wrong input!');
-            dialogInstance2.setMessage('Wrong input!');
-            dialogInstance2.setType(BootstrapDialog.TYPE_DANGER);
+            var DangerDialogWindow = new BootstrapDialog();
+            DangerDialogWindow.setTitle('Wrong input!');
+            DangerDialogWindow.setMessage('Wrong input!');
+            DangerDialogWindow.setType(BootstrapDialog.TYPE_DANGER);
 
             // Using chain callings
-            var dialogInstance3 = new BootstrapDialog()
+            var SuccessDialogWindow = new BootstrapDialog()
                 .setTitle('Success!')
                 .setMessage('Event added')
                 .setType(BootstrapDialog.TYPE_SUCCESS);
@@ -71,7 +71,7 @@
                     contentType: 'application/json'
                 },
                 eventClick: function (event) {
-                    if (event.color === "#E53935") {
+                    if (event.status === "PASSIVE") {
                         $(this).confirmation({
                             title: "Do you want to confirm?",
                             container: 'body',
@@ -143,7 +143,7 @@
                     };
                 },
                 onSelect: function (suggestion) {
-                    $("#temp1").html(suggestion.data);
+                    $("#successinfo").html(suggestion.data);
                 }
 
             });
@@ -151,28 +151,28 @@
 
 
             $( "#control-button" ).click(function() {
-                if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
+                if ($("#first-date").val() !== "" && $("#successinfo").html() !== "") {
                     $.ajax({
                         url: '/user/addApp/',
                         method: 'POST',
                         data: {
                             "datatime": $("#first-date").val(),
-                            "input": $("#temp1").html()
+                            "input": $("#successinfo").html()
                         },
                         success: function (result) {
                             $('#calendar').fullCalendar('rerenderEvents');
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#calendar').fullCalendar('refresh');
                             $("#first-date").val("");
-                            $("#temp1").html("");
+                            $("#successinfo").html("");
                             $("#autocom").val("");
-                            dialogInstance3.open();
+                            SuccessDialogWindow.open();
                         }
                     });
                 }
                 else
                 {
-                    dialogInstance2.open();
+                    DangerDialogWindow.open();
                 }
 
             });
@@ -498,7 +498,7 @@
 </div>
 
 
-<p style="display: none" id = "temp1" name="allInfo"></p>
+<p style="display: none" id = "successinfo" name="allInfo"></p>
 </body>
 </html>
 

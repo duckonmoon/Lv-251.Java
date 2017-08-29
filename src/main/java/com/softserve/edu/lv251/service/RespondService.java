@@ -1,5 +1,6 @@
 package com.softserve.edu.lv251.service;
 
+import com.softserve.edu.lv251.dto.pojos.RespondDTO;
 import com.softserve.edu.lv251.entity.Respond;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface RespondService {
 
-    List<Respond> getAllRespondsByDoctor(long doctorId);
+    List<RespondDTO> getAllRespondsByDoctor(long doctorId);
 
     List<Respond> getAllRespondsByUser(long userId);
 }

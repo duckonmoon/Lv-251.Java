@@ -52,51 +52,5 @@ public class DoctorCabinetController {
         return "doctor_schedule";
     }
 
-    @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
-    @ResponseBody
-    public List<AppointmentsDTO> getApp(Principal principal) {
-
-        return appointmentService.getAppiontmentbyDoctorsEmail(principal.getName());
-    }
-
-
-    @RequestMapping(value = "/doctor/cabinet/setApp/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public void setApp(@PathVariable(value = "id") long id) {
-        Appointment appointment = appointmentService.getAppointmentById(id);
-        appointment.setIsApproved(true);
-        appointmentService.updateAppointment(appointment);
-    }
-
-    @RequestMapping(value = "/user/search")
-    @ResponseBody
-    public List<DoctorCabinetUser> getUsers(@RequestParam String name) {
-        return userService.searchByLetters(name);
-    }
-
-    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
-    public String patients() {
-        return "doctor_cabinet_patients";
-    }
-
-
-    @RequestMapping(value = "/user/addApp", method = RequestMethod.POST)
-    @ResponseBody
-    public void addAppointment(HttpServletRequest request, Principal principal) throws java.text.ParseException {
-        Date date;
-
-        SimpleDateFormat isoFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        date = isoFormat.parse(request.getParameter("datatime"));
-
-
-        Appointment appointment = new Appointment();
-        appointment.setAppointmentDate(date);
-        appointment.setIsApproved(true);
-        appointment.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
-        appointment.setDoctor(doctorsService.findByEmail(principal.getName()));
-        appointmentService.addAppointment(appointment);
-    }
-
 
 }

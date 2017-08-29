@@ -48,13 +48,13 @@
 
         $(document).ready(function () {
 
-            var dialogInstance2 = new BootstrapDialog();
-            dialogInstance2.setTitle('Wrong input!');
-            dialogInstance2.setMessage('Wrong input!');
-            dialogInstance2.setType(BootstrapDialog.TYPE_DANGER);
+            var DangerDialogWindow = new BootstrapDialog();
+            DangerDialogWindow.setTitle('Wrong input!');
+            DangerDialogWindow.setMessage('Wrong input!');
+            DangerDialogWindow.setType(BootstrapDialog.TYPE_DANGER);
 
             // Using chain callings
-            var dialogInstance3 = new BootstrapDialog()
+            var SuccessDialogWindow = new BootstrapDialog()
                 .setTitle('Success!')
                 .setMessage('Event added')
                 .setType(BootstrapDialog.TYPE_SUCCESS);
@@ -166,13 +166,13 @@
                             $("#first-date").val("");
                             $("#temp1").html("");
                             $("#autocom").val("");
-                            dialogInstance3.open();
+                            SuccessDialogWindow.open();
                         }
                     });
                 }
                 else
                 {
-                    dialogInstance2.open();
+                    DangerDialogWindow.open();
                 }
 
             });

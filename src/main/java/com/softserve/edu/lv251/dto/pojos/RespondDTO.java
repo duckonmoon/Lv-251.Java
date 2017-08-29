@@ -1,20 +1,15 @@
-package com.softserve.edu.lv251.entity;
+package com.softserve.edu.lv251.dto.pojos;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
- * Created by Marian Brynetskyi on 23.08.2017.
+ * Created by Marian Brynetskyi on 28.08.2017.
  */
-@Entity
-public class Respond extends BaseEntity{
+public class RespondDTO {
 
-    @ManyToOne
-    private User user;
+    private String userFullName;
 
-    @ManyToOne
-    private Doctor doctor;
+    private long doctorId;
 
     private short raiting;
 
@@ -22,23 +17,23 @@ public class Respond extends BaseEntity{
 
     private String description;
 
-    public Respond() {
+    public RespondDTO() {
     }
 
-    public User getUser() {
-        return user;
+    public String getUserFullName() {
+        return userFullName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public long getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorId(long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public short getRaiting() {

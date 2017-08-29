@@ -15,4 +15,12 @@
     <div class="card-block">
             <p>${doctor.description}</p>
     </div>
+    <h4>Responds</h4>
+
+<c:forEach items="${responds}" var="respond">
+    <div class="card">
+        <h4>${respond.userFullName} : </h4> ${respond.description} ${respond.raiting}
+    </div>
+</c:forEach>
+
 </div>

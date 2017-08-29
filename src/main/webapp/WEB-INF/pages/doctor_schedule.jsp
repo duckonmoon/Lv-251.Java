@@ -143,7 +143,7 @@
                     };
                 },
                 onSelect: function (suggestion) {
-                    $("#temp1").html(suggestion.data);
+                    $("#successinfo").html(suggestion.data);
                 }
 
             });
@@ -151,20 +151,20 @@
 
 
             $( "#control-button" ).click(function() {
-                if ($("#first-date").val() !== "" && $("#temp1").html() !== "") {
+                if ($("#first-date").val() !== "" && $("#successinfo").html() !== "") {
                     $.ajax({
                         url: '/user/addApp/',
                         method: 'POST',
                         data: {
                             "datatime": $("#first-date").val(),
-                            "input": $("#temp1").html()
+                            "input": $("#successinfo").html()
                         },
                         success: function (result) {
                             $('#calendar').fullCalendar('rerenderEvents');
                             $('#calendar').fullCalendar('refetchEvents');
                             $('#calendar').fullCalendar('refresh');
                             $("#first-date").val("");
-                            $("#temp1").html("");
+                            $("#successinfo").html("");
                             $("#autocom").val("");
                             SuccessDialogWindow.open();
                         }
@@ -498,7 +498,7 @@
 </div>
 
 
-<p style="display: none" id = "temp1" name="allInfo"></p>
+<p style="display: none" id = "successinfo" name="allInfo"></p>
 </body>
 </html>
 

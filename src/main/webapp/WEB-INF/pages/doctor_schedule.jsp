@@ -71,7 +71,7 @@
                     contentType: 'application/json'
                 },
                 eventClick: function (event) {
-                    if (event.color === "#E53935") {
+                    if (event.status === "PASSIVE") {
                         $(this).confirmation({
                             title: "Do you want to confirm?",
                             container: 'body',

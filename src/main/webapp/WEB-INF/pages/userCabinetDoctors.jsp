@@ -94,15 +94,20 @@
                                                             <label class="control-label" for="email">
                                                                 <spring:message code="messages.Description"/>
                                                             </label>
-                                                            <input id="email" name="description" type="text" class="form-control"
+                                                            <textarea id="email" name="description" type="text" class="form-control"
                                                                    placeholder="<spring:message code="messages.Description"/>"
-                                                                   autofocus=""/>
+                                                                      autofocus="" rows="5"></textarea>
+                                                            <br>
                                                             <label class="control-label" for="raiting">
                                                                 <spring:message code="messages.raiting"/>
                                                             </label>
-                                                            <input id="raiting" name="raiting" type="number" class="form-control"
-                                                                   placeholder="<spring:message code="messages.raiting"/>"
-                                                                   autofocus=""/>
+                                                            <select id="raiting" name="raiting" class="form-control">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </select>
                                                             <input name="doctorId" value="${doctor.id}" style="display: none">
                                                         </div>
 

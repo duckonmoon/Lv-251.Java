@@ -154,10 +154,10 @@ public class UserCabinetController {
     public Model addAppointment(Model modelMap,
                                 @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
                                 @RequestParam("description") String description,
-                                @RequestParam("raiting") short raiting,
+                                @RequestParam("raiting") String raiting,
                                 Principal principal) {
-        
-        respondService.AddRespond(raiting, description, userService.findByEmail(principal.getName()).getId(), doctorId);
+
+        respondService.AddRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
         return modelMap;
     }
 

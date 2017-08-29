@@ -1,11 +1,14 @@
 package com.softserve.edu.lv251.service.impl;
 
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dao.RespondDAO;
+import com.softserve.edu.lv251.dto.pojos.RespondDTO;
 import com.softserve.edu.lv251.entity.Respond;
 import com.softserve.edu.lv251.service.RespondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,14 +19,18 @@ import java.util.stream.Collectors;
 public class RespondServiceImpl implements RespondService {
 
     @Autowired
+    private Mapper mapper;
+    @Autowired
     private RespondDAO respondDAO;
 
     @Override
-    public List<Respond> getAllRespondsByDoctor(long doctorId) {
-        return respondDAO.getAllEntities()
+    public List<RespondDTO> getAllRespondsByDoctor(long doctorId) {
+        List<RespondDTO> respondDTOS = new LinkedList<>();
+        respondDAO.getAllEntities()
                 .stream()
                 .filter(p->p.getDoctor().getId()==doctorId)
-                .collect(Collectors.toList());
+                .forEach(p->respondDTOS.add(mapper.map(p,RespondDTO.class)));
+        return respondDTOS;
     }
 
     @Override

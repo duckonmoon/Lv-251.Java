@@ -290,6 +290,19 @@ public class Mapper extends ConfigurableMapper {
                 })
                 .register();
 
+        factory.classMap(Respond.class, RespondDTO.class)
+                .field("raiting", "raiting")
+                .field("date", "date")
+                .field("description", "description")
+                .customize(new CustomMapper<Respond, RespondDTO>() {
+                    @Override
+                    public void mapAtoB(Respond respond, RespondDTO respondDTO, MappingContext context) {
+                        super.mapAtoB(respond, respondDTO, context);
+                        respondDTO.setUserFullName(respond.getUser().getFirstname() + respond.getUser().getLastname());
+                        respondDTO.setDoctorId(respond.getDoctor().getId());
+                    }
+                }).register();
+
         factory.classMap(User.class, DoctorCabinetUser.class)
                 .field("firstname", "firstname")
                 .field("lastname", "lastname")

@@ -3,10 +3,7 @@ package com.softserve.edu.lv251.controllers;
 import com.softserve.edu.lv251.constants.Constants;
 import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Doctor;
-import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
-import com.softserve.edu.lv251.service.PagingSizeService;
-import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,8 +24,9 @@ public class AllDoctorsController {
     @Autowired
     private DoctorsService doctorsService;
     @Autowired
+    private RespondService respondService;
+    @Autowired
     @Qualifier("doctorService")
-
     private PagingSizeService<Doctor> pagingSizeService;
 
 
@@ -84,6 +82,7 @@ public class AllDoctorsController {
     @RequestMapping(value = "/doctors/{id}", method = RequestMethod.GET)
     public String Doctor(@PathVariable Long id, Model model) {
         model.addAttribute("doctor", doctorsService.find(id));
+        model.addAttribute("responds",respondService.getAllRespondsByDoctor(id));
         return "doctor_details";
     }
 

@@ -12,5 +12,7 @@ public interface RespondService {
 
     List<RespondDTO> getAllRespondsByDoctor(long doctorId);
 
+    boolean AddRespond(short raiting, String description, long userId, long doctorId);
+
     List<Respond> getAllRespondsByUser(long userId);
 }

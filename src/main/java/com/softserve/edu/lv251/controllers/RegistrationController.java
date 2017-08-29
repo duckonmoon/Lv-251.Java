@@ -7,7 +7,6 @@ import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
-import com.softserve.edu.lv251.exceptions.EmailExistsException;
 import com.softserve.edu.lv251.service.DoctorsService;
 import com.softserve.edu.lv251.service.UserService;
 import com.softserve.edu.lv251.service.VerificationTokenService;
@@ -18,9 +17,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Calendar;
@@ -67,7 +66,7 @@ public class RegistrationController {
             @ModelAttribute("userForm") @Valid UserDTO accountDto,
             BindingResult result,
             WebRequest request,
-            Errors errors) {
+            RedirectAttributes model) {
 
         if (result.hasErrors()) {
             logger.warn(result.getAllErrors());
@@ -76,10 +75,11 @@ public class RegistrationController {
 
         User registered = userService.registerNewUserAccount(accountDto);
 
+
+
         if (registered == null) {
-
-            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
-
+            result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
+            return "registration";
         }
 
         try {
@@ -87,7 +87,12 @@ public class RegistrationController {
             applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, LocaleContextHolder.getLocale(), appUrl));
         } catch (Exception e) {
             logger.error(e);
-            return "registration";
+            Locale currentLocale = LocaleContextHolder.getLocale();
+            String emailSendingError = messageSource.getMessage("messages.emailSendingError", null, currentLocale);
+            model.addFlashAttribute(Constants.Controller.CLASS_CSS, "alert alert-warning");
+            model.addFlashAttribute(Constants.Controller.MESSAGE, emailSendingError);
+            userService.deleteUser(userService.getUserByID(registered.getId()));
+            return "redirect:/registration";
         }
 
         return "redirect:/afterRegistration";
@@ -123,7 +128,7 @@ public class RegistrationController {
         }
         if (registered == null) {
 
-            result.rejectValue(Constants.Controller.EMAIL, "message.regError");
+            result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
 
         }
         if (result.hasErrors()) {

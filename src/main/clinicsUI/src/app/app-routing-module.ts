@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {UserCabinetComponent} from './user-cabinet/user-cabinet.component';
 import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
+import {UserCabinetDoctorsComponent} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component";
 
 const appRoutes: Routes =[
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,8 +15,10 @@ const appRoutes: Routes =[
   {path: 'personal-cabinet'
     , component: UserCabinetComponent,
     children: [
-    {path: '', component:UserCabinetProfileComponent },
-    {path: 'medical-info' , component: UserCabinetMedicalComponent}
+      {path: '', component:UserCabinetProfileComponent },
+    {path: 'profile', component:UserCabinetProfileComponent },
+    {path: 'medical-info' , component: UserCabinetMedicalComponent},
+      {path: 'doctors' , component:UserCabinetDoctorsComponent}
 
     ]
   },

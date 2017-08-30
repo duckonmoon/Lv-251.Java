@@ -38,5 +38,5 @@ public interface DoctorsService {
     public  DoctorsSearchDTO findById(long id);
     public void makeDoctorFromUser(UserToDoctor userToDoctor,String email);
     public List<DoctorsSearchDTO>getByClinic(Clinic clinic);
-
+    List<DoctorInfoDTO>getDoctorsByUser(long id);
 }

@@ -1,0 +1,22 @@
+<div class="well mcard_content">
+  <div class="col-sm-6" style="width: 100%; padding-left: 0; padding-right: 0;">
+    <div *ngFor="let doctor of doctors" class="medical-card alert alert-info">
+      <div class="media">
+        <div class="media-left">
+          <img class="media-object img-circle profile-img" alt="photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png">
+        </div>
+        <div class="media-body">
+          <div>
+            <div >
+              <h3 class="media-heading">{{doctor.firstName}} {{doctor.lastName}}</h3>
+            </div>
+          </div>
+
+          <div class="specialization">{{doctor.specialization}}</div>
+          <div class="diagnosis">{{doctor.clinicName}}</div>
+          <div class="diagnosis">25.02.14</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

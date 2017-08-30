@@ -3,6 +3,7 @@ import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {UserService} from '../../user.service';
 import {UserModel} from "../../user.model";
 import {error} from "util";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-user-cabinet-profile',
@@ -10,9 +11,8 @@ import {error} from "util";
   styleUrls: ['./user-cabinet-profile.component.css']
 })
 export class UserCabinetProfileComponent implements OnInit {
-  name: string = 'Yana';
   editUserForm: FormGroup;
-  user: UserModel= new UserModel;
+  userUpdate = new User;
 
   constructor(private userService: UserService) { }
 
@@ -21,17 +21,17 @@ export class UserCabinetProfileComponent implements OnInit {
       'name': new FormControl('Yana',Validators.required),
       'lastName': new FormControl('Martynyak',Validators.required),
       'email': new FormControl('y@y.com',[Validators.required,Validators.email]),
+      'city': new FormControl('dd'),
+      'district': new FormControl('dd'),
+      'address': new FormControl(''),
     })
   }
-  onSubmit() {
-  console.log(this.editUserForm.value.name);
-    console.log("here");
 
-  }
   onSave(){
-    this.user= this.editUserForm.value;
-    console.log(this.user);
-    this.userService.registerApartmentWithUser(this.user).subscribe(
+    this.userUpdate= this.editUserForm.value;
+    this.userUpdate.id =2;
+    console.log(this.userUpdate);
+    this.userService.updateUser(this.userUpdate).subscribe(
       (response)=> console.log(response),
       (error)=> console.error(error)
     )

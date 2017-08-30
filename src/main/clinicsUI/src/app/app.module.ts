@@ -17,6 +17,8 @@ import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/u
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {UserService} from "./user.service";
+import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
+import {UserCabinetDoctorsService} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.service";
 
 
 
@@ -36,7 +38,8 @@ import {UserService} from "./user.service";
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
     UserCabinetProfileComponent,
-    UserCabinetMedicalComponent
+    UserCabinetMedicalComponent,
+    UserCabinetDoctorsComponent
 
   ],
   imports: [
@@ -48,7 +51,7 @@ import {UserService} from "./user.service";
 
 
   ],
-  providers: [UserService],
+  providers: [UserService,UserCabinetDoctorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -270,8 +270,10 @@ public class Mapper extends ConfigurableMapper {
                 .customize(new CustomMapper<Doctor, DoctorsSearchDTO>() {
                     @Override
                     public void mapAtoB(Doctor doctor, DoctorsSearchDTO doctorsSearchDTO, MappingContext context) {
-                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());
-                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());
+                        if(doctor.getClinic()!= null){
+                        doctorsSearchDTO.setClinicName(doctor.getClinic().getClinic_name());}
+                        if(doctor.getSpecialization()!=null){
+                        doctorsSearchDTO.setSpecialisation(doctor.getSpecialization().getName());}
                     }
                 }).register();
 
@@ -283,6 +285,20 @@ public class Mapper extends ConfigurableMapper {
                     public void mapAtoB(Appointment appointment, AppointmentsForDateTimePickerInDocDTO appointmentsForDateTimePickerInDocDTO, MappingContext context) {
                         super.mapAtoB(appointment, appointmentsForDateTimePickerInDocDTO, context);
                         appointmentsForDateTimePickerInDocDTO.setUsers(appointment.getDoctor().getId());
+                    }
+                })
+                .register();
+
+        factory.classMap(Doctor.class,DoctorInfoDTO.class)
+                .field("firstname","firstName")
+                .field("id","id")
+                .field("lastname","lastName")
+                .customize(new CustomMapper<Doctor, DoctorInfoDTO>() {
+                    @Override
+                    public void mapAtoB(Doctor doctor, DoctorInfoDTO doctorInfoDTO, MappingContext context) {
+                        super.mapAtoB(doctor, doctorInfoDTO, context);
+                        doctorInfoDTO.setClinicName(doctor.getClinic().getClinic_name());
+                        doctorInfoDTO.setSpecialization(doctor.getSpecialization().getName());
                     }
                 })
                 .register();

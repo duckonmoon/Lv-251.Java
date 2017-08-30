@@ -1,7 +1,6 @@
 <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-sm-3">
-          <img class="img-responsive" src="http://www.pngall.com/wp-content/uploads/2016/03/Food-PNG.png" alt="Photo" style="max-height:100px ">
         </div>
         <div class="col-sm-9 form-group">
           <label for="name">First Name</label>
@@ -13,6 +12,12 @@
           <label for="email">Email</label>
           <input  formControlName="email" type="text" name="email" id="email" class="form-control">
           <span *ngIf="!editUserForm.get('email').valid && editUserForm.get('email').touched" class="help-block">Enter valid email!</span>
+          <label  for="city">City</label>
+          <input formControlName="city" name="lastName" id="city" class="form-control">
+          <label  for="address">Address</label>
+          <input formControlName="address" name="address" id="address" class="form-control">
+          <label  for="district">District</label>
+          <input formControlName="district" name="lastName" id="district" class="form-control">
           <button class="btn btn-success" type="submit" *ngIf="!editUserForm.invalid" (click)="onSave()" >Add</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>

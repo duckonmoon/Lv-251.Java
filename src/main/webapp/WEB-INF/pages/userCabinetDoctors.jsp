@@ -44,13 +44,14 @@
 
                                     <div>
                                         <div class="col-sm-6 appointmentWrapper">
-                                            <div class="appointmentFloatContainer">
-                                               <button class="btn btn-info" style="margin-top: 15px"
-                                                       data-toggle="modal" data-target="#modal_${doctor.id}">
-                                                   <spring:message code="messages.respond"/>
-                                               </button>
-                                            </div>
-
+                                            <c:if test="${doctor.responded}">
+                                                <div class="appointmentFloatContainer">
+                                                   <button class="btn btn-info" style="margin-top: 15px"
+                                                           data-toggle="modal" data-target="#modal_${doctor.id}">
+                                                       <spring:message code="messages.respond"/>
+                                                   </button>
+                                                </div>
+                                            </c:if>
                                             <div class="medical-card">
                                                 <div class="media">
                                                     <div class="media-left">

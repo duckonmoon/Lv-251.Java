@@ -179,7 +179,7 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
     @Override
     public List<Doctor> getByClinic(Long clinicId) {
         List<Doctor> doctors = doctorDAO.getEntitiesByColumnNameAndValue("clinic", clinicId);
-        return  doctors;
+        return doctors;
     }
 
     public List<DoctorsSearchDTO> getByClinic(Clinic clinic) {
@@ -300,17 +300,21 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         List<DoctorRespondDTO> doctorRespondDTOS = new LinkedList<>();
         Date date = new Date();
 
-        for (Doctor doctor: doctorDAO.getAllEntities()) {
-            for (Appointment appointment: doctor.getDocAppointments()) {
-                if(appointment.getUser().getId() == userId
-                        && appointment.getIsApproved() && appointment.getAppointmentDate().before(date)
-                        ){
-                    doctorRespondDTOS.add(mapper.map(doctor,DoctorRespondDTO.class));
+        doctorDAO.getAllEntities().forEach(doctor -> {
+            doctor.getDocAppointments().forEach(appointment -> {
+                if (appointment.getUser().getId() == userId
+//                        && appointment.getIsApproved()
+//                        && appointment.getAppointmentDate().before(date)
+                        ) {
+                    doctorRespondDTOS.add(mapper.map(doctor, DoctorRespondDTO.class));
                 }
-            }
-        }
-        return doctorRespondDTOS;
+            });
+        });
+
+
+        return doctorRespondDTOS.stream().distinct().collect(Collectors.toList());
     }
+
 
     @Override
     public Doctor getById(long doctorId) {

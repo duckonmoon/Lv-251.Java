@@ -142,7 +142,7 @@ public class UserCabinetController {
         //model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
-        model.addAttribute("doctors", doctorsService.getDoctorsByUser(user.getId()));
+        model.addAttribute("doctors", respondService.setResponded(user.getId(), doctorsService.getDoctorsByUser(user.getId())));
 
         return "userCabinetDoctors";
     }

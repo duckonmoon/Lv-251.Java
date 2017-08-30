@@ -303,8 +303,8 @@ public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements 
         doctorDAO.getAllEntities().forEach(doctor -> {
             doctor.getDocAppointments().forEach(appointment -> {
                 if (appointment.getUser().getId() == userId
-//                        && appointment.getIsApproved()
-//                        && appointment.getAppointmentDate().before(date)
+                        && appointment.getIsApproved()
+                        && appointment.getAppointmentDate().before(date)
                         ) {
                     doctorRespondDTOS.add(mapper.map(doctor, DoctorRespondDTO.class));
                 }

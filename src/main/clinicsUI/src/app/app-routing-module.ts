@@ -8,6 +8,8 @@ import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/u
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {UserCabinetDoctorsComponent} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component";
 
+import {AppointmentsHistoryComponent} from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
+
 const appRoutes: Routes =[
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home' , component: HomeComponent},
@@ -17,7 +19,10 @@ const appRoutes: Routes =[
     children: [
       {path: '', component:UserCabinetProfileComponent },
     {path: 'profile', component:UserCabinetProfileComponent },
-    {path: 'medical-info' , component: UserCabinetMedicalComponent},
+    {path: 'medical-info' , component: UserCabinetMedicalComponent,children: [
+      {path: '', component:AppointmentsHistoryComponent },
+      { path: 'appointments-history', component:AppointmentsHistoryComponent}
+    ]},
       {path: 'doctors' , component:UserCabinetDoctorsComponent}
 
     ]

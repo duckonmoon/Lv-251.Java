@@ -19,6 +19,7 @@ import {HttpModule} from '@angular/http';
 import {UserService} from "./user.service";
 import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
 import {UserCabinetDoctorsService} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.service";
+import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
 
 
 
@@ -39,7 +40,8 @@ import {UserCabinetDoctorsService} from "./user-cabinet/user-cabinet-doctors/use
     ModeratorCabinetComponent,
     UserCabinetProfileComponent,
     UserCabinetMedicalComponent,
-    UserCabinetDoctorsComponent
+    UserCabinetDoctorsComponent,
+    AppointmentsHistoryComponent
 
   ],
   imports: [

@@ -1,7 +1,8 @@
-<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="editUserForm" >
       <div class="row">
 
         <div class="col-sm-9 form-group">
+
           <label for="name">First Name</label>
           <input formControlName="name" type="text" name="name" id="name" class="form-control">
           <span *ngIf="!editUserForm.get('name').valid && editUserForm.get('name').touched" class="help-block">Enter valid name!</span>

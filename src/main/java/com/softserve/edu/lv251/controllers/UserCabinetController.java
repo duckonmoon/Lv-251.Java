@@ -11,7 +11,6 @@ import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
 import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ import java.util.Date;
 public class UserCabinetController {
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
     @Autowired
     private UserService userService;
 
@@ -139,7 +138,7 @@ public class UserCabinetController {
         User user = userService.findByEmail(principal.getName());
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
-        model.addAttribute("doctors", respondService.setResponded(user.getId(), doctorsService.getDoctorsByUser(user.getId())));
+        model.addAttribute("doctors", respondService.setResponded(user.getId(), doctorService.getDoctorsByUser(user.getId())));
 
         return "userCabinetDoctors";
     }

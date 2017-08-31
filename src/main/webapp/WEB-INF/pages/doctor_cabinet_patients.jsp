@@ -32,7 +32,7 @@
                     <spring:message code="messages.profile"/>
                 </a>
                 <a href="#" class="list-group-item">
-                    <spring:message code="messages.doctor"/>
+                    <spring:message code="messages.doctors"/>
                 </a>
                 <a href="#" class="list-group-item">
                     <spring:message code="messages.medicalCard"/>

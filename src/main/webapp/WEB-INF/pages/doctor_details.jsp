@@ -19,7 +19,26 @@
 
 <c:forEach items="${responds}" var="respond">
     <div class="card">
-        <h4>${respond.userFullName} : </h4> ${respond.description} ${respond.raiting}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+                    <p style="font-size: medium">${respond.userFullName} :</p>
+                    <p style="font-size: small">${respond.date}</p>
+                </div>
+                <div class="col-xs-7">
+                    <div class="container">
+                        <p style="font-size: medium">
+                            ${respond.description}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <c:forEach begin="1" end="${respond.raiting}" varStatus="loop">
+                        <span style="font-size:200%;color:yellow;">&starf;</span>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
     </div>
 </c:forEach>
 

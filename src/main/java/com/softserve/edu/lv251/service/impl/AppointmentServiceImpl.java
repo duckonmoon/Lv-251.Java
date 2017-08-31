@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by kilopo on 31.07.2017.
@@ -153,5 +154,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         return true;
 
+    }
+
+    @Override
+    public List<Appointment> listAppointmensWithUser(Long id) {
+        return appointmentsDAO.getAllEntities().stream().filter(p->p.getUser().getId() == id).collect(Collectors.toList());
     }
 }

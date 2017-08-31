@@ -8,16 +8,12 @@ import com.softserve.edu.lv251.dto.pojos.PersonalInfoDTO;
 import com.softserve.edu.lv251.entity.Contact;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.security.UpdatableUserDetails;
-import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.ContactsService;
-import com.softserve.edu.lv251.service.UserService;
+import com.softserve.edu.lv251.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,6 +29,8 @@ import java.util.Date;
 public class UserCabinetController {
 
     @Autowired
+    private DoctorService doctorService;
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -40,6 +38,9 @@ public class UserCabinetController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    RespondService respondService;
 
     @Autowired
     private Mapper mapper;
@@ -75,9 +76,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
-
             return "userCabinet";
         }
 
@@ -97,11 +96,11 @@ public class UserCabinetController {
     @PostMapping("/user/changePassword")
     public String savePassword(@Valid @ModelAttribute PasswordDTO passwordDTO, BindingResult bindingPasswordDTO,
                                @ModelAttribute PersonalInfoDTO personalInfoDTO, BindingResult bindingInfoDTO,
-                               Principal principal,  ModelMap model) {
+                               Principal principal, ModelMap model) {
         User user = userService.findByEmail(principal.getName());
         Contact contact = user.getContact();
 
-        if (bindingPasswordDTO.hasErrors()){
+        if (bindingPasswordDTO.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
             mapper.map(user, personalInfoDTO);
 
@@ -129,4 +128,34 @@ public class UserCabinetController {
 
         return "userCabinetMedicalCard";
     }
+
+    /**
+     * Author: Marian Brynetskyy
+     */
+    @GetMapping("/user/doctors")
+    public String doctorsGET(ModelMap model, Principal principal) {
+
+        User user = userService.findByEmail(principal.getName());
+        model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
+        model.addAttribute("date", new Date().getTime());
+        model.addAttribute("doctors", respondService.setResponded(user.getId(), doctorService.getDoctorsByUser(user.getId())));
+
+        return "userCabinetDoctors";
+    }
+
+    /**
+     * Created by Marian Brynetskyi
+     */
+    @RequestMapping(value = "/user/addRespond", method = RequestMethod.POST)
+    public String addAppointment(ModelMap modelMap,
+                                @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
+                                @RequestParam("description") String description,
+                                @RequestParam("raiting") String raiting,
+                                Principal principal) {
+
+        respondService.AddRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
+        return doctorsGET(modelMap, principal);
+    }
+
+
 }

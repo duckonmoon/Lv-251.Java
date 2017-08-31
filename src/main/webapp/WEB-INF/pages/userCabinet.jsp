@@ -15,7 +15,7 @@
                     <a href="<c:url value="/user/cabinet"/>" class="navbar-inverse list-group-item">
                         <spring:message code="messages.profile"/>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="<c:url value="/user/doctors"/>" class="list-group-item">
                         <spring:message code="messages.doctors"/>
                     </a>
                     <a href="<c:url value="/user/medicalcard"/>" class="list-group-item">

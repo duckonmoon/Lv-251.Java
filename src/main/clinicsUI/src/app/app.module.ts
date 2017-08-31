@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -23,9 +24,6 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
 
 
 
-;
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +36,7 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
     UserCabinetComponent,
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
+
     UserCabinetProfileComponent,
     UserCabinetMedicalComponent,
     UserCabinetDoctorsComponent,
@@ -50,6 +49,7 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
     FormsModule,
     ReactiveFormsModule,
     HttpModule
+
 
 
   ],

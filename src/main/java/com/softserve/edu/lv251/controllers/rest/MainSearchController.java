@@ -6,7 +6,7 @@ import com.softserve.edu.lv251.dto.pojos.DoctorsSearchDTO;
 import com.softserve.edu.lv251.entity.Specialization;
 import com.softserve.edu.lv251.service.ClinicService;
 import com.softserve.edu.lv251.service.DistrictsService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.SpecializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +27,7 @@ public class MainSearchController {
     @Autowired
     private DistrictsService districtsService;
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
     @Autowired
     private SpecializationService specializationService;
 
@@ -59,7 +59,7 @@ public class MainSearchController {
     @ResponseBody
     @RequestMapping(value = "/rest/search/doctors/byDistrict/{name}")
     public List<DoctorsSearchDTO> doctorsByDistrict(@PathVariable("name") String name) {
-        return doctorsService.searchByDistrict(name);
+        return doctorService.searchByDistrict(name);
     }
     @ResponseBody
     @RequestMapping(value = "/rest/autocomplete/specializations/byName")
@@ -69,19 +69,19 @@ public class MainSearchController {
     @ResponseBody
     @RequestMapping(value = "/rest/search/doctors/bySpec/{name}")
     public List<DoctorsSearchDTO> doctorsBySpec(@PathVariable("name") String name) {
-        return doctorsService.searchBySpecialization(name);
+        return doctorService.searchBySpecialization(name);
     }
 
     @ResponseBody
     @RequestMapping(value = "/rest/autocomplete/doctors/byName")
     public List<DoctorsSearchDTO> searchDoctors(@RequestParam String name) {
-        return doctorsService.searchByLetters(name);
+        return doctorService.searchByLetters(name);
 
     }
     @ResponseBody
     @RequestMapping(value = "/rest/search/doctor/{id}")
     public DoctorsSearchDTO doctorById(@PathVariable Long id) {
-        return doctorsService.findById(id);
+        return doctorService.findById(id);
     }
 
 }

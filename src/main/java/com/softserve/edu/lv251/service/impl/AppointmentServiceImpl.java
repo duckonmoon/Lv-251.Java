@@ -8,7 +8,7 @@ import com.softserve.edu.lv251.dto.pojos.AppointmentsForCreationDTO;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsForDateTimePickerInDocDTO;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private AppointmentDAO appointmentDAO;
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
 
     @Autowired
     private UserService userService;
@@ -146,7 +146,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setAppointmentDate(date);
             appointment.setIsApproved(false);
             appointment.setUser(userService.findByEmail(userEmail));
-            appointment.setDoctor(doctorsService.find(doctorId));
+            appointment.setDoctor(doctorService.find(doctorId));
             addAppointment(appointment);
         } catch (ParseException e) {
             logger.info(e);

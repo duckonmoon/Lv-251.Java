@@ -49,13 +49,6 @@ public class UserEditController {
     }
     @RequestMapping(value = "/getAppointmentsToUser/{id}", method = RequestMethod.GET)
    public  ResponseEntity<List<AppointmentsInfoDTO>> getAppointments(@PathVariable ("id") Long id){
-//       List<AppointmentsInfoDTO> list=new LinkedList<>();
-//       AppointmentsInfoDTO appointmentsInfoDTO= new AppointmentsInfoDTO(1,new Date(),"Petro","Ivanovych","Hiryrg",true);
-//        AppointmentsInfoDTO app2= new AppointmentsInfoDTO(2,new Date(),"Petro","Ivanovych","Hiryrg",false);
-//       list.add(appointmentsInfoDTO);
-//        System.out.println(new Date());
-//       list.add(app2);
-        System.out.println(appointmentService.getAppointmentsToUser(12));
         return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(12),HttpStatus.OK);
    }
 

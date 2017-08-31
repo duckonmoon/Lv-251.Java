@@ -37,7 +37,7 @@ public class AllDoctorsController {
         model.addAttribute("getDoctors", pagingSizeService.getEntity(chainIndex, 10));
         model.addAttribute(Constants.Controller.NUMBER_CHAIN, pagingSizeService.numberOfPaging(10));
         model.addAttribute(Constants.Controller.DOC_APPS, appointmentService.getAllDoctorsAppointmentsAfterNow());
-        return "allDoctors";
+        return Constants.Controller.ALL_DOCTORS;
 
     }
 

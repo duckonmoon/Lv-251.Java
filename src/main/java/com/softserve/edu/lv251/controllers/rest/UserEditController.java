@@ -41,7 +41,9 @@ public class UserEditController {
     @ResponseBody
     @RequestMapping(value = "/api/getDoctorsToUser/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<DoctorInfoDTO>> getDoctors(@PathVariable("id") Long id) {
-        return new ResponseEntity<List<DoctorInfoDTO>>(doctorsService.getDoctorsByUser(id),HttpStatus.OK);
+        List<DoctorInfoDTO> list=doctorsService.getDoctorsByUser(id);
+        System.out.println(list.size());
+        return new ResponseEntity<List<DoctorInfoDTO>>(list,HttpStatus.OK);
 
     }
 }

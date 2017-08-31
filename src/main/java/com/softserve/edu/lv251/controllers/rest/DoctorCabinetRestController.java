@@ -50,10 +50,6 @@ public class DoctorCabinetRestController {
         return userService.searchByLetters(name);
     }
 
-    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
-    public String patients() {
-        return "doctor_cabinet_patients";
-    }
 
 
     @RequestMapping(value = "/user/addApp", method = RequestMethod.POST)

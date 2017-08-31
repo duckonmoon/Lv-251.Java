@@ -6,7 +6,7 @@ import com.softserve.edu.lv251.dto.pojos.DoctorRespondDTO;
 import com.softserve.edu.lv251.dto.pojos.RespondDTO;
 import com.softserve.edu.lv251.entity.Respond;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.RespondService;
 import com.softserve.edu.lv251.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class RespondServiceImpl implements RespondService {
     @Autowired
     private Mapper mapper;
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
     @Autowired
     private UserService usersService;
     @Autowired
@@ -57,7 +57,7 @@ public class RespondServiceImpl implements RespondService {
         Respond respond = new Respond();
         respond.setDate(new Date());
         respond.setDescription(description);
-        respond.setDoctor(doctorsService.getById(doctorId));
+        respond.setDoctor(doctorService.getById(doctorId));
         respond.setUser(usersService.getUserByID(userId));
 
         if (raiting > 5 || raiting < 0 || raiting % 1 != 0) {

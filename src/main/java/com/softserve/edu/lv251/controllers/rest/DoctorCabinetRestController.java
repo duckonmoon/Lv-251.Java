@@ -1,14 +1,12 @@
 package com.softserve.edu.lv251.controllers.rest;
 
 
-import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
 import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
 import com.softserve.edu.lv251.entity.Appointment;
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +27,7 @@ public class DoctorCabinetRestController {
     private UserService userService;
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
 
     @RequestMapping(value = "/doctor/cabinet/getApp", method = RequestMethod.POST)
     public List<AppointmentsDTO> getApp(Principal principal) {
@@ -50,10 +48,6 @@ public class DoctorCabinetRestController {
         return userService.searchByLetters(name);
     }
 
-    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
-    public String patients() {
-        return "doctor_cabinet_patients";
-    }
 
 
     @RequestMapping(value = "/user/addApp", method = RequestMethod.POST)
@@ -69,7 +63,7 @@ public class DoctorCabinetRestController {
         appointment.setAppointmentDate(date);
         appointment.setIsApproved(true);
         appointment.setUser(userService.getUserByID(Long.parseLong(request.getParameter("input"))));
-        appointment.setDoctor(doctorsService.findByEmail(principal.getName()));
+        appointment.setDoctor(doctorService.findByEmail(principal.getName()));
         appointmentService.addAppointment(appointment);
     }
 

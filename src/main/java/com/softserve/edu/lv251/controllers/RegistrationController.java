@@ -7,7 +7,7 @@ import com.softserve.edu.lv251.entity.Doctor;
 import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.entity.VerificationToken;
 import com.softserve.edu.lv251.events.OnRegistrationCompleteEvent;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.UserService;
 import com.softserve.edu.lv251.service.VerificationTokenService;
 import org.apache.log4j.Logger;
@@ -38,7 +38,7 @@ public class RegistrationController {
     private UserService userService;
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
@@ -118,7 +118,7 @@ public class RegistrationController {
 
         Doctor registered = new Doctor();
         if (!result.hasErrors()) {
-            registered = doctorsService.registerNewDoctorAccount(accountDto);
+            registered = doctorService.registerNewDoctorAccount(accountDto);
         }
         if (registered == null) {
             result.rejectValue(Constants.Controller.EMAIL, "messages.regError");

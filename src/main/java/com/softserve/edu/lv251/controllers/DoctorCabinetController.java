@@ -2,24 +2,19 @@ package com.softserve.edu.lv251.controllers;
 
 import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.constants.Constants;
-import com.softserve.edu.lv251.dto.pojos.AppointmentsDTO;
-
-import com.softserve.edu.lv251.dto.pojos.DoctorCabinetUser;
-import com.softserve.edu.lv251.entity.Appointment;
-import com.softserve.edu.lv251.entity.User;
 
 import com.softserve.edu.lv251.service.AppointmentService;
-import com.softserve.edu.lv251.service.DoctorsService;
+import com.softserve.edu.lv251.service.DoctorService;
 import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -41,7 +36,7 @@ public class DoctorCabinetController {
     private Logger logger;
 
     @Autowired
-    private DoctorsService doctorsService;
+    private DoctorService doctorService;
 
     @RequestMapping(value = "/doctor/сabinet", method = RequestMethod.GET)
     public String home(ModelMap model, Principal principal, HttpServletRequest httpServletRequest) {
@@ -50,6 +45,11 @@ public class DoctorCabinetController {
 
         model.addAttribute("locale", LocaleContextHolder.getLocale().getLanguage());
         return "doctor_schedule";
+    }
+
+    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
+    public String patients(Model model) {
+        return "doctor_cabinet_patients";
     }
 
 

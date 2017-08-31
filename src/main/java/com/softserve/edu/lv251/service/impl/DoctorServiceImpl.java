@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * Created by Admin on 21.07.2017.
  */
 @Service("doctorService")
-public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorsService {
+public class DoctorServiceImpl extends PagingSizeServiceImpl<Doctor> implements DoctorService {
 
     @Autowired
     private ContactDAO contactDAO;

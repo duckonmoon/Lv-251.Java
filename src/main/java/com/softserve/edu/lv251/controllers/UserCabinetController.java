@@ -77,9 +77,7 @@ public class UserCabinetController {
 
         if (bindingResult.hasErrors()) {
             personalInfoDTO.setPhoto(new Base64(user.getPhoto().getBytes()));
-
             model.addAttribute(Constants.Controller.PHOTO, user.getPhoto());
-
             return "userCabinet";
         }
 
@@ -136,13 +134,12 @@ public class UserCabinetController {
      * Author: Marian Brynetskyy
      */
     @GetMapping("/user/doctors")
-    public String doctorsGET(ModelMap model, Principal principal, HttpServletRequest request) {
+    public String doctorsGET(ModelMap model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
-        //model.addAttribute("listAppointments", appointmentService.listAppointmensWithDoctor(user.getId()));
         model.addAttribute("listAppointments", appointmentService.getAppointmentByUserEmail(principal.getName()));
         model.addAttribute("date", new Date().getTime());
-        model.addAttribute("doctors", doctorsService.getDoctorsByUser(user.getId()));
+        model.addAttribute("doctors", respondService.setResponded(user.getId(), doctorsService.getDoctorsByUser(user.getId())));
 
         return "userCabinetDoctors";
     }
@@ -151,14 +148,14 @@ public class UserCabinetController {
      * Created by Marian Brynetskyi
      */
     @RequestMapping(value = "/user/addRespond", method = RequestMethod.POST)
-    public Model addAppointment(Model modelMap,
+    public String addAppointment(ModelMap modelMap,
                                 @RequestParam(Constants.Controller.DOCTOR_ID) long doctorId,
                                 @RequestParam("description") String description,
-                                @RequestParam("raiting") short raiting,
+                                @RequestParam("raiting") String raiting,
                                 Principal principal) {
-        
-        respondService.AddRespond(raiting, description, userService.findByEmail(principal.getName()).getId(), doctorId);
-        return modelMap;
+
+        respondService.AddRespond(Short.parseShort(raiting), description, userService.findByEmail(principal.getName()).getId(), doctorId);
+        return doctorsGET(modelMap, principal);
     }
 
 

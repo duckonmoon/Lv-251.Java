@@ -28,6 +28,8 @@ public interface AppointmentService {
 
     List<Appointment> listAppointmensWithDoctor(Long id);
 
+    List<Appointment> listAppointmensWithUser(Long id);
+
     List<AppointmentsDTO> getAppiontmentbyDoctorsEmail(String email);
 
     List<AppointmentDTO> getAppointmentDtoByUserEmail(String email);

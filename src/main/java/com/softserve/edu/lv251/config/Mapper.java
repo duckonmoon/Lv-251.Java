@@ -323,22 +323,25 @@ public class Mapper extends ConfigurableMapper {
 
     private void respondConfigure(MapperFactory factory){
 
-//<<<<<<< HEAD
-//        factory.classMap(Doctor.class,DoctorInfoDTO.class)
-//                .field("firstname","firstName")
-//                .field("id","id")
-//                .field("lastname","lastName")
-//                .customize(new CustomMapper<Doctor, DoctorInfoDTO>() {
-//                    @Override
-//                    public void mapAtoB(Doctor doctor, DoctorInfoDTO doctorInfoDTO, MappingContext context) {
-//                        super.mapAtoB(doctor, doctorInfoDTO, context);
-//                        doctorInfoDTO.setClinicName(doctor.getClinic().getClinic_name());
-//                        doctorInfoDTO.setSpecialization(doctor.getSpecialization().getName());
-//                    }
-//                })
-//                .register();
-//
-//=======
+
+        factory.classMap(Appointment.class,AppointmentsInfoDTO.class)
+                .field("isApproved","status")
+                .field("id","id")
+                .field("appointmentDate","date")
+                .field("description","description")
+                .customize(new CustomMapper<Appointment, AppointmentsInfoDTO>() {
+                    @Override
+                    public void mapAtoB(Appointment appointment, AppointmentsInfoDTO appointmentsInfoDTO, MappingContext context) {
+                        super.mapAtoB(appointment, appointmentsInfoDTO, context);
+                        appointmentsInfoDTO.setDoctorName(appointment.getDoctor().getFirstname());
+                        appointmentsInfoDTO.setDoctorLastName(appointment.getDoctor().getLastname());
+                        appointmentsInfoDTO.setDoctorPhoto(appointment.getDoctor().getPhoto());
+                        appointmentsInfoDTO.setSpecialization(appointment.getDoctor().getSpecialization().getName());
+
+                    }
+                })
+                .register();
+
         factory.classMap(Respond.class, RespondDTO.class)
                 .field("raiting", "raiting")
                 .field("description", "description")

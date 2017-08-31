@@ -21,10 +21,19 @@ export  class UserService {
     let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
     return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user, options);
   }
+
   getAppointmentsToUser( userId: number):Observable<any>{
     let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
     return this.http.get(this.baseUrl+'/api/getAppointmentsToUser/'+userId)
       .map((response) => response.json())
       .catch((error)=>Observable.throw(error));
   }
+
+  getDoctorsByUser( userId: number):Observable<any>{
+    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+    return this.http.get(this.baseUrl+'/api/getDoctorsToUser/'+userId)
+      .map((response) => response.json())
+      .catch((error)=>Observable.throw(error));
+  }
+
 }

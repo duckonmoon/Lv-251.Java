@@ -53,7 +53,7 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
 
 
   ],
-  providers: [UserService,UserCabinetDoctorsService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

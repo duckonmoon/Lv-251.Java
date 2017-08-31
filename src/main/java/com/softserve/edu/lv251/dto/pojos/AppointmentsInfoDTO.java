@@ -12,6 +12,8 @@ public class AppointmentsInfoDTO {
     private String doctorLastName;
     private String specialization;
     private boolean status;
+    private String description;
+    private String doctorPhoto;
 
     public long getId() {
         return id;
@@ -62,6 +64,22 @@ public class AppointmentsInfoDTO {
     }
 
     public AppointmentsInfoDTO() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDoctorPhoto() {
+        return doctorPhoto;
+    }
+
+    public void setDoctorPhoto(String doctorPhoto) {
+        this.doctorPhoto = doctorPhoto;
     }
 
     public AppointmentsInfoDTO(long id, Date date, String doctorName, String doctorLastName, String specialization, boolean status) {

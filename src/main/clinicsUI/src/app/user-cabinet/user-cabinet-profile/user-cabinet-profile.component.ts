@@ -26,7 +26,6 @@ export class UserCabinetProfileComponent implements OnInit {
       'address': new FormControl(''),
     })
   }
-
   onSave(){
     this.userUpdate= this.editUserForm.value;
     this.userUpdate.id =2;

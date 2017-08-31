@@ -11,7 +11,7 @@
 <div class="medical-card">
   <div class="media">
     <div class="media-left">
-      <img class="media-object img-circle profile-img" alt="Photo">
+      <img class="media-object img-circle profile-img" src="data:image/jpeg;base64,{{appointment.doctorPhoto}}" alt="Photo">
     </div>
     <div class="media-body">
       <div>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="specialization">{{appointment.specialization}}</div>
-      <div class="diagnosis">diagnos dd</div>
+      <div class="diagnosis">{{appointment.description}}</div>
       <div class="diagnosis">{{appointment.date | date:'medium'}}</div>
     </div>
   </div>

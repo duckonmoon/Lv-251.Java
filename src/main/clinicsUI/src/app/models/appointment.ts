@@ -5,4 +5,6 @@ export class Appointment {
   doctorLastName: string;
   specialization:string;
   status: boolean ;
+  doctorPhoto:string;
+  description:string;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Doctor} from "../../models/doctor";
-import {UserCabinetDoctorsService} from "./user-cabinet-doctors.service";
+
+import {UserService} from "../../user.service";
 
 @Component({
   selector: 'app-user-cabinet-doctors',
@@ -10,14 +11,14 @@ import {UserCabinetDoctorsService} from "./user-cabinet-doctors.service";
 })
 export class UserCabinetDoctorsComponent implements OnInit {
   private doctors: Doctor[] = [];
-  constructor(private doctorsService: UserCabinetDoctorsService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.doctorsService.getDoctorsByUser(12)
+    this.userService.getDoctorsByUser(12)
       .subscribe((data)=> {
-      console.log(data.length);
+        console.log(data.length);
         this.doctors = data;
-      console.log(this.doctors)
+        console.log(this.doctors)
       }, (error)=>
         console.log(error));
 

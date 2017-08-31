@@ -4,5 +4,7 @@ export  class Doctor {
   lastname: string;
   clinic: string;
   specialization: string;
-  photo: string;
+  doctorPhoto: string;
+  description: string;
+
 }

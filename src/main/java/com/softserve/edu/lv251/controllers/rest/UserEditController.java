@@ -1,6 +1,7 @@
 package com.softserve.edu.lv251.controllers.rest;
 
 import com.softserve.edu.lv251.dto.pojos.*;
+import com.softserve.edu.lv251.service.AppointmentService;
 import com.softserve.edu.lv251.service.DoctorService;
 ;
 import com.softserve.edu.lv251.service.UserService;
@@ -30,7 +31,8 @@ public class UserEditController {
 
     @Autowired
     private DoctorService doctorService;
-
+    @Autowired
+  private AppointmentService appointmentService;
 
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
@@ -47,13 +49,14 @@ public class UserEditController {
     }
     @RequestMapping(value = "/getAppointmentsToUser/{id}", method = RequestMethod.GET)
    public  ResponseEntity<List<AppointmentsInfoDTO>> getAppointments(@PathVariable ("id") Long id){
-       List<AppointmentsInfoDTO> list=new LinkedList<>();
-       AppointmentsInfoDTO appointmentsInfoDTO= new AppointmentsInfoDTO(1,new Date(),"Petro","Ivanovych","Hiryrg",true);
-        AppointmentsInfoDTO app2= new AppointmentsInfoDTO(2,new Date(),"Petro","Ivanovych","Hiryrg",false);
-       list.add(appointmentsInfoDTO);
-        System.out.println(new Date());
-       list.add(app2);
-        return new ResponseEntity<List<AppointmentsInfoDTO>>(list,HttpStatus.OK);
+//       List<AppointmentsInfoDTO> list=new LinkedList<>();
+//       AppointmentsInfoDTO appointmentsInfoDTO= new AppointmentsInfoDTO(1,new Date(),"Petro","Ivanovych","Hiryrg",true);
+//        AppointmentsInfoDTO app2= new AppointmentsInfoDTO(2,new Date(),"Petro","Ivanovych","Hiryrg",false);
+//       list.add(appointmentsInfoDTO);
+//        System.out.println(new Date());
+//       list.add(app2);
+        System.out.println(appointmentService.getAppointmentsToUser(12));
+        return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(12),HttpStatus.OK);
    }
 
 }

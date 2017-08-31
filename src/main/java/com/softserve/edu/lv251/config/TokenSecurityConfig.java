@@ -32,8 +32,8 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/rest/api/**")
-                .csrf().
-                disable()
+                .csrf()
+                .disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .addFilterBefore(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
@@ -44,14 +44,11 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/api/user/**")
                 .hasAuthority(WebRoles.ROLE_USER.name())
 
-
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint())
         ;
-
-
     }
 
     @Bean(name = "restTokenAuthenticationFilter")
@@ -61,6 +58,5 @@ public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return restTokenAuthenticationFilter;
     }
-
 
 }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ import java.util.Locale;
  * Updated: Brynetskyi Marian
  */
 
-@org.springframework.stereotype.Controller
+@Controller
 public class RegistrationController {
 
     @Autowired
@@ -75,8 +76,6 @@ public class RegistrationController {
 
         User registered = userService.registerNewUserAccount(accountDto);
 
-
-
         if (registered == null) {
             result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
             return "registration";
@@ -108,18 +107,13 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.GET)
     public String registrationDoctor(Model model) {
-
         model.addAttribute(Constants.Controller.DOCTOR_FORM, new DoctorDTO());
-
-
         return "registrationDoctor";
     }
 
     @RequestMapping(value = "/registrationDoctor", method = RequestMethod.POST)
     public String registerDoctorAccount(
-
             @ModelAttribute(Constants.Controller.DOCTOR_FORM) @Valid DoctorDTO accountDto,
-
             BindingResult result) {
 
         Doctor registered = new Doctor();
@@ -127,9 +121,7 @@ public class RegistrationController {
             registered = doctorsService.registerNewDoctorAccount(accountDto);
         }
         if (registered == null) {
-
             result.rejectValue(Constants.Controller.EMAIL, "messages.regError");
-
         }
         if (result.hasErrors()) {
             return "registrationDoctor";
@@ -141,28 +133,25 @@ public class RegistrationController {
     @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
     public String finishRegistration(
             @RequestParam("token") String token,
-            Model model,
-            WebRequest request) {
+            Model model) {
 
         Locale locale = LocaleContextHolder.getLocale();
 
         VerificationToken verificationToken = userService.getVerificationToken(token);
         if (verificationToken == null) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-
             model.addAttribute(Constants.Controller.MESSAGE, message);
 
-            return "redirect:/403?lang=" + locale.getLanguage();
+            return "redirect:/403";
         }
 
         User user = verificationToken.getUser();
         Calendar calendar = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - calendar.getTime().getTime()) <= 0) {
             String message = messageSource.getMessage("messages.invalidToken", null, locale);
-
             model.addAttribute(Constants.Controller.MESSAGE, message);
 
-            return "redirect:/403?lang=" + locale.getLanguage();
+            return "redirect:/403";
         }
 
         user.setEnabled(true);
@@ -175,10 +164,7 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null) {
-
             model.addAttribute(Constants.Controller.LOGIN_FLAG, true);
-
-
             return "home";
         }
 

@@ -55,7 +55,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        logger.info("authhhhhhhhhhhhhhhhhh ");
 
         String token = request.getHeader("token");
         if (token == null)

@@ -17,9 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -292,14 +294,15 @@ public class Mapper extends ConfigurableMapper {
 
         factory.classMap(Respond.class, RespondDTO.class)
                 .field("raiting", "raiting")
-                .field("date", "date")
                 .field("description", "description")
                 .customize(new CustomMapper<Respond, RespondDTO>() {
                     @Override
                     public void mapAtoB(Respond respond, RespondDTO respondDTO, MappingContext context) {
                         super.mapAtoB(respond, respondDTO, context);
-                        respondDTO.setUserFullName(respond.getUser().getFirstname() + respond.getUser().getLastname());
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                        respondDTO.setUserFullName(respond.getUser().getFirstname() + " " + respond.getUser().getLastname());
                         respondDTO.setDoctorId(respond.getDoctor().getId());
+                        respondDTO.setDate(sdf.format(respond.getDate()));
                     }
                 }).register();
 

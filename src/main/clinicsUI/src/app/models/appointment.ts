@@ -1,17 +1,8 @@
 export class Appointment {
- appointmentDate;
-  status;
-   duration;
-   description;
-
-   patientId;
-  patientFirstName;
-    patientLastName;
-    patientMiddleName;
-
-  doctorId;
-   doctorFirstName;
-   doctorLastName;
-   doctorMiddleName;
-   doctorSpecialisation;
+  id: number;
+  date: Date;
+  doctorName: string;
+  doctorLastName: string;
+  specialization:string;
+  status: boolean ;
 }

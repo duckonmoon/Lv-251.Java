@@ -1,9 +1,10 @@
 <div class="col-sm-9" style="width: 100%">
   <div  class="well mcard_content">
-  <div class="col-sm-6 appointmentWrapper">
-    <div class="appointmentFloatContainer">
-      <div class="appointmentInner label label-success appointmentIsNotApproved">
-        Approved
+  <div *ngFor="let appointment of appointments"class="col-sm-6 appointmentWrapper">
+    <div  class="appointmentFloatContainer">
+      <div  [ngClass]="appointment.status === true ? 'label-success' : 'label-danger'" class="appointmentInner label   appointmentIsNotApproved">
+<span *ngIf="appointment.status===true;else notApproved">Approved</span>
+        <ng-template #notApproved>Not Approved</ng-template>
       </div>
     </div>
 
@@ -15,13 +16,13 @@
     <div class="media-body">
       <div>
         <div >
-          <h3 class="media-heading">Doctor Name Surname</h3>
+          <h3 class="media-heading">{{appointment.doctorName}} {{appointment.doctorLastName}}</h3>
         </div>
       </div>
 
-      <div class="specialization">Specialization</div>
-      <div class="diagnosis">Diagnos</div>
-      <div class="diagnosis">25.03.12</div>
+      <div class="specialization">{{appointment.specialization}}</div>
+      <div class="diagnosis">diagnos dd</div>
+      <div class="diagnosis">{{appointment.date | date:'medium'}}</div>
     </div>
   </div>
 </div>

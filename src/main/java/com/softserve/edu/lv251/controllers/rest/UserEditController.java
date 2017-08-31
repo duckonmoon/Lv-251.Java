@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,9 +35,6 @@ public class UserEditController {
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> saveUser(@RequestBody UserUpdate user, @PathVariable("id") Long id) {
-        System.out.println(id);
-        System.out.println(user.getId());
-        System.out.println(user);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -43,8 +42,18 @@ public class UserEditController {
     @RequestMapping(value = "/getDoctorsToUser/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<DoctorRespondDTO>> getDoctors(@PathVariable("id") Long id) {
         List<DoctorRespondDTO> list=doctorService.getDoctorsByUser(id);
-        System.out.println(list.size());
         return new ResponseEntity<List<DoctorRespondDTO>>(list,HttpStatus.OK);
 
     }
+    @RequestMapping(value = "/getAppointmentsToUser/{id}", method = RequestMethod.GET)
+   public  ResponseEntity<List<AppointmentsInfoDTO>> getAppointments(@PathVariable ("id") Long id){
+       List<AppointmentsInfoDTO> list=new LinkedList<>();
+       AppointmentsInfoDTO appointmentsInfoDTO= new AppointmentsInfoDTO(1,new Date(),"Petro","Ivanovych","Hiryrg",true);
+        AppointmentsInfoDTO app2= new AppointmentsInfoDTO(2,new Date(),"Petro","Ivanovych","Hiryrg",false);
+       list.add(appointmentsInfoDTO);
+        System.out.println(new Date());
+       list.add(app2);
+        return new ResponseEntity<List<AppointmentsInfoDTO>>(list,HttpStatus.OK);
+   }
+
 }

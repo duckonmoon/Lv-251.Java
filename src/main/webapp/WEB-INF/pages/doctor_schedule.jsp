@@ -9,6 +9,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
+<%@taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -413,7 +414,7 @@
                 <a href="#" class='list-group-item active'>
                     <spring:message code="messages.schedule"/>
                 </a>
-                <a href="#" class="list-group-item">
+                <a href=<c:url value="/doctor/patients"/> class="list-group-item">
                     <spring:message code="messages.patients"/>
                 </a>
             </div>

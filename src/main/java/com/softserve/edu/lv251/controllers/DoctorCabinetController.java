@@ -14,6 +14,7 @@ import com.softserve.edu.lv251.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,11 @@ public class DoctorCabinetController {
 
         model.addAttribute("locale", LocaleContextHolder.getLocale().getLanguage());
         return "doctor_schedule";
+    }
+
+    @RequestMapping(value = "doctor/patients", method = RequestMethod.GET)
+    public String patients(Model model) {
+        return "doctor_cabinet_patients";
     }
 
 

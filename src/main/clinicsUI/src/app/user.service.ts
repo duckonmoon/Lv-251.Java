@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/toPromise';
 import {Http, RequestOptions} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {UserModel} from './user.model';
+
 import  {Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -12,26 +12,28 @@ import {User} from "./models/user";
 @Injectable()
 export  class UserService {
   private baseUrl = 'http://localhost:8080';
-
+ options=new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
 
   constructor(private http: Http) {
   }
 
   updateUser(user: User): Observable<any> {
-    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
-    return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user, options);
+    return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user,this.options);
   }
 
   getAppointmentsToUser( userId: number):Observable<any>{
-    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
     return this.http.get(this.baseUrl+'/api/getAppointmentsToUser/'+userId)
       .map((response) => response.json())
       .catch((error)=>Observable.throw(error));
   }
 
   getDoctorsByUser( userId: number):Observable<any>{
-    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
     return this.http.get(this.baseUrl+'/api/getDoctorsToUser/'+userId)
+      .map((response) => response.json())
+      .catch((error)=>Observable.throw(error));
+  }
+  getUserByEmail(email:string):Observable<any>{
+    return this.http.get(this.baseUrl+'/api/user/'+email)
       .map((response) => response.json())
       .catch((error)=>Observable.throw(error));
   }

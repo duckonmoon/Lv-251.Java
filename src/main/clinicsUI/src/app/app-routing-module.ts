@@ -9,12 +9,15 @@ import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/u
 import {UserCabinetDoctorsComponent} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component";
 
 import {AppointmentsHistoryComponent} from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
+import {LoginComponent} from "./auth/login/login.component";
 
 
 const appRoutes: Routes =[
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home' , component: HomeComponent},
   {path: 'doctors' , component: DoctorsComponent},
+  {path: 'login' , component: LoginComponent},
+  {path: 'logout' , component: LoginComponent},
 
   {path: 'personal-cabinet'
     , component: UserCabinetComponent,

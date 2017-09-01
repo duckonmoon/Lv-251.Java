@@ -59,6 +59,7 @@ public class GetTokenServiceImpl implements GetTokenService {
 
             authentication.setToken(token);
             authentication.setUsername(user.getUsername());
+            
             for (GrantedAuthority authority : user.getAuthorities()) {
                 logger.log(Priority.INFO, authority.getAuthority());
                 if (authority.getAuthority().equals(WebRoles.ROLE_USER.name())) {

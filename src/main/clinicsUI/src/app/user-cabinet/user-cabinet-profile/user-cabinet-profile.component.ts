@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {UserService} from '../../user.service';
-import {UserModel} from "../../user.model";
+
 import {error} from "util";
 import {User} from "../../models/user";
 
@@ -13,16 +13,18 @@ import {User} from "../../models/user";
 export class UserCabinetProfileComponent implements OnInit {
   editUserForm: FormGroup;
   userUpdate = new User;
+  user:User=JSON.parse(localStorage.getItem("currentUser"));
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+
     this.editUserForm = new FormGroup({
-      'name': new FormControl('Yana',Validators.required),
-      'lastName': new FormControl('Martynyak',Validators.required),
-      'email': new FormControl('y@y.com',[Validators.required,Validators.email]),
-      'city': new FormControl('dd'),
-      'district': new FormControl('dd'),
+      'name': new FormControl('',Validators.required),
+      'lastName': new FormControl('',Validators.required),
+      'email': new FormControl(this.user.email,[Validators.required,Validators.email]),
+      'city': new FormControl(''),
+      'district': new FormControl(''),
       'address': new FormControl(''),
     })
   }

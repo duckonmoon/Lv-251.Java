@@ -67,8 +67,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a type="text">
-            username
+          <a type="text" *ngIf="user!==null">
+            {{user.email}}
           </a>
         </li>
         <li class="nav navbar-nav flags hidden-xs">
@@ -83,12 +83,16 @@
           <span>&nbsp;&nbsp;</span>
         </li>
 
-        <li>
-          <a type="button" id="logoutBtn" style="cursor:pointer;" href="/logout">
+        <li *ngIf="user===null">
+          <a  type="button" id="logoutBtn1" style="cursor:pointer;" routerLink="/login">
             <span class="glyphicon glyphicon-log-out"></span> Login
           </a>
         </li>
-
+        <li *ngIf="user!==null">
+          <a  type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
+            <span class="glyphicon glyphicon-log-out"></span> Logout
+          </a>
+        </li>
 
   <!--<div class="container-fluid">
     <div class="collapse navbar-collapse">

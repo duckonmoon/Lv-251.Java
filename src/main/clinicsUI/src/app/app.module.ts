@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -19,8 +17,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {UserService} from "./user.service";
 import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
-import {UserCabinetDoctorsService} from "./user-cabinet/user-cabinet-doctors/user-cabinet-doctors.service";
 import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AuthenticationService} from "./auth/authentication.service";
+import {AlertService} from "./auth/alert.service";
 
 
 
@@ -36,11 +36,11 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
     UserCabinetComponent,
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
-
     UserCabinetProfileComponent,
     UserCabinetMedicalComponent,
     UserCabinetDoctorsComponent,
-    AppointmentsHistoryComponent
+    AppointmentsHistoryComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -53,7 +53,7 @@ import { AppointmentsHistoryComponent } from './user-cabinet/user-cabinet-medica
 
 
   ],
-  providers: [UserService],
+  providers: [UserService,AuthenticationService,AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = {"*"})
-public class UserEditController {
+public class UserCabinetController {
 
     @Autowired
   private UserService userService;
@@ -42,7 +43,7 @@ public class UserEditController {
 
 
     @RequestMapping(value = "/getDoctorsToUser/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<DoctorRespondDTO>> getDoctors(@PathVariable("id") Long id) {
+    public ResponseEntity<List<DoctorRespondDTO>> getDoctors(@PathVariable("id") Long id, Principal principal) {
         List<DoctorRespondDTO> list=doctorService.getDoctorsByUser(id);
         return new ResponseEntity<List<DoctorRespondDTO>>(list,HttpStatus.OK);
 
@@ -51,5 +52,8 @@ public class UserEditController {
    public  ResponseEntity<List<AppointmentsInfoDTO>> getAppointments(@PathVariable ("id") Long id){
         return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(12),HttpStatus.OK);
    }
-
+    @RequestMapping(value = "/getUser/{email}", method = RequestMethod.GET)
+  public UserUpdate getUser(){
+       return null;
+  }
 }

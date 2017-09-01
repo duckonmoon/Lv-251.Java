@@ -15,6 +15,7 @@ import org.apache.log4j.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -31,13 +32,16 @@ public class GetTokenServiceImpl implements GetTokenService {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public TokenAuthenticationDTO getToken(String username, String password) throws Exception {
         if (username == null || password == null)
             return null;
         User user = (User) userDetailsService.loadUserByUsername(username);
         Map<String, Object> tokenData = new HashMap<>();
-        if (password.equals(user.getPassword())) {
+        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             tokenData.put("clientType", "user");
             tokenData.put("username", username);
             tokenData.put("token_create_date", new Date().getTime());

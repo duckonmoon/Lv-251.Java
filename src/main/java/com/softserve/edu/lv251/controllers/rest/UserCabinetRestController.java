@@ -53,7 +53,7 @@ public class UserCabinetController {
         return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(12),HttpStatus.OK);
    }
     @RequestMapping(value = "/getUser/{email}", method = RequestMethod.GET)
-  public UserUpdate getUser(){
+  public UserUpdate getUser(@PathVariable ("email")String email){
        return null;
   }
 }

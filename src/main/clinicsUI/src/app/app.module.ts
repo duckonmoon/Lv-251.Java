@@ -15,6 +15,8 @@ import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
+import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
     UserCabinetProfileComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ClinicsEditComponent,
+    ClinicsListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Admin on 21.07.2017.
  */
-public interface DoctorsService {
+public interface DoctorService {
     void addDoctor(Doctor doctor);
 
     List<Doctor> getAll();

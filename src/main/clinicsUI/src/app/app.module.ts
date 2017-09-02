@@ -19,6 +19,7 @@ import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.compon
 import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 import {ContactService} from "./contacts/contact.service";
 import {HttpModule} from "@angular/http";
+import {RegistrationService} from "./auth/registration/registration.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import {HttpModule} from "@angular/http";
     HttpModule,
     ReactiveFormsModule
   ],
-  providers: [ContactService],
+  providers: [ContactService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,6 +10,7 @@ import {UserCabinetDoctorsComponent} from "./user-cabinet/user-cabinet-doctors/u
 
 import {AppointmentsHistoryComponent} from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
 import {LoginComponent} from "./auth/login/login.component";
+import {ContactsComponent} from "./contacts/contacts.component";
 
 
 const appRoutes: Routes =[
@@ -18,7 +19,7 @@ const appRoutes: Routes =[
   {path: 'doctors' , component: DoctorsComponent},
   {path: 'login' , component: LoginComponent},
   {path: 'logout' , component: LoginComponent},
-
+  {path: 'contact', component: ContactsComponent},
   {path: 'personal-cabinet'
     , component: UserCabinetComponent,
     children: [
@@ -28,6 +29,7 @@ const appRoutes: Routes =[
       {path: '', component:AppointmentsHistoryComponent },
       { path: 'appointments-history', component:AppointmentsHistoryComponent}
     ]},
+
       {path: 'doctors' , component:UserCabinetDoctorsComponent}
 
     ]
@@ -35,6 +37,7 @@ const appRoutes: Routes =[
   {path: 'clinics' , component: ClinicsComponent}
 
 ];
+
   @NgModule({
     imports: [RouterModule.forRoot(appRoutes)],
     exports: [RouterModule]

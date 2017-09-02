@@ -9,12 +9,13 @@ import {Appointment} from "../../../models/appointment";
   styleUrls: ['./appointments-history.component.css']
 })
 export class AppointmentsHistoryComponent implements OnInit {
- user:User;
+  user:User=JSON.parse(localStorage.getItem("currentUser"));
   private appointments: Appointment[] = [];
   constructor(private userService:UserService ) { }
 
   ngOnInit() {
-    this.userService.getAppointmentsToUser(12) .subscribe((data)=> {
+    console.log("id"+this.user.id);
+    this.userService.getAppointmentsToUser(this.user.id) .subscribe((data)=> {
       console.log(data.length);
       this.appointments = data;
       console.log(this.appointments)

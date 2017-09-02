@@ -52,7 +52,7 @@
           </a>
         </li>
 
-        <li class="">
+        <li *ngIf="user!==null">
           <a routerLink="/personal-cabinet">
             <i class="fa fa-id-card"></i>
             Personal Cabinet
@@ -68,7 +68,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a type="text" *ngIf="user!==null">
-            {{user.email}}
+          {{user.name}}{{user.lastName}}
           </a>
         </li>
         <li class="nav navbar-nav flags hidden-xs">
@@ -94,23 +94,6 @@
           </a>
         </li>
 
-  <!--<div class="container-fluid">
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a routerLink="/home">Home</a></li>
-        <li routerLinkActive="active"><a routerLink="/clinics">Clinics</a></li>
-        <li routerLinkActive="active"><a routerLink="/doctors">Doctors</a></li>
-        <li routerLinkActive="active"><a routerLink="/contact">Contact</a></li>
-        <li routerLinkActive="active"><a routerLink="/personal-cabinet">Personal Cabinet</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" >
-        <li class="dropdown" appDropdown>
-          <a href="#" class="dropdown-toggle" role="button">LogIn <span class="caret"></span></a>
-
-        </li>
-      </ul>
-    </div>
-  </div>-->
       </ul>
     </div>
   </div>

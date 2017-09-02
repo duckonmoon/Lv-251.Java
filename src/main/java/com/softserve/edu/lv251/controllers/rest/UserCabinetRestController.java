@@ -1,7 +1,11 @@
 package com.softserve.edu.lv251.controllers.rest;
 
+import com.softserve.edu.lv251.config.Mapper;
 import com.softserve.edu.lv251.dto.pojos.*;
+import com.softserve.edu.lv251.entity.Contact;
+import com.softserve.edu.lv251.entity.User;
 import com.softserve.edu.lv251.service.AppointmentService;
+import com.softserve.edu.lv251.service.ContactsService;
 import com.softserve.edu.lv251.service.DoctorService;
 ;
 import com.softserve.edu.lv251.service.UserService;
@@ -25,19 +29,31 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = {"*"})
-public class UserCabinetController {
+public class UserCabinetRestController {
 
     @Autowired
-  private UserService userService;
+    private UserService userService;
 
     @Autowired
     private DoctorService doctorService;
     @Autowired
   private AppointmentService appointmentService;
-
+    @Autowired
+    private Mapper mapper;
+    @Autowired
+    private ContactsService contactsService;
 
     @RequestMapping(value = "/editUser/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Void> saveUser(@RequestBody UserUpdate user, @PathVariable("id") Long id) {
+    public ResponseEntity<Void> saveUser(@RequestBody UserUpdate updateUser, @PathVariable("id") Long id) {
+        User user = userService.getUserByID(id);
+        mapper.map(updateUser,user);
+        userService.updateUser(user);
+        Contact contact= user.getContact();
+
+        mapper.map(updateUser,contact);
+
+        contactsService.updateContacts(contact);
+
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -50,10 +66,12 @@ public class UserCabinetController {
     }
     @RequestMapping(value = "/getAppointmentsToUser/{id}", method = RequestMethod.GET)
    public  ResponseEntity<List<AppointmentsInfoDTO>> getAppointments(@PathVariable ("id") Long id){
-        return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(12),HttpStatus.OK);
+        return new ResponseEntity<List<AppointmentsInfoDTO>>(appointmentService.getAppointmentsToUser(id),HttpStatus.OK);
    }
-    @RequestMapping(value = "/getUser/{email}", method = RequestMethod.GET)
-  public UserUpdate getUser(@PathVariable ("email")String email){
-       return null;
+    @RequestMapping(value = "/getUser/{email:.+}", method = RequestMethod.GET)
+  public UserUpdate getUser(@PathVariable("email") String email){
+        System.out.println(email);
+        System.out.println( userService.getByEmail(email));
+       return userService.getByEmail(email);
   }
 }

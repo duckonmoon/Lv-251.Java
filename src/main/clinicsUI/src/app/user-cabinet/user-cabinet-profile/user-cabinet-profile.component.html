@@ -4,7 +4,7 @@
         <div class="col-sm-9 form-group">
 
           <label for="name">First Name</label>
-          <input formControlName="name" type="text" name="name" id="name" class="form-control">
+          <input formControlName="name" type="text" name="name"  id="name" class="form-control">
           <span *ngIf="!editUserForm.get('name').valid && editUserForm.get('name').touched" class="help-block">Enter valid name!</span>
           <label  for="lastName">Last Name</label>
           <input formControlName="lastName" name="lastName" id="lastName" class="form-control">
@@ -14,10 +14,13 @@
           <span *ngIf="!editUserForm.get('email').valid && editUserForm.get('email').touched" class="help-block">Enter valid email!</span>
           <label  for="city">City</label>
           <input formControlName="city" name="lastName" id="city" class="form-control">
-          <label  for="address">Address</label>
-          <input formControlName="address" name="address" id="address" class="form-control">
           <label  for="district">District</label>
           <input formControlName="district" name="district" id="district" class="form-control">
+          <label  for="address">Address</label>
+          <input formControlName="address" name="address" id="address" class="form-control">
+
+
+
           <div style="margin-left: 42% ;margin-top: 2%">
           <button class="btn btn-clinic " type="submit" *ngIf="!editUserForm.invalid" (click)="onSave()" >Submit</button>
 

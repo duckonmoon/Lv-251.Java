@@ -11,8 +11,10 @@ public class UserUpdate {
     private  String city;
     private  String district;
     private String address;
-
-
+    private String zipCode;
+    private String firstPhone;
+    private String secondPhone;
+    private String thirdPhone;
     public UserUpdate() {
     }
 
@@ -79,5 +81,37 @@ public class UserUpdate {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getFirstPhone() {
+        return firstPhone;
+    }
+
+    public void setFirstPhone(String firstPhone) {
+        this.firstPhone = firstPhone;
+    }
+
+    public String getSecondPhone() {
+        return secondPhone;
+    }
+
+    public void setSecondPhone(String secondPhone) {
+        this.secondPhone = secondPhone;
+    }
+
+    public String getThirdPhone() {
+        return thirdPhone;
+    }
+
+    public void setThirdPhone(String thirdPhone) {
+        this.thirdPhone = thirdPhone;
     }
 }

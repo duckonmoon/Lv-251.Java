@@ -12,13 +12,13 @@ import {User} from "./models/user";
 @Injectable()
 export  class UserService {
   private baseUrl = 'http://localhost:8080';
- options=new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+
 
   constructor(private http: Http) {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user,this.options);
+    return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user);
   }
 
   getAppointmentsToUser( userId: number):Observable<any>{
@@ -32,8 +32,9 @@ export  class UserService {
       .map((response) => response.json())
       .catch((error)=>Observable.throw(error));
   }
+
   getUserByEmail(email:string):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/user/'+email)
+    return this.http.get(this.baseUrl+'/api/getUser/'+email)
       .map((response) => response.json())
       .catch((error)=>Observable.throw(error));
   }

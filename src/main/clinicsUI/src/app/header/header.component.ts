@@ -10,6 +10,7 @@ import {User} from "../models/user";
 })
 export class HeaderComponent implements OnInit {
   user:User=JSON.parse(localStorage.getItem("currentUser"));
+
   constructor() { }
 
   ngOnInit() {

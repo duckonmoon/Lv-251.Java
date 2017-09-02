@@ -61,7 +61,20 @@ public class Mapper extends ConfigurableMapper {
     }
 
     private void userConfigure(MapperFactory factory){
-
+        factory.classMap(UserUpdate.class, User.class)
+                .field("name","firstname")
+                 .field("lastName", "lastname")
+                .field("email", "email")
+                .register();
+        factory.classMap(UserUpdate.class, Contact.class)
+                .field("address", "address")
+                .field("city", "city")
+                .field("zipCode", "zipCode")
+                .field("firstPhone", "firstPhone")
+                .field("secondPhone", "secondPhone")
+                .field("thirdPhone", "thirdPhone")
+                .field("email", "email")
+                .register();
         factory.classMap(UserDTO.class, User.class)
                 .field("firstName", "firstname")
                 .field("lastName", "lastname")

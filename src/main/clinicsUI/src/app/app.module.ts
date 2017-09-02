@@ -13,7 +13,7 @@ import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
 import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {UserService} from "./user.service";
 import { UserCabinetDoctorsComponent } from './user-cabinet/user-cabinet-doctors/user-cabinet-doctors.component';
@@ -48,9 +48,7 @@ import {AlertService} from "./auth/alert.service";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
-
-
+    HttpModule,
 
   ],
   providers: [UserService,AuthenticationService,AlertService],

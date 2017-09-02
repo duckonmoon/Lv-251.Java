@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,7 @@ import { DoctorCabinetComponent } from './doctor-cabinet/doctor-cabinet.componen
 import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet.component';
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
+import { RegistrationComponent } from './auth/registration/registration.component';
 import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
 import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 
@@ -30,13 +31,15 @@ import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.compon
     DoctorCabinetComponent,
     ModeratorCabinetComponent,
     UserCabinetProfileComponent,
+    RegistrationComponent,
     ClinicsEditComponent,
     ClinicsListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

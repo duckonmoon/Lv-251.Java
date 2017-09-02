@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ClinicsService} from "../clinics-service";
+
 import {Clinic} from "../../models/Clinic";
 
 @Component({
@@ -9,7 +9,7 @@ import {Clinic} from "../../models/Clinic";
 })
 export class ClinicsListComponent implements OnInit {
   @Input() clinic : Clinic;
-  constructor(private clinicsService: ClinicsService) { }
+  constructor() { }
 
   ngOnInit() {
   }

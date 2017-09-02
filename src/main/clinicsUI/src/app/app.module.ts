@@ -28,6 +28,8 @@ import {AlertService} from "./auth/alert.service";
 // import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
 // import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 import {ContactService} from "./contacts/contact.service";
+import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
+import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
 
 
 
@@ -47,6 +49,8 @@ import {ContactService} from "./contacts/contact.service";
     UserCabinetMedicalComponent,
     UserCabinetDoctorsComponent,
     AppointmentsHistoryComponent,
+    ClinicsEditComponent,
+    ClinicsListComponent,
     LoginComponent
 
   ],
@@ -58,8 +62,6 @@ import {ContactService} from "./contacts/contact.service";
     HttpModule,
 
   ],
-
-
 
   providers: [UserService,AuthenticationService,AlertService,ContactService],
 

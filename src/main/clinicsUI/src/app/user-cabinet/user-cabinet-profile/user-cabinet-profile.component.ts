@@ -20,7 +20,7 @@ export class UserCabinetProfileComponent implements OnInit {
 
   ngOnInit() {
     this.editUserForm = new FormGroup({
-      'name': new FormControl('',Validators.required),
+      'name': new FormControl('nnnn',Validators.required),
       'lastName': new FormControl('',Validators.required),
       'email': new FormControl('',[Validators.required,Validators.email]),
       'city': new FormControl(''),

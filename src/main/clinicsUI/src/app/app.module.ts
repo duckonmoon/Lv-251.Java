@@ -12,6 +12,7 @@ import { DoctorCabinetComponent } from './doctor-cabinet/doctor-cabinet.componen
 import { ModeratorCabinetComponent } from './moderator-cabinet/moderator-cabinet.component';
 import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/user-cabinet-profile.component';
 import {AppRoutingModule} from './app-routing-module';
+<<<<<<< HEAD
 import {UserCabinetMedicalComponent} from './user-cabinet/user-cabinet-medical/user-cabinet-medical.component';
 import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
@@ -23,6 +24,13 @@ import {AuthenticationService} from "./auth/authentication.service";
 import {AlertService} from "./auth/alert.service";
 
 
+=======
+import { RegistrationComponent } from './auth/registration/registration.component';
+import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
+import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
+import {ContactService} from "./contacts/contact.service";
+import {HttpModule} from "@angular/http";
+>>>>>>> cdb379309d3f8e9c218fd23ded6b83c17e21758d
 
 @NgModule({
   declarations: [
@@ -45,6 +53,7 @@ import {AlertService} from "./auth/alert.service";
   ],
   imports: [
     BrowserModule,
+<<<<<<< HEAD
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -52,6 +61,15 @@ import {AlertService} from "./auth/alert.service";
 
   ],
   providers: [UserService,AuthenticationService,AlertService],
+=======
+    ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpModule,
+    ReactiveFormsModule
+  ],
+  providers: [ContactService],
+>>>>>>> cdb379309d3f8e9c218fd23ded6b83c17e21758d
   bootstrap: [AppComponent]
 })
 export class AppModule { }

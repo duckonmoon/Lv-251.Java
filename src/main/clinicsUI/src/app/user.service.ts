@@ -18,25 +18,35 @@ export  class UserService {
   }
 
   updateUser(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + '/api/editUser/'+user.id, user);
+    return this.http.post(this.baseUrl + '/api/editUser/' + user.id, user);
   }
 
-  getAppointmentsToUser( userId: number):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/getAppointmentsToUser/'+userId)
+  getAppointmentsToUser(userId: number): Observable<any> {
+    return this.http.get(this.baseUrl + '/api/getAppointmentsToUser/' + userId)
       .map((response) => response.json())
-      .catch((error)=>Observable.throw(error));
+      .catch((error) => Observable.throw(error));
   }
 
-  getDoctorsByUser( userId: number):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/getDoctorsToUser/'+userId)
+  getDoctorsByUser(userId: number): Observable<any> {
+    return this.http.get(this.baseUrl + '/api/getDoctorsToUser/' + userId)
       .map((response) => response.json())
-      .catch((error)=>Observable.throw(error));
+      .catch((error) => Observable.throw(error));
   }
 
-  getUserByEmail(email:string):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/getUser/'+email)
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get(this.baseUrl + '/api/getUser/'+ email )
       .map((response) => response.json())
-      .catch((error)=>Observable.throw(error));
+      .catch((error) => Observable.throw(error));
   }
 
+
+  private jwt() {
+    // create authorization header with jwt token
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
+      return new RequestOptions({headers: headers});
+    }
+
+  }
 }

@@ -11,6 +11,7 @@ import {UserCabinetDoctorsComponent} from "./user-cabinet/user-cabinet-doctors/u
 import {AppointmentsHistoryComponent} from './user-cabinet/user-cabinet-medical/appointments-history/appointments-history.component';
 import {LoginComponent} from "./auth/login/login.component";
 import {ContactsComponent} from "./contacts/contacts.component";
+import {RegistrationComponent} from "./auth/registration/registration.component";
 
 
 const appRoutes: Routes =[
@@ -20,6 +21,7 @@ const appRoutes: Routes =[
   {path: 'login' , component: LoginComponent},
   {path: 'logout' , component: LoginComponent},
   {path: 'contact', component: ContactsComponent},
+  {path: 'registration', component: RegistrationComponent},
   {path: 'personal-cabinet'
     , component: UserCabinetComponent,
     children: [

@@ -67,7 +67,7 @@
           </a>
         </li>
         <li *ngIf="user!==null">
-          <a  type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
+          <a (click)="logoUt()" type="button" id="logoutBtn" style="cursor:pointer;" routerLink="/logout">
             <span class="glyphicon glyphicon-log-out"></span> Logout
           </a>
         </li>

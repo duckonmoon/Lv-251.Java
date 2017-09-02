@@ -60,11 +60,10 @@ function disconnect() {
 }
 
 function sendMessage() {
-    console.log("hereerererer")
+
     var text = document.getElementById('text').value;
     stompClient.send("/app/chat", {},
         JSON.stringify({  'text':text}));
-    console.log("before")
     $("textarea").val("")
 }
 

@@ -30,6 +30,7 @@ import {AlertService} from "./auth/alert.service";
 import {ContactService} from "./contacts/contact.service";
 import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
 import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 
 
@@ -51,7 +52,8 @@ import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.componen
     AppointmentsHistoryComponent,
     ClinicsEditComponent,
     ClinicsListComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
 
   ],
   imports: [

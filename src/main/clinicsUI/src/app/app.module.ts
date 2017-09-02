@@ -16,6 +16,8 @@ import {UserCabinetProfileComponent} from './user-cabinet/user-cabinet-profile/u
 import {AppRoutingModule} from './app-routing-module';
 import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
 import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
+import {ContactService} from "./contacts/contact.service";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -37,9 +39,10 @@ import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.compon
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

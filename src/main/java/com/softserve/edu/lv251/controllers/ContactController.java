@@ -58,11 +58,5 @@ public class ContactController {
     }
 
 
-    @RequestMapping(value = "/contact1", method = RequestMethod.POST)
-    @ResponseBody
-    public boolean sendMail(){
 
-        System.out.println("oooooo");
-        return true;
-    }
 }

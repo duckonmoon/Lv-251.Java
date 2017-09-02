@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Http} from "@angular/http";
+
+import {ContactService} from "./contact.service";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {Http} from "@angular/http";
 export class ContactsComponent implements OnInit {
   contactUsForm: FormGroup;
 
-  constructor(private http: Http) { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
     this.contactUsForm = new FormGroup ({
@@ -30,9 +31,8 @@ export class ContactsComponent implements OnInit {
   }
 
   onSend(){
-    // http://192.168.101.30:8080/
-    this.http.post('http://10.4.48.181:8080/contact1', null).subscribe(
-      (response) => console.log(response),
-    );
+    this.contactService.storeIt(this.contactUsForm).subscribe(
+      (response) => console.log(response)
+    )
   }
 }

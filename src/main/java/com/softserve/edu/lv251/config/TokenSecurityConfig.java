@@ -5,7 +5,6 @@ package com.softserve.edu.lv251.config;
  */
 
 import com.softserve.edu.lv251.idl.WebRoles;
-import com.softserve.edu.lv251.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @Order(1)
 public class TokenSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private TokenAuthenticationManager tokenAuthenticationManager;

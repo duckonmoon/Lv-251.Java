@@ -56,8 +56,6 @@ public class Mapper extends ConfigurableMapper {
                 .field("thirdPhone", "thirdPhone")
                 .field("email", "email")
                 .byDefault().register();
-
-
     }
 
     private void userConfigure(MapperFactory factory){

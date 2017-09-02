@@ -170,6 +170,20 @@ public class Mapper extends ConfigurableMapper {
                 .field("description", "description")
 
                 .byDefault().register();
+
+
+        factory.classMap(Clinic.class,ClinicsAngularDTO.class)
+                .customize(new CustomMapper<Clinic, ClinicsAngularDTO>() {
+                    @Override
+                    public void mapAtoB(Clinic clinic, ClinicsAngularDTO clinicsAngularDTO, MappingContext context) {
+                        clinicsAngularDTO.setId(clinic.getId());
+                        clinicsAngularDTO.setName(clinic.getClinic_name());
+                        clinicsAngularDTO.setFirstPhone(clinic.getContact().getFirstPhone());
+                        clinicsAngularDTO.setCity(clinic.getContact().getCity());
+                        clinicsAngularDTO.setAddress(clinic.getContact().getAddress());
+                        clinicsAngularDTO.setDistrict_name(clinic.getContact().getDistrict().getName());
+                    }
+                }).register();
     }
 
     private void appointmentsConfigure(MapperFactory factory){

@@ -24,11 +24,11 @@ import {AuthenticationService} from "./auth/authentication.service";
 import {AlertService} from "./auth/alert.service";
 
 
-import { RegistrationComponent } from './auth/registration/registration.component';
-import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
-import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
+// import { RegistrationComponent } from './auth/registration/registration.component';
+// import { ClinicsEditComponent } from './clinics/clinics-edit/clinics-edit.component';
+// import { ClinicsListComponent } from './clinics/clinics-list/clinics-list.component';
 import {ContactService} from "./contacts/contact.service";
-import {HttpModule} from "@angular/http";
+
 
 
 @NgModule({
@@ -52,33 +52,19 @@ import {HttpModule} from "@angular/http";
   ],
   imports: [
     BrowserModule,
-<<<<<<< HEAD
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
 
   ],
-  providers: [UserService,AuthenticationService,AlertService],
-=======
-<<<<<<< HEAD
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
 
-  ],
-  providers: [UserService,AuthenticationService,AlertService],
-=======
-    ReactiveFormsModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpModule,
-    ReactiveFormsModule
-  ],
-  providers: [ContactService],
->>>>>>> cdb379309d3f8e9c218fd23ded6b83c17e21758d
->>>>>>> develop
+
+
+  providers: [UserService,AuthenticationService,AlertService,ContactService],
+
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

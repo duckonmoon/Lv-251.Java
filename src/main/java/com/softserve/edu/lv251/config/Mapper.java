@@ -182,6 +182,7 @@ public class Mapper extends ConfigurableMapper {
                         clinicsAngularDTO.setCity(clinic.getContact().getCity());
                         clinicsAngularDTO.setAddress(clinic.getContact().getAddress());
                         clinicsAngularDTO.setDistrict_name(clinic.getContact().getDistrict().getName());
+                        clinicsAngularDTO.setPhoto(clinic.getPhoto());
                     }
                 }).register();
     }

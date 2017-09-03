@@ -31,8 +31,7 @@ import {ContactService} from "./contacts/contact.service";
 import {ClinicsEditComponent} from "./clinics/clinics-edit/clinics-edit.component";
 import {ClinicsListComponent} from "./clinics/clinics-list/clinics-list.component";
 import { RegistrationComponent } from './auth/registration/registration.component';
-
-
+import {RegistrationService} from "./auth/registration/registration.service";
 
 @NgModule({
   declarations: [
@@ -65,10 +64,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 
   ],
 
-  providers: [UserService,AuthenticationService,AlertService,ContactService],
-
-
-
+  providers: [UserService,AuthenticationService,AlertService,ContactService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

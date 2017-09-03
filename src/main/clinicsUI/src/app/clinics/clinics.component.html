@@ -1,3 +1,6 @@
-<p>
-  clinics works!
-</p>
+<div class="container">
+  <app-clinics-edit (submit)="OnSubmitChange($event)"></app-clinics-edit>
+</div>
+<div class="container">
+  <app-clinics-list *ngFor="let item of activeClinics" [clinic]="item"></app-clinics-list>
+</div>
